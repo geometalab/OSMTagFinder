@@ -1,0 +1,15 @@
+/__init__.pyc
+/_compat.pyc
+/app.pyc
+/blueprints.pyc
+/config.pyc
+/ctx.pyc
+/debughelpers.pyc
+/globals.pyc
+/helpers.pyc
+/json.pyc
+/module.pyc
+/sessions.pyc
+/signals.pyc
+/templating.pyc
+/wrappers.pyc
