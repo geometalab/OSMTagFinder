@@ -96,4 +96,4 @@ if __name__ == '__main__':
     s.addBroader(mammals, animals)
     s.addHasTopConcept(scheme, animals)
 
-    print s.serialize('./data/test.rdf')
+    print s.serialize('./data/testtest.rdf')
