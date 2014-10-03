@@ -8,19 +8,19 @@ from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin
 from rdflib.namespace import SKOS
 from rdflib.namespace import FOAF
 from rdflib.serializer import Serializer
-#from skosserializer import SKOSSerializer
+# from skosserializer import SKOSSerializer
 
 class SkosGraph:
     encoding = 'utf-8'
     graph = Graph()
-    foaf = Namespace("http://xmlns.com/foaf/0.1/") #only for depictions
+    foaf = Namespace("http://xmlns.com/foaf/0.1/")  # only for depictions
     skos = Namespace('http://www.w3.org/2004/02/skos/core#')
     graph.bind('foaf', foaf)
     graph.bind('skos', skos)
 
 
     def serialize(self, filepath):
-        plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer') #register(name, kind, module_path, class_name)
+        plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')  # register(name, kind, module_path, class_name)
         self.graph.serialize(destination=filepath, format='skos', encoding=self.encoding)
         return self.graph.serialize(format='skos', encoding=self.encoding)
 
@@ -58,7 +58,7 @@ class SkosGraph:
         self.graph.add((URIRef(subject), SKOS.narrower, URIRef(obj)))
         return subject
 
-    def addBroader(self, subject, obj): #in concept_animals is: ... narrow concept_mammals
+    def addBroader(self, subject, obj):  # in concept_animals is: ... narrow concept_mammals
         self.graph.add((URIRef(subject), SKOS.broader, URIRef(obj)))
         return subject
 
