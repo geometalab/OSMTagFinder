@@ -52,7 +52,7 @@ def is_number(s):
     except ValueError:
         return False
 
-def validCheck(s):
+def valid_check(s):
     if contains_digits(s):
         return False
     if ' ' in s:
@@ -96,7 +96,7 @@ if __name__ == '__main__':
     for keyItem in keyData:
         if keyItem['count_all'] < minCount:
             break; #speedup because of sorted list
-        if keyItem['key'] not in exactKeyFilter and not startsWithFilter(keyItem['key'], prefixKeyFilter) and validCheck(keyItem['key']) and keyItem['values_all'] >= minCount:
+        if keyItem['key'] not in exactKeyFilter and not startsWithFilter(keyItem['key'], prefixKeyFilter) and valid_check(keyItem['key']) and keyItem['values_all'] >= minCount:
             #keyWikiPage = requests.get(tagInfoWikiPageOfKey + keyItem['key'].replace('%',''))
             #if(len(keyWikiPage.json()) > 0):
             keyList.append(keyItem['key'])
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
         s = ''
         for valueItem in valueData:
-            if valueItem['value'] not in valueFilter and valueItem['in_wiki'] and validCheck(valueItem['value']) and valueItem['count'] >= minCount:
+            if valueItem['value'] not in valueFilter and valueItem['in_wiki'] and valid_check(valueItem['value']) and valueItem['count'] >= minCount:
                 k = tagMap.get(key)
                 if(k is not None):
                     k.append(valueItem['value'])
@@ -152,7 +152,7 @@ if __name__ == '__main__':
                 print('\t' + taglink)
                 tagWikiPageJson = tagWikiPage.json()
                 tagConcept = graph.addConcept(taglink)
-                graph.addPrefLabel(tagConcept, key + ':' + value, 'de')
+                graph.addPrefLabel(tagConcept, key + '=' + value, 'en')
                 graph.addBroader(tagConcept, keyConcept)
                 graph.addNarrower(keyConcept, tagConcept)
                 graph.addInScheme(tagConcept, scheme)
