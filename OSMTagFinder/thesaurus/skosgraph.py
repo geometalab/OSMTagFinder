@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on 26.09.2014
 
@@ -88,8 +89,8 @@ if __name__ == '__main__':
 
     mammals = s.addConcept('www.example.com/mammals')
     s.addPrefLabel(mammals, 'Mammals', 'en')
-    s.addAltLabel(mammals, 'Saeugetier', 'de')
-    s.addScopeNote(mammals, 'Die Saeugetiere (Mammalia) sind eine Klasse der Wirbeltiere.'
+    s.addAltLabel(mammals, 'Säugetier', 'de')
+    s.addScopeNote(mammals, 'Die Säugetiere (Mammalia) sind eine Klasse der Wirbeltiere.'
     + 'Zu ihren kennzeichnenden Merkmalen gehoeren das Saeugen des Nachwuchses mit Milch, '
     + 'die in den Milchdruesen der Weibchen produziert wird', 'de')
     s.addInScheme(mammals, scheme)
