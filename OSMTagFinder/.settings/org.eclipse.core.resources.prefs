@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
 encoding//flask/testsuite/helpers.py=utf-8
-encoding/skosgraph.py=UTF-8
-encoding/skosserializer.py=utf-8
+encoding//thesaurus/skosgraph.py=UTF-8
+encoding//thesaurus/skosserializer.py=utf-8

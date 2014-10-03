@@ -4,6 +4,7 @@ Created on 26.09.2014
 @author: Simon Gwerder
 '''
 
+import os
 from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin
 from rdflib.namespace import SKOS
 from rdflib.namespace import FOAF
@@ -11,6 +12,7 @@ from rdflib.serializer import Serializer
 # from skosserializer import SKOSSerializer
 
 class SkosGraph:
+    root_dir = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
     encoding = 'utf-8'
     graph = Graph()
     foaf = Namespace("http://xmlns.com/foaf/0.1/")  # only for depictions
@@ -96,4 +98,4 @@ if __name__ == '__main__':
     s.addBroader(mammals, animals)
     s.addHasTopConcept(scheme, animals)
 
-    print s.serialize('./data/test.rdf')
+    print s.serialize(s.root_dir + '/data/test.rdf')
