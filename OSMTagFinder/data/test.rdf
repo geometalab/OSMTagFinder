@@ -5,18 +5,18 @@
   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
 >
   <skos:Concept rdf:about="www.example.com/animals">
-    <skos:narrower rdf:resource="www.example.com/mammals"/>
-    <foaf:depiction rdf:resource="http://en.wikipedia.org/wiki/File:Animal_diversity.png"/>
     <skos:altLabel xml:lang="de">Tier</skos:altLabel>
-    <skos:prefLabel xml:lang="en">Animals</skos:prefLabel>
+    <foaf:depiction rdf:resource="http://en.wikipedia.org/wiki/File:Animal_diversity.png"/>
     <skos:inScheme rdf:resource="www.example.com"/>
-    <skos:definition xml:lang="de">Tiere sind nach biologischem Verstaendnis eukaryotische Lebewesen, die ihre Energie nicht durch Photosynthese gewinnen und Sauerstoff zur Atmung benoetigen, aber keine Pilze sind.</skos:definition>
+    <skos:definition xml:lang="de">Tiere sind nach biologischem Verstaendnis eukaryotische Lebewesen, die ihre Energie nicht durch Photosynthese gewinnen und Sauerstoff zur Atmung benötigen, aber keine Pilze sind.</skos:definition>
+    <skos:prefLabel xml:lang="en">Animals</skos:prefLabel>
+    <skos:narrower rdf:resource="www.example.com/mammals"/>
   </skos:Concept>
   <skos:Concept rdf:about="www.example.com/mammals">
-    <skos:scopeNote xml:lang="de">Die Säugetiere (Mammalia) sind eine Klasse der Wirbeltiere.Zu ihren kennzeichnenden Merkmalen gehoeren das Saeugen des Nachwuchses mit Milch, die in den Milchdruesen der Weibchen produziert wird</skos:scopeNote>
-    <skos:prefLabel xml:lang="en">Mammals</skos:prefLabel>
-    <skos:altLabel xml:lang="de">Säugetier</skos:altLabel>
     <skos:broader rdf:resource="www.example.com/animals"/>
+    <skos:prefLabel xml:lang="en">Mammals</skos:prefLabel>
+    <skos:scopeNote xml:lang="de">Die Säugetiere (Mammalia) sind eine Klasse der Wirbeltiere. Zu ihren kennzeichnenden Merkmalen gehören das Säugen des Nachwuchses mit Milch</skos:scopeNote>
+    <skos:altLabel xml:lang="de">Säugetier</skos:altLabel>
     <skos:inScheme rdf:resource="www.example.com"/>
   </skos:Concept>
   <skos:ConceptScheme rdf:about="www.example.com">

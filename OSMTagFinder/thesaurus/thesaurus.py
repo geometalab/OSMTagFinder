@@ -8,42 +8,25 @@ Created on 27.09.2014
 import requests
 import re
 import timeit
-#from requests.adapters import TimeoutSauce
+import os
+# from requests.adapters import TimeoutSauce
+
+from filter import Filter
+from skosgraph import SkosGraph
+import datetime
 
 
-from thesaurus.skosgraph import SkosGraph
+root_dir = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 
-#class ConnectionTimeout(TimeoutSauce):
+# class ConnectionTimeout(TimeoutSauce):
 #    def __init__(self, *args, **kwargs):
 #        connect = kwargs.get('connect', 5)
 #        read = kwargs.get('read', connect)
 #        super(ConnectionTimeout, self).__init__(connect=connect, read=read)
 
-#requests.adapters.TimeoutSauce = ConnectionTimeout
+# requests.adapters.TimeoutSauce = ConnectionTimeout
 
-#key's that got too many different meaningless values (key still will be added as concept)
-exactKeyFilter = ['name', 'ele', 'comment', 'image', 'symbol', 'deanery', 'jel', 'rating', 'school:FR', 'alt','is_in', 'url', 'website',
-                  'wikipedia','email', 'converted_by','phone','information','opening_hours','date','time','collection_times',
-                  'colour','fee', 'population','access','noexit','towards','bus_routes','busline','lines', 'type','denotation',
-                  'CONTINUE','continue','copyright','stop', 'network', 'comment', 'old_name', 'destination', 'brand',
-                  'turn:lanes', 'owner', 'fire_hydrant:city', 'fire_hydrant:street', 'country', 'contact:google_plus',
-                  'short_name:ru', 'tpuk_ref', 'wikimedia_commons', 'operator', 'source', 'wikipedia', 'railway:etcs',
-                  'de:regionalschluessel', 'de:amtlicher_gemeindeschluessel', 'contact:xing', 'nspn', '_picture_',
-                  '_waypoint_', 'label', 'branch', 'note', 'phone', 'created_by', 'start_date', 'end_date', 'description', 'description:ru']
-
-prefixKeyFilter = ['name:', 'note:', 'alt_name', 'int_name', 'loc_name', 'not:name', 'nat_name', 'official_name', 'short_name', 'reg_name', 'sorting_name',
-                   'contact:', 'addr', 'icao', 'iata' 'onkz', 'is_in', 'fixme', 'seamark:fixme',
-                   'ois:fixme', 'todo', 'type:', 'admin_level', 'AND_', 'AND:', 'seamark:', 'attribution', 'openGeoDB', 'ref', 'source_ref', 'tiger',
-                    'yh:', 'ngbe:', 'gvr:code','old_ref_legislative', 'sl_stop_id', 'ele:', 'source:',
-                   'osak:', 'kms', 'gnis:', 'nhd', 'chicago:building_id', 'hgv', 'nhs', 'ncat', 'nhd-shp:', 'osmc:', 'kp',
-                   'int_name', 'CLC:', 'naptan:', 'building:ruian:', 'massgis:', 'WroclawGIS:', 'ref:FR:FANTOIR', 'rednap:', 'ts_', 'type:FR:FINESS',
-                   'route_ref', 'lcn_ref', 'ncn_ref', 'rcn', 'rwn_ref', 'old_ref', 'prow_ref', 'local_ref', 'loc_ref', 'reg_ref', 'url',
-                   'nat_ref', 'int_ref', 'uic_ref', 'asset_ref', 'carriageway_ref', 'junction:ref', 'fhrs:', 'osmc:', 'cep', 'protection_title',
-                   'bag:extract', 'ref:bagid', 'adr_les', 'bag:', 'fresno_', 'uuid', 'uic_name', 'gtfs_id', 'USGS-LULC:', 'reg_', 'IBGE:',
-                   'sagns_id', 'protect_id', 'PMSA_ref', 'destination:', 'EH_ref', 'rtc_rate', 'cyclestreets_id', 'woeid', 'CEMT',
-                   'depth:dredged']
-
-valueFilter = []
+# key's that got too many different meaningless values (key still will be added as concept)
 minCount = 5
 
 def isNumber(s):
@@ -54,26 +37,15 @@ def isNumber(s):
         return False
 
 def validCheck(s):
-    if contains_digits(s):
+    if containsDigits(s):
         return False
-    if ' ' in s:
-        return False
-    if ';' in s:
+    if ' ' in s or ';' in s:
         return False
     return True
 
 _digits = re.compile('\d')
-def contains_digits(d):
+def containsDigits(d):
     return bool(_digits.search(d))
-
-def startsWithFilter(strKey, filterList):
-    for prefixKeyFilter in filterList:
-        lowStrKey = strKey.lower()
-        lowKeyFilter = prefixKeyFilter.lower()
-        if(lowStrKey.startswith(lowKeyFilter)):
-            return True
-    return False
-
 
 if __name__ == '__main__':
 
@@ -83,23 +55,27 @@ if __name__ == '__main__':
     tagInfoAllKeys = 'http://taginfo.osm.org/api/4/keys/all?filter=in_wiki'
     tagInfoValueOfKey = 'http://taginfo.osm.org/api/4/key/values?key='
     tagInfoWikiPageOfKey = 'http://taginfo.osm.org/api/4/key/wiki_pages?key='
-    tagInfoWikiPageOfTag = 'http://taginfo.osm.org/api/4/tag/wiki_pages?key=' # + &value=blabla
+    tagInfoWikiPageOfTag = 'http://taginfo.osm.org/api/4/tag/wiki_pages?key='  # + &value=blabla
     osmWikiBase = 'http://wiki.openstreetmap.org/wiki/'
     osmSchemeName = 'http://wiki.openstreetmap.org/wiki/Tag'
-    outputfile = './data/osm_tag_thesaurus_v0.2.rdf'
+    outputfile = root_dir + '/data/osm_tag_thesaurus_' + datetime.date.today().isoformat() + '.rdf'
 
     keyResult = requests.get(tagInfoAllKeys + tagInfoSortDesc);
     keyJson = keyResult.json();
     keyData = keyJson['data'];
 
+    filterUtil = Filter()
+
     keyCount = 0
     keyList = []
+
+
     for keyItem in keyData:
         if keyItem['count_all'] < minCount:
-            break; #speedup because of sorted list
-        if keyItem['key'] not in exactKeyFilter and not startsWithFilter(keyItem['key'], prefixKeyFilter) and validCheck(keyItem['key']) and keyItem['values_all'] >= minCount:
-            #keyWikiPage = requests.get(tagInfoWikiPageOfKey + keyItem['key'].replace('%',''))
-            #if(len(keyWikiPage.json()) > 0):
+            break;  # speedup because of sorted list
+        if not filterUtil.hasKey(keyItem['key']) and validCheck(keyItem['key']) and keyItem['values_all'] >= minCount:
+            # keyWikiPage = requests.get(tagInfoWikiPageOfKey + keyItem['key'].replace('%',''))
+            # if(len(keyWikiPage.json()) > 0):
             keyList.append(keyItem['key'])
             keyCount = keyCount + 1
             print(str(keyCount) + ' - Key: ' + keyItem['key'])
@@ -114,7 +90,7 @@ if __name__ == '__main__':
 
         s = ''
         for valueItem in valueData:
-            if valueItem['value'] not in valueFilter and valueItem['in_wiki'] and validCheck(valueItem['value']) and valueItem['count'] >= minCount:
+            if not filterUtil.hasValue(valueItem['value']) and valueItem['in_wiki'] and validCheck(valueItem['value']) and valueItem['count'] >= minCount:
                 k = tagMap.get(key)
                 if(k is not None):
                     k.append(valueItem['value'])
@@ -141,13 +117,13 @@ if __name__ == '__main__':
         graph.addInScheme(keyConcept, scheme)
         graph.addHasTopConcept(scheme, keyConcept)
 
-        print(str(keyCount) + '/' + str(len(keyList)) + ' : ' +  osmWikiBase + 'Key:' + key)
+        print(str(keyCount) + '/' + str(len(keyList)) + ' : ' + osmWikiBase + 'Key:' + key)
         valueList = tagMap.get(key)
         if valueList is None:
             continue
         for value in valueList:
-            taglink = osmWikiBase + 'Tag:' + key + '=' + value #before: key + '%3D' + value
-            #result = requests.get('http://' + taglink)
+            taglink = osmWikiBase + 'Tag:' + key + '=' + value  # before: key + '%3D' + value
+            # result = requests.get('http://' + taglink)
             tagWikiPage = requests.get(tagInfoWikiPageOfTag + key + '&value=' + value)
             if len(tagWikiPage.json()) > 0:
                 print('\t' + taglink)
@@ -177,7 +153,7 @@ if __name__ == '__main__':
                             print '\t\t' + depiction
                     else:
                         continue
-    for filteredKey in prefixKeyFilter:
+    for filteredKey in filterUtil.completeFilterList():
         keyWikiPage = requests.get(tagInfoWikiPageOfKey + filteredKey)
         if len(keyWikiPage.json()) > 0:
             keyConcept = graph.addConcept(osmWikiBase + 'Key:' + filteredKey)

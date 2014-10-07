@@ -22,10 +22,9 @@ class SkosGraph:
     graph.bind('skos', skos)
 
 
-    def serialize(self, filepath):
+    def serialize(self, filepath=(root_dir + '/data/test.rdf')):
         plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')  # register(name, kind, module_path, class_name)
         self.graph.serialize(destination=filepath, format='skos', encoding=self.encoding)
-        return self.graph.serialize(format='skos', encoding=self.encoding)
 
     def addConceptScheme(self, subject):
         self.graph.add((URIRef(subject), RDF.type, SKOS.ConceptScheme))
@@ -82,7 +81,7 @@ if __name__ == '__main__':
     s.addPrefLabel(animals, 'Animals', 'en')
     s.addDefinition(animals, 'Tiere sind nach biologischem Verstaendnis eukaryotische Lebewesen, '
                     + 'die ihre Energie nicht durch Photosynthese gewinnen und Sauerstoff '
-                    + 'zur Atmung benoetigen, aber keine Pilze sind.', 'de')
+                    + 'zur Atmung benötigen, aber keine Pilze sind.', 'de')
     s.addAltLabel(animals, 'Tier', 'de')
     s.addDepiction(animals, 'http://en.wikipedia.org/wiki/File:Animal_diversity.png')
     s.addInScheme(animals, scheme)
@@ -90,13 +89,14 @@ if __name__ == '__main__':
     mammals = s.addConcept('www.example.com/mammals')
     s.addPrefLabel(mammals, 'Mammals', 'en')
     s.addAltLabel(mammals, 'Säugetier', 'de')
-    s.addScopeNote(mammals, 'Die Säugetiere (Mammalia) sind eine Klasse der Wirbeltiere.'
-    + 'Zu ihren kennzeichnenden Merkmalen gehoeren das Saeugen des Nachwuchses mit Milch, '
-    + 'die in den Milchdruesen der Weibchen produziert wird', 'de')
+    s.addScopeNote(mammals, 'Die Säugetiere (Mammalia) sind eine Klasse der Wirbeltiere. '
+    + 'Zu ihren kennzeichnenden Merkmalen gehören das Säugen des Nachwuchses mit Milch', 'de')
     s.addInScheme(mammals, scheme)
 
     s.addNarrower(animals, mammals)
     s.addBroader(mammals, animals)
     s.addHasTopConcept(scheme, animals)
 
-    print s.serialize(s.root_dir + '/data/test.rdf')
+    plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')
+    print s.graph.serialize(format='skos', encoding=s.encoding)
+
