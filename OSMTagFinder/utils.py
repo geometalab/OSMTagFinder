@@ -13,13 +13,13 @@ dataFolderName = 'data'
 resourceFolderName = 'resource'
 
 def rootDir():
-    return os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
+    return os.path.split(os.path.abspath(os.path.dirname(__file__)))[0] + '\\' + os.path.split(os.path.abspath(os.path.dirname(__file__)))[1]
 
 def dataDir():
-    return rootDir() + '/' + dataFolderName + '/'
+    return rootDir() + '\\' + dataFolderName + '\\'
 
 def resourceDir():
-    return rootDir() + '/' + resourceFolderName + '/'
+    return rootDir() + '\\' + resourceFolderName + '\\'
 
 def isNumber(s):
     try:

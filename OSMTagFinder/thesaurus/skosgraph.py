@@ -10,6 +10,7 @@ from rdflib.namespace import SKOS
 from rdflib.namespace import FOAF
 from rdflib.serializer import Serializer
 import utils
+
 # from skosserializer import SKOSSerializer
 
 class SkosGraph:

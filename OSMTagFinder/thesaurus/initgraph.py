@@ -31,7 +31,7 @@ def outputFile(outputName, outputEnding, printDate):
     if printDate:
         dateString = datetime.date.today().isoformat()
         dateString = dateString.replace('-', '')
-        dateString = dateString.substring(2, dateString.length)
+        dateString = dateString[2:] # substring from incl. 3rd char to end of string
         return utils.dataDir() + outputName + dateString + outputEnding
     else:
         return utils.dataDir() + outputName + outputEnding
