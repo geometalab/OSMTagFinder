@@ -5,24 +5,24 @@ Created on 26.09.2014
 @author: Simon Gwerder
 '''
 
-import os
 from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin
 from rdflib.namespace import SKOS
 from rdflib.namespace import FOAF
 from rdflib.serializer import Serializer
+import utils
 # from skosserializer import SKOSSerializer
 
 class SkosGraph:
-    root_dir = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
     encoding = 'utf-8'
     graph = Graph()
-    foaf = Namespace("http://xmlns.com/foaf/0.1/")  # only for depictions
-    skos = Namespace('http://www.w3.org/2004/02/skos/core#')
-    graph.bind('foaf', foaf)
-    graph.bind('skos', skos)
 
+    def __init__ (self):
+        foaf = Namespace("http://xmlns.com/foaf/0.1/")  # only for depictions
+        skos = Namespace('http://www.w3.org/2004/02/skos/core#')
+        self.graph.bind('foaf', foaf)
+        self.graph.bind('skos', skos)
 
-    def serialize(self, filepath=(root_dir + '/data/test.rdf')):
+    def serialize(self, filepath=(utils.dataDir() + 'test.rdf')):
         plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')  # register(name, kind, module_path, class_name)
         self.graph.serialize(destination=filepath, format='skos', encoding=self.encoding)
 

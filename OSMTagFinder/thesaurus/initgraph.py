@@ -6,17 +6,15 @@ Created on 27.09.2014
 '''
 
 import requests
-import re
 import timeit
-import os
+import datetime
+
 # from requests.adapters import TimeoutSauce
 
 from filter import Filter
+import utils
 from skosgraph import SkosGraph
-import datetime
 
-
-root_dir = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 
 # class ConnectionTimeout(TimeoutSauce):
 #    def __init__(self, *args, **kwargs):
@@ -29,23 +27,15 @@ root_dir = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
 # key's that got too many different meaningless values (key still will be added as concept)
 minCount = 5
 
-def isNumber(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        return False
+def outputFile(outputName, outputEnding, printDate):
+    if printDate:
+        dateString = datetime.date.today().isoformat()
+        dateString = dateString.replace('-', '')
+        dateString = dateString.substring(2, dateString.length)
+        return utils.dataDir() + outputName + dateString + outputEnding
+    else:
+        return utils.dataDir() + outputName + outputEnding
 
-def validCheck(s):
-    if containsDigits(s):
-        return False
-    if ' ' in s or ';' in s:
-        return False
-    return True
-
-_digits = re.compile('\d')
-def containsDigits(d):
-    return bool(_digits.search(d))
 
 if __name__ == '__main__':
 
@@ -58,7 +48,10 @@ if __name__ == '__main__':
     tagInfoWikiPageOfTag = 'http://taginfo.osm.org/api/4/tag/wiki_pages?key='  # + &value=blabla
     osmWikiBase = 'http://wiki.openstreetmap.org/wiki/'
     osmSchemeName = 'http://wiki.openstreetmap.org/wiki/Tag'
-    outputfile = root_dir + '/data/osm_tag_thesaurus_' + datetime.date.today().isoformat() + '.rdf'
+
+    outputName = 'osm_tag_thesaurus_'
+    outputEnding = '.rdf'
+
 
     keyResult = requests.get(tagInfoAllKeys + tagInfoSortDesc);
     keyJson = keyResult.json();
@@ -73,7 +66,7 @@ if __name__ == '__main__':
     for keyItem in keyData:
         if keyItem['count_all'] < minCount:
             break;  # speedup because of sorted list
-        if not filterUtil.hasKey(keyItem['key']) and validCheck(keyItem['key']) and keyItem['values_all'] >= minCount:
+        if not filterUtil.hasKey(keyItem['key']) and utils.validCharsCheck(keyItem['key']) and keyItem['values_all'] >= minCount:
             # keyWikiPage = requests.get(tagInfoWikiPageOfKey + keyItem['key'].replace('%',''))
             # if(len(keyWikiPage.json()) > 0):
             keyList.append(keyItem['key'])
@@ -90,7 +83,7 @@ if __name__ == '__main__':
 
         s = ''
         for valueItem in valueData:
-            if not filterUtil.hasValue(valueItem['value']) and valueItem['in_wiki'] and validCheck(valueItem['value']) and valueItem['count'] >= minCount:
+            if not filterUtil.hasValue(valueItem['value']) and valueItem['in_wiki'] and utils.validCharsCheck(valueItem['value']) and valueItem['count'] >= minCount:
                 k = tagMap.get(key)
                 if(k is not None):
                     k.append(valueItem['value'])
@@ -162,8 +155,7 @@ if __name__ == '__main__':
             graph.addHasTopConcept(scheme, keyConcept)
             keyCount = keyCount + 1
 
-    ser = graph.serialize(outputfile)
-    print(ser)
+    graph.serialize(outputFile(outputName, outputEnding, printDate=True))
 
     print('\n\nKeys: ' + str(keyCount))
     print('Tags: ' + str(tagCount))
