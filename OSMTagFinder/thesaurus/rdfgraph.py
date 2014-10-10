@@ -10,7 +10,7 @@ from rdflib.namespace import SKOS
 from rdflib.namespace import FOAF
 from rdflib.serializer import Serializer
 from rdflib.util import guess_format
-from utils import Utils
+import utils
 
 # from skosserializer import SKOSSerializer
 
@@ -30,7 +30,7 @@ class RDFGraph:
         guessedFormat = guess_format(filePath)
         return self.graph.parse(filePath, format=guessedFormat)
 
-    def serialize(self, filepath=(Utils().dataDir() + 'default.rdf')):
+    def serialize(self, filepath=(utils.dataDir() + 'default.rdf')):
         plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')  # register(name, kind, module_path, class_name)
         self.graph.serialize(destination=filepath, format='skos', encoding=self.encoding)
 

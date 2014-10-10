@@ -11,8 +11,10 @@ import timeit
 import datetime
 
 from filter import Filter
-from utils import Utils, ConfigLoader
+import utils
+from configloader import ConfigLoader
 from thesaurus.rdfgraph import RDFGraph
+from translator import Translator
 
 class BaseThesaurus:
     minCount = 5
@@ -34,9 +36,9 @@ def outputFile(outputName, outputEnding, printDate):
         dateString = datetime.date.today().isoformat()
         dateString = dateString.replace('-', '')
         dateString = dateString[2:] # substring from incl. 3rd char to end of string
-        return Utils().dataDir() + outputName + '_' + dateString + outputEnding
+        return utils.dataDir() + outputName + '_' + dateString + outputEnding
     else:
-        return Utils().dataDir() + outputName + outputEnding
+        return utils.dataDir() + outputName + outputEnding
 
 
 if __name__ == '__main__':
@@ -59,6 +61,9 @@ if __name__ == '__main__':
     outputName = cl.getThesaurusString('output_name') # osm_tag_thesaurus
     outputEnding = cl.getThesaurusString('default_format') # .rdf
 
+    translationHintDE = cl.getThesaurusString('translation_hint_DE')
+    translationHintEN = cl.getThesaurusString('translation_hint_EN')
+
     minCount = cl.getThesaurusInt('minimum_count')
 
     keyResult = requests.get(tagInfoAllKeys + tagInfoSortDesc);
@@ -74,7 +79,7 @@ if __name__ == '__main__':
     for keyItem in keyData:
         if keyItem['count_all'] < minCount:
             break;  # speedup because of sorted list
-        if not filterUtil.hasKey(keyItem['key']) and Utils().validCharsCheck(keyItem['key']) and keyItem['values_all'] >= minCount:
+        if not filterUtil.hasKey(keyItem['key']) and utils.validCharsCheck(keyItem['key']) and keyItem['values_all'] >= minCount:
             # keyWikiPage = requests.get(tagInfoWikiPageOfKey + keyItem['key'].replace('%',''))
             # if(len(keyWikiPage.json()) > 0):
             keyList.append(keyItem['key'])
@@ -91,7 +96,7 @@ if __name__ == '__main__':
 
         r = ''
         for valueItem in valueData:
-            if not filterUtil.hasValue(valueItem['value']) and valueItem['in_wiki'] and Utils().validCharsCheck(valueItem['value']) and valueItem['count'] >= minCount:
+            if not filterUtil.hasValue(valueItem['value']) and valueItem['in_wiki'] and utils.validCharsCheck(valueItem['value']) and valueItem['count'] >= minCount:
                 k = tagMap.get(key)
                 if(k is not None):
                     k.append(valueItem['value'])
@@ -111,6 +116,9 @@ if __name__ == '__main__':
 
     keyCount = 0;
     tagCount = 0;
+
+    translator = Translator()
+
     for key in keyList:
         keyCount = keyCount + 1
         keyConcept = graph.addConcept(osmWikiBase + 'Key:' + key)
@@ -137,24 +145,40 @@ if __name__ == '__main__':
                 graph.addInScheme(tagConcept, tagScheme)
                 tagCount = tagCount + 1
 
+                descriptionDE = ''
+                descriptionEN = ''
+
                 for langItems in tagWikiPageJson:
+
                     if langItems['lang'] == 'de':
-                        description = langItems['description']
-                        if not description == '':
-                            graph.addScopeNote(tagConcept, description, 'de')
-                            print '\t\tde: ' + description
+                        temp = langItems['description']
+                        if temp is not None and not temp == '':
+                            descriptionDE = temp
+                            print '\t\tde: ' + descriptionDE
                     elif langItems['lang'] == 'en':
-                        description = langItems['description']
-                        if  description is not None and not description == '':
-                            graph.addScopeNote(tagConcept, description, 'en')
-                            print '\t\ten: ' + description
-                        imageData = langItems['image']
-                        depiction = imageData['image_url']
-                        if depiction is not None and not depiction == '':
-                            graph.addDepiction(tagConcept, depiction)
-                            print '\t\t' + depiction
-                    else:
-                        continue
+                        temp = langItems['description']
+                        if  temp is not None and not temp == '':
+                            descriptionEN = temp
+                            print '\t\ten: ' + descriptionEN
+
+                if descriptionDE == '' and not descriptionEN == '':
+                    graph.addScopeNote(tagConcept, descriptionEN, 'en')
+                    graph.addScopeNote(tagConcept, translator.translateENtoDE(descriptionEN) + ' ' + translationHintDE, 'de')
+                elif not descriptionDE == '' and descriptionEN == '':
+                    graph.addScopeNote(tagConcept, translator.translateDEtoEN(descriptionDE) + ' ' + translationHintEN, 'en')
+                    graph.addScopeNote(tagConcept, descriptionDE, 'de')
+                elif not descriptionDE == '' and not descriptionEN == '':
+                    graph.addScopeNote(tagConcept, descriptionEN, 'en')
+                    graph.addScopeNote(tagConcept, descriptionDE, 'de')
+
+                imageData = langItems['image']
+                depiction = imageData['image_url']
+                if depiction is not None and not depiction == '':
+                    graph.addDepiction(tagConcept, depiction)
+                    print '\t\t' + depiction
+
+
+
     for filteredKey in filterUtil.completeFilterList():
         keyWikiPage = requests.get(tagInfoWikiPageOfKey + filteredKey)
         if len(keyWikiPage.json()) > 0:
@@ -168,7 +192,7 @@ if __name__ == '__main__':
 
     print('\n\nKeys: ' + str(keyCount))
     print('Tags: ' + str(tagCount))
-    print ('Tripples Count: ' + str(graph.tripplesCount()))
+    print ('Tripples: ' + str(graph.tripplesCount()))
 
     stopTime = timeit.default_timer()
 

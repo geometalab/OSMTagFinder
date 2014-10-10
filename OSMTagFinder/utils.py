@@ -7,73 +7,38 @@ Created on 08.10.2014
 
 import re
 import os
-from ConfigParser import SafeConfigParser
-import codecs
 
-class Utils:
-    invalidChars = [' ', ';']
-    dataFolderName = 'data'
-    resourceFolderName = 'resource'
+_invalidChars = [' ', ';']
+_dataFolderName = 'data'
+_resourceFolderName = 'resource'
 
-    def rootDir(self):
-        return os.path.split(os.path.abspath(os.path.dirname(__file__)))[0] + '\\' + os.path.split(os.path.abspath(os.path.dirname(__file__)))[1]
+def rootDir():
+    return os.path.split(os.path.abspath(os.path.dirname(__file__)))[0] + '\\' + os.path.split(os.path.abspath(os.path.dirname(__file__)))[1]
 
-    def dataDir(self):
-        return self.rootDir() + '\\' + self.dataFolderName + '\\'
+def dataDir():
+    return rootDir() + '\\' + _dataFolderName + '\\'
 
-    def resourceDir(self):
-        return self.rootDir() + '\\' + self.resourceFolderName + '\\'
+def resourceDir():
+    return rootDir() + '\\' + _resourceFolderName + '\\'
 
-    def isNumber(self, r):
-        try:
-            float(r)
-            return True
-        except ValueError:
-            return False
-
-    def validCharsCheck(self, r):
-        if self.containsDigits(r):
-            return False
-
-        for invalidChar in self.invalidChars:
-            if invalidChar in r:
-                return False
-
+def isNumber(r):
+    try:
+        float(r)
         return True
+    except ValueError:
+        return False
 
-    _digits = re.compile('\d')
-    def containsDigits(self, d):
-        return bool(self._digits.search(d))
+def validCharsCheck(r):
+    if containsDigits(r):
+        return False
 
+    for invalidChar in _invalidChars:
+        if invalidChar in r:
+            return False
 
+    return True
 
-
-class ConfigLoader:
-
-    configFileLoc = Utils().dataDir() + 'config.ini'
-
-    thesaurusSection = 'Thesaurus'
-    tagInfoSection = "TagInfoAPI"
-
-    __parser = SafeConfigParser()
-
-    def __init__(self):
-        with codecs.open(self.configFileLoc, 'r', encoding='utf-8') as configFile:  # open the file with the correct encoding
-            self.__parser.readfp(configFile)
-
-    def getThesaurusString(self, option):
-        return self.__parser.get(self.thesaurusSection, option)
-
-    def getThesaurusInt(self, option):
-        return self.__parser.getint(self.thesaurusSection, option)
-
-    def getTagInfoAPIString(self, option):
-        return self.__parser.get(self.tagInfoSection, option)
-
-
-
-
-
-
-
+_digits = re.compile('\d')
+def containsDigits(d):
+    return bool(_digits.search(d))
 
