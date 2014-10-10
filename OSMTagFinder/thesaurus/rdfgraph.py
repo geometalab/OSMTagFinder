@@ -9,21 +9,28 @@ from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin
 from rdflib.namespace import SKOS
 from rdflib.namespace import FOAF
 from rdflib.serializer import Serializer
-import utils
+from rdflib.util import guess_format
+from utils import Utils
 
 # from skosserializer import SKOSSerializer
 
-class SkosGraph:
+class RDFGraph:
     encoding = 'utf-8'
     graph = Graph()
 
-    def __init__ (self):
+    def __init__ (self, filePath=None):
+        if filePath is not None:
+            self.graph = self.load(filePath)
         foaf = Namespace("http://xmlns.com/foaf/0.1/")  # only for depictions
         skos = Namespace('http://www.w3.org/2004/02/skos/core#')
         self.graph.bind('foaf', foaf)
         self.graph.bind('skos', skos)
 
-    def serialize(self, filepath=(utils.dataDir() + 'test.rdf')):
+    def load(self, filePath):
+        guessedFormat = guess_format(filePath)
+        return self.graph.parse(filePath, format=guessedFormat)
+
+    def serialize(self, filepath=(Utils().dataDir() + 'default.rdf')):
         plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')  # register(name, kind, module_path, class_name)
         self.graph.serialize(destination=filepath, format='skos', encoding=self.encoding)
 
@@ -49,8 +56,8 @@ class SkosGraph:
     def addScopeNote(self, subject, obj, language):
         self.graph.add((URIRef(subject), SKOS.scopeNote, Literal(obj, lang=language)))
 
-    def addPrefLabel(self, subject, obj, language):
-        self.graph.add((URIRef(subject), SKOS.prefLabel, Literal(obj, lang=language)))
+    def addPrefLabel(self, subject, obj):
+        self.graph.add((URIRef(subject), SKOS.prefLabel, Literal(obj)))
         return subject
 
     def addAltLabel(self, subject, obj, language):
@@ -73,31 +80,35 @@ class SkosGraph:
         self.graph.add((URIRef(subject), SKOS.prefSymbol, URIRef(obj)))
         return subject
 
+    def tripplesCount(self):
+        return len(self.graph)
+
 if __name__ == '__main__':
-    s = SkosGraph()
+    r = RDFGraph()
 
-    scheme = s.addConceptScheme('www.example.com')
+    keyScheme = r.addConceptScheme('www.example.com')
 
-    animals = s.addConcept('www.example.com/animals')
-    s.addPrefLabel(animals, 'Animals', 'en')
-    s.addDefinition(animals, 'Tiere sind nach biologischem Verstaendnis eukaryotische Lebewesen, '
+    animals = r.addConcept('www.example.com/animals')
+    r.addPrefLabel(animals, 'Animals')
+    r.addDefinition(animals, 'Tiere sind nach biologischem Verstaendnis eukaryotische Lebewesen, '
                     + 'die ihre Energie nicht durch Photosynthese gewinnen und Sauerstoff '
                     + 'zur Atmung benötigen, aber keine Pilze sind.', 'de')
-    s.addAltLabel(animals, 'Tier', 'de')
-    s.addDepiction(animals, 'http://en.wikipedia.org/wiki/File:Animal_diversity.png')
-    s.addInScheme(animals, scheme)
+    r.addAltLabel(animals, 'Tier', 'de')
+    r.addDepiction(animals, 'http://en.wikipedia.org/wiki/File:Animal_diversity.png')
+    r.addInScheme(animals, keyScheme)
 
-    mammals = s.addConcept('www.example.com/mammals')
-    s.addPrefLabel(mammals, 'Mammals', 'en')
-    s.addAltLabel(mammals, 'Säugetier', 'de')
-    s.addScopeNote(mammals, 'Die Säugetiere (Mammalia) sind eine Klasse der Wirbeltiere. '
+    mammals = r.addConcept('www.example.com/mammals')
+    r.addPrefLabel(mammals, 'Mammals')
+    r.addAltLabel(mammals, 'Säugetier', 'de')
+    r.addScopeNote(mammals, 'Die Säugetiere (Mammalia) sind eine Klasse der Wirbeltiere. '
     + 'Zu ihren kennzeichnenden Merkmalen gehören das Säugen des Nachwuchses mit Milch', 'de')
-    s.addInScheme(mammals, scheme)
+    r.addInScheme(mammals, keyScheme)
 
-    s.addNarrower(animals, mammals)
-    s.addBroader(mammals, animals)
-    s.addHasTopConcept(scheme, animals)
+    r.addNarrower(animals, mammals)
+    r.addBroader(mammals, animals)
+    r.addHasTopConcept(keyScheme, animals)
 
     plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')
-    print s.graph.serialize(format='skos', encoding=s.encoding)
+    print r.graph.serialize(format='skos', encoding=r.encoding)
+
 

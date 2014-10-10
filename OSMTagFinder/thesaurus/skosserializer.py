@@ -334,7 +334,7 @@ class SKOSSerializer(Serializer):
 
                     if not object in self.__serialized \
                             and (object, None, None) in store \
-                            and len(list(store.subjects(object=object))) == 1:
+                            and tripplesCount(list(store.subjects(object=object))) == 1:
                         # inline blank nodes if they haven't been serialized yet
                         # and are only referenced once (regardless of depth)
                         self.subject(object, depth + 1)
