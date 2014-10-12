@@ -11,6 +11,7 @@ from rdflib.namespace import FOAF
 from rdflib.serializer import Serializer
 from rdflib.util import guess_format
 import utils
+from graphsearch import GraphSearch
 
 # from skosserializer import SKOSSerializer
 
@@ -83,17 +84,29 @@ class RDFGraph:
     def tripplesCount(self):
         return len(self.graph)
 
+    def sparqlQuery(self, query):
+        return self.graph.query(query)
+
+    def getPrefLabels(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), SKOS.prefLabel)
+        return generatorList
+
+    def getAltLabels(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), SKOS.altLabel)
+        return generatorList
+
 if __name__ == '__main__':
     r = RDFGraph()
 
     keyScheme = r.addConceptScheme('www.example.com')
 
     animals = r.addConcept('www.example.com/animals')
-    r.addPrefLabel(animals, 'Animals')
-    r.addDefinition(animals, 'Tiere sind nach biologischem Verstaendnis eukaryotische Lebewesen, '
+    prefLabel = r.addPrefLabel(animals, 'Animals')
+    description = r.addDefinition(animals, 'Tiere sind nach biologischem Verständnis eukaryotische Lebewesen, '
                     + 'die ihre Energie nicht durch Photosynthese gewinnen und Sauerstoff '
                     + 'zur Atmung benötigen, aber keine Pilze sind.', 'de')
-    r.addAltLabel(animals, 'Tier', 'de')
+    altLabel = r.addAltLabel(animals, 'Tier', 'de')
+    r.addAltLabel(animals, 'Viech', 'de')
     r.addDepiction(animals, 'http://en.wikipedia.org/wiki/File:Animal_diversity.png')
     r.addInScheme(animals, keyScheme)
 
@@ -111,4 +124,24 @@ if __name__ == '__main__':
     plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')
     print r.graph.serialize(format='skos', encoding=r.encoding)
 
+    #print r.getAltLabels('www.example.com/animals')
+
+'''
+    qres = r.sparqlQuery('SELECT DISTINCT ?aname ?bname'+
+       'WHERE {'+
+          '?a skos:broader ?b .'+
+          '?a skos:prefLabel ?aname .'+
+          '?b skos:prefLabel ?bname .'+
+       '}')
+
+    r = RDFGraph()
+    r.load(utils.dataDir() + 'osm_tag_thesaurus_141010.rdf')
+
+    qres = r.sparqlQuery('SELECT ?a'+
+       'WHERE {'+
+          'OPTIONAL { ?a skos:prefLabel "highway" }'+
+       '}')
+    for row in qres:
+        print("%s" % row)
+'''
 

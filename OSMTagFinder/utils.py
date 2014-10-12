@@ -10,16 +10,31 @@ import os
 
 _invalidChars = [' ', ';']
 _dataFolderName = 'data'
+_indexerFolderName = 'indexer'
 _resourceFolderName = 'resource'
+
+indexName = 'index' #for indexer and graphsearch
+
+
+def _checkPath(path):
+    if not os.path.exists(path):
+        os.mkdir(path)
+    return path
 
 def rootDir():
     return os.path.split(os.path.abspath(os.path.dirname(__file__)))[0] + '\\' + os.path.split(os.path.abspath(os.path.dirname(__file__)))[1]
 
 def dataDir():
-    return rootDir() + '\\' + _dataFolderName + '\\'
+    path = rootDir() + '\\' + _dataFolderName + '\\'
+    return _checkPath(path)
+
+def indexerDir():
+    path = dataDir() + '\\' + _indexerFolderName + '\\'
+    return _checkPath(path)
 
 def resourceDir():
-    return rootDir() + '\\' + _resourceFolderName + '\\'
+    path = rootDir() + '\\' + _resourceFolderName + '\\'
+    return _checkPath(path)
 
 def isNumber(r):
     try:
