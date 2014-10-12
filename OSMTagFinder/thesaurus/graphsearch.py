@@ -10,7 +10,8 @@ from whoosh.index import open_dir
 import whoosh.index as index
 from spellcorrect import SpellCorrect
 from translator import Translator
-from rdfgraph import RDFGraph
+#from rdfgraph import RDFGraph
+from ordered_set import OrderedSet
 
 import utils
 
@@ -21,11 +22,12 @@ class GraphSearch:
         seen_add = seen.add
         return [ x for x in seq if not (x in seen or seen_add(x))]
 
+
     def search(self, word, includeScopeNote=False, translateDEToEN=False):
 
-        retList = []
+        retSet = OrderedSet()
         if not index.exists_in(utils.indexerDir(), utils.indexName):
-            return retList
+            return retSet
 
         ix = open_dir(utils.indexerDir(), indexname=utils.indexName)
 
@@ -42,50 +44,61 @@ class GraphSearch:
             resultsHiddenLabel = searcher.search(queryHiddenLabel, limit=None, terms=True)
 
             for result in resultsPrefLabel:
-                retList.append(result['concept'])
+                retSet.add(result['concept'])
 
             for result in resultsAltLabel:
-                retList.append(result['concept'])
+                retSet.add(result['concept'])
 
             for result in resultsHiddenLabel:
-                retList.append(result['concept'])
+                retSet.add(result['concept'])
 
             if includeScopeNote:
                 queryScopeNote = QueryParser("scopeNote", ix.schema).parse(unicode(word))
                 resultsScopeNote = searcher.search(queryScopeNote, limit=None, terms=True)
                 for result in resultsScopeNote:
-                    retList.append(result['concept'])
+                    retSet.add(result['concept'])
 
-            retList = self.uniqueList(retList)
+        return retSet
 
-        return retList
+    def extendedSearch(self, word):
+
+        threshold = 2
+
+        results = OrderedSet()
+        results = results | gs.search(word, includeScopeNote=False, translateDEToEN=False)
+
+        if len(results) < threshold:
+            results = results | gs.search(word, includeScopeNote=False, translateDEToEN=True)
+
+        if len(results) < threshold:
+            results = results | gs.search(word, includeScopeNote=True, translateDEToEN=False)
+
+        if len(results) < threshold:
+            results = results | gs.search(word, includeScopeNote=True, translateDEToEN=True)
+
+        if len(results) < threshold:
+            suggestions = SpellCorrect().listSuggestions(word)
+            for s in suggestions:
+                results = results | gs.search(s, includeScopeNote=False, translateDEToEN=True)
+
+        if len(results) < threshold:
+            suggestions = SpellCorrect().listSuggestions(word)
+            for s in suggestions:
+                results = results | gs.search(s, includeScopeNote=True, translateDEToEN=True)
+
+        return results
+
+
 
 
 if __name__ == '__main__':
-
     #rg = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141012.rdf')
+
     gs = GraphSearch()
     while True:
-        threshold = 2
         word = raw_input("Enter word to search for: ")
-        results = set()
-        results.update(gs.search(word, includeScopeNote=False, translateDEToEN=False))
-        if len(results) < threshold:
-            results.update(gs.search(word, includeScopeNote=False, translateDEToEN=True))
-        if len(results) < threshold:
-            results.update(gs.search(word, includeScopeNote=True, translateDEToEN=False))
-        if len(results) < threshold:
-            results.update(gs.search(word, includeScopeNote=True, translateDEToEN=True))
-        if len(results) < threshold:
-            suggestions = SpellCorrect().listSuggestions(word)
-            for s in suggestions:
-                results.update(gs.search(s, includeScopeNote=False, translateDEToEN=True))
-        if len(results) < threshold:
-            suggestions = SpellCorrect().listSuggestions(word)
-            for s in suggestions:
-                results.update(gs.search(s, includeScopeNote=True, translateDEToEN=True))
-
-        for subject in results:
+        partResults = gs.extendedSearch(word)
+        for subject in partResults:
             print('\t' + str(subject))
             '''
             prefLabelGen = rg.getPrefLabels(subject)
@@ -110,5 +123,8 @@ if __name__ == '__main__':
                 print('\t\tscopeNote: ' + str(item))
 
             print('\n')'''
+
+
+
 
 
