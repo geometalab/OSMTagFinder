@@ -76,10 +76,10 @@ class Indexer:
             self.createNewIndex()
         self.__writer.add_document(concept=unicode(concept), hiddenLabel=unicode(hiddenLabel))
 
-    def addScopeNote(self, concept, description):
+    def addScopeNote(self, concept, scopeNote):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
-        self.__writer.add_document(concept=unicode(concept), scopeNote=unicode(description))
+        self.__writer.add_document(concept=unicode(concept), scopeNote=unicode(scopeNote))
 
     def commit(self):
         self.__writer.commit()

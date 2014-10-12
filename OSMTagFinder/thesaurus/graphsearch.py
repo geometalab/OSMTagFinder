@@ -9,8 +9,8 @@ from whoosh.qparser import QueryParser
 from whoosh.index import open_dir
 import whoosh.index as index
 from spellcorrect import SpellCorrect
-
 from translator import Translator
+from rdfgraph import RDFGraph
 
 import utils
 
@@ -63,6 +63,7 @@ class GraphSearch:
 
 if __name__ == '__main__':
 
+    #rg = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141012.rdf')
     gs = GraphSearch()
     while True:
         threshold = 2
@@ -84,7 +85,30 @@ if __name__ == '__main__':
             for s in suggestions:
                 results.update(gs.search(s, includeScopeNote=True, translateDEToEN=True))
 
-        for result in results:
-            print('\t' + str(result))
+        for subject in results:
+            print('\t' + str(subject))
+            '''
+            prefLabelGen = rg.getPrefLabels(subject)
+            broaderGen = rg.getBroader(subject)
+            narrowerGen = rg.getNarrower(subject)
+            depictionGen = rg.getDepiction(subject)
+            scopeNoteGen = rg.getScopeNote(subject)
+
+            for item in prefLabelGen:
+                print('\t\tprefLabel: ' + str(item))
+
+            for item in broaderGen:
+                print('\t\tbroader: ' + str(item))
+
+            for item in narrowerGen:
+                print('\t\tnarrower: ' + str(item))
+
+            for item in depictionGen:
+                print('\t\tdepicition: ' + str(item))
+
+            for item in scopeNoteGen:
+                print('\t\tscopeNote: ' + str(item))
+
+            print('\n')'''
 
 

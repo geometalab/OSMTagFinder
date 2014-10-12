@@ -11,7 +11,6 @@ from rdflib.namespace import FOAF
 from rdflib.serializer import Serializer
 from rdflib.util import guess_format
 import utils
-from graphsearch import GraphSearch
 
 # from skosserializer import SKOSSerializer
 
@@ -87,6 +86,18 @@ class RDFGraph:
     def sparqlQuery(self, query):
         return self.graph.query(query)
 
+    def getInScheme(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), SKOS.inScheme)
+        return generatorList
+
+    def getDefinition(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), SKOS.definition)
+        return generatorList
+
+    def getScopeNote(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), SKOS.scopeNote)
+        return generatorList
+
     def getPrefLabels(self, subject):
         generatorList = self.graph.objects(URIRef(subject), SKOS.prefLabel)
         return generatorList
@@ -95,6 +106,27 @@ class RDFGraph:
         generatorList = self.graph.objects(URIRef(subject), SKOS.altLabel)
         return generatorList
 
+    def getHiddenLabels(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), SKOS.hiddenLabel)
+        return generatorList
+
+    def getNarrower(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), SKOS.narrower)
+        return generatorList
+
+    def getBroader(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), SKOS.broader)
+        return generatorList
+
+    def getDepiction(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), FOAF.depiction)
+        return generatorList
+
+    def getPrefSymbol(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), SKOS.prefSymbol)
+        return generatorList
+
+
 if __name__ == '__main__':
     r = RDFGraph()
 
@@ -102,7 +134,7 @@ if __name__ == '__main__':
 
     animals = r.addConcept('www.example.com/animals')
     prefLabel = r.addPrefLabel(animals, 'Animals')
-    description = r.addDefinition(animals, 'Tiere sind nach biologischem Verständnis eukaryotische Lebewesen, '
+    scopeNote = r.addScopeNote(animals, 'Tiere sind nach biologischem Verständnis eukaryotische Lebewesen, '
                     + 'die ihre Energie nicht durch Photosynthese gewinnen und Sauerstoff '
                     + 'zur Atmung benötigen, aber keine Pilze sind.', 'de')
     altLabel = r.addAltLabel(animals, 'Tier', 'de')
@@ -123,25 +155,4 @@ if __name__ == '__main__':
 
     plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')
     print r.graph.serialize(format='skos', encoding=r.encoding)
-
-    #print r.getAltLabels('www.example.com/animals')
-
-'''
-    qres = r.sparqlQuery('SELECT DISTINCT ?aname ?bname'+
-       'WHERE {'+
-          '?a skos:broader ?b .'+
-          '?a skos:prefLabel ?aname .'+
-          '?b skos:prefLabel ?bname .'+
-       '}')
-
-    r = RDFGraph()
-    r.load(utils.dataDir() + 'osm_tag_thesaurus_141010.rdf')
-
-    qres = r.sparqlQuery('SELECT ?a'+
-       'WHERE {'+
-          'OPTIONAL { ?a skos:prefLabel "highway" }'+
-       '}')
-    for row in qres:
-        print("%s" % row)
-'''
 
