@@ -22,6 +22,11 @@ class GraphSearch:
         seen_add = seen.add
         return [ x for x in seq if not (x in seen or seen_add(x))]
 
+    def prepareWord(self, word):
+        word = word.replace(',', ' ')
+        word = word.replace(';', ' ')
+        word = word.replace(' = ', '=')
+        return word
 
     def search(self, word, includeScopeNote=False, translateDEToEN=False):
 
@@ -61,6 +66,8 @@ class GraphSearch:
         return retSet
 
     def extendedSearch(self, word):
+
+        word = self.prepareWord(word)
 
         threshold = 2
 

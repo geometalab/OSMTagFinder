@@ -51,16 +51,6 @@ class Indexer:
         ix = create_in(utils.indexerDir(), self.schema, indexname=utils.indexName)
         self.__writer = ix.writer()
 
-    def addKey(self, concept, key):
-        if not index.exists_in(utils.indexerDir(), utils.indexName):
-            self.createNewIndex()
-        self.__writer.add_document(concept=unicode(concept), key=unicode(key))
-
-    def addValue(self, concept, value):
-        if not index.exists_in(utils.indexerDir(), utils.indexName):
-            self.createNewIndex()
-        self.__writer.add_document(concept=unicode(concept), value=unicode(value))
-
     def addPrefLabel(self, concept, prefLabel):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
