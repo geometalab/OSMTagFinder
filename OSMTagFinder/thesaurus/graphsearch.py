@@ -10,17 +10,12 @@ from whoosh.index import open_dir
 import whoosh.index as index
 from spellcorrect import SpellCorrect
 from translator import Translator
-#from rdfgraph import RDFGraph
+from rdfgraph import RDFGraph
 from ordered_set import OrderedSet
 
 import utils
 
 class GraphSearch:
-
-    def uniqueList(self, seq):
-        seen = set()
-        seen_add = seen.add
-        return [ x for x in seq if not (x in seen or seen_add(x))]
 
     def prepareWord(self, word):
         word = word.replace(',', ' ')
@@ -99,7 +94,7 @@ class GraphSearch:
 
 
 if __name__ == '__main__':
-    #rg = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141012.rdf')
+    rg = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141012.rdf')
 
     gs = GraphSearch()
     while True:
@@ -107,7 +102,7 @@ if __name__ == '__main__':
         partResults = gs.extendedSearch(word)
         for subject in partResults:
             print('\t' + str(subject))
-            '''
+
             prefLabelGen = rg.getPrefLabels(subject)
             broaderGen = rg.getBroader(subject)
             narrowerGen = rg.getNarrower(subject)
@@ -129,8 +124,7 @@ if __name__ == '__main__':
             for item in scopeNoteGen:
                 print('\t\tscopeNote: ' + str(item))
 
-            print('\n')'''
-
+            print('\n')
 
 
 
