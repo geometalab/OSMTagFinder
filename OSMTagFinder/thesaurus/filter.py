@@ -10,10 +10,10 @@ class Filter:
     exactKeyFilter = ['name', 'ele', 'comment', 'image', 'symbol', 'deanery', 'jel', 'rating', 'school:FR', 'alt', 'is_in', 'url', 'website',
                       'wikipedia', 'email', 'converted_by', 'phone', 'information', 'opening_hours', 'date', 'time', 'collection_times',
                       'colour', 'fee', 'population', 'access', 'noexit', 'towards', 'bus_routes', 'busline', 'lines', 'type', 'denotation',
-                      'CONTINUE', 'continue', 'copyright', 'stop', 'network', 'comment', 'old_name', 'destination', 'brand',
-                      'turn:lanes', 'owner', 'fire_hydrant:city', 'fire_hydrant:street', 'country', 'contact:google_plus',
-                      'short_name:ru', 'tpuk_ref', 'wikimedia_commons', 'operator', 'source', 'wikipedia', 'railway:etcs',
-                      'de:regionalschluessel', 'de:amtlicher_gemeindeschluessel', 'contact:xing', 'nspn', '_picture_',
+                      'CONTINUE', 'continue', 'copyright', 'stop', 'network', 'comment', 'old_name', 'destination', 'brand', 'fax', 'designation',
+                      'turn:lanes', 'owner', 'fire_hydrant:city', 'fire_hydrant:street', 'country', 'contact:google_plus', 'wikipedia:ru',
+                      'short_name:ru', 'tpuk_ref', 'wikimedia_commons', 'operator', 'source', 'wikipedia', 'railway:etcs', 'note', 'height',
+                      'de:regionalschluessel', 'de:amtlicher_gemeindeschluessel', 'contact:xing', 'nspn', '_picture_', 'postal_code', 'exit_to',
                       '_waypoint_', 'label', 'branch', 'note', 'phone', 'created_by', 'start_date', 'end_date', 'description', 'description:ru']
 
     prefixKeyFilter = ['name:', 'note:', 'alt_name', 'int_name', 'loc_name', 'not:name', 'nat_name', 'official_name', 'short_name', 'reg_name', 'sorting_name',

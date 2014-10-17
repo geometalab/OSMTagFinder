@@ -39,6 +39,7 @@ class GraphSearch:
             queryPrefLabel = QueryParser("prefLabel", ix.schema).parse(unicode(word))
             queryAltLabel = QueryParser("altLabel", ix.schema).parse(unicode(word))
             queryHiddenLabel = QueryParser("hiddenLabel", ix.schema).parse(unicode(word))
+
             resultsPrefLabel = searcher.search(queryPrefLabel, limit=None, terms=True)
             resultsAltLabel = searcher.search(queryAltLabel, limit=None, terms=True)
             resultsHiddenLabel = searcher.search(queryHiddenLabel, limit=None, terms=True)
@@ -94,7 +95,7 @@ class GraphSearch:
 
 
 if __name__ == '__main__':
-    rg = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141012.rdf')
+    rg = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141017.rdf')
 
     gs = GraphSearch()
     while True:
@@ -123,9 +124,6 @@ if __name__ == '__main__':
 
             for item in scopeNoteGen:
                 print('\t\tscopeNote: ' + str(item))
-
-            print('\n')
-
 
 
 
