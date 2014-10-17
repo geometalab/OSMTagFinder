@@ -8,16 +8,17 @@ Created on 12.10.2014
 from whoosh.qparser import QueryParser
 from whoosh.index import open_dir
 import whoosh.index as index
-from spellcorrect import SpellCorrect
-from translator import Translator
+from utilities.spellcorrect import SpellCorrect
+from utilities.translator import Translator
 from rdfgraph import RDFGraph
 from ordered_set import OrderedSet
 
-import utils
+from utilities import utils
 
 class GraphSearch:
 
     def prepareWord(self, word):
+        word = word.replace('"', ' ')
         word = word.replace(',', ' ')
         word = word.replace(';', ' ')
         word = word.replace(' = ', '=')

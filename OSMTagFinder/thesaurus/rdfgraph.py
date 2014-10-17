@@ -10,7 +10,7 @@ from rdflib.namespace import SKOS
 from rdflib.namespace import FOAF
 from rdflib.serializer import Serializer
 from rdflib.util import guess_format
-import utils
+from utilities import utils
 
 # from skosserializer import SKOSSerializer
 

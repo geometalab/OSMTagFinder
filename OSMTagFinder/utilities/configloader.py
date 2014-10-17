@@ -7,14 +7,15 @@ Created on 10.10.2014
 
 from ConfigParser import SafeConfigParser
 import codecs
-import utils
+from utilities import utils
 
 class ConfigLoader:
 
     configFileLoc = utils.dataDir() + 'config.ini'
 
     thesaurusSection = 'Thesaurus'
-    tagInfoSection = "TagInfoAPI"
+    tagInfoSection = 'TagInfoAPI'
+    websiteSection = 'Website'
 
     __parser = SafeConfigParser()
 
@@ -30,3 +31,9 @@ class ConfigLoader:
 
     def getTagInfoAPIString(self, option):
         return self.__parser.get(self.tagInfoSection, option)
+
+    def getWebsiteString(self, option):
+        return self.__parser.get(self.websiteSection, option)
+
+    def getWebsiteInt(self, option):
+        return self.__parser.getint(self.websiteSection, option)

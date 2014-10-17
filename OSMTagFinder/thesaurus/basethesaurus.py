@@ -12,10 +12,10 @@ import timeit
 import datetime
 
 from filter import Filter
-import utils
-from configloader import ConfigLoader
+from utilities import utils
+from utilities.configloader import ConfigLoader
 from thesaurus.rdfgraph import RDFGraph
-from translator import Translator
+from utilities.translator import Translator
 
 class BaseThesaurus:
 
@@ -24,24 +24,24 @@ class BaseThesaurus:
     numberTags = 0
 
     cl = ConfigLoader()
-    tagInfoSortDesc = cl.getTagInfoAPIString('sort_desc')
-    tagInfoAllKeys = cl.getTagInfoAPIString('all_keys')
-    tagInfoValueOfKey = cl.getTagInfoAPIString('value_of_key')
-    tagInfoWikiPageOfKey = cl.getTagInfoAPIString('wiki_page_of_key')
-    tagInfoWikiPageOfTag = cl.getTagInfoAPIString('wiki_page_of_tag')
-    tagInfoTagPostfix = cl.getTagInfoAPIString('tag_postfix')
+    tagInfoSortDesc = cl.getTagInfoAPIString('SORT_DESC')
+    tagInfoAllKeys = cl.getTagInfoAPIString('ALL_KEYS')
+    tagInfoValueOfKey = cl.getTagInfoAPIString('VALUE_OF_KEY')
+    tagInfoWikiPageOfKey = cl.getTagInfoAPIString('WIKI_PAGE_OF_KEY')
+    tagInfoWikiPageOfTag = cl.getTagInfoAPIString('WIKI_PAGE_OF_TAG')
+    tagInfoTagPostfix = cl.getTagInfoAPIString('TAG_POSTFIX')
 
-    osmWikiBase = cl.getThesaurusString('osm_wiki_page')
-    keySchemeName = cl.getThesaurusString('key_scheme_name')
-    tagSchemeName = cl.getThesaurusString('tag_scheme_name')
+    osmWikiBase = cl.getThesaurusString('OSM_WIKI_PAGE')
+    keySchemeName = cl.getThesaurusString('KEY_SCHEME_NAME')
+    tagSchemeName = cl.getThesaurusString('TAG_SCHEME_NAME')
 
-    outputName = cl.getThesaurusString('output_name')  # osm_tag_thesaurus
-    outputEnding = cl.getThesaurusString('default_format')  # .rdf
+    outputName = cl.getThesaurusString('OUTPUT_NAME')  # osm_tag_thesaurus
+    outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')  # .rdf
 
-    translationHintDE = cl.getThesaurusString('translation_hint_DE')
-    translationHintEN = cl.getThesaurusString('translation_hint_EN')
+    translationHintDE = cl.getThesaurusString('TRANSLATION_HINT_DE')
+    translationHintEN = cl.getThesaurusString('TRANSLATION_HINT_EN')
 
-    minCount = cl.getThesaurusInt('minimum_count')
+    minCount = cl.getThesaurusInt('MINIMUM_COUNT')
 
     filterUtil = Filter()
 

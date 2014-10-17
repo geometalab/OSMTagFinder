@@ -7,7 +7,7 @@ Created on 11.10.2014
 from whoosh.index import create_in
 import whoosh.index as index
 from whoosh.fields import TEXT, ID, NGRAM, Schema
-import utils
+from utilities import utils
 from rdflib.namespace import SKOS
 from rdfgraph import RDFGraph
 

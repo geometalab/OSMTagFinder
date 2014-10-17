@@ -11,9 +11,10 @@ import os
 _invalidChars = [' ', ';']
 _dataFolderName = 'data'
 _indexerFolderName = 'indexer'
-_resourceFolderName = 'resource'
+_staticFolderName = 'static'
+_templatesFolderName = 'templates'
 
-indexName = 'index' #for indexer and graphsearch
+indexName = 'index'  # for indexer and graphsearch
 
 
 def _checkPath(path):
@@ -22,7 +23,7 @@ def _checkPath(path):
     return path
 
 def rootDir():
-    return os.path.split(os.path.abspath(os.path.dirname(__file__)))[0] + '\\' + os.path.split(os.path.abspath(os.path.dirname(__file__)))[1]
+    return os.path.split(os.path.abspath(os.path.dirname(__file__)))[0] # + '\\' + os.path.split(os.path.abspath(os.path.dirname(__file__)))[1]
 
 def dataDir():
     path = rootDir() + '\\' + _dataFolderName + '\\'
@@ -32,8 +33,12 @@ def indexerDir():
     path = dataDir() + '\\' + _indexerFolderName + '\\'
     return _checkPath(path)
 
-def resourceDir():
-    path = rootDir() + '\\' + _resourceFolderName + '\\'
+def staticDir():
+    path = rootDir() + '\\' + _staticFolderName + '\\'
+    return _checkPath(path)
+
+def templatesDir():
+    path = rootDir() + '\\' + _templatesFolderName + '\\'
     return _checkPath(path)
 
 def isNumber(r):

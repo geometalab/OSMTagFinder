@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>OSM TagFinder</title>
+        <link rel="tagfinder icon" href="{{ url_for('static', filename='kv_logo_120.png') }}">
+    </head>
+    <body>
+        <h2>TagFinder:</h2>
+        <form action="/search" method="get">
+            <input type="text" value="{{fieldvalue}}" name="term">
+            <input type="submit" value="Tag-Search">
+        </form>
+        <h2>You searched for: {{term}}</h2>
+        <hr/>
+        <img src="http://upload.wikimedia.org/wikipedia/commons/0/0e/Havelockradhanagar1.jpg" alt="natural=coastline" style="width:170px;height:130px">
+        <a href="http://wiki.openstreetmap.org/wiki/Tag:natural=coastline">natural=coastline</a>
+        <hr/>
+    </body>
+</html>
