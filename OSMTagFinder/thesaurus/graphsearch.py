@@ -69,26 +69,26 @@ class GraphSearch:
         threshold = 2
 
         results = OrderedSet()
-        results = results | gs.search(word, includeScopeNote=False, translateDEToEN=False)
+        results = results | self.search(word, includeScopeNote=False, translateDEToEN=False)
 
         if len(results) < threshold:
-            results = results | gs.search(word, includeScopeNote=False, translateDEToEN=True)
+            results = results | self.search(word, includeScopeNote=False, translateDEToEN=True)
 
         if len(results) < threshold:
-            results = results | gs.search(word, includeScopeNote=True, translateDEToEN=False)
+            results = results | self.search(word, includeScopeNote=True, translateDEToEN=False)
 
         if len(results) < threshold:
-            results = results | gs.search(word, includeScopeNote=True, translateDEToEN=True)
-
-        if len(results) < threshold:
-            suggestions = SpellCorrect().listSuggestions(word)
-            for s in suggestions:
-                results = results | gs.search(s, includeScopeNote=False, translateDEToEN=True)
+            results = results | self.search(word, includeScopeNote=True, translateDEToEN=True)
 
         if len(results) < threshold:
             suggestions = SpellCorrect().listSuggestions(word)
             for s in suggestions:
-                results = results | gs.search(s, includeScopeNote=True, translateDEToEN=True)
+                results = results | self.search(s, includeScopeNote=False, translateDEToEN=True)
+
+        if len(results) < threshold:
+            suggestions = SpellCorrect().listSuggestions(word)
+            for s in suggestions:
+                results = results | self.search(s, includeScopeNote=True, translateDEToEN=True)
 
         return results
 
@@ -96,7 +96,7 @@ class GraphSearch:
 
 
 if __name__ == '__main__':
-    rg = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141017.rdf')
+    rg = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141018.rdf')
 
     gs = GraphSearch()
     while True:

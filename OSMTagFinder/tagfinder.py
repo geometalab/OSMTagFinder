@@ -8,6 +8,11 @@ from flask import Flask, send_from_directory, render_template, request, redirect
 
 from utilities.configloader import ConfigLoader
 from utilities import utils
+from thesaurus.rdfgraph import RDFGraph
+from thesaurus.graphsearch import GraphSearch
+
+
+rg = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141018.rdf')
 
 app = Flask(__name__)
 
@@ -26,7 +31,27 @@ def search():
     term = request.args.get('term', '')
     if term is None or term == '':
         return redirect('/')
-    return render_template('index.html', term=term, fieldvalue=term)
+    results = []
+    gsResults = GraphSearch().extendedSearch(term)
+    for subject in gsResults:
+        tagInfos = {}
+        prefLabelGen = rg.getPrefLabels(subject)
+        broaderGen = rg.getBroader(subject)
+        narrowerGen = rg.getNarrower(subject)
+        depictionGen = rg.getDepiction(subject)
+        scopeNoteGen = rg.getScopeNote(subject)
+
+        tagInfos['osmWikiUrl'] = str(subject)
+        tagInfos['prefLabel'] = str(prefLabelGen.next())
+        for item in depictionGen:
+            tagInfos['image'] = item
+        for item in scopeNoteGen:
+            tagInfos['description'] = item
+
+        results.append(tagInfos)
+
+
+    return render_template('index.html', term=term, fieldvalue=term, results=results)
 
 if __name__ == '__main__':
     cl = ConfigLoader()

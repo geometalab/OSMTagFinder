@@ -29,7 +29,7 @@ class BaseThesaurus:
     tagInfoValueOfKey = cl.getTagInfoAPIString('VALUE_OF_KEY')
     tagInfoWikiPageOfKey = cl.getTagInfoAPIString('WIKI_PAGE_OF_KEY')
     tagInfoWikiPageOfTag = cl.getTagInfoAPIString('WIKI_PAGE_OF_TAG')
-    tagInfoTagPostfix = cl.getTagInfoAPIString('TAG_POSTFIX')
+    tagInfoTagPostfix = cl.getTagInfoAPIString('TAG_SUFFIX')
 
     osmWikiBase = cl.getThesaurusString('OSM_WIKI_PAGE')
     keySchemeName = cl.getThesaurusString('KEY_SCHEME_NAME')
@@ -44,6 +44,7 @@ class BaseThesaurus:
     minCount = cl.getThesaurusInt('MINIMUM_COUNT')
 
     filterUtil = Filter()
+    translator = Translator()
 
     def __init__(self):
         keyData = self.tagInfoGetKeyData()
@@ -128,6 +129,45 @@ class BaseThesaurus:
             tagMap = self.filterTagData(key, tagMap, tagData)
         return tagMap
 
+    def addImageDescription(self, concept, wikiPageJson):
+        '''Adds a depiction and description in EN and DE to the 'concept' (if available,
+           also translates to the other language if only one is).'''
+        descriptionDE = ''
+        descriptionEN = ''
+        depiction = ''
+
+        for wikiData in wikiPageJson:
+
+            if wikiData['lang'] == 'de':
+                temp = wikiData['description']
+                if temp is not None and not temp == '':
+                    descriptionDE = temp
+                    print '\t\tde: ' + descriptionDE
+            elif wikiData['lang'] == 'en':
+                temp = wikiData['description']
+                if  temp is not None and not temp == '':
+                    descriptionEN = temp
+                    print '\t\ten: ' + descriptionEN
+                    imageData = wikiData['image']
+                    depiction = imageData['image_url']
+            if depiction is None or depiction == '':
+                imageData = wikiData['image']
+                depiction = imageData['image_url']
+
+        if descriptionDE == '' and not descriptionEN == '':
+            self.graph.addScopeNote(concept, descriptionEN, 'en')
+            self.graph.addScopeNote(concept, self.translator.translateENtoDE(descriptionEN) + ' ' + self.translationHintDE, 'de')
+        elif not descriptionDE == '' and descriptionEN == '':
+            self.graph.addScopeNote(concept, self.translator.translateDEtoEN(descriptionDE) + ' ' + self.translationHintEN, 'en')
+            self.graph.addScopeNote(concept, descriptionDE, 'de')
+        elif not descriptionDE == '' and not descriptionEN == '':
+            self.graph.addScopeNote(concept, descriptionEN, 'en')
+            self.graph.addScopeNote(concept, descriptionDE, 'de')
+
+        if depiction is not None and not depiction == '':
+            self.graph.addDepiction(concept, depiction)
+            print '\t\t' + depiction
+
     def createKey(self, key, keyScheme):
         '''Adds key with name 'key' to the graph, with as much wiki information as possible.'''
         keyConcept = self.graph.addConcept(self.osmWikiBase + 'Key:' + key)
@@ -138,25 +178,12 @@ class BaseThesaurus:
         keyWikiPage = requests.get(self.tagInfoWikiPageOfKey + key)
         keyWikiPageJson = keyWikiPage.json()
         if len(keyWikiPageJson) > 0:
-            depiction = ''
-            for wikiData in keyWikiPageJson:
-                if wikiData['lang'] == 'de':
-                    if depiction == '':
-                        imageData = wikiData['image']
-                        depiction = imageData['image_url']
-                elif wikiData['lang'] == 'en':
-                    imageData = wikiData['image']
-                    depiction = imageData['image_url']
-            if depiction is not None and not depiction == '':
-                self.graph.addDepiction(keyConcept, depiction)
-                print '\t\t' + depiction
+            self.addImageDescription(keyConcept, keyWikiPageJson)
 
         return keyConcept
 
     def createTag(self, key, keyConcept, tag, tagScheme):
         '''Adds tag with name 'tag' to the graph, with as much wiki information as possible.'''
-        translator = Translator()
-
         taglink = self.osmWikiBase + 'Tag:' + key + '=' + tag  # before: key + '%3D' + tag
         # result = requests.get('http://' + taglink)
         tagWikiPage = requests.get(self.tagInfoWikiPageOfTag + key + self.tagInfoTagPostfix + tag)
@@ -169,41 +196,7 @@ class BaseThesaurus:
             self.graph.addNarrower(keyConcept, tagConcept)
             self.graph.addInScheme(tagConcept, tagScheme)
 
-            descriptionDE = ''
-            descriptionEN = ''
-            depiction = ''
-
-            for wikiData in tagWikiPageJson:
-
-                if wikiData['lang'] == 'de':
-                    temp = wikiData['description']
-                    if temp is not None and not temp == '':
-                        descriptionDE = temp
-                        print '\t\tde: ' + descriptionDE
-                    if depiction == '':
-                        imageData = wikiData['image']
-                        depiction = imageData['image_url']
-                elif wikiData['lang'] == 'en':
-                    temp = wikiData['description']
-                    if  temp is not None and not temp == '':
-                        descriptionEN = temp
-                        print '\t\ten: ' + descriptionEN
-                        imageData = wikiData['image']
-                        depiction = imageData['image_url']
-
-            if descriptionDE == '' and not descriptionEN == '':
-                self.graph.addScopeNote(tagConcept, descriptionEN, 'en')
-                self.graph.addScopeNote(tagConcept, translator.translateENtoDE(descriptionEN) + ' ' + self.translationHintDE, 'de')
-            elif not descriptionDE == '' and descriptionEN == '':
-                self.graph.addScopeNote(tagConcept, translator.translateDEtoEN(descriptionDE) + ' ' + self.translationHintEN, 'en')
-                self.graph.addScopeNote(tagConcept, descriptionDE, 'de')
-            elif not descriptionDE == '' and not descriptionEN == '':
-                self.graph.addScopeNote(tagConcept, descriptionEN, 'en')
-                self.graph.addScopeNote(tagConcept, descriptionDE, 'de')
-
-            if depiction is not None and not depiction == '':
-                self.graph.addDepiction(tagConcept, depiction)
-                print '\t\t' + depiction
+            self.addImageDescription(tagConcept, tagWikiPageJson)
 
     def createGraph(self, keyList, tagMap):
         '''Fills graph with keys and tags.'''
