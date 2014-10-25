@@ -1,0 +1,70 @@
+.jumbotron {
+  padding-top: 5px;
+  padding-bottom: 55px;
+  margin-bottom: 50px;
+}
+
+#tag_panel {
+    margin-bottom: 40px;
+}
+
+#no_depiction_tag {
+    min-height:160px;
+    height:160px;
+    min-width:210px;
+    width:210px;
+    margin-right: 10px;
+    margin-bottom: 1px;
+    float: left;
+}
+
+#no_depiction_key {
+    min-height:160px;
+    height:160px;
+    min-width:210px;
+    width:210px;
+    margin-right: 10px;
+    margin-bottom: 1px;
+    float: left;
+}
+
+#depiction {
+    min-height:160px;
+    height:160px;
+    min-width:210px;
+    width:210px;
+    margin-right: 10px;
+    margin-bottom: 1px;
+    float: left;
+}
+
+#description_box {
+    min-height:160px;
+    min-width:210px;
+    width:210px;
+    margin-right: 10px;
+    margin-left: 5px;
+    margin-bottom: 1px;
+    float: left;
+}
+
+#description_text > h5 {
+    margin-top: 0px;
+    margin-left: 3px;
+    margin-bottom: 3px;
+}
+
+#description_text > p {
+    margin-top: 0px;
+    margin-left: 3px;
+    margin-bottom: 3px;
+}
+
+#description_title_de {
+    margin-top: 0px;
+    margin-right: 0px;
+}
+
+a {
+    font-size: 20px;
+}

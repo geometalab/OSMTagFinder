@@ -1,0 +1,21 @@
+.jumbotron {
+  padding-top: 5px;
+  padding-bottom: 50px;
+  margin-bottom: 50px;
+}
+
+h3 {
+    margin-top: 40px
+}
+
+#first_line_en {
+    margin-top: 10px
+}
+
+#first_line_de {
+    margin-top: 10px
+}
+
+a {
+    font-size: 20px;
+}

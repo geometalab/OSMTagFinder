@@ -13,7 +13,7 @@ from rdfgraph import RDFGraph
 
 class Indexer:
 
-    schema = Schema(concept=ID(stored=True),
+    schema = Schema(subject=ID(stored=True),
                     prefLabel=NGRAM(stored=True),
                     altLabel=NGRAM(stored=True),
                     hiddenLabel=NGRAM(stored=True),
@@ -51,33 +51,33 @@ class Indexer:
         ix = create_in(utils.indexerDir(), self.schema, indexname=utils.indexName)
         self.__writer = ix.writer()
 
-    def addPrefLabel(self, concept, prefLabel):
+    def addPrefLabel(self, subject, prefLabel):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
-        self.__writer.add_document(concept=unicode(concept), prefLabel=unicode(prefLabel))
+        self.__writer.add_document(subject=unicode(subject), prefLabel=unicode(prefLabel))
 
-    def addAltLabel(self, concept, altLabel):
+    def addAltLabel(self, subject, altLabel):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
-        self.__writer.add_document(concept=unicode(concept), altLabel=unicode(altLabel))
+        self.__writer.add_document(subject=unicode(subject), altLabel=unicode(altLabel))
 
-    def addHiddenLabel(self, concept, hiddenLabel):
+    def addHiddenLabel(self, subject, hiddenLabel):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
-        self.__writer.add_document(concept=unicode(concept), hiddenLabel=unicode(hiddenLabel))
+        self.__writer.add_document(subject=unicode(subject), hiddenLabel=unicode(hiddenLabel))
 
-    def addScopeNote(self, concept, scopeNote):
+    def addScopeNote(self, subject, scopeNote):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
-        self.__writer.add_document(concept=unicode(concept), scopeNote=unicode(scopeNote))
+        self.__writer.add_document(subject=unicode(subject), scopeNote=unicode(scopeNote))
 
     def commit(self):
         self.__writer.commit()
 
 
 if __name__ == '__main__':
-    rg = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141018.rdf')
-    Indexer(rg)
+    rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141020.rdf')
+    Indexer(rdfGraph)
 
 
 

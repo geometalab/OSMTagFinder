@@ -1,0 +1,16 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.dropdown-menu {
+    min-width: 0px;
+}
+
+h5 {
+    margin-bottom: 2px;
+}

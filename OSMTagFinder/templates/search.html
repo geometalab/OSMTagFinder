@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block head %}
+    {{super()}}
+    <link href="{{ url_for('static', filename='css/search.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {{super()}}
+    <div class="container">
+        <div class ="row">
+            <div class="col-lg-20 col-md-20">
+                <div class="jumbotron">
+                    <h3><b>Tag Finder</b></h3>
+                    <p></p>
+                    <form action="/search" method="get">
+                        <div class="input-group input-group-lg">
+                            <input type="text" value="{{ q }}" name="q" class="form-control" >
+                            <span class="input-group-btn">
+                                <button class="btn btn-success btn-lg" type="submit" lang="en">Search</button>
+                                <button class="btn btn-success btn-lg" type="submit" lang="de">Suchen</button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <p></p>
+        {% if results %}
+            {% for result in results %}
+                <div class ="row">
+                    <div class="col-lg-20 col-md-20">
+                        {% if result['isTag'] %}
+                            {% set panel_type = "panel-success" %}
+                        {% else %}
+                            {% set panel_type = "panel-info" %}
+                        {% endif %}
+                        <div id="tag_panel" class="panel {{ panel_type }}">
+                            <div class="panel-heading">
+                                <a target="_tag" href="{{ result['subject'] }}"><b>{{ result['prefLabel'] }}</b></a>
+                            </div>
+                            <div class="panel-body">
+                                {% if result['depiction'] is none %}
+                                    {% if result['isTag'] %}
+                                        <a id="no_depiction_tag" class="thumbnail">
+                                            <p><img src="{{ url_for('static', filename='img/kv200_150_gray.png') }}" alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
+                                        </a>
+                                    {% else %}
+                                        <a id="no_depiction_key" class="thumbnail">
+                                            <p><img src="{{ url_for('static', filename='img/k200_150_gray.png') }}" alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
+                                        </a>
+                                    {% endif %}
+                                {% else %}
+                                    <a id="depiction" target="_tag" href="{{ result['depiction'] }}" class="thumbnail">
+                                        <p><img src="{{ result['depiction'] }}" alt="{{ result['prefLabel'] }}" align="left" width="200" height="150"></p>
+                                    </a>
+                                {% endif %}
+
+                                <div class="row">
+                                    <div class="col-lg-20 col-md-20">
+                                        <div id="description_box" class="thumbnail">
+                                            <div id="description_text">
+                                                <h5 lang="en"><b>Description</b></h5>
+                                                <h5 lang="de"><b>Beschreibung</b></h5>
+                                                {% for scopeNote in result['scopeNote'] %}
+                                                    <p>{{ scopeNote }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            {% endfor %}
+        {% else %}
+            <em>No tags found</em>
+        {% endif %}
+    </div>
+{% endblock %}

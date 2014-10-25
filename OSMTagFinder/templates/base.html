@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+{% extends "bootstrap/base.html" %}
+{% block head %}
+    <title>OSM Tag Finder{% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico') }}">
+    <!-- Custom styles for this template -->
+    {{super()}}
+    <link id="navbarstyle" href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet">
+    {% set url = "static/css/lang_" + lang + ".css" %}
+    <link id="langstyle" href="{{ url }}" rel="stylesheet">
+{% endblock %}
+
+<!--{% block html_attribs %}lang="de"{% endblock %}-->
+
+{% block metas %}
+    {{super()}}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Open Street Map Tag Finder">
+    <meta name="keywords" content="Open Street Map, OSM, Tag Finder, Search, Tag, Key, Value">
+    <meta name="author" content="Simon Gwerder">
+    <meta charset="utf-8">
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/language.js')}}"></script>
+    {{super()}}
+{% endblock %}
+
+{% block navbar %}
+    <div class="container">
+        <div class ="row">
+            <div class="col-lg-20 col-md-20">
+                <nav class="navbar navbar-inverse" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand">
+                                 <img width="35" style="max-width:100px; margin-top: -6px;" src="{{ url_for('static', filename='img/tf_logo_128.png') }}">
+                            </a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="top-navbar-collapse"><!-- grouping for better mobile display -->
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="{{ url_for('search') }}">Tag Finder</a></li>
+                                <li><a href="#">API</a></li>
+                                <li><a lang="en" href="#">Info</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right" lang="en"> <!-- english dropdown -->
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img width="16" style="max-width:16px; margin-top: -2px; margin-right: 3px;" src="{{ url_for('static', filename='img/en.png') }}">
+                                    English <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <li><a href="#" onclick="switchLanguageTo('de', '{{ url_for('static', filename='css/lang_de.css') }}')">
+                                        <img width="16" style="max-width:16px; margin-top: -2px; margin-right: 3px" src="{{ url_for('static', filename='img/de.png') }}">
+                                        Deutsch
+                                        </a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right" lang="de"> <!-- german dropdown -->
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img width="16" style="max-width:16px; margin-top: -2px; margin-right: 3px;" src="{{ url_for('static', filename='img/de.png') }}">
+                                    Deutsch <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <li><a href="#" onclick="switchLanguageTo('en', '{{ url_for('static', filename='css/lang_en.css') }}')">
+                                        <img width="16" style="max-width:16px; margin-top: -2px; margin-right: 3px" src="{{ url_for('static', filename='img/en.png') }}">
+                                        English
+                                        </a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+        </div>
+    </div><!-- /.container -->
+{% endblock %}
+
+

@@ -90,6 +90,14 @@ class RDFGraph:
         generatorList = self.graph.objects(URIRef(subject), SKOS.inScheme)
         return generatorList
 
+    def isInScheme(self, subject, obj):
+        refScheme = URIRef(obj)
+        generator = self.getInScheme(subject)
+        for item in generator:
+            if item == refScheme:
+                return True
+        return False
+
     def getDefinition(self, subject):
         generatorList = self.graph.objects(URIRef(subject), SKOS.definition)
         return generatorList
@@ -125,7 +133,6 @@ class RDFGraph:
     def getPrefSymbol(self, subject):
         generatorList = self.graph.objects(URIRef(subject), SKOS.prefSymbol)
         return generatorList
-
 
 if __name__ == '__main__':
     r = RDFGraph()

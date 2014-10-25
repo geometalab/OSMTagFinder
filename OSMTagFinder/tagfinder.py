@@ -4,57 +4,76 @@ Created on 17.10.2014
 
 @author: Simon Gwerder
 '''
-from flask import Flask, send_from_directory, render_template, request, redirect
+import os
+from flask import Flask, session, send_from_directory, render_template, request, redirect
+from flask_bootstrap import Bootstrap
 
 from utilities.configloader import ConfigLoader
 from utilities import utils
 from thesaurus.rdfgraph import RDFGraph
+from thesaurus.tagresults import TagResults
 from thesaurus.graphsearch import GraphSearch
 
 
-rg = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141018.rdf')
+rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141020.rdf')
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '#T0P#SECRET#'
+Bootstrap(app)
+
+def getLocale():
+    if 'language' in session:
+        return session['language']
+    lang = request.accept_languages.best_match(['en', 'de'])
+    if lang is None or lang == '':
+        lang = 'en'
+    setLocale(lang)
+    return lang
+
+def setLocale(lang=None):
+    if lang is None or lang == '':
+        session['language'] = 'en'
+    else:
+        session['language'] = lang
+
+
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(utils.staticDir(), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+    return send_from_directory(utils.staticDir(), '/ico/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/', methods = ['GET'])
+@app.route('/index', methods = ['GET'])
 def index():
-    author = "Simon"
-    name = "You"
-    return render_template('index.html', author=author, name=name)
+    return render_template('search.html', lang=getLocale())
+
+@app.route('/lang', methods = ['POST'])
+def changeLanguage():
+    setLocale(request.form["lang"])
+    return '200'
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html', lang=getLocale()), 404
 
 @app.route('/search', methods = ['GET'])
 def search():
-    term = request.args.get('term', '')
-    if term is None or term == '':
+    graphSearch = GraphSearch()
+    q = request.args.get('q', '')
+    if q is None or q == '':
         return redirect('/')
-    results = []
-    gsResults = GraphSearch().extendedSearch(term)
-    for subject in gsResults:
-        tagInfos = {}
-        prefLabelGen = rg.getPrefLabels(subject)
-        broaderGen = rg.getBroader(subject)
-        narrowerGen = rg.getNarrower(subject)
-        depictionGen = rg.getDepiction(subject)
-        scopeNoteGen = rg.getScopeNote(subject)
 
-        tagInfos['osmWikiUrl'] = str(subject)
-        tagInfos['prefLabel'] = str(prefLabelGen.next())
-        for item in depictionGen:
-            tagInfos['image'] = item
-        for item in scopeNoteGen:
-            tagInfos['description'] = item
+    rawResults = graphSearch.extendedSearch(q)
+    searchResults = TagResults(rdfGraph, rawResults)
 
-        results.append(tagInfos)
-
-
-    return render_template('index.html', term=term, fieldvalue=term, results=results)
+    return render_template('search.html', lang=getLocale(), q=q, results=searchResults.getResults())
 
 if __name__ == '__main__':
     cl = ConfigLoader()
     tagFinderHost = cl.getWebsiteString('HOST')
-    tagFinderPort = cl.getWebsiteInt('PORT')
-    app.run(host=tagFinderHost, port=tagFinderPort)
+    tagFinderPort = int(os.environ.get("PORT", cl.getWebsiteInt('PORT')))
+    app.run(debug=True, host=tagFinderHost, port=tagFinderPort) # TODO debug=False
+
+
+
+
