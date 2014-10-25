@@ -15,7 +15,7 @@ from thesaurus.tagresults import TagResults
 from thesaurus.graphsearch import GraphSearch
 
 
-rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141020.rdf')
+rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141025.rdf')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '#T0P#SECRET#'
@@ -52,8 +52,12 @@ def changeLanguage():
     setLocale(request.form["lang"])
     return '200'
 
+@app.errorhandler(405)
+def methodNotAllowed(e):
+    return render_template('404.html', lang=getLocale()), 404
+
 @app.errorhandler(404)
-def page_not_found(e):
+def pageNotFound(e):
     return render_template('404.html', lang=getLocale()), 404
 
 @app.route('/search', methods = ['GET'])

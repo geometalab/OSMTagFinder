@@ -8,6 +8,11 @@
     margin-bottom: 40px;
 }
 
+.label {
+    font-size: 14pt;
+    float: right
+}
+
 #no_depiction_tag {
     min-height:160px;
     height:160px;
@@ -68,3 +73,5 @@
 a {
     font-size: 20px;
 }
+
+

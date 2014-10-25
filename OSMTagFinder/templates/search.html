@@ -5,6 +5,10 @@
     <link href="{{ url_for('static', filename='css/search.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% block scripts %}
+    {{super()}}
+{% endblock %}
+
 {% block content %}
     {{super()}}
     <div class="container">
@@ -38,6 +42,11 @@
                         <div id="tag_panel" class="panel {{ panel_type }}">
                             <div class="panel-heading">
                                 <a target="_tag" href="{{ result['subject'] }}"><b>{{ result['prefLabel'] }}</b></a>
+                                {% if result['isTag'] %}
+                                    <span class="label label-success">{{ result['countAll'] }}</span>
+                                 {% else %}
+                                    <span class="label label-info">{{ result['countAll'] }}</span>
+                                 {% endif %}
                             </div>
                             <div class="panel-body">
                                 {% if result['depiction'] is none %}

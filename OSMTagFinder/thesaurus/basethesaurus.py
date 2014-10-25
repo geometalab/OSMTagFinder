@@ -5,8 +5,6 @@ Created on 27.09.2014
 @author: Simon Gwerder
 '''
 
-# from requests.adapters import TimeoutSauce
-import requests
 from requests.exceptions import ConnectionError
 import timeit
 import datetime
@@ -15,21 +13,17 @@ from filter import Filter
 from utilities import utils
 from utilities.configloader import ConfigLoader
 from thesaurus.rdfgraph import RDFGraph
+from taginfo import TagInfo
 from utilities.translator import Translator
 
 class BaseThesaurus:
 
     graph = RDFGraph()
+    tagInfo = TagInfo()
     numberKeys = 0
     numberTags = 0
 
     cl = ConfigLoader()
-    tagInfoSortDesc = cl.getTagInfoAPIString('SORT_DESC')
-    tagInfoAllKeys = cl.getTagInfoAPIString('ALL_KEYS')
-    tagInfoValueOfKey = cl.getTagInfoAPIString('VALUE_OF_KEY')
-    tagInfoWikiPageOfKey = cl.getTagInfoAPIString('WIKI_PAGE_OF_KEY')
-    tagInfoWikiPageOfTag = cl.getTagInfoAPIString('WIKI_PAGE_OF_TAG')
-    tagInfoTagPostfix = cl.getTagInfoAPIString('TAG_SUFFIX')
 
     osmWikiBase = cl.getThesaurusString('OSM_WIKI_PAGE')
     keySchemeName = cl.getThesaurusString('KEY_SCHEME_NAME')
@@ -47,12 +41,12 @@ class BaseThesaurus:
     translator = Translator()
 
     def __init__(self):
-        keyData = self.tagInfoGetKeyData()
+        keyData = self.tagInfo.getAllKeyData()
         keyList = self.filterKeyData(keyData)
 
         self.numberKeys = len(keyList) + len(self.filterUtil.exactKeyFilter)
 
-        tagMap = self.getTagMap(keyList)
+        tagMap = self.bundleToTagMap(keyList)
 
         self.numberTags = self.numberTags(tagMap)
 
@@ -76,13 +70,6 @@ class BaseThesaurus:
         '''Getter for the base graph.'''
         return self.graph
 
-    def tagInfoGetKeyData(self):
-        '''Calls TagInfo for a list of all keys. The list is descending sorted by count of
-           values attached to the key.'''
-        keyResult = requests.get(self.tagInfoAllKeys + self.tagInfoSortDesc);
-        keyJson = keyResult.json();
-        return keyJson['data'];
-
     def filterKeyData(self, keyData):
         '''Takes the raw key data from 'keyData' and makes validation checks on each
            element. Then a list of valid keys is returned.'''
@@ -91,22 +78,13 @@ class BaseThesaurus:
             if keyItem['count_all'] < self.minCount:
                 break;  # speedup because of sorted list
             if not self.filterUtil.hasKey(keyItem['key']) and utils.validCharsCheck(keyItem['key']) and keyItem['values_all'] >= self.minCount:
-                # keyWikiPage = requests.get(tagInfoWikiPageOfKey + keyItem['key'].replace('%',''))
-                # if(len(keyWikiPage.json()) > 0):
                 keyList.append(keyItem['key'])
                 print('Key: ' + keyItem['key'])
         return keyList
 
-    def tagInfoGetTagData(self, key):
-        '''Calls TagInfo for a list of all tags for 'key'. The list is descending sorted by count of
-        occurrence in OSM.'''
-        tagResult = requests.get(self.tagInfoValueOfKey + key + self.tagInfoSortDesc)
-        tagJson = tagResult.json()
-        return tagJson['data']
-
     def filterTagData(self, key, tagMap, tagData):
         '''Takes the raw key data from 'tagData' and makes validation checks on each
-           element. Then the updated 'tagMap' (k:key, v:tag) is returned.'''
+           element. Then the updated 'tagMap' (k:key, v:value) is returned.'''
         r = ''
         for valueItem in tagData:
             if not self.filterUtil.hasValue(valueItem['value']) and valueItem['in_wiki'] and utils.validCharsCheck(valueItem['value']) and valueItem['count'] >= self.minCount:
@@ -121,11 +99,11 @@ class BaseThesaurus:
         print(key + '\t\t' + r)
         return tagMap
 
-    def getTagMap(self, keyList):
-        '''Creates a hash map with k:key and v:tag of valid keys and tags.'''
+    def bundleToTagMap(self, keyList):
+        '''Creates a hash map with k:key and v:value of valid keys and values.'''
         tagMap = {}
         for key in keyList:
-            tagData = self.tagInfoGetTagData(key)
+            tagData = self.tagInfo.getAllTagData(key)
             tagMap = self.filterTagData(key, tagMap, tagData)
         return tagMap
 
@@ -141,11 +119,13 @@ class BaseThesaurus:
             if wikiData['lang'] == 'de':
                 temp = wikiData['description']
                 if temp is not None and not temp == '':
+                    temp = temp.replace('\'', '')
                     scopeNoteDE = temp
                     print '\t\tde: ' + scopeNoteDE
             elif wikiData['lang'] == 'en':
                 temp = wikiData['description']
                 if  temp is not None and not temp == '':
+                    temp = temp.replace('\'', '')
                     scopeNoteEN = temp
                     print '\t\ten: ' + scopeNoteEN
                     imageData = wikiData['image']
@@ -175,23 +155,21 @@ class BaseThesaurus:
         self.graph.addInScheme(keyConcept, keyScheme)
         # graph.addHasTopConcept(keyScheme, keyConcept)
 
-        keyWikiPage = requests.get(self.tagInfoWikiPageOfKey + key)
-        keyWikiPageJson = keyWikiPage.json()
+        keyWikiPageJson = self.tagInfo.getWikiPageOfKey(key)
         if len(keyWikiPageJson) > 0:
             self.addImageScopeNote(keyConcept, keyWikiPageJson)
 
         return keyConcept
 
-    def createTag(self, key, keyConcept, tag, tagScheme):
-        '''Adds tag with name 'tag' to the graph, with as much wiki information as possible.'''
-        taglink = self.osmWikiBase + 'Tag:' + key + '=' + tag  # before: key + '%3D' + tag
+    def createTag(self, key, keyConcept, value, tagScheme):
+        '''Adds value with name 'key'='value' to the graph, with as much wiki information as possible.'''
+        taglink = self.osmWikiBase + 'Tag:' + key + '=' + value  # before: key + '%3D' + value
         # result = requests.get('http://' + taglink)
-        tagWikiPage = requests.get(self.tagInfoWikiPageOfTag + key + self.tagInfoTagPostfix + tag)
-        tagWikiPageJson = tagWikiPage.json()
+        tagWikiPageJson = self.tagInfo.getWikiPageOfTag(key, value)
         if len(tagWikiPageJson) > 0:
             print('\t' + taglink)
             tagConcept = self.graph.addConcept(taglink)
-            self.graph.addPrefLabel(tagConcept, key + '=' + tag)
+            self.graph.addPrefLabel(tagConcept, key + '=' + value)
             self.graph.addBroader(tagConcept, keyConcept)
             self.graph.addNarrower(keyConcept, tagConcept)
             self.graph.addInScheme(tagConcept, tagScheme)
@@ -207,11 +185,11 @@ class BaseThesaurus:
             keyConcept = self.createKey(key, keyScheme)
 
             print(self.osmWikiBase + 'Key:' + key)
-            tagList = tagMap.get(key)
-            if tagList is None:
+            valueList = tagMap.get(key)
+            if valueList is None:
                 continue
-            for tag in tagList:
-                self.createTag(key, keyConcept, tag, tagScheme)
+            for value in valueList:
+                self.createTag(key, keyConcept, value, tagScheme)
 
     def outputFile(self, outputName, outputEnding, hasDateEnding):
         '''Returns full file path. If 'hasDateEnding' is True, a date postfix is added between
@@ -240,6 +218,6 @@ if __name__ == '__main__':
     print('\nTime elapsed to generate graph: ' + str(elapsed / 60) + ' mins')
     print('Number of keys: ' + str(bt.numberKeys))
     print('Number tags: ' + str(bt.numberTags))
-    print ('Tripples: ' + str(bt.graph.tripplesCount()))
+    print ('Tripples: ' + str(bt.getBaseGraph().tripplesCount()))
 
     bt.getBaseGraph()

@@ -6,18 +6,25 @@ Created on 20.10.2014
 '''
 
 from utilities.configloader import ConfigLoader
+from taginfo import TagInfo
 
 class TagResults:
 
     cl = ConfigLoader()
+    tagInfo = TagInfo()
     results = []
 
     def __init__(self, rdfGraph, rawResults):
         self.results = []
-        self.getTagInformation(rdfGraph, rawResults)
+        self.fillResultList(rdfGraph, rawResults)
+        self.results = sorted(self.results, reverse=True, key=self.sortKey)
 
     def getResults(self):
         return self.results
+
+    def sortKey(self, tag):
+        return int(tag['countAll'])
+
 
     def isKey(self, rdfGraph, subject):
         keyScheme = self.cl.getThesaurusString('KEY_SCHEME_NAME')
@@ -40,9 +47,44 @@ class TagResults:
             return None
         return str(firstItem)
 
-    def getTagInformation(self, rdfGraph, rawResults):
+    def getStatsData(self, tagInfos):
+        statsData = {}
+        if tagInfos['isKey']:
+            statsData = self.tagInfo.getKeyStats(tagInfos['prefLabel'])
+        else:
+            prefLabel = tagInfos['prefLabel']
+            key = prefLabel.split('=')[0]
+            value = prefLabel.split('=')[1]
+            statsData = self.tagInfo.getTagStats(key, value)
+        return statsData
+
+    def getCountAll(self, statsData):
+        for item in statsData:
+            if item['type'] == 'all':
+                return item['count']
+        return '0'
+
+    def getCountNodes(self, statsData):
+        for item in statsData:
+            if item['type'] == 'nodes':
+                return item['count']
+        return '0'
+
+    def getCountWays(self, statsData):
+        for item in statsData:
+            if item['type'] == 'ways':
+                return item['count']
+        return '0'
+
+    def getCountRelations(self, statsData):
+        for item in statsData:
+            if item['type'] == 'relations':
+                return item['count']
+        return '0'
+
+    def fillResultList(self, rdfGraph, rawResults):
         for subject in rawResults:
-            tagInfos = {}
+            tag = {}
 
             prefLabelGen = rdfGraph.getPrefLabels(subject)
             broaderGen = rdfGraph.getBroader(subject)
@@ -50,15 +92,26 @@ class TagResults:
             scopeNoteGen = rdfGraph.getScopeNote(subject)
             depictionGen = rdfGraph.getDepiction(subject)
 
-            tagInfos['subject'] = str(subject)
-            tagInfos['isKey'] = self.isKey(rdfGraph, subject)
-            tagInfos['isTag'] = self.isTag(rdfGraph, subject)
-            tagInfos['prefLabel'] = self.genGetFirstItem(prefLabelGen)
-            tagInfos['broader'] = self.genToList(broaderGen)
-            tagInfos['narrower'] = self.genToList(narrowerGen)
-            tagInfos['broader'] = self.genToList(broaderGen)
-            tagInfos['scopeNote'] = self.genToList(scopeNoteGen)
-            tagInfos['depiction'] = self.genGetFirstItem(depictionGen)
+            tag['subject'] = str(subject)
 
-            self.results.append(tagInfos)
+            tag['isKey'] = self.isKey(rdfGraph, subject)
+            tag['isTag'] = self.isTag(rdfGraph, subject)
+
+            tag['prefLabel'] = self.genGetFirstItem(prefLabelGen)
+            tag['broader']   = self.genToList(broaderGen)
+            tag['narrower'] = self.genToList(narrowerGen)
+            tag['broader'] = self.genToList(broaderGen)
+            tag['scopeNote'] = self.genToList(scopeNoteGen)
+            tag['depiction'] = self.genGetFirstItem(depictionGen)
+
+            statsData = self.getStatsData(tag)
+
+            tag['countAll'] = self.getCountAll(statsData)
+            tag['countNodes']= self.getCountAll(statsData)
+            tag['countWays'] = self.getCountAll(statsData)
+            tag['countRelations'] = self.getCountAll(statsData)
+
+            self.results.append(tag)
+
+
 

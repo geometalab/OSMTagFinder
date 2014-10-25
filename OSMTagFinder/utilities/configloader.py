@@ -37,3 +37,5 @@ class ConfigLoader:
 
     def getWebsiteInt(self, option):
         return self.__parser.getint(self.websiteSection, option)
+
+

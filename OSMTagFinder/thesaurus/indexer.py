@@ -76,7 +76,7 @@ class Indexer:
 
 
 if __name__ == '__main__':
-    rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141020.rdf')
+    rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141025.rdf')
     Indexer(rdfGraph)
 
 
