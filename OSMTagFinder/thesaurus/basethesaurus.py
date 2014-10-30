@@ -35,14 +35,13 @@ class BaseThesaurus:
     translationHintDE = cl.getThesaurusString('TRANSLATION_HINT_DE')
     translationHintEN = cl.getThesaurusString('TRANSLATION_HINT_EN')
 
-    minCount = cl.getThesaurusInt('MINIMUM_COUNT')
+    valueMinCount = cl.getThesaurusInt('MINIMUM_COUNT')
 
     filterUtil = Filter()
     translator = Translator()
 
     def __init__(self):
-        keyData = self.tagInfo.getAllKeyData()
-        keyList = self.filterKeyData(keyData)
+        keyList = self.getListOfValidKeys()
 
         self.numberKeys = len(keyList) + len(self.filterUtil.exactKeyFilter)
 
@@ -70,14 +69,21 @@ class BaseThesaurus:
         '''Getter for the base graph.'''
         return self.graph
 
+    def getListOfValidKeys(self):
+        '''Calls TagInfo for a list of all keys. The elements in the list are then checked for their validity.
+        'minCount' is a restriction on the number of occurence of a key and the number of values per key.
+        The returned list is descending sorted by count of values attached to the key.'''
+        keyData = self.tagInfo.getAllKeyData()
+        return self.filterKeyData(keyData)
+
     def filterKeyData(self, keyData):
         '''Takes the raw key data from 'keyData' and makes validation checks on each
            element. Then a list of valid keys is returned.'''
         keyList = []
         for keyItem in keyData:
-            if keyItem['count_all'] < self.minCount:
+            if keyItem['count_all'] < self.valueMinCount:
                 break;  # speedup because of sorted list
-            if not self.filterUtil.hasKey(keyItem['key']) and utils.validCharsCheck(keyItem['key']) and keyItem['values_all'] >= self.minCount:
+            if not self.filterUtil.hasKey(keyItem['key']) and utils.validCharsCheck(keyItem['key']) and keyItem['values_all'] >= self.valueMinCount:
                 keyList.append(keyItem['key'])
                 print('Key: ' + keyItem['key'])
         return keyList
@@ -87,7 +93,7 @@ class BaseThesaurus:
            element. Then the updated 'tagMap' (k:key, v:value) is returned.'''
         r = ''
         for valueItem in tagData:
-            if not self.filterUtil.hasValue(valueItem['value']) and valueItem['in_wiki'] and utils.validCharsCheck(valueItem['value']) and valueItem['count'] >= self.minCount:
+            if not self.filterUtil.hasValue(valueItem['value']) and valueItem['in_wiki'] and utils.validCharsCheck(valueItem['value']) and valueItem['count'] >= self.valueMinCount:
                 k = tagMap.get(key)
                 if k is not None:
                     k.append(valueItem['value'])

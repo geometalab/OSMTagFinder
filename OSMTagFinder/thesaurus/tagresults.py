@@ -14,10 +14,11 @@ class TagResults:
     tagInfo = TagInfo()
     results = []
 
-    def __init__(self, rdfGraph, rawResults):
+    def __init__(self, rdfGraph, rawResults, addStats):
         self.results = []
-        self.fillResultList(rdfGraph, rawResults)
-        self.results = sorted(self.results, reverse=True, key=self.sortKey)
+        self.fillResultList(rdfGraph, rawResults, addStats)
+        if addStats:
+            self.results = sorted(self.results, reverse=True, key=self.sortKey)
 
     def getResults(self):
         return self.results
@@ -82,7 +83,7 @@ class TagResults:
                 return item['count']
         return '0'
 
-    def fillResultList(self, rdfGraph, rawResults):
+    def fillResultList(self, rdfGraph, rawResults, addStats):
         for subject in rawResults:
             tag = {}
 
@@ -104,12 +105,13 @@ class TagResults:
             tag['scopeNote'] = self.genToList(scopeNoteGen)
             tag['depiction'] = self.genGetFirstItem(depictionGen)
 
-            statsData = self.getStatsData(tag)
+            if addStats:
+                statsData = self.getStatsData(tag)
 
-            tag['countAll'] = self.getCountAll(statsData)
-            tag['countNodes']= self.getCountAll(statsData)
-            tag['countWays'] = self.getCountAll(statsData)
-            tag['countRelations'] = self.getCountAll(statsData)
+                tag['countAll'] = self.getCountAll(statsData)
+                tag['countNodes']= self.getCountAll(statsData)
+                tag['countWays'] = self.getCountAll(statsData)
+                tag['countRelations'] = self.getCountAll(statsData)
 
             self.results.append(tag)
 

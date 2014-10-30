@@ -68,12 +68,14 @@ class GraphSearch:
 
         return retSet
 
-    def extendedSearch(self, word):
+    def extendedSearch(self, word, translateDEToEN=False):
 
         word = self.prepareWord(word)
 
         results = OrderedSet()
-        results = results | self.search(word, includeScopeNote=False, translateDEToEN=False)
+
+        if not translateDEToEN:
+            print 'done'            results = results | self.search(word, includeScopeNote=False, translateDEToEN=False)
 
         if len(results) < self.threshold:
             results = results | self.search(word, includeScopeNote=False, translateDEToEN=True)

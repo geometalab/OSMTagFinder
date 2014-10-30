@@ -22,14 +22,6 @@ class TagInfo:
     tagInfoWikiPageOfTag = cl.getTagInfoAPIString('WIKI_PAGE_OF_TAG')
     tagInfoTagPostfix = cl.getTagInfoAPIString('TAG_SUFFIX')
 
-
-    def getListOfValidKeys(self, minCount):
-        '''Calls TagInfo for a list of all keys. The elements in the list are then checked for their validity.
-        'minCount' is a restriction on the number of occurence of a key and the number of values per key.
-        The returned list is descending sorted by count of values attached to the key.'''
-        keyData = self.tagInfo.getAllKeyData()
-        return self.filterKeyData(keyData, minCount)
-
     def getAllKeyData(self):
         '''Calls TagInfo for a list of all keys. The list is descending sorted by count of
            values attached to the key.'''

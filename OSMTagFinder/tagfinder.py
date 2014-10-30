@@ -5,8 +5,9 @@ Created on 17.10.2014
 @author: Simon Gwerder
 '''
 import os
-from flask import Flask, session, send_from_directory, render_template, request, redirect
+from flask import Flask, session, send_from_directory, render_template, request, redirect, jsonify, Response
 from flask_bootstrap import Bootstrap
+import json
 
 from utilities.configloader import ConfigLoader
 from utilities import utils
@@ -15,7 +16,7 @@ from thesaurus.tagresults import TagResults
 from thesaurus.graphsearch import GraphSearch
 
 
-rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141025.rdf')
+rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141027.rdf')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '#T0P#SECRET#'
@@ -36,6 +37,18 @@ def setLocale(lang=None):
     else:
         session['language'] = lang
 
+def searchCall(query):
+    graphSearch = GraphSearch()
+    if query is None or query == '':
+        return None
+
+    if getLocale() == 'de':
+        translateDEToEN=True
+    else:
+        translateDEToEN=False
+    rawResults = graphSearch.extendedSearch(query, translateDEToEN)
+
+    return TagResults(rdfGraph, rawResults, addStats=True)
 
 
 @app.route('/favicon.ico')
@@ -62,21 +75,25 @@ def pageNotFound(e):
 
 @app.route('/search', methods = ['GET'])
 def search():
-    graphSearch = GraphSearch()
     q = request.args.get('q', '')
-    if q is None or q == '':
+    searchResults = searchCall(q)
+    if searchResults is None:
         return redirect('/')
-
-    rawResults = graphSearch.extendedSearch(q)
-    searchResults = TagResults(rdfGraph, rawResults)
-
     return render_template('search.html', lang=getLocale(), q=q, results=searchResults.getResults())
+
+@app.route('/api/search', methods = ['GET'])
+def apiSearch():
+    searchResults = searchCall(request.args.get('q', ''))
+    if searchResults is None:
+        return jsonify([])
+    #return jsonify(results=searchResults.getResults())
+    return Response(json.dumps(searchResults.getResults()),  mimetype='application/json')
 
 if __name__ == '__main__':
     cl = ConfigLoader()
     tagFinderHost = cl.getWebsiteString('HOST')
     tagFinderPort = int(os.environ.get("PORT", cl.getWebsiteInt('PORT')))
-    app.run(debug=True, host=tagFinderHost, port=tagFinderPort) # TODO debug=False
+    app.run(debug=True, host=tagFinderHost, port=tagFinderPort, threaded=True) # TODO debug=False, # Alternately app.run(..., processes=3)
 
 
 
