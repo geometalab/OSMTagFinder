@@ -14,6 +14,7 @@ from utilities import utils
 from utilities.configloader import ConfigLoader
 from thesaurus.rdfgraph import RDFGraph
 from taginfo import TagInfo
+from tagstats import TagStats
 from utilities.translator import Translator
 
 class BaseThesaurus:
@@ -154,16 +155,24 @@ class BaseThesaurus:
             self.graph.addDepiction(concept, depiction)
             print '\t\t' + depiction
 
+    def addStats(self, concept, key, value=None):
+        tagStats = TagStats(key, value)
+        self.graph.addOSMNode(concept, tagStats.getCountNodes())
+        self.graph.addOSMWay(concept, tagStats.getCountWays())
+        self.graph.addOSMRelation(concept, tagStats.getCountRelations())
+
     def createKey(self, key, keyScheme):
         '''Adds key with name 'key' to the graph, with as much wiki information as possible.'''
         keyConcept = self.graph.addConcept(self.osmWikiBase + 'Key:' + key)
-        self.graph.addPrefLabel(keyConcept, key)
         self.graph.addInScheme(keyConcept, keyScheme)
+        self.graph.addPrefLabel(keyConcept, key)
+        self.addStats(keyConcept, key)
         # graph.addHasTopConcept(keyScheme, keyConcept)
 
         keyWikiPageJson = self.tagInfo.getWikiPageOfKey(key)
         if len(keyWikiPageJson) > 0:
             self.addImageScopeNote(keyConcept, keyWikiPageJson)
+
 
         return keyConcept
 
@@ -175,10 +184,11 @@ class BaseThesaurus:
         if len(tagWikiPageJson) > 0:
             print('\t' + taglink)
             tagConcept = self.graph.addConcept(taglink)
+            self.graph.addInScheme(tagConcept, tagScheme)
             self.graph.addPrefLabel(tagConcept, key + '=' + value)
             self.graph.addBroader(tagConcept, keyConcept)
             self.graph.addNarrower(keyConcept, tagConcept)
-            self.graph.addInScheme(tagConcept, tagScheme)
+            self.addStats(tagConcept, key, value)
 
             self.addImageScopeNote(tagConcept, tagWikiPageJson)
 

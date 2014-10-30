@@ -75,7 +75,7 @@ class GraphSearch:
         results = OrderedSet()
 
         if not translateDEToEN:
-            print 'done'            results = results | self.search(word, includeScopeNote=False, translateDEToEN=False)
+            results = results | self.search(word, includeScopeNote=False, translateDEToEN=False)
 
         if len(results) < self.threshold:
             results = results | self.search(word, includeScopeNote=False, translateDEToEN=True)

@@ -6,12 +6,11 @@ Created on 20.10.2014
 '''
 
 from utilities.configloader import ConfigLoader
-from taginfo import TagInfo
+
 
 class TagResults:
 
     cl = ConfigLoader()
-    tagInfo = TagInfo()
     results = []
 
     def __init__(self, rdfGraph, rawResults, addStats):
@@ -25,7 +24,6 @@ class TagResults:
 
     def sortKey(self, tag):
         return int(tag['countAll'])
-
 
     def isKey(self, rdfGraph, subject):
         keyScheme = self.cl.getThesaurusString('KEY_SCHEME_NAME')
@@ -48,41 +46,6 @@ class TagResults:
             return None
         return str(firstItem)
 
-    def getStatsData(self, tagInfos):
-        statsData = {}
-        if tagInfos['isKey']:
-            statsData = self.tagInfo.getKeyStats(tagInfos['prefLabel'])
-        else:
-            prefLabel = tagInfos['prefLabel']
-            key = prefLabel.split('=')[0]
-            value = prefLabel.split('=')[1]
-            statsData = self.tagInfo.getTagStats(key, value)
-        return statsData
-
-    def getCountAll(self, statsData):
-        for item in statsData:
-            if item['type'] == 'all':
-                return item['count']
-        return '0'
-
-    def getCountNodes(self, statsData):
-        for item in statsData:
-            if item['type'] == 'nodes':
-                return item['count']
-        return '0'
-
-    def getCountWays(self, statsData):
-        for item in statsData:
-            if item['type'] == 'ways':
-                return item['count']
-        return '0'
-
-    def getCountRelations(self, statsData):
-        for item in statsData:
-            if item['type'] == 'relations':
-                return item['count']
-        return '0'
-
     def fillResultList(self, rdfGraph, rawResults, addStats):
         for subject in rawResults:
             tag = {}
@@ -92,6 +55,9 @@ class TagResults:
             narrowerGen = rdfGraph.getNarrower(subject)
             scopeNoteGen = rdfGraph.getScopeNote(subject)
             depictionGen = rdfGraph.getDepiction(subject)
+            osmNodeGen = rdfGraph.getOSMNode(subject)
+            osmWayGen = rdfGraph.getOSMWay(subject)
+            osmRelationGen = rdfGraph.getOSMRelation(subject)
 
             tag['subject'] = str(subject)
 
@@ -101,17 +67,12 @@ class TagResults:
             tag['prefLabel'] = self.genGetFirstItem(prefLabelGen)
             tag['broader']   = self.genToList(broaderGen)
             tag['narrower'] = self.genToList(narrowerGen)
-            tag['broader'] = self.genToList(broaderGen)
             tag['scopeNote'] = self.genToList(scopeNoteGen)
             tag['depiction'] = self.genGetFirstItem(depictionGen)
-
-            if addStats:
-                statsData = self.getStatsData(tag)
-
-                tag['countAll'] = self.getCountAll(statsData)
-                tag['countNodes']= self.getCountAll(statsData)
-                tag['countWays'] = self.getCountAll(statsData)
-                tag['countRelations'] = self.getCountAll(statsData)
+            tag['countNodes']= self.genGetFirstItem(osmNodeGen)
+            tag['countWays'] = self.genGetFirstItem(osmWayGen)
+            tag['countRelations'] = self.genGetFirstItem(osmRelationGen)
+            tag['countAll'] = str(int(tag['countNodes']) + int(tag['countWays']) + int(tag['countRelations']))
 
             self.results.append(tag)
 

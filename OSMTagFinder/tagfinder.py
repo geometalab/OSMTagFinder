@@ -16,7 +16,7 @@ from thesaurus.tagresults import TagResults
 from thesaurus.graphsearch import GraphSearch
 
 
-rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141027.rdf')
+rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141030.rdf')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '#T0P#SECRET#'
@@ -46,7 +46,7 @@ def searchCall(query):
         translateDEToEN=True
     else:
         translateDEToEN=False
-    rawResults = graphSearch.extendedSearch(query, translateDEToEN)
+    rawResults = graphSearch.extendedSearch(query, translateDEToEN=False) # TODO e.g. "sport" scenario
 
     return TagResults(rdfGraph, rawResults, addStats=True)
 

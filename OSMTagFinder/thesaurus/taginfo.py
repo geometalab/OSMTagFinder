@@ -15,6 +15,7 @@ class TagInfo:
 
     tagInfoAllKeys = cl.getTagInfoAPIString('ALL_KEYS')
     tagInfoKeyStats = cl.getTagInfoAPIString('KEY_STATS')
+    tagInfoTagStats = cl.getTagInfoAPIString('TAG_STATS')
 
     tagInfoValueOfKey = cl.getTagInfoAPIString('VALUE_OF_KEY')
 
@@ -44,7 +45,7 @@ class TagInfo:
 
     def getTagStats(self, key, value):
         '''Calls TagInfo for statistics of 'key'='value'.'''
-        tagResult = requests.get(self.tagInfoKeyStats + key + self.tagInfoTagPostfix + value)
+        tagResult = requests.get(self.tagInfoTagStats + key + self.tagInfoTagPostfix + value)
         tagJson = tagResult.json();
         return tagJson['data']
 
