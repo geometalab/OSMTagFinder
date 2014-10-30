@@ -5,12 +5,13 @@ Created on 26.09.2014
 @author: Simon Gwerder
 '''
 
-from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin
+from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin, XSD
 from rdflib.namespace import SKOS
 from rdflib.namespace import FOAF
 from rdflib.serializer import Serializer
 from rdflib.util import guess_format
 from utilities import utils
+from utilities.configloader import ConfigLoader
 
 # from skosserializer import SKOSSerializer
 
@@ -18,13 +19,25 @@ class RDFGraph:
     encoding = 'utf-8'
     graph = Graph()
 
+    cl = ConfigLoader()
+
+    foaf = Namespace("http://xmlns.com/foaf/0.1/")  # only for depictions
+    skos = Namespace('http://www.w3.org/2004/02/skos/core#')
+    osm = Namespace(cl.getThesaurusString('OSM_WIKI_PAGE'))
+    osmNode = osm[cl.getThesaurusString('OSM_NODE')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/Node')
+    osmWay = osm[cl.getThesaurusString('OSM_WAY')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/Way')
+    osmRelation = osm[cl.getThesaurusString('OSM_RELATION')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/Relation')
+
     def __init__ (self, filePath=None):
         if filePath is not None:
             self.graph = self.load(filePath)
-        foaf = Namespace("http://xmlns.com/foaf/0.1/")  # only for depictions
-        skos = Namespace('http://www.w3.org/2004/02/skos/core#')
-        self.graph.bind('foaf', foaf)
-        self.graph.bind('skos', skos)
+
+        self.graph.bind('foaf', self.foaf)
+        self.graph.bind('skos', self.skos)
+        self.graph.bind('osm', self.osm)
+        self.graph.bind('osmNode', self.osmNode)
+        self.graph.bind('osmWay', self.osmWay)
+        self.graph.bind('osmRelation', self.osmRelation)
 
     def load(self, filePath):
         guessedFormat = guess_format(filePath)
@@ -78,6 +91,18 @@ class RDFGraph:
 
     def addPrefSymbol(self, subject, obj):
         self.graph.add((URIRef(subject), SKOS.prefSymbol, URIRef(obj)))
+        return subject
+
+    def addOSMNode(self, subject, obj):
+        self.graph.add((URIRef(subject), self.osmNode, Literal(obj, datatype=XSD.integer)))
+        return subject
+
+    def addOSMWay(self, subject, obj):
+        self.graph.add((URIRef(subject), self.osmWay, Literal(obj, datatype=XSD.integer)))
+        return subject
+
+    def addOSMRelation(self, subject, obj):
+        self.graph.add((URIRef(subject), self.osmRelation, Literal(obj, datatype=XSD.integer)))
         return subject
 
     def tripplesCount(self):
@@ -134,6 +159,18 @@ class RDFGraph:
         generatorList = self.graph.objects(URIRef(subject), SKOS.prefSymbol)
         return generatorList
 
+    def getOSMNode(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), self.osmNode)
+        return generatorList
+
+    def getOSMWay(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), self.osmWay)
+        return generatorList
+
+    def getOSMRelation(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), self.osmRelation)
+        return generatorList
+
 if __name__ == '__main__':
     r = RDFGraph()
 
@@ -153,7 +190,8 @@ if __name__ == '__main__':
     r.addPrefLabel(mammals, 'Mammals')
     r.addAltLabel(mammals, 'Säugetier', 'de')
     r.addScopeNote(mammals, 'Die Säugetiere (Mammalia) sind eine Klasse der Wirbeltiere. '
-    + 'Zu ihren kennzeichnenden Merkmalen gehören das Säugen des Nachwuchses mit Milch', 'de')
+                    'Zu ihren kennzeichnenden Merkmalen gehören das Säugen des Nachwuchses mit Milch', 'de')
+    r.addOSMNode(mammals, '50')
     r.addInScheme(mammals, keyScheme)
 
     r.addNarrower(animals, mammals)
