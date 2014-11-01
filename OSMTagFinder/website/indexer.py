@@ -9,7 +9,7 @@ import whoosh.index as index
 from whoosh.fields import TEXT, ID, NGRAM, Schema
 from utilities import utils
 from rdflib.namespace import SKOS
-from rdfgraph import RDFGraph
+from thesaurus.rdfgraph import RDFGraph
 
 class Indexer:
 

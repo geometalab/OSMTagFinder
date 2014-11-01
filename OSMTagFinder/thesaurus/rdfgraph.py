@@ -78,10 +78,12 @@ class RDFGraph:
         return subject
 
     def addNarrower(self, subject, obj):
+        '''subject > object. E.g. concept_animals narrower concept_mammals: '''
         self.graph.add((URIRef(subject), SKOS.narrower, URIRef(obj)))
         return subject
 
-    def addBroader(self, subject, obj):  # in concept_animals is: ... narrow concept_mammals
+    def addBroader(self, subject, obj):
+        '''subject > object. E.g. concept_mammals narrower concept_animals: '''
         self.graph.add((URIRef(subject), SKOS.broader, URIRef(obj)))
         return subject
 
@@ -201,3 +203,9 @@ if __name__ == '__main__':
     plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')
     print r.graph.serialize(format='skos', encoding=r.encoding)
 
+
+    print '\n'
+
+    graph = Graph()
+    graph.load(utils.dataDir() + 'gemet_labels_de.rdf')
+    print str(len(graph))

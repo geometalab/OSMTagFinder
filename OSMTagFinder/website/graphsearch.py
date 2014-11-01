@@ -12,7 +12,7 @@ from whoosh.index import open_dir
 import whoosh.index as index
 from utilities.spellcorrect import SpellCorrect
 from utilities.translator import Translator
-from rdfgraph import RDFGraph
+from thesaurus.rdfgraph import RDFGraph
 from tagresults import TagResults
 from utilities import utils
 
@@ -100,12 +100,14 @@ class GraphSearch:
 
 if __name__ == '__main__':
 
-    rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141018.rdf')
+    rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141030.rdf')
     gs = GraphSearch()
     while True:
         word = raw_input("Enter word to search for: ")
         rawResults = gs.extendedSearch(word)
         searchResults = TagResults(rdfGraph, rawResults)
+        for item in searchResults.getResults():
+            print '\t' + item
 
 
 

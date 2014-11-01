@@ -5,7 +5,7 @@ Created on 30.10.2014
 @author: Simon Gwerder
 '''
 
-from taginfo import TagInfo
+from externalapi.taginfo import TagInfo
 
 class TagStats:
 

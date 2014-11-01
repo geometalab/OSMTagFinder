@@ -15,6 +15,7 @@ class ConfigLoader:
 
     thesaurusSection = 'Thesaurus'
     tagInfoSection = 'TagInfoAPI'
+    openThesaurusSection = 'OpenThesaurusAPI'
     websiteSection = 'Website'
 
     __parser = SafeConfigParser()
@@ -37,5 +38,8 @@ class ConfigLoader:
 
     def getWebsiteInt(self, option):
         return self.__parser.getint(self.websiteSection, option)
+
+    def getOpenThesaurusAPIString(self, option):
+        return self.__parser.get(self.openThesaurusSection, option)
 
 

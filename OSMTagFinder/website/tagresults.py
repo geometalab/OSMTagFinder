@@ -13,11 +13,10 @@ class TagResults:
     cl = ConfigLoader()
     results = []
 
-    def __init__(self, rdfGraph, rawResults, addStats):
+    def __init__(self, rdfGraph, rawResults):
         self.results = []
-        self.fillResultList(rdfGraph, rawResults, addStats)
-        if addStats:
-            self.results = sorted(self.results, reverse=True, key=self.sortKey)
+        self.fillResultList(rdfGraph, rawResults)
+        self.results = sorted(self.results, reverse=True, key=self.sortKey)
 
     def getResults(self):
         return self.results
@@ -46,7 +45,7 @@ class TagResults:
             return None
         return str(firstItem)
 
-    def fillResultList(self, rdfGraph, rawResults, addStats):
+    def fillResultList(self, rdfGraph, rawResults):
         for subject in rawResults:
             tag = {}
 

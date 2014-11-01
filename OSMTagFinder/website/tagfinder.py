@@ -12,8 +12,8 @@ import json
 from utilities.configloader import ConfigLoader
 from utilities import utils
 from thesaurus.rdfgraph import RDFGraph
-from thesaurus.tagresults import TagResults
-from thesaurus.graphsearch import GraphSearch
+from website.tagresults import TagResults
+from website.graphsearch import GraphSearch
 
 
 rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141030.rdf')
@@ -48,7 +48,7 @@ def searchCall(query):
         translateDEToEN=False
     rawResults = graphSearch.extendedSearch(query, translateDEToEN=False) # TODO e.g. "sport" scenario
 
-    return TagResults(rdfGraph, rawResults, addStats=True)
+    return TagResults(rdfGraph, rawResults)
 
 
 @app.route('/favicon.ico')

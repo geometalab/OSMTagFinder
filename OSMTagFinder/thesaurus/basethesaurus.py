@@ -13,8 +13,8 @@ from filter import Filter
 from utilities import utils
 from utilities.configloader import ConfigLoader
 from thesaurus.rdfgraph import RDFGraph
-from taginfo import TagInfo
-from tagstats import TagStats
+from externalapi.taginfo import TagInfo
+from externalapi.tagstats import TagStats
 from utilities.translator import Translator
 
 class BaseThesaurus:
