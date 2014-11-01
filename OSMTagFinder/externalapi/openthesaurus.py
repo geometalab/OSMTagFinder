@@ -16,24 +16,25 @@ from utilities import utils
 class OpenThesaurus(ThesauriBase):
 
     cl = ConfigLoader()
+    apiPrefix = cl.getOpenThesaurusAPIString('API_URL')
+    apiSuffix = cl.getOpenThesaurusAPIString('API_URL_SUFFIX')
 
-    synonymSet = OrderedSet()
+    relatedSet = OrderedSet()
     broaderSet = OrderedSet()
     narrowerSet = OrderedSet()
 
-    def __init__(self, searchTerm):
-        ThesauriBase.__init__(self, searchTerm)
+    def __init__(self, searchTerm, language):
+        ThesauriBase.__init__(self, searchTerm, language)
         self.supportedLang.append('de')
 
-        apiPrefix = self.cl.getOpenThesaurusAPIString('API_CALL')
-        apiSuffix = self.cl.getOpenThesaurusAPIString('API_CALL_SUFFIX')
-
-        for word in self.searchTerms:
-            result = requests.get(apiPrefix + word + apiSuffix)
-            xmlString = result.text
-            self.parseXML(xmlString)
-            if len(self.synonymSet) > 0:
-                break
+        if language in self.supportedLang:
+            for word in self.searchTerms:
+                result = requests.get(self.apiPrefix + word + self.apiSuffix)
+                if result.status_code < 300:
+                    xmlString = result.text
+                    self.parseXML(xmlString)
+                    if len(self.relatedSet) > 0:
+                        break
 
     def parseXML(self, xmlString):
         root = ET.fromstring(xmlString)
@@ -44,7 +45,7 @@ class OpenThesaurus(ThesauriBase):
                 for levelTwo in synsetOne:
                     if levelTwo.tag == 'term':
                         synonym = levelTwo.attrib['term']
-                        self.synonymSet.append(utils.eszettToSS(synonym))
+                        self.relatedSet.append(utils.eszettToSS(synonym))
                     elif levelTwo.tag == 'supersynsets':
                         for levelThree in levelTwo:
                             if levelThree.tag == 'synset':
@@ -60,8 +61,8 @@ class OpenThesaurus(ThesauriBase):
                                         narrower = levelFour.attrib['term']
                                         self.narrowerSet.append(utils.eszettToSS(narrower))
 
-    def getSynonym(self):
-        return self.synonymSet
+    def getRelated(self):
+        return self.relatedSet
 
     def getNarrower(self):
         return self.narrowerSet
@@ -70,11 +71,11 @@ class OpenThesaurus(ThesauriBase):
         return self.broaderSet
 
 if __name__ == '__main__':
-    ot = OpenThesaurus('Fussball')
+    ot = OpenThesaurus('Coiffeur', 'de')
 
-    print "Synonym: "
-    for synonym in ot.getSynonym():
-        print synonym
+    print "Related: "
+    for related in ot.getRelated():
+        print related
 
     print "\nNarrower: "
     for narrower in ot.getNarrower():

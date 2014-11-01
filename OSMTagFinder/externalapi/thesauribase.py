@@ -6,15 +6,16 @@ Created on 31.10.2014
 '''
 
 import abc
+from abc import ABCMeta
 from utilities import utils
 
 class ThesauriBase(object):
-    __metaclass__ = abc.ABCMeta
+    __metaclass__ = ABCMeta
 
     searchTerms = None
     supportedLang = None
 
-    def __init__(self, searchTerm):
+    def __init__(self, searchTerm, language):
         self.searchTerms = []
         self.searchTerms.append(searchTerm)
         if utils.hasEszett(searchTerm):
@@ -31,8 +32,8 @@ class ThesauriBase(object):
         return self.searchTerm
 
     @abc.abstractmethod
-    def getSynonym(self):
-        '''Returns an ordered set containing all synonyms for 'searchTerm'.'''
+    def getRelated(self):
+        '''Returns an ordered set containing all synonyms and other related terms for 'searchTerm'.'''
         return
 
     @abc.abstractmethod

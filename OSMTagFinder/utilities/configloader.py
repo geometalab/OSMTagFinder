@@ -13,10 +13,13 @@ class ConfigLoader:
 
     configFileLoc = utils.dataDir() + 'config.ini'
 
+    websiteSection = 'Website'
     thesaurusSection = 'Thesaurus'
     tagInfoSection = 'TagInfoAPI'
     openThesaurusSection = 'OpenThesaurusAPI'
-    websiteSection = 'Website'
+    altervistaSection = 'AltervistaAPI'
+    gemetSection = 'GemetAPI'
+    wordnikSection = 'WordnikAPI'
 
     __parser = SafeConfigParser()
 
@@ -41,5 +44,15 @@ class ConfigLoader:
 
     def getOpenThesaurusAPIString(self, option):
         return self.__parser.get(self.openThesaurusSection, option)
+
+    def getAltervistaAPIString(self, option):
+        return self.__parser.get(self.altervistaSection, option)
+
+    def getGemetAPIString(self, option):
+        return self.__parser.get(self.gemetSection, option)
+
+    def getWordnikAPIString(self, option):
+        return self.__parser.get(self.wordnikSection, option)
+
 
 
