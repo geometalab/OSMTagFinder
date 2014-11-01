@@ -28,6 +28,17 @@ class Thesauri:
         self.callThesauri(wordnik)
         self.callThesauri(openthesaurus)
 
+        self.removeRelatedWord(word) # making sure no self relation occurs
+
+
+    def removeRelatedWord(self, word):
+        if word in self.relatedSet:
+            temp = []
+            for related in self.relatedSet:
+                temp.append(related)
+            temp.remove(word)
+            self.relatedSet = OrderedSet() | temp
+
     def callThesauri(self, thesauri):
         self.relatedSet  = self.relatedSet  | thesauri.getRelated()
         self.broaderSet  = self.broaderSet  | thesauri.getBroader()

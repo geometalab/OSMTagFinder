@@ -87,6 +87,10 @@ class RDFGraph:
         self.graph.add((URIRef(subject), SKOS.broader, URIRef(obj)))
         return subject
 
+    def addRelated(self, subject, obj):
+        self.graph.add((URIRef(subject), SKOS.related, URIRef(obj)))
+        return subject
+
     def addDepiction(self, subject, obj):
         self.graph.add((URIRef(subject), FOAF.depiction, URIRef(obj)))
         return subject
@@ -159,6 +163,10 @@ class RDFGraph:
 
     def getPrefSymbol(self, subject):
         generatorList = self.graph.objects(URIRef(subject), SKOS.prefSymbol)
+        return generatorList
+
+    def getRelated(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), SKOS.related)
         return generatorList
 
     def getOSMNode(self, subject):
