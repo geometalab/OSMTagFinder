@@ -47,6 +47,10 @@ class RDFGraph:
         plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')  # register(name, kind, module_path, class_name)
         self.graph.serialize(destination=filepath, format='skos', encoding=self.encoding)
 
+    def prepareLiteral(self, objStr):
+        objStr = utils.eszettToSS(objStr)
+        return objStr
+
     def addConceptScheme(self, subject):
         self.graph.add((URIRef(subject), RDF.type, SKOS.ConceptScheme))
         return subject
@@ -64,17 +68,17 @@ class RDFGraph:
         return subject
 
     def addDefinition(self, subject, obj, language):
-        self.graph.add((URIRef(subject), SKOS.definition, Literal(obj, lang=language)))
+        self.graph.add((URIRef(subject), SKOS.definition, Literal(self.prepareLiteral(obj), lang=language)))
 
     def addScopeNote(self, subject, obj, language):
-        self.graph.add((URIRef(subject), SKOS.scopeNote, Literal(obj, lang=language)))
+        self.graph.add((URIRef(subject), SKOS.scopeNote, Literal(self.prepareLiteral(obj), lang=language)))
 
     def addPrefLabel(self, subject, obj):
-        self.graph.add((URIRef(subject), SKOS.prefLabel, Literal(obj)))
+        self.graph.add((URIRef(subject), SKOS.prefLabel, Literal(self.prepareLiteral(obj))))
         return subject
 
     def addAltLabel(self, subject, obj, language):
-        self.graph.add((URIRef(subject), SKOS.altLabel, Literal(obj, lang=language)))
+        self.graph.add((URIRef(subject), SKOS.altLabel, Literal(self.prepareLiteral(obj), lang=language)))
         return subject
 
     def addNarrower(self, subject, obj):
@@ -136,6 +140,9 @@ class RDFGraph:
     def getScopeNote(self, subject):
         generatorList = self.graph.objects(URIRef(subject), SKOS.scopeNote)
         return generatorList
+
+    def getScopeNoteByLang(self, subject):
+        pass
 
     def getPrefLabels(self, subject):
         generatorList = self.graph.objects(URIRef(subject), SKOS.prefLabel)
@@ -215,5 +222,7 @@ if __name__ == '__main__':
     print '\n'
 
     graph = Graph()
-    graph.load(utils.dataDir() + 'gemet_labels_de.rdf')
+    g = graph.parse(utils.dataDir() + 'gemet\gemet_concept_en.rdf')
+    for i in g.objects(URIRef('http://www.eionet.europa.eu/gemet/concept/8073'), SKOS.prefLabel):
+        print i
     print str(len(graph))

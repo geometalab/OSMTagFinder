@@ -34,6 +34,9 @@ class Gemet(ThesauriBase):
 
     def __init__(self, searchTerm, language):
         ThesauriBase.__init__(self, searchTerm, language)
+        self.relatedSet = OrderedSet()
+        self.broaderSet = OrderedSet()
+        self.narrowerSet = OrderedSet()
         self.supportedLang.append('de')
         self.supportedLang.append('en')
 
@@ -53,7 +56,8 @@ class Gemet(ThesauriBase):
             for category in searchJson:
                 conceptUri = category['uri']
                 thisPrefLabel = self.getConceptForUri(conceptUri, apiLang)
-                self.relatedSet.append(utils.eszettToSS(thisPrefLabel))
+                if thisPrefLabel is not None:
+                    self.relatedSet.append(utils.eszettToSS(thisPrefLabel))
                 relativesResult = requests.get(self.getRelatives + self.conceptSuffix + conceptUri)
                 if relativesResult.status_code < 300:
                     relativesJson = relativesResult.json()
@@ -88,7 +92,7 @@ class Gemet(ThesauriBase):
 
 
 if __name__ == '__main__':
-    g = Gemet('lake', 'en')
+    g = Gemet('shop', 'en')
 
     print "Related: "
     for related in g.getRelated():

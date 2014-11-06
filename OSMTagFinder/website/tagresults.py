@@ -5,6 +5,8 @@ Created on 20.10.2014
 @author: Simon Gwerder
 '''
 
+from rdflib import Literal
+
 from utilities.configloader import ConfigLoader
 
 
@@ -38,6 +40,14 @@ class TagResults:
             retList.append(str(item))
         return retList
 
+    def genToLangDict(self, generator):
+        retDict = {}
+        for item in generator:
+            print item
+            print item.language
+            retDict[item.language] = item
+        return retDict;
+
     def genGetFirstItem(self, generator):
         try:
             firstItem = generator.next()
@@ -66,7 +76,7 @@ class TagResults:
             tag['prefLabel'] = self.genGetFirstItem(prefLabelGen)
             tag['broader']   = self.genToList(broaderGen)
             tag['narrower'] = self.genToList(narrowerGen)
-            tag['scopeNote'] = self.genToList(scopeNoteGen)
+            tag['scopeNote'] = self.genToLangDict(scopeNoteGen)
             tag['depiction'] = self.genGetFirstItem(depictionGen)
             tag['countNodes']= self.genGetFirstItem(osmNodeGen)
             tag['countWays'] = self.genGetFirstItem(osmWayGen)

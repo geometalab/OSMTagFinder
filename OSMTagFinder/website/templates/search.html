@@ -41,10 +41,11 @@
                         {% endif %}
                         <div id="tag_panel" class="panel {{ panel_type }}">
                             <div class="panel-heading">
-                                <a target="_tag" href="{{ result['subject'] }}"><b>{{ result['prefLabel'] }}</b></a>
                                 {% if result['isTag'] %}
+                                    <a target="_tag" href="{{ result['subject'] }}"><b>{{ result['prefLabel'] }}</b></a>
                                     <span class="label label-success">{{ result['countAll'] }}</span>
                                  {% else %}
+                                 <a target="_tag" href="{{ result['subject'] }}"><b>{{ result['prefLabel'] }}=✲</b></a> <!--✱✲-->
                                     <span class="label label-info">{{ result['countAll'] }}</span>
                                  {% endif %}
                             </div>
@@ -71,9 +72,8 @@
                                             <div id="description_text">
                                                 <h5 lang="en"><b>Description</b></h5>
                                                 <h5 lang="de"><b>Beschreibung</b></h5>
-                                                {% for scopeNote in result['scopeNote'] %}
-                                                    <p>{{ scopeNote }}</p>
-                                                {% endfor %}
+                                                <p lang="en">{{ result['scopeNote']['en'] }}</p>
+                                                <p lang="de">{{ result['scopeNote']['de'] }}</p>
                                             </div>
                                         </div>
                                     </div>

@@ -25,6 +25,7 @@ class GraphSearch:
         word = word.replace(',', ' ')
         word = word.replace(';', ' ')
         word = word.replace(' = ', '=')
+        word = utils.eszettToSS(word)
         return word
 
     def search(self, word, includeScopeNote=False, translateDEToEN=False):
@@ -107,7 +108,7 @@ if __name__ == '__main__':
         rawResults = gs.extendedSearch(word)
         searchResults = TagResults(rdfGraph, rawResults)
         for item in searchResults.getResults():
-            print '\t' + item
+            print '\t' + str(item)
 
 
 

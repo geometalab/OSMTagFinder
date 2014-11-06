@@ -7,7 +7,6 @@ Created on 08.10.2014
 
 import re
 import os
-from collections import defaultdict
 
 _invalidChars = [' ', ';']
 _dataFolderName = 'data'
@@ -66,75 +65,16 @@ def hasSS(word):
     return 'ss' in word
 
 def eszettToSS(word):
-    return word.replace('ß', 'ss')
+    if word is not None:
+        return word.replace('ß', 'ss')
 
 def ssToEszett(word):
-    return word.replace('ss', 'ß')
+    if word is not None:
+        return word.replace('ss', 'ß')
 
 _digits = re.compile('\d')
 def containsDigits(d):
     return bool(_digits.search(d))
-
-def etreeToDict(t):
-    d = {t.tag: {} if t.attrib else None}
-    children = list(t)
-    if children:
-        dd = defaultdict(list)
-        for dc in map(etreeToDict, children):
-            for k, v in dc.iteritems():
-                dd[k].append(v)
-        d = {t.tag: {k:v[0] if len(v) == 1 else v for k, v in dd.iteritems()}}
-    if t.attrib:
-        d[t.tag].update(('@' + k, v) for k, v in t.attrib.iteritems())
-    if t.text:
-        text = t.text.strip()
-        if children or t.attrib:
-            if text:
-                d[t.tag]['#text'] = text
-        else:
-            d[t.tag] = text
-    return d
-
-def itersubclasses(cls, _seen=None):
-    """
-    itersubclasses(cls)
-
-    Generator over all subclasses of a given class, in depth first order.
-
-    >>> list(itersubclasses(int)) == [bool]
-    True
-    >>> class A(object): pass
-    >>> class B(A): pass
-    >>> class C(A): pass
-    >>> class D(B,C): pass
-    >>> class E(D): pass
-    >>>
-    >>> for cls in itersubclasses(A):
-    ...     print(cls.__name__)
-    B
-    D
-    E
-    C
-    >>> # get ALL (new-style) classes currently defined
-    >>> [cls.__name__ for cls in itersubclasses(object)] #doctest: +ELLIPSIS
-    ['type', ...'tuple', ...]
-    """
-
-    if not isinstance(cls, type):
-        raise TypeError('itersubclasses must be called with '
-                        'new-style classes, not %.100r' % cls)
-    if _seen is None: _seen = set()
-    try:
-        subs = cls.__subclasses__()
-    except TypeError: # fails only when cls is type
-        subs = cls.__subclasses__(cls)
-    for sub in subs:
-        if sub not in _seen:
-            _seen.add(sub)
-            yield sub
-            for sub in itersubclasses(sub, _seen):
-                yield sub
-
 
 
 

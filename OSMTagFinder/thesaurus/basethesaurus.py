@@ -17,6 +17,8 @@ from externalapi.taginfo import TagInfo
 from externalapi.tagstats import TagStats
 from utilities.translator import Translator
 
+from externalapi.thesauri import Thesauri
+
 class BaseThesaurus:
 
     graph = RDFGraph()
@@ -56,7 +58,7 @@ class BaseThesaurus:
 
         self.createGraph(keyList, tagMap)
 
-        self.graph.serialize(self.outputFile(self.outputName, self.outputEnding, hasDateEnding=True))
+        self.graph.serialize(self.outputFile(self.outputName, self.outputEnding, useDateEnding=True))
 
     def numberTags(self, tagMap):
         '''Returns number of tags in 'tagMap'.'''
@@ -166,6 +168,7 @@ class BaseThesaurus:
         keyConcept = self.graph.addConcept(self.osmWikiBase + 'Key:' + key)
         self.graph.addInScheme(keyConcept, keyScheme)
         self.graph.addPrefLabel(keyConcept, key)
+
         self.addStats(keyConcept, key)
         # graph.addHasTopConcept(keyScheme, keyConcept)
 
@@ -188,6 +191,7 @@ class BaseThesaurus:
             self.graph.addPrefLabel(tagConcept, key + '=' + value)
             self.graph.addBroader(tagConcept, keyConcept)
             self.graph.addNarrower(keyConcept, tagConcept)
+
             self.addStats(tagConcept, key, value)
 
             self.addImageScopeNote(tagConcept, tagWikiPageJson)
@@ -207,10 +211,10 @@ class BaseThesaurus:
             for value in valueList:
                 self.createTag(key, keyConcept, value, tagScheme)
 
-    def outputFile(self, outputName, outputEnding, hasDateEnding):
-        '''Returns full file path. If 'hasDateEnding' is True, a date postfix is added between
+    def outputFile(self, outputName, outputEnding, useDateEnding):
+        '''Returns full file path. If 'useDateEnding' is True, a date postfix is added between
            the filename and ending, of the form '_yymmdd'.'''
-        if hasDateEnding:
+        if useDateEnding:
             dateString = datetime.date.today().isoformat()
             dateString = dateString.replace('-', '')
             dateString = dateString[2:]  # substring from incl. 3rd char to end of string
@@ -225,7 +229,7 @@ if __name__ == '__main__':
         try:
             bt = BaseThesaurus()
             retry = False
-        except ConnectionError  as ce:
+        except ConnectionError as ce:
             print(ce)
             print('Retrying creating BaseGraph')
 

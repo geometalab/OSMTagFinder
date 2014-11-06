@@ -29,6 +29,9 @@ class Altervista(ThesauriBase):
 
     def __init__(self, searchTerm, language):
         ThesauriBase.__init__(self, searchTerm, language)
+        self.relatedSet = OrderedSet()
+        self.broaderSet = OrderedSet()
+        self.narrowerSet = OrderedSet()
         self.supportedLang.append('de')
         self.supportedLang.append('en')
 

@@ -25,6 +25,9 @@ class WordnikApi(ThesauriBase):
 
     def __init__(self, searchTerm, language):
         ThesauriBase.__init__(self, searchTerm, language)
+        self.relatedSet = OrderedSet()
+        self.broaderSet = OrderedSet()
+        self.narrowerSet = OrderedSet()
         self.supportedLang.append('en')
 
         if language in self.supportedLang:
@@ -32,18 +35,19 @@ class WordnikApi(ThesauriBase):
                 client = swagger.ApiClient(self.apiKey, self.apiUrl)
                 wordApi = WordApi.WordApi(client)
                 relatedWords = wordApi.getRelatedWords(word)
-                for related in relatedWords:
-                    relationship = related.relationshipType
-                    if ('equivalent' in relationship or 'synonym' in relationship
-                    or 'verb-form' in relationship or 'form' in relationship):
-                        for word in related.words:
-                            self.relatedSet.append(utils.eszettToSS(word))
-                    if('hypernym' in relationship):
-                        for word in related.words:
-                            self.broaderSet.append(utils.eszettToSS(word))
-                    if('hyponym' in relationship):
-                        for word in related.words:
-                            self.narrowerSet.append(utils.eszettToSS(word))
+                if relatedWords is not None:
+                    for related in relatedWords:
+                        relationship = related.relationshipType
+                        if ('equivalent' in relationship or 'synonym' in relationship
+                        or 'verb-form' in relationship or 'form' in relationship):
+                            for word in related.words:
+                                self.relatedSet.append(utils.eszettToSS(word))
+                        if('hypernym' in relationship):
+                            for word in related.words:
+                                self.broaderSet.append(utils.eszettToSS(word))
+                        if('hyponym' in relationship):
+                            for word in related.words:
+                                self.narrowerSet.append(utils.eszettToSS(word))
 
     def getRelated(self):
         return self.relatedSet

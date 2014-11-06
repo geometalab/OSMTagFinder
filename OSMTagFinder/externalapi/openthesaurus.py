@@ -25,6 +25,9 @@ class OpenThesaurus(ThesauriBase):
 
     def __init__(self, searchTerm, language):
         ThesauriBase.__init__(self, searchTerm, language)
+        self.relatedSet = OrderedSet()
+        self.broaderSet = OrderedSet()
+        self.narrowerSet = OrderedSet()
         self.supportedLang.append('de')
 
         if language in self.supportedLang:

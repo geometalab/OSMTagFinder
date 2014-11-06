@@ -59,19 +59,25 @@ class Thesauri:
 
 
 if __name__ == '__main__':
-    t = Thesauri('Fahrrad', 'de')
+    t = Thesauri('railway', 'en')
 
     print "Related: "
+    relatedStr = ''
     for related in t.getRelated():
-        print related
+        relatedStr = relatedStr + related + ', '
+    print relatedStr
 
     print "\nNarrower: "
+    narrowerStr = ''
     for narrower in t.getNarrower():
-        print narrower
+        narrowerStr = narrowerStr + narrower + ', '
+    print narrowerStr
 
     print "\nBroader: "
+    broaderStr = ''
     for broader in t.getBroader():
-        print broader
+        broaderStr = broaderStr + broader + ', '
+    print broaderStr
 
 
 

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xml:lang="de"
+         xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+         xmlns:rdfs='http://www.w3.org/2000/01/rdf-schema#'
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns="http://www.eionet.europa.eu/gemet/2004/06/gemet-schema.rdf#"
+         xml:base="http://www.eionet.europa.eu/gemet/">
+
+
+    <rdf:Description rdf:about="supergroup/2894">
+    <rdfs:label>SOZIALE ASPEKTE, UMWELTPOLITISCHE MASSNAHMEN</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="supergroup/4044">
+    <rdfs:label>ANTHROPOGENE AKTIVITÄTEN UND PRODUKTE, WIRKUNGEN AUF DIE UMWELT</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="supergroup/5306">
+    <rdfs:label>ZUSATZVERZEICHNISSE</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="supergroup/5499">
+    <rdfs:label>NATÜRLICHE UND ANTHROPOGEN ÜBERFORMTE UMWELT</rdfs:label>
+    </rdf:Description>
+
+
+
+    <rdf:Description rdf:about="group/10111">
+    <rdfs:label>UMWELT (natürliche und anthropogen überformte Umwelt)</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/10112">
+    <rdfs:label>PRODUKTE, MATERIALIEN, WERKSTOFFE</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/10114">
+    <rdfs:label>BELASTUNGEN UND AUSWIRKUNGEN</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/10117">
+    <rdfs:label>ALLGEMEINE UND ÜBEGREIFENDE BEGRIFFE</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/10118">
+    <rdfs:label>RESSOURCENNUTZUNG</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/1062">
+    <rdfs:label>URBANE UMWELT, BAUWERKE, MATERIELLE MASSNAHMEN</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/13109">
+    <rdfs:label>UMWELTPOLITIK, UMWELTSCHUTZGESETZGEBUNG</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/1349">
+    <rdfs:label>CHEMISCHE STOFFE UND PROZESSE</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/14979">
+    <rdfs:label>ZEITLICHER ASPEKT</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/14980">
+    <rdfs:label>HILFSBEGRIFFE</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/1922">
+    <rdfs:label>INFORMATION, AUSBILDUNG, KULTUR</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/234">
+    <rdfs:label>LANDWIRTSCHAFT, FORSTWIRTSCHAFT, VIEHZUCHT,  UND FISCHEREI</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/2504">
+    <rdfs:label>ÖKONOMIE UND FINANZEN</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/2711">
+    <rdfs:label>ENERGIE</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/3875">
+    <rdfs:label>GESUNDHEIT, ERNÄHRUNG</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/4125">
+    <rdfs:label>HYDROSPHÄRE</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/4281">
+    <rdfs:label>TECHNISCHE VERFAHREN UND PROZESSE, EINRICHTUNGEN</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/4630">
+    <rdfs:label>LANDSCHAFT, GEOGRAPHIE</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/4750">
+    <rdfs:label>ÜBEREINKOMMEN, NORMEN, RECHTSVORSCHRIFTEN UND RECHTSAUSLEGUNG</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/4856">
+    <rdfs:label>LITHOSPHÄRE, BÖDEN</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/618">
+    <rdfs:label>ATMOSPHÄRE UND KLIMA</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/6237">
+    <rdfs:label>PHYSIKALISCHE ERSCHEINUNGEN UND PROZESSE</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/7007">
+    <rdfs:label>ERHOLUNG, FREIZEIT, FREMDENVERKEHR</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/7136">
+    <rdfs:label>WISSEN, WISSENSCHAFT, FORSCHUNG, INFORMATIONSGEWINNUNG</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/7243">
+    <rdfs:label>RISIKEN, SICHERHEIT</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/7779">
+    <rdfs:label>GESELLSCHAFT UND SOZIALES</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/7956">
+    <rdfs:label>ERDE UND WELTRAUM</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/8575">
+    <rdfs:label>HANDEL, GEWERBE UND DIENSTLEISTUNGEN</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/8603">
+    <rdfs:label>VERKEHR UND TRANSPORT</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/893">
+    <rdfs:label>BIOSPHÄRE- BIOLOGISCHE SYSTEME UND PROZESSE</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/9117">
+    <rdfs:label>SCHADSTOFFE UND ABFÄLLE, UMWELTVERSCHMUTZUNG</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="group/96">
+    <rdfs:label>VERWALTUNG, ORGANISATION, INSTITUTION, PLANUNG, POLITIK UND -VOLLZUG, IMMATERIELLE MASSNAHMEN</rdfs:label>
+    </rdf:Description>
+
+
+
+    <rdf:Description rdf:about="theme/1">
+    <rdfs:label>Verwaltung, Organisation, Institutionen, Planung, Politik und -vollzug, immaterielle Massnahmen</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/10">
+    <rdfs:label>Energie</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/11">
+    <rdfs:label>Umweltpolitik</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/12">
+    <rdfs:label>Fischerei</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/13">
+    <rdfs:label>Nahrungsmittel, Trinkwasser</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/14">
+    <rdfs:label>Forstwirtschaft</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/15">
+    <rdfs:label>Allgemeine Angelegenheiten</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/16">
+    <rdfs:label>Geographie</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/17">
+    <rdfs:label>Gesundheit, Hygiene, Ernährung</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/18">
+    <rdfs:label>Tierzucht</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/19">
+    <rdfs:label>Industrie, Aktivitäten und Prozesse</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/2">
+    <rdfs:label>Landwirtschaft</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/20">
+    <rdfs:label>Information, Ausbildung, Kultur</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/21">
+    <rdfs:label>Gesetzgebung</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/22">
+    <rdfs:label>Militär und Umwelt</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/23">
+    <rdfs:label>Natürliche Lebensräume, Landschaft, Ökosysteme</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/24">
+    <rdfs:label>Lärm, Erschütterungen</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/25">
+    <rdfs:label>Physikalische Erscheinungen und Prozesse</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/26">
+    <rdfs:label>Umweltverschmutzung, Schadstoffe</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/27">
+    <rdfs:label>Produkte, Materialien, Werkstoffe</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/28">
+    <rdfs:label>Strahlungen</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/29">
+    <rdfs:label>Tourismus und Freizeit</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/3">
+    <rdfs:label>Luft, Atmosphäre</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/30">
+    <rdfs:label>Wissen, Wissenschaft, Forschung, Informationsgewinnung</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/31">
+    <rdfs:label>Ressourcen, Ressourcennutzung</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/32">
+    <rdfs:label>Katastrophen, Unfälle, Risiken</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/33">
+    <rdfs:label>Handel, Dienstleistungen</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/34">
+    <rdfs:label>Soziale Aspekte, Bevölkerung</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/35">
+    <rdfs:label>Boden</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/36">
+    <rdfs:label>Weltraum</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/37">
+    <rdfs:label>Verkehr</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/38">
+    <rdfs:label>Urbane Umwelt, urbane Belastungen</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/39">
+    <rdfs:label>Abfall</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/4">
+    <rdfs:label>Biosphäre - Organismen, biologische Systeme und Prozesse</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/40">
+    <rdfs:label>Wasser</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/5">
+    <rdfs:label>Bauwesen und gebaute Umwelt</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/6">
+    <rdfs:label>Chemische Stoffe und Prozesse</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/7">
+    <rdfs:label>Klima</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/8">
+    <rdfs:label>Naturprozesse, Naturereignisse</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="theme/9">
+    <rdfs:label>Wirtschaft, Ökonomie und Finanzen</rdfs:label>
+    </rdf:Description>
+
+</rdf:RDF>
