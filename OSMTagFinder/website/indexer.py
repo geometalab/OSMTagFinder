@@ -21,11 +21,11 @@ class Indexer:
 
     __writer = None
 
-    def __init__(self, rdfgraph):
+    def __init__(self, rdfGraph):
         self.createNewIndex()
 
         count = 0
-        for subject, predicate, obj in rdfgraph.graph:
+        for subject, predicate, obj in rdfGraph.graph:
             if predicate == SKOS.prefLabel:
                 print str(count) + ': Indexing prefLabel: ' + str(obj)
                 count += 1
@@ -76,7 +76,7 @@ class Indexer:
 
 
 if __name__ == '__main__':
-    rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141106.rdf')
+    rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141107.rdf')
     Indexer(rdfGraph)
 
 

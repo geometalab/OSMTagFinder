@@ -1,77 +1,115 @@
 .jumbotron {
   padding-top: 5px;
   padding-bottom: 55px;
-  margin-bottom: 50px;
+  margin-bottom: 18px;
+  background-color: rgb(223, 240, 216)
 }
 
 #tag_panel {
-    margin-bottom: 40px;
+    margin-top: 0px;
+    margin-left: 18px;
+    margin-right: 15px;
+    margin-bottom: 60px;
 }
 
-.label {
-    font-size: 14pt;
-    float: right
+#tag_body {
+    margin-left: 11px;
+    margin-right: 15px;
+}
+
+#tagstats_box {
+    margin-top: 9px;
+    min-height:160px;
+    height:160px;
+    min-width:auto;
+    width:auto;
+    float: right;
+}
+
+#tagstats_text {
+    float: left;
+}
+
+td {
+    padding: 4px;
+    color: black;
+    font-size: 15px;
+}
+
+table td:last-child {
+  border-left: 10;
+  text-align: right;
+  border-left:solid 10px transparent;
+}
+
+a:link {
+    text-decoration: none
 }
 
 #no_depiction_tag {
+    margin-top: 9px;
     min-height:160px;
     height:160px;
     min-width:210px;
     width:210px;
-    margin-right: 10px;
-    margin-bottom: 1px;
-    float: left;
+    margin-right: 0px;
+    margin-left: 10px;
+    float: right;
 }
 
 #no_depiction_key {
+    margin-top: 9px;
     min-height:160px;
     height:160px;
     min-width:210px;
     width:210px;
-    margin-right: 10px;
-    margin-bottom: 1px;
-    float: left;
+    margin-right: 0px;
+    margin-left: 10px;
+    float: right;
 }
 
 #depiction {
+    margin-top: 9px;
     min-height:160px;
     height:160px;
     min-width:210px;
     width:210px;
-    margin-right: 10px;
-    margin-bottom: 1px;
-    float: left;
-}
-
-#description_box {
-    min-height:160px;
-    min-width:210px;
-    width:210px;
-    margin-right: 10px;
-    margin-left: 5px;
-    margin-bottom: 1px;
-    float: left;
+    margin-right: 0px;
+    margin-left: 10px;
+    float: right;
 }
 
 #description_text > h5 {
     margin-top: 0px;
-    margin-left: 3px;
-    margin-bottom: 3px;
-}
-
-#description_text > p {
-    margin-top: 0px;
-    margin-left: 3px;
-    margin-bottom: 3px;
-}
-
-#description_title_de {
-    margin-top: 0px;
-    margin-right: 0px;
+    margin-left: -15px;
+    margin-bottom: 5px;
+    line-height: 1.4em
 }
 
 a {
     font-size: 20px;
+}
+
+.found {
+    font-size: 16px;
+    margin-left: 15px;
+    margin-bottom: 40px;
+}
+
+.none_found {
+    font-size: 16px;
+    margin-left: 15px;
+}
+
+.suggestion_header {
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 6px;
+}
+
+#suggestion_list {
+    padding-left: 13px;
+    margin-left: 15px;
 }
 
 

@@ -7,7 +7,6 @@ Created on 27.09.2014
 
 from requests.exceptions import ConnectionError
 import timeit
-import datetime
 
 from filter import Filter
 from utilities import utils
@@ -58,7 +57,7 @@ class BaseThesaurus:
 
         self.createGraph(keyList, tagMap)
 
-        self.graph.serialize(self.outputFile(self.outputName, self.outputEnding, useDateEnding=True))
+        self.graph.serialize(utils.outputFile(self.outputName, self.outputEnding, useDateEnding=True))
 
     def numberTags(self, tagMap):
         '''Returns number of tags in 'tagMap'.'''
@@ -157,11 +156,32 @@ class BaseThesaurus:
             self.graph.addDepiction(concept, depiction)
             print '\t\t' + depiction
 
-    def addStats(self, concept, key, value=None):
-        tagStats = TagStats(key, value)
-        self.graph.addOSMNode(concept, tagStats.getCountNodes())
-        self.graph.addOSMWay(concept, tagStats.getCountWays())
-        self.graph.addOSMRelation(concept, tagStats.getCountRelations())
+    def addStats(self, concept, key, value=None, wikiPageJson=None):
+        tagStats = TagStats(key=key, value=value, wikiPageJson=wikiPageJson)
+
+        if value is None:
+            nodeStr = '{ "count": "' + str(tagStats.getCountNodes()) + '", "use": "false" }'
+            wayStr = '{ "count": "' + str(tagStats.getCountWays()) + '", "use": "false" }'
+            areaStr = '{ "count": "0", "use": "false" }'
+            relationStr = '{ "count": "' + str(tagStats.getCountRelations()) + '", "use": "false" }'
+        else:
+            onNode =  tagStats.getOnNode()
+            onWay = tagStats.getOnWay()
+            onRelation = tagStats.getOnRelation()
+            if not onNode and not onWay and not onRelation:
+                onArea = True
+            else:
+                onArea = tagStats.getOnArea()
+
+            nodeStr = '{ "count": "' + str(tagStats.getCountNodes()) + '", "use": "' + str(onNode).lower() + '" }'
+            wayStr = '{ "count": "' + str(tagStats.getCountWays()) + '", "use": "' + str(onWay).lower() + '" }'
+            areaStr = '{ "count": "0"' + ', "use": "' + str(onArea).lower() + '" }'
+            relationStr = '{ "count": "' + str(tagStats.getCountRelations()) + '", "use": "' + str(onRelation).lower() + '" }'
+
+        self.graph.addOSMNode(concept, nodeStr)
+        self.graph.addOSMWay(concept, wayStr)
+        self.graph.addOSMArea(concept, areaStr)
+        self.graph.addOSMRelation(concept, relationStr)
 
     def createKey(self, key, keyScheme):
         '''Adds key with name 'key' to the graph, with as much wiki information as possible.'''
@@ -169,11 +189,11 @@ class BaseThesaurus:
         self.graph.addInScheme(keyConcept, keyScheme)
         self.graph.addPrefLabel(keyConcept, key)
 
-        self.addStats(keyConcept, key)
         # graph.addHasTopConcept(keyScheme, keyConcept)
 
         keyWikiPageJson = self.tagInfo.getWikiPageOfKey(key)
         if len(keyWikiPageJson) > 0:
+            self.addStats(concept=keyConcept, key=key, wikiPageJson=keyWikiPageJson)
             self.addImageScopeNote(keyConcept, keyWikiPageJson)
 
 
@@ -192,7 +212,7 @@ class BaseThesaurus:
             self.graph.addBroader(tagConcept, keyConcept)
             self.graph.addNarrower(keyConcept, tagConcept)
 
-            self.addStats(tagConcept, key, value)
+            self.addStats(concept=tagConcept, key=key, value=value, wikiPageJson=tagWikiPageJson)
 
             self.addImageScopeNote(tagConcept, tagWikiPageJson)
 
@@ -210,17 +230,6 @@ class BaseThesaurus:
                 continue
             for value in valueList:
                 self.createTag(key, keyConcept, value, tagScheme)
-
-    def outputFile(self, outputName, outputEnding, useDateEnding):
-        '''Returns full file path. If 'useDateEnding' is True, a date postfix is added between
-           the filename and ending, of the form '_yymmdd'.'''
-        if useDateEnding:
-            dateString = datetime.date.today().isoformat()
-            dateString = dateString.replace('-', '')
-            dateString = dateString[2:]  # substring from incl. 3rd char to end of string
-            return utils.dataDir() + outputName + '_' + dateString + outputEnding
-        else:
-            return utils.dataDir() + outputName + outputEnding
 
 if __name__ == '__main__':
     startTime = timeit.default_timer()

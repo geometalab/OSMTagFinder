@@ -5,9 +5,8 @@ Created on 20.10.2014
 @author: Simon Gwerder
 '''
 
-from rdflib import Literal
-
 from utilities.configloader import ConfigLoader
+from utilities import utils
 
 
 class TagResults:
@@ -34,26 +33,7 @@ class TagResults:
         tagScheme = self.cl.getThesaurusString('TAG_SCHEME_NAME')
         return rdfGraph.isInScheme(subject, tagScheme)
 
-    def genToList(self, generator):
-        retList = []
-        for item in generator:
-            retList.append(str(item))
-        return retList
 
-    def genToLangDict(self, generator):
-        retDict = {}
-        for item in generator:
-            print item
-            print item.language
-            retDict[item.language] = item
-        return retDict;
-
-    def genGetFirstItem(self, generator):
-        try:
-            firstItem = generator.next()
-        except StopIteration:
-            return None
-        return str(firstItem)
 
     def fillResultList(self, rdfGraph, rawResults):
         for subject in rawResults:
@@ -66,22 +46,25 @@ class TagResults:
             depictionGen = rdfGraph.getDepiction(subject)
             osmNodeGen = rdfGraph.getOSMNode(subject)
             osmWayGen = rdfGraph.getOSMWay(subject)
+            osmAreaGen = rdfGraph.getOSMArea(subject)
             osmRelationGen = rdfGraph.getOSMRelation(subject)
+            default = { 'count' : '0', 'use' : 'false' }
 
             tag['subject'] = str(subject)
 
             tag['isKey'] = self.isKey(rdfGraph, subject)
             tag['isTag'] = self.isTag(rdfGraph, subject)
 
-            tag['prefLabel'] = self.genGetFirstItem(prefLabelGen)
-            tag['broader']   = self.genToList(broaderGen)
-            tag['narrower'] = self.genToList(narrowerGen)
-            tag['scopeNote'] = self.genToLangDict(scopeNoteGen)
-            tag['depiction'] = self.genGetFirstItem(depictionGen)
-            tag['countNodes']= self.genGetFirstItem(osmNodeGen)
-            tag['countWays'] = self.genGetFirstItem(osmWayGen)
-            tag['countRelations'] = self.genGetFirstItem(osmRelationGen)
-            tag['countAll'] = str(int(tag['countNodes']) + int(tag['countWays']) + int(tag['countRelations']))
+            tag['prefLabel'] = utils.genGetFirstItem(prefLabelGen)
+            tag['broader']   = utils.genToList(broaderGen)
+            tag['narrower'] = utils.genToList(narrowerGen)
+            tag['scopeNote'] = utils.genToLangDict(scopeNoteGen)
+            tag['depiction'] = utils.genGetFirstItem(depictionGen)
+            tag['node']= utils.genJsonToDict(osmNodeGen, default)
+            tag['way'] = utils.genJsonToDict(osmWayGen, default)
+            tag['area'] = utils.genJsonToDict(osmAreaGen, default)
+            tag['relation'] = utils.genJsonToDict(osmRelationGen, default)
+            tag['countAll'] = str(int(tag['node']['count']) + int(tag['way']['count']) + int(tag['relation']['count']) + int(tag['area']['count']))
 
             self.results.append(tag)
 

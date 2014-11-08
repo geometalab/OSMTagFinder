@@ -26,7 +26,11 @@ class RDFGraph:
     osm = Namespace(cl.getThesaurusString('OSM_WIKI_PAGE'))
     osmNode = osm[cl.getThesaurusString('OSM_NODE')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/Node')
     osmWay = osm[cl.getThesaurusString('OSM_WAY')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/Way')
+    osmArea = osm[cl.getThesaurusString('OSM_AREA')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/Area')
     osmRelation = osm[cl.getThesaurusString('OSM_RELATION')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/Relation')
+    osmImplies = osm[cl.getThesaurusString('OSM_IMPLIES')]
+    osmCombination = osm[cl.getThesaurusString('OSM_COMBINATION')]
+    osmLinked = osm[cl.getThesaurusString('OSM_LINKED')]
 
     def __init__ (self, filePath=None):
         if filePath is not None:
@@ -95,6 +99,10 @@ class RDFGraph:
         self.graph.add((URIRef(subject), SKOS.related, URIRef(obj)))
         return subject
 
+    def addRelatedMatch(self, subject, obj):
+        self.graph.add((URIRef(subject), SKOS.relatedMatch, URIRef(obj)))
+        return subject
+
     def addDepiction(self, subject, obj):
         self.graph.add((URIRef(subject), FOAF.depiction, URIRef(obj)))
         return subject
@@ -104,15 +112,19 @@ class RDFGraph:
         return subject
 
     def addOSMNode(self, subject, obj):
-        self.graph.add((URIRef(subject), self.osmNode, Literal(obj, datatype=XSD.integer)))
+        self.graph.add((URIRef(subject), self.osmNode, Literal(obj)))
         return subject
 
     def addOSMWay(self, subject, obj):
-        self.graph.add((URIRef(subject), self.osmWay, Literal(obj, datatype=XSD.integer)))
+        self.graph.add((URIRef(subject), self.osmWay, Literal(obj)))
+        return subject
+
+    def addOSMArea(self, subject, obj):
+        self.graph.add((URIRef(subject), self.osmArea, Literal(obj)))
         return subject
 
     def addOSMRelation(self, subject, obj):
-        self.graph.add((URIRef(subject), self.osmRelation, Literal(obj, datatype=XSD.integer)))
+        self.graph.add((URIRef(subject), self.osmRelation, Literal(obj)))
         return subject
 
     def tripplesCount(self):
@@ -176,12 +188,20 @@ class RDFGraph:
         generatorList = self.graph.objects(URIRef(subject), SKOS.related)
         return generatorList
 
+    def getRelatedMatch(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), SKOS.relatedMatch)
+        return generatorList
+
     def getOSMNode(self, subject):
         generatorList = self.graph.objects(URIRef(subject), self.osmNode)
         return generatorList
 
     def getOSMWay(self, subject):
         generatorList = self.graph.objects(URIRef(subject), self.osmWay)
+        return generatorList
+
+    def getOSMArea(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), self.osmArea)
         return generatorList
 
     def getOSMRelation(self, subject):
@@ -214,6 +234,8 @@ if __name__ == '__main__':
     r.addNarrower(animals, mammals)
     r.addBroader(mammals, animals)
     r.addHasTopConcept(keyScheme, animals)
+
+    r.addRelatedMatch(animals, mammals)
 
     plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')
     print r.graph.serialize(format='skos', encoding=r.encoding)

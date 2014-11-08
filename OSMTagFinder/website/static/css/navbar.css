@@ -5,6 +5,8 @@ body {
 
 .navbar {
   margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .dropdown-menu {

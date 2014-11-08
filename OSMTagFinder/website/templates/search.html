@@ -14,68 +14,111 @@
     <div class="container">
         <div class ="row">
             <div class="col-lg-20 col-md-20">
-                <div class="jumbotron">
-                    <h3><b>Tag Finder</b></h3>
-                    <p></p>
-                    <form action="/search" method="get">
-                        <div class="input-group input-group-lg">
-                            <input type="text" value="{{ q }}" name="q" class="form-control" >
-                            <span class="input-group-btn">
-                                <button class="btn btn-success btn-lg" type="submit" lang="en">Search</button>
-                                <button class="btn btn-success btn-lg" type="submit" lang="de">Suchen</button>
-                            </span>
-                        </div><!-- /input-group -->
-                    </form>
+                <div class="container">
+                    <div class="jumbotron">
+                        <h3><b>Tag Finder</b></h3>
+                        <p></p>
+                        <form action="/search" method="get">
+                            <div class="input-group input-group-lg">
+                                <input type="text" value="{{ q }}" name="q" class="form-control" >
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success btn-lg" type="submit" lang="en">Search</button>
+                                    <button class="btn btn-success btn-lg" type="submit" lang="de">Suchen</button>
+                                </span>
+                            </div><!-- /input-group -->
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
         <p></p>
         {% if results %}
+            <h5 lang="en" class="found">Found <b>{{ results|count }}</b> Open Street Map tags.</h5>
+            <h5 lang="de" class="found">Es wurden <b>{{ results|count }}</b> Open Street Map Tags gefunden.</h5>
             {% for result in results %}
+                <hr>
                 <div class ="row">
                     <div class="col-lg-20 col-md-20">
-                        {% if result['isTag'] %}
-                            {% set panel_type = "panel-success" %}
-                        {% else %}
-                            {% set panel_type = "panel-info" %}
-                        {% endif %}
-                        <div id="tag_panel" class="panel {{ panel_type }}">
-                            <div class="panel-heading">
-                                {% if result['isTag'] %}
-                                    <a target="_tag" href="{{ result['subject'] }}"><b>{{ result['prefLabel'] }}</b></a>
-                                    <span class="label label-success">{{ result['countAll'] }}</span>
-                                 {% else %}
-                                 <a target="_tag" href="{{ result['subject'] }}"><b>{{ result['prefLabel'] }}=✲</b></a> <!--✱✲-->
-                                    <span class="label label-info">{{ result['countAll'] }}</span>
-                                 {% endif %}
-                            </div>
-                            <div class="panel-body">
-                                {% if result['depiction'] is none %}
-                                    {% if result['isTag'] %}
-                                        <a id="no_depiction_tag" class="thumbnail">
-                                            <p><img src="{{ url_for('static', filename='img/kv200_150_gray.png') }}" alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
-                                        </a>
+                        <div id="tag_panel">
+                            <div id="tag_body">
+                                <div class="col-lg-20 col-md-20">
+                                    {% if result['depiction'] is none %}
+                                        {% if result['isTag'] %}
+                                            <a id="no_depiction_tag" class="thumbnail">
+                                                <p><img src="{{ url_for('static', filename='img/kv200_150_gray.png') }}" alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
+                                            </a>
+                                        {% else %}
+                                            <a id="no_depiction_key" class="thumbnail">
+                                                <p><img src="{{ url_for('static', filename='img/k200_150_gray.png') }}" alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
+                                            </a>
+                                        {% endif %}
                                     {% else %}
-                                        <a id="no_depiction_key" class="thumbnail">
-                                            <p><img src="{{ url_for('static', filename='img/k200_150_gray.png') }}" alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
+                                        <a id="depiction" target="_tag" href="{{ result['depiction'] }}" class="thumbnail">
+                                            <p><img src="{{ result['depiction'] }}" alt="{{ result['prefLabel'] }}" align="left" width="200" height="150"></p>
                                         </a>
                                     {% endif %}
-                                {% else %}
-                                    <a id="depiction" target="_tag" href="{{ result['depiction'] }}" class="thumbnail">
-                                        <p><img src="{{ result['depiction'] }}" alt="{{ result['prefLabel'] }}" align="left" width="200" height="150"></p>
-                                    </a>
-                                {% endif %}
+                                    {% if result['isTag'] %}
+                                        {% set taginfo_baseurl = "https://taginfo.openstreetmap.org/tags/" %}
+                                        {% set srcNode =     ["static/img/osm_node_", result['node']['use'], ".png"]|join %}
+                                        {% set srcWay =      ["static/img/osm_way_", result['way']['use'], ".png"]|join %}
+                                        {% set srcArea =     ["static/img/osm_area_", result['area']['use'], ".png"]|join %}
+                                        {% set srcRelation = ["static/img/osm_relation_", result['relation']['use'], ".png"]|join %}
+                                    {% else %}
+                                        {% set taginfo_baseurl = "https://taginfo.openstreetmap.org/keys/" %}
+                                        {% set srcNode =     "static/img/osm_node_unspec.png" %}
+                                        {% set srcWay =      "static/img/osm_way_unspec.png" %}
+                                        {% set srcArea =     "static/img/osm_area_unspec.png" %}
+                                        {% set srcRelation = "static/img/osm_relation_unspec.png" %}
+                                    {% endif %}
+                                    <a id="tagstats_box" target="_tag" href="{{ taginfo_baseurl}}{{ result['prefLabel'] }}" class="thumbnail">
+                                         <table>
 
-                                <div class="row">
-                                    <div class="col-lg-20 col-md-20">
-                                        <div id="description_box" class="thumbnail">
-                                            <div id="description_text">
-                                                <h5 lang="en"><b>Description</b></h5>
-                                                <h5 lang="de"><b>Beschreibung</b></h5>
-                                                <p lang="en">{{ result['scopeNote']['en'] }}</p>
-                                                <p lang="de">{{ result['scopeNote']['de'] }}</p>
-                                            </div>
-                                        </div>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="ft" title="Total count of tag"><img src="{{ url_for('static', filename='img/osm_count_all_v2.png') }}" alt="Node" align="left" width="30" height="30"></td>
+                                                    <td></td>
+                                                    <td>{{ result['countAll'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="ft" title="Total count of tag"><img src="{{ srcNode }}" alt="Node" align="left" width="30" height="30"></td>
+                                                    <td></td>
+                                                    <td>{{ result['node']['count'] }}</td>
+                                                </tr>
+                                               <tr>
+                                                    <td class="ft" title="Total count of tag"><img src="{{ srcRelation }}" alt="Node" align="left" width="30" height="30"></td>
+                                                    <td></td>
+                                                    <td>{{ result['relation']['count'] }}</td>
+                                                </tr>
+                                                 <tr>
+                                                    <td class="ft" title="Total count of tag"><img src="{{ srcWay }}" alt="Node" align="left" width="30" height="30"></td>
+                                                    <td class="ft" title="Total count of tag"><img src="{{ srcArea }}" alt="Node" align="left" width="30" height="30"></td>
+                                                    <td>{{ result['way']['count'] }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!--<div id="tagstats_text">
+                                            <p><img src="{{ url_for('static', filename='img/osm_count_all.png') }}" alt="Node" align="left" width="25" height="25">{{ result['countAll'] }}</p>
+                                            <p><img src="{{ url_for('static', filename='img/osm_node_true.png') }}" alt="Node" align="left" width="25" height="25">{{ result['node']['count'] }}</p>
+                                            <p><img src="{{ url_for('static', filename='img/osm_way_true.png') }}" alt="Node" align="left" width="25" height="25">{{ result['way']['count'] }}</p>
+                                            <p><img src="{{ url_for('static', filename='img/osm_area_true.png') }}" alt="Node" align="left" width="25" height="25">{{ result['area']['count'] }}</p>
+                                            <p><img src="{{ url_for('static', filename='img/osm_relation_true.png') }}" alt="Node" align="left" width="25" height="25">{{ result['relation']['count'] }}</p>
+                                        </div>-->
+                                    </a>
+                                    {% if result['isTag'] %}
+                                        <a target="_tag" href="{{ result['subject'] }}"><b>{{ result['prefLabel'] }}</b></a>
+                                    {% else %}
+                                        <a target="_tag" href="{{ result['subject'] }}"><b>{{ result['prefLabel'] }}=✱</b></a> <!--✱✲-->
+                                    {% endif %}
+                                </div>
+                                <div class="tag_content">
+                                    <div class="container" id="description_text">
+                                        {% if result['scopeNote']['en']|count > 0 %}
+                                            <h5 lang="en"><b>Description: </b>{{ result['scopeNote']['en'] }}</h5>
+                                            <h5 lang="de"><b>Beschreibung: </b>{{ result['scopeNote']['de'] }}</h5>
+                                        {% else %}
+                                            <h5 lang="en"><b>Description: </b><em>No OSM wiki description available</em></h5>
+                                            <h5 lang="de"><b>Beschreibung: </b><em>Keine OSM Wiki Beschreibung vorhanden</em></h5>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -83,8 +126,19 @@
                     </div>
                  </div>
             {% endfor %}
-        {% else %}
-            <em>No tags found</em>
+        {% elif q %}
+            <h5 lang="en" class="none_found">Your search - <b>{{ q }}</b> - did not match any Open Street Map  tags. </h5>
+            <h5 lang="de" class="none_found">Es wurden keine mit Ihrer Suchanfrage - <b>{{ q }}</b> - übereinstimmende Open Street Map Tags gefunden.</h5>
+            <h5 lang="en" class="suggestion_header">Suggestions:</h5>
+            <h5 lang="de" class="suggestion_header">Vorschläge:</h5>
+            <ul id="suggestion_list">
+                <li lang="en">Make sure that all words are spelled correctly.</li>
+                <li lang="en">Try different keywords.</li>
+                <li lang="en">Try more general keywords.</li>
+                <li lang="de">Achten Sie darauf, dass alle Wörter richtig geschrieben sind.</li>
+                <li lang="de">Probieren Sie es mit anderen Suchbegriffen.</li>
+                <li lang="de">Probieren Sie es mit allgemeineren Suchbegriffen.</li>
+            </ul>
         {% endif %}
     </div>
 {% endblock %}

@@ -7,6 +7,9 @@ Created on 08.10.2014
 
 import re
 import os
+import datetime
+import json
+
 
 _invalidChars = [' ', ';']
 _dataFolderName = 'data'
@@ -75,6 +78,44 @@ def ssToEszett(word):
 _digits = re.compile('\d')
 def containsDigits(d):
     return bool(_digits.search(d))
+
+def outputFile(outputName, outputEnding, useDateEnding):
+    '''Returns full file path. If 'useDateEnding' is True, a date postfix is added between
+       the filename and ending, of the form '_yymmdd'.'''
+    if useDateEnding:
+        dateString = datetime.date.today().isoformat()
+        dateString = dateString.replace('-', '')
+        dateString = dateString[2:]  # substring from incl. 3rd char to end of string
+        return dataDir() + outputName + '_' + dateString + outputEnding
+    else:
+        return dataDir() + outputName + outputEnding
+
+
+def genToList(generator):
+    retList = []
+    for item in generator:
+        retList.append(str(item))
+    return retList
+
+def genToLangDict(generator):
+    retDict = {}
+    for item in generator:
+        retDict[item.language] = item
+    return retDict;
+
+def genGetFirstItem(generator):
+    try:
+        firstItem = generator.next()
+    except StopIteration:
+        return None
+    return str(firstItem)
+
+def genJsonToDict(generator, default=None):
+    jsonStr = genGetFirstItem(generator)
+    try:
+        return json.loads(jsonStr)
+    except ValueError:
+        return default
 
 
 
