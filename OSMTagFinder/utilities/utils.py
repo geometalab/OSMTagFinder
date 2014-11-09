@@ -90,6 +90,10 @@ def outputFile(outputName, outputEnding, useDateEnding):
     else:
         return dataDir() + outputName + outputEnding
 
+def getAsteriskSymbol():
+    '''Returns asterisk '✱' symbol'''
+    return '✱' # ✱✲
+
 
 def genToList(generator):
     retList = []

@@ -19,6 +19,7 @@
 
 #tagstats_box {
     margin-top: 9px;
+    margin-left: 10px;
     min-height:160px;
     height:160px;
     min-width:auto;
@@ -30,16 +31,20 @@
     float: left;
 }
 
-td {
+#tagstats_box td {
     padding: 4px;
     color: black;
     font-size: 15px;
 }
 
-table td:last-child {
+#tagstats_box table td:last-child {
   border-left: 10;
   text-align: right;
   border-left:solid 10px transparent;
+}
+
+.maintag_header {
+    font-size: 20px;
 }
 
 a:link {
@@ -79,16 +84,42 @@ a:link {
     float: right;
 }
 
-#description_text > h5 {
-    margin-top: 0px;
-    margin-left: -15px;
-    margin-bottom: 5px;
-    line-height: 1.4em
+#tag_content {
+    padding-left: 0px;
 }
 
-a {
-    font-size: 20px;
+#tag_content > h5 {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    line-height: 1.5em
+    color: black;
+    font-size: 17px;
 }
+
+#tag_content a:link {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    line-height: 1.4em
+    color: black;
+    font-size: 17px;
+}
+
+#tag_content table td.first_column {
+    vertical-align: top;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 17px;
+}
+
+#tag_content table td.second_column {
+    border-left: 10;
+    border-left:solid 10px transparent;
+    vertical-align: bottom;
+    margin-bottom: 5px;
+    font-size: 17px;
+}
+
+
 
 .found {
     font-size: 16px;

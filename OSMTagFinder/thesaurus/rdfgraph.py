@@ -29,8 +29,8 @@ class RDFGraph:
     osmArea = osm[cl.getThesaurusString('OSM_AREA')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/Area')
     osmRelation = osm[cl.getThesaurusString('OSM_RELATION')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/Relation')
     osmImplies = osm[cl.getThesaurusString('OSM_IMPLIES')]
-    osmCombination = osm[cl.getThesaurusString('OSM_COMBINATION')]
-    osmLinked = osm[cl.getThesaurusString('OSM_LINKED')]
+    osmCombines = osm[cl.getThesaurusString('OSM_COMBINATION')]
+    osmLinks = osm[cl.getThesaurusString('OSM_LINKED')]
 
     def __init__ (self, filePath=None):
         if filePath is not None:
@@ -41,7 +41,12 @@ class RDFGraph:
         self.graph.bind('osm', self.osm)
         self.graph.bind('osmNode', self.osmNode)
         self.graph.bind('osmWay', self.osmWay)
+        self.graph.bind('osmArea', self.osmArea)
         self.graph.bind('osmRelation', self.osmRelation)
+        self.graph.bind('osmImplies', self.osmImplies)
+        self.graph.bind('osmCombines', self.osmCombines)
+        self.graph.bind('osmLinks', self.osmLinks)
+
 
     def load(self, filePath):
         guessedFormat = guess_format(filePath)
@@ -127,11 +132,39 @@ class RDFGraph:
         self.graph.add((URIRef(subject), self.osmRelation, Literal(obj)))
         return subject
 
-    def tripplesCount(self):
+    def addOSMImpliesLiteral(self, subject, obj):
+        self.graph.add((URIRef(subject), self.osmImplies, Literal(obj)))
+        return subject
+
+    def addOSMImpliesURIRef(self, subject, obj):
+        self.graph.add((URIRef(subject), self.osmImplies, URIRef(obj)))
+        return subject
+
+    def addOSMCombinesLiteral(self, subject, obj):
+        self.graph.add((URIRef(subject), self.osmCombines, Literal(obj)))
+        return subject
+
+    def addOSMCombinesURIRef(self, subject, obj):
+        self.graph.add((URIRef(subject), self.osmCombines, URIRef(obj)))
+        return subject
+
+    def addOSMLinksLiteral(self, subject, obj):
+        self.graph.add((URIRef(subject), self.osmLinks, Literal(obj)))
+        return subject
+
+    def addOSMLinksURIRef(self, subject, obj):
+        self.graph.add((URIRef(subject), self.osmLinks, URIRef(obj)))
+        return subject
+
+    def triplesCount(self):
         return len(self.graph)
 
     def sparqlQuery(self, query):
         return self.graph.query(query)
+
+    def getSubByPrefLabel(self, obj):
+        generatorList = self.graph.subjects(SKOS.prefLabel, Literal(obj))
+        return utils.genGetFirstItem(generatorList)
 
     def getInScheme(self, subject):
         generatorList = self.graph.objects(URIRef(subject), SKOS.inScheme)
@@ -208,6 +241,39 @@ class RDFGraph:
         generatorList = self.graph.objects(URIRef(subject), self.osmRelation)
         return generatorList
 
+    def getSubObjOSMImplies(self):
+        genTupleList = self.graph.subject_objects(self.osmImplies)
+        return genTupleList
+
+    def getSubObjOSMCombines(self):
+        genTupleList = self.graph.subject_objects(self.osmCombines)
+        return genTupleList
+
+    def getSubObjOSMLinks(self):
+        genTupleList = self.graph.subject_objects(self.osmLinks)
+        return genTupleList
+
+    def getOSMImplies(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), self.osmImplies)
+        return generatorList
+
+    def getOSMCombines(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), self.osmCombines)
+        return generatorList
+
+    def getOSMLinks(self, subject):
+        generatorList = self.graph.objects(URIRef(subject), self.osmLinks)
+        return generatorList
+
+    def removeOSMImpliesLiteral(self, subject, obj):
+        self.graph.remove( (URIRef(subject), self.osmImplies, Literal(obj)) )
+
+    def removeOSMCombinesLiteral(self, subject, obj):
+        self.graph.remove( (URIRef(subject), self.osmCombines, Literal(obj)) )
+
+    def removeOSMLinksLiteral(self, subject, obj):
+        self.graph.remove( (URIRef(subject), self.osmLinks, Literal(obj)) )
+
 if __name__ == '__main__':
     r = RDFGraph()
 
@@ -231,6 +297,9 @@ if __name__ == '__main__':
     r.addOSMNode(mammals, '50')
     r.addInScheme(mammals, keyScheme)
 
+    r.addOSMImpliesLiteral(animals, 'blubb')
+    r.addOSMImpliesURIRef(mammals, 'bliib')
+
     r.addNarrower(animals, mammals)
     r.addBroader(mammals, animals)
     r.addHasTopConcept(keyScheme, animals)
@@ -241,6 +310,15 @@ if __name__ == '__main__':
     print r.graph.serialize(format='skos', encoding=r.encoding)
 
 
+    for i, j in r.graph.subject_objects(r.osmImplies):
+        print i
+        print j
+    print '\n'
+    r.removeOSMImpliesLiteral(animals, 'blubb')
+    print '\n'
+    for i, j in r.graph.subject_objects(r.osmImplies):
+        print i
+        print j
     print '\n'
 
     graph = Graph()

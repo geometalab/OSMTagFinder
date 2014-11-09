@@ -13,14 +13,12 @@ from utilities import utils
 from utilities.configloader import ConfigLoader
 from thesaurus.rdfgraph import RDFGraph
 from externalapi.taginfo import TagInfo
-from externalapi.tagstats import TagStats
+from externalapi.tagupdate import TagInfoUpdate
 from utilities.translator import Translator
-
-from externalapi.thesauri import Thesauri
 
 class BaseThesaurus:
 
-    graph = RDFGraph()
+    rdfGraph = RDFGraph()
     tagInfo = TagInfo()
     numberKeys = 0
     numberTags = 0
@@ -57,7 +55,9 @@ class BaseThesaurus:
 
         self.createGraph(keyList, tagMap)
 
-        self.graph.serialize(utils.outputFile(self.outputName, self.outputEnding, useDateEnding=True))
+        self.osmLinksToConcept()
+
+        self.rdfGraph.serialize(utils.outputFile(self.outputName, self.outputEnding, useDateEnding=True))
 
     def numberTags(self, tagMap):
         '''Returns number of tags in 'tagMap'.'''
@@ -68,8 +68,8 @@ class BaseThesaurus:
         return count
 
     def getBaseGraph(self):
-        '''Getter for the base graph.'''
-        return self.graph
+        '''Getter for the base rdfGraph.'''
+        return self.rdfGraph
 
     def getListOfValidKeys(self):
         '''Calls TagInfo for a list of all keys. The elements in the list are then checked for their validity.
@@ -143,83 +143,117 @@ class BaseThesaurus:
                 depiction = imageData['image_url']
 
         if scopeNoteDE == '' and not scopeNoteEN == '':
-            self.graph.addScopeNote(concept, scopeNoteEN, 'en')
-            self.graph.addScopeNote(concept, self.translator.translateENtoDE(scopeNoteEN) + ' ' + self.translationHintDE, 'de')
+            self.rdfGraph.addScopeNote(concept, scopeNoteEN, 'en')
+            self.rdfGraph.addScopeNote(concept, self.translator.translateENtoDE(scopeNoteEN) + ' ' + self.translationHintDE, 'de')
         elif not scopeNoteDE == '' and scopeNoteEN == '':
-            self.graph.addScopeNote(concept, self.translator.translateDEtoEN(scopeNoteDE) + ' ' + self.translationHintEN, 'en')
-            self.graph.addScopeNote(concept, scopeNoteDE, 'de')
+            self.rdfGraph.addScopeNote(concept, self.translator.translateDEtoEN(scopeNoteDE) + ' ' + self.translationHintEN, 'en')
+            self.rdfGraph.addScopeNote(concept, scopeNoteDE, 'de')
         elif not scopeNoteDE == '' and not scopeNoteEN == '':
-            self.graph.addScopeNote(concept, scopeNoteEN, 'en')
-            self.graph.addScopeNote(concept, scopeNoteDE, 'de')
+            self.rdfGraph.addScopeNote(concept, scopeNoteEN, 'en')
+            self.rdfGraph.addScopeNote(concept, scopeNoteDE, 'de')
 
         if depiction is not None and not depiction == '':
-            self.graph.addDepiction(concept, depiction)
+            self.rdfGraph.addDepiction(concept, depiction)
             print '\t\t' + depiction
 
-    def addStats(self, concept, key, value=None, wikiPageJson=None):
-        tagStats = TagStats(key=key, value=value, wikiPageJson=wikiPageJson)
+    def updateTagStats(self, concept, key, value=None, wikiPageJson=None):
+        '''Updates stats counts, node use, way use, area use and relation use.'''
+        tagInfoUpdate = TagInfoUpdate(key=key, value=value, wikiPageJson=wikiPageJson)
+
+        nodeStr = '{ "count": "0", "use": "False" }' # dummy values
+        wayStr = '{ "count": "0", "use": "False" }'
+        areaStr = '{ "count": "0", "use": "False" }'
+        relationStr = '{ "count": "0", "use": "False" }'
 
         if value is None:
-            nodeStr = '{ "count": "' + str(tagStats.getCountNodes()) + '", "use": "false" }'
-            wayStr = '{ "count": "' + str(tagStats.getCountWays()) + '", "use": "false" }'
-            areaStr = '{ "count": "0", "use": "false" }'
-            relationStr = '{ "count": "' + str(tagStats.getCountRelations()) + '", "use": "false" }'
+            nodeStr = '{ "count": "' + str(tagInfoUpdate.getCountNodes()) + '", "use": "False" }'
+            wayStr = '{ "count": "' + str(tagInfoUpdate.getCountWays()) + '", "use": "False" }'
+            areaStr = '{ "count": "0", "use": "False" }'
+            relationStr = '{ "count": "' + str(tagInfoUpdate.getCountRelations()) + '", "use": "False" }'
         else:
-            onNode =  tagStats.getOnNode()
-            onWay = tagStats.getOnWay()
-            onRelation = tagStats.getOnRelation()
+            onNode =  tagInfoUpdate.getOnNode()
+            onWay = tagInfoUpdate.getOnWay()
+            onRelation = tagInfoUpdate.getOnRelation()
             if not onNode and not onWay and not onRelation:
                 onArea = True
             else:
-                onArea = tagStats.getOnArea()
+                onArea = tagInfoUpdate.getOnArea()
 
-            nodeStr = '{ "count": "' + str(tagStats.getCountNodes()) + '", "use": "' + str(onNode).lower() + '" }'
-            wayStr = '{ "count": "' + str(tagStats.getCountWays()) + '", "use": "' + str(onWay).lower() + '" }'
-            areaStr = '{ "count": "0"' + ', "use": "' + str(onArea).lower() + '" }'
-            relationStr = '{ "count": "' + str(tagStats.getCountRelations()) + '", "use": "' + str(onRelation).lower() + '" }'
+            nodeStr = '{ "count": "' + str(tagInfoUpdate.getCountNodes()) + '", "use": "' + str(onNode) + '" }'
+            wayStr = '{ "count": "' + str(tagInfoUpdate.getCountWays()) + '", "use": "' + str(onWay) + '" }'
+            areaStr = '{ "count": "0"' + ', "use": "' + str(onArea) + '" }'
+            relationStr = '{ "count": "' + str(tagInfoUpdate.getCountRelations()) + '", "use": "' + str(onRelation) + '" }'
 
-        self.graph.addOSMNode(concept, nodeStr)
-        self.graph.addOSMWay(concept, wayStr)
-        self.graph.addOSMArea(concept, areaStr)
-        self.graph.addOSMRelation(concept, relationStr)
+        self.rdfGraph.addOSMNode(concept, nodeStr)
+        self.rdfGraph.addOSMWay(concept, wayStr)
+        self.rdfGraph.addOSMArea(concept, areaStr)
+        self.rdfGraph.addOSMRelation(concept, relationStr)
+
+    def updateTagLinks(self, concept, key, value=None, wikiPageJson=None):
+        '''Updates the tag links from OSM wiki: implies, combinations and linked. Just as Literals.'''
+        tagInfoUpdate = TagInfoUpdate(key=key, value=value, wikiPageJson=wikiPageJson)
+
+        listImplies = tagInfoUpdate.getListImplies()
+        listCombinations = tagInfoUpdate.getListCombinations()
+        listLinked = tagInfoUpdate.getListLinked()
+
+        impliesStr = '\t\tImplies: '
+        for tagImplies in listImplies: #tags or keys
+            self.rdfGraph.addOSMImpliesLiteral(concept, tagImplies)
+            impliesStr = impliesStr + tagImplies + ', '
+        print(impliesStr[:-2])
+
+        combinesStr = '\t\tCombines: '
+        for tagCombines in listCombinations: #tags or keys
+            self.rdfGraph.addOSMCombinesLiteral(concept, tagCombines)
+            combinesStr = combinesStr + tagCombines + ', '
+        print(combinesStr[:-2])
+
+        linksStr = '\t\tLinks: '
+        for tagLinks in listLinked: #tags or keys
+            self.rdfGraph.addOSMLinksLiteral(concept, tagLinks)
+            linksStr = linksStr + tagLinks + ', '
+        print(linksStr[:-2])
 
     def createKey(self, key, keyScheme):
-        '''Adds key with name 'key' to the graph, with as much wiki information as possible.'''
-        keyConcept = self.graph.addConcept(self.osmWikiBase + 'Key:' + key)
-        self.graph.addInScheme(keyConcept, keyScheme)
-        self.graph.addPrefLabel(keyConcept, key)
+        '''Adds key with name 'key' to the rdfGraph, with as much wiki information as possible.'''
+        keyConcept = self.rdfGraph.addConcept(self.osmWikiBase + 'Key:' + key)
+        self.rdfGraph.addInScheme(keyConcept, keyScheme)
+        self.rdfGraph.addPrefLabel(keyConcept, key)
 
-        # graph.addHasTopConcept(keyScheme, keyConcept)
+        # rdfGraph.addHasTopConcept(keyScheme, keyConcept)
 
         keyWikiPageJson = self.tagInfo.getWikiPageOfKey(key)
         if len(keyWikiPageJson) > 0:
-            self.addStats(concept=keyConcept, key=key, wikiPageJson=keyWikiPageJson)
+            self.updateTagStats(concept=keyConcept, key=key, wikiPageJson=keyWikiPageJson)
+            self.updateTagLinks(concept=keyConcept, key=key, wikiPageJson=keyWikiPageJson)
             self.addImageScopeNote(keyConcept, keyWikiPageJson)
 
 
         return keyConcept
 
     def createTag(self, key, keyConcept, value, tagScheme):
-        '''Adds value with name 'key'='value' to the graph, with as much wiki information as possible.'''
+        '''Adds value with name 'key'='value' to the rdfGraph, with as much wiki information as possible.'''
         taglink = self.osmWikiBase + 'Tag:' + key + '=' + value  # before: key + '%3D' + value
         # result = requests.get('http://' + taglink)
         tagWikiPageJson = self.tagInfo.getWikiPageOfTag(key, value)
         if len(tagWikiPageJson) > 0:
             print('\t' + taglink)
-            tagConcept = self.graph.addConcept(taglink)
-            self.graph.addInScheme(tagConcept, tagScheme)
-            self.graph.addPrefLabel(tagConcept, key + '=' + value)
-            self.graph.addBroader(tagConcept, keyConcept)
-            self.graph.addNarrower(keyConcept, tagConcept)
+            tagConcept = self.rdfGraph.addConcept(taglink)
+            self.rdfGraph.addInScheme(tagConcept, tagScheme)
+            self.rdfGraph.addPrefLabel(tagConcept, key + '=' + value)
+            self.rdfGraph.addBroader(tagConcept, keyConcept)
+            self.rdfGraph.addNarrower(keyConcept, tagConcept)
 
-            self.addStats(concept=tagConcept, key=key, value=value, wikiPageJson=tagWikiPageJson)
+            self.updateTagStats(concept=tagConcept, key=key, value=value, wikiPageJson=tagWikiPageJson)
+            self.updateTagLinks(concept=tagConcept, key=key, value=value, wikiPageJson=tagWikiPageJson)
 
             self.addImageScopeNote(tagConcept, tagWikiPageJson)
 
     def createGraph(self, keyList, tagMap):
-        '''Fills graph with keys and tags.'''
-        keyScheme = self.graph.addConceptScheme(self.keySchemeName)
-        tagScheme = self.graph.addConceptScheme(self.tagSchemeName)
+        '''Fills rdfGraph with keys and tags.'''
+        keyScheme = self.rdfGraph.addConceptScheme(self.keySchemeName)
+        tagScheme = self.rdfGraph.addConceptScheme(self.tagSchemeName)
 
         for key in keyList:
             keyConcept = self.createKey(key, keyScheme)
@@ -230,6 +264,43 @@ class BaseThesaurus:
                 continue
             for value in valueList:
                 self.createTag(key, keyConcept, value, tagScheme)
+
+    def impliesToConcept(self):
+        for subject, obj in self.rdfGraph.getSubObjOSMImplies():
+            foundConcept = self.rdfGraph.getSubByPrefLabel(str(obj))
+            if foundConcept is not None:
+                self.rdfGraph.removeOSMImpliesLiteral(str(subject), str(obj))
+                self.rdfGraph.addOSMImpliesURIRef(str(subject), foundConcept)
+                print('Replacing implies: ' + str(obj) + '\tto: ' + str(foundConcept))
+
+    def combinesToConcept(self):
+        for subject, obj in self.rdfGraph.getSubObjOSMCombines():
+            foundConcept = self.rdfGraph.getSubByPrefLabel(str(obj))
+            if foundConcept is not None:
+                self.rdfGraph.removeOSMCombinesLiteral(str(subject), str(obj))
+                self.rdfGraph.addOSMCombinesURIRef(str(subject), foundConcept)
+                print('Replacing combines: ' + str(obj) + '\tto: ' + str(foundConcept))
+
+    def linksToConcept(self):
+        for subject, obj in self.rdfGraph.getSubObjOSMLinks():
+            foundConcept = self.rdfGraph.getSubByPrefLabel(str(obj))
+            if foundConcept is not None:
+                self.rdfGraph.removeOSMLinksLiteral(str(subject), str(obj))
+                self.rdfGraph.addOSMLinksURIRef(str(subject), foundConcept)
+                print('Replacing links: ' + str(obj) + '\tto: ' + str(foundConcept))
+
+    def osmLinksToConcept(self):
+        '''Traverse the rdfGraph and replaces OSM Wiki links literals (implies, combines, links)
+           to concepts of this rdfGraph, should they exists. Should be done once the rdfGraph
+           is created completly.'''
+        self.impliesToConcept()
+        self.combinesToConcept()
+        self.linksToConcept()
+
+
+
+
+
 
 if __name__ == '__main__':
     startTime = timeit.default_timer()
@@ -244,9 +315,9 @@ if __name__ == '__main__':
 
     endTime = timeit.default_timer()
     elapsed = endTime - startTime
-    print('\nTime elapsed to generate graph: ' + str(elapsed / 60) + ' mins')
+    print('\nTime elapsed to generate rdfGraph: ' + str(elapsed / 60) + ' mins')
     print('Number of keys: ' + str(bt.numberKeys))
     print('Number tags: ' + str(bt.numberTags))
-    print ('Tripples: ' + str(bt.getBaseGraph().tripplesCount()))
+    print ('Tripples: ' + str(bt.getBaseGraph().triplesCount()))
 
     bt.getBaseGraph()
