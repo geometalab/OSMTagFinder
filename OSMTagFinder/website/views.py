@@ -4,12 +4,12 @@ Created on 17.10.2014
 
 @author: Simon Gwerder
 '''
-import os
+
 from flask import Flask, session, send_from_directory, render_template, request, redirect, jsonify, Response
 from flask_bootstrap import Bootstrap
 import json
 
-from utilities.configloader import ConfigLoader
+
 from utilities import utils
 from thesaurus.rdfgraph import RDFGraph
 from website.tagresults import TagResults
@@ -88,12 +88,6 @@ def apiSearch():
         return jsonify([])
     #return jsonify(results=searchResults.getResults())
     return Response(json.dumps(searchResults.getResults()),  mimetype='application/json')
-
-if __name__ == '__main__':
-    cl = ConfigLoader()
-    tagFinderHost = cl.getWebsiteString('HOST')
-    tagFinderPort = int(os.environ.get("PORT", cl.getWebsiteInt('PORT')))
-    app.run(debug=True, host=tagFinderHost, port=tagFinderPort, threaded=True) # TODO debug=False, # Alternately app.run(..., processes=3)
 
 
 
