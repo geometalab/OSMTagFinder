@@ -9,16 +9,14 @@
 {% block content %}
     {{super()}}
     <div class="container">
-        <div class ="row">
-            <div class="col-lg-20 col-md-20">
-                <div class="jumbotron">
-                    <h3 lang="en"><b>404: Page Not Found</b></h3>
-                    <h3 lang="de"><b>404: Die Seite konnte nicht gefunden werden</b></h3>
-                    <p></p>
-                    <h4 id="first_line_en" lang="en">The page you're looking for might have been removed or is temporarily unavailable. You could try the front page:</h4>
-                    <h4 id="first_line_de" lang="de">Die gewünschte Seite wurde entfernt oder ist zur Zeit nicht verfügbar. Die Startseite ist unter folgendem Link erreichbar:</h4>
-                    <a href="{{ url_for('search') }}">Tag Finder</a>
-                </div>
+        <div class="col-lg-20 col-md-20">
+            <div class="jumbotron">
+                <h3 lang="en"><b>404: Page Not Found</b></h3>
+                <h3 lang="de"><b>404: Die Seite konnte nicht gefunden werden</b></h3>
+                <p></p>
+                <h4 id="first_line_en" lang="en">The page you're looking for might have been removed or is temporarily unavailable. You could try the front page:</h4>
+                <h4 id="first_line_de" lang="de">Die gewünschte Seite wurde entfernt oder ist zur Zeit nicht verfügbar. Die Startseite ist unter folgendem Link erreichbar:</h4>
+                <a href="{{ url_for('search') }}">Tag Finder</a>
             </div>
         </div>
     </div>

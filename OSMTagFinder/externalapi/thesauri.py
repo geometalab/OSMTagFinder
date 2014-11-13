@@ -30,7 +30,6 @@ class Thesauri:
 
         self.removeRelatedWord(word) # making sure no self relation occurs
 
-
     def removeRelatedWord(self, word):
         if word in self.relatedSet:
             temp = []

@@ -46,7 +46,10 @@ class TagResults:
                     retDict['label']=linkOrLabel.replace(keyBaseLink, '') + '=' + '*' #utils.getAsteriskSymbol()
                 retDict['link']=linkOrLabel
             else:
-                retDict['label']=linkOrLabel # linkOrLabel is a label (key or tag)
+                if '=' in linkOrLabel: # represents a tag not a key
+                    retDict['label']=linkOrLabel # linkOrLabel is a label (key or tag)
+                else: # represents a key
+                    retDict['label']=linkOrLabel + '=' + '*' #utils.getAsteriskSymbol()
                 retDict['link']=None
             retList.append(retDict)
         return retList

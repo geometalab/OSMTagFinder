@@ -79,21 +79,34 @@ _digits = re.compile('\d')
 def containsDigits(d):
     return bool(_digits.search(d))
 
-def outputFile(outputName, outputEnding, useDateEnding):
+def outputFile(directory, outputName, outputExtension, useDateEnding):
     '''Returns full file path. If 'useDateEnding' is True, a date postfix is added between
        the filename and ending, of the form '_yymmdd'.'''
     if useDateEnding:
         dateString = datetime.date.today().isoformat()
         dateString = dateString.replace('-', '')
         dateString = dateString[2:]  # substring from incl. 3rd char to end of string
-        return dataDir() + outputName + '_' + dateString + outputEnding
+        return directory + '\\' + outputName + '_' + dateString + outputExtension
     else:
-        return dataDir() + outputName + outputEnding
+        return directory + '\\' + outputName + outputExtension
+
+def fileLoader(baseDir, extension):
+    '''Returns a list of files that are in the 'baseDir' directory or in a subdirectory
+       of it. The fileending is 'extension' (e.g. 'rdf' or '.rdf').'''
+    extension = extension.replace('.','') # in case someone calls this function with '.' ending
+    foundFiles = []
+    if extension is None: return None
+    for root, dirs, files in os.walk(baseDir):
+        for f in files:
+            if f.endswith('.' + extension):
+                foundFiles.append(os.path.join(root, f))
+                dirs # just to get rid of the not-used warning
+    return foundFiles
+
 
 def getAsteriskSymbol():
     '''Returns asterisk '✱' symbol'''
     return '✱' # ✱✲
-
 
 def genToList(generator):
     retList = []

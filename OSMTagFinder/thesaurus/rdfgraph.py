@@ -5,19 +5,24 @@ Created on 26.09.2014
 @author: Simon Gwerder
 '''
 
-from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin, XSD
+from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin
 from rdflib.namespace import SKOS
 from rdflib.namespace import FOAF
 from rdflib.serializer import Serializer
 from rdflib.util import guess_format
+
 from utilities import utils
 from utilities.configloader import ConfigLoader
+import logging
 
 # from skosserializer import SKOSSerializer
 
 class RDFGraph:
     encoding = 'utf-8'
-    graph = Graph()
+
+    #logging.basicConfig()
+
+    graph = None
 
     cl = ConfigLoader()
 
@@ -29,10 +34,11 @@ class RDFGraph:
     osmArea = osm[cl.getThesaurusString('OSM_AREA')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/Area')
     osmRelation = osm[cl.getThesaurusString('OSM_RELATION')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/Relation')
     osmImplies = osm[cl.getThesaurusString('OSM_IMPLIES')]
-    osmCombines = osm[cl.getThesaurusString('OSM_COMBINATION')]
-    osmLinks = osm[cl.getThesaurusString('OSM_LINKED')]
+    osmCombines = osm[cl.getThesaurusString('OSM_COMBINES')]
+    osmLinks = osm[cl.getThesaurusString('OSM_LINKS')]
 
     def __init__ (self, filePath=None):
+        self.graph = Graph()
         if filePath is not None:
             self.graph = self.load(filePath)
 
@@ -57,6 +63,7 @@ class RDFGraph:
         self.graph.serialize(destination=filepath, format='skos', encoding=self.encoding)
 
     def prepareLiteral(self, objStr):
+        objStr = objStr.strip()
         objStr = utils.eszettToSS(objStr)
         return objStr
 

@@ -41,7 +41,6 @@ class Gemet(ThesauriBase):
         self.supportedLang.append('en')
 
         if language in self.supportedLang:
-
             for word in self.searchTerms:
                 self.runAPICall(word, language)
 

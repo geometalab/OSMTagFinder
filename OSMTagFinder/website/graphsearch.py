@@ -104,7 +104,7 @@ if __name__ == '__main__':
     rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141030.rdf')
     gs = GraphSearch()
     while True:
-        word = raw_input("Enter word to search for: ")
+        word = raw_input('Enter word to search for: ')
         rawResults = gs.extendedSearch(word)
         searchResults = TagResults(rdfGraph, rawResults)
         for item in searchResults.getResults():

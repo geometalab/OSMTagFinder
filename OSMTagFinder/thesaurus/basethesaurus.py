@@ -5,8 +5,7 @@ Created on 27.09.2014
 @author: Simon Gwerder
 '''
 
-from requests.exceptions import ConnectionError
-import timeit
+#from requests.exceptions import ConnectionError
 
 from filter import Filter
 from utilities import utils
@@ -40,24 +39,37 @@ class BaseThesaurus:
     filterUtil = Filter()
     translator = Translator()
 
-    def __init__(self):
+
+    def __init__(self, console):
+        if console is not None:
+            self.console = console
+
+        self.console.println(' Requesting valid OSM keys from "' + self.cl.getTagInfoAPIString('TAGINFO_PAGE')  + '":')
         keyList = self.getListOfValidKeys()
 
         self.numberKeys = len(keyList) + len(self.filterUtil.exactKeyFilter)
+        self.console.println(' Got ' + str(len(keyList)) + ' valid OSM keys. ' + str(len(self.filterUtil.exactKeyFilter)) + ' are additional keys from filter.')
 
+        self.console.println('\n Requesting valid OSM tags from "' + self.cl.getTagInfoAPIString('TAGINFO_PAGE')  + '":')
         tagMap = self.bundleToTagMap(keyList)
 
         self.numberTags = self.numberTags(tagMap)
+        self.console.println(' Got ' + str(self.numberTags) + ' valid OSM tags.')
 
         empty = []
         for filteredKey in self.filterUtil.exactKeyFilter:
             tagMap[filteredKey] = empty
 
+        self.console.println('\n Requesting detailed information from "' + self.cl.getTagInfoAPIString('TAGINFO_PAGE')  + '":')
         self.createGraph(keyList, tagMap)
 
+        self.console.println('\n Linking OSM "implies", "combines" and "links" relations to graph concepts:')
         self.osmLinksToConcept()
 
-        self.rdfGraph.serialize(utils.outputFile(self.outputName, self.outputEnding, useDateEnding=True))
+        fullPath = utils.outputFile(utils.dataDir() + 'temp\\', self.outputName, self.outputEnding, useDateEnding=True)
+        self.console.println('\n Serializing graph to: ' + fullPath)
+        self.rdfGraph.serialize(fullPath)
+        self.console.println('\n Finished creating TagFinder BaseThesaurus')
 
     def numberTags(self, tagMap):
         '''Returns number of tags in 'tagMap'.'''
@@ -82,37 +94,40 @@ class BaseThesaurus:
         '''Takes the raw key data from 'keyData' and makes validation checks on each
            element. Then a list of valid keys is returned.'''
         keyList = []
+        atPart = 1
         for keyItem in keyData:
-            if keyItem['count_all'] < self.valueMinCount:
-                break;  # speedup because of sorted list
+            #if keyItem['count_all'] < self.valueMinCount:
+                #break;  # speedup because of sorted list
             if not self.filterUtil.hasKey(keyItem['key']) and utils.validCharsCheck(keyItem['key']) and keyItem['values_all'] >= self.valueMinCount:
                 keyList.append(keyItem['key'])
-                print('Key: ' + keyItem['key'])
+                self.console.printPercent(partInt=atPart, totalInt=len(keyData), workingOn='Getting key: ' + keyItem['key'])
+            atPart = atPart + 1
+        self.console.printPercent(partInt=1, totalInt=1)
+
         return keyList
 
     def filterTagData(self, key, tagMap, tagData):
         '''Takes the raw key data from 'tagData' and makes validation checks on each
            element. Then the updated 'tagMap' (k:key, v:value) is returned.'''
-        r = ''
         for valueItem in tagData:
             if not self.filterUtil.hasValue(valueItem['value']) and valueItem['in_wiki'] and utils.validCharsCheck(valueItem['value']) and valueItem['count'] >= self.valueMinCount:
                 k = tagMap.get(key)
                 if k is not None:
                     k.append(valueItem['value'])
-                    r = r + ',  ' + valueItem['value']
                 else:
                     k = [valueItem['value']]
-                    r = valueItem['value']
                 tagMap[key] = k
-        print(key + '\t\t' + r)
         return tagMap
 
     def bundleToTagMap(self, keyList):
         '''Creates a hash map with k:key and v:value of valid keys and values.'''
         tagMap = {}
+        atPart = 1
         for key in keyList:
+            self.console.printPercent(atPart, len(keyList), 'Getting all tags for key: ' + key)
             tagData = self.tagInfo.getAllTagData(key)
             tagMap = self.filterTagData(key, tagMap, tagData)
+            atPart = atPart + 1
         return tagMap
 
     def addImageScopeNote(self, concept, wikiPageJson):
@@ -129,13 +144,11 @@ class BaseThesaurus:
                 if temp is not None and not temp == '':
                     temp = temp.replace('\'', '')
                     scopeNoteDE = temp
-                    print '\t\tde: ' + scopeNoteDE
             elif wikiData['lang'] == 'en':
                 temp = wikiData['description']
                 if  temp is not None and not temp == '':
                     temp = temp.replace('\'', '')
                     scopeNoteEN = temp
-                    print '\t\ten: ' + scopeNoteEN
                     imageData = wikiData['image']
                     depiction = imageData['image_url']
             if depiction is None or depiction == '':
@@ -154,7 +167,6 @@ class BaseThesaurus:
 
         if depiction is not None and not depiction == '':
             self.rdfGraph.addDepiction(concept, depiction)
-            print '\t\t' + depiction
 
     def updateTagStats(self, concept, key, value=None, wikiPageJson=None):
         '''Updates stats counts, node use, way use, area use and relation use.'''
@@ -201,19 +213,16 @@ class BaseThesaurus:
         for tagImplies in listImplies: #tags or keys
             self.rdfGraph.addOSMImpliesLiteral(concept, tagImplies)
             impliesStr = impliesStr + tagImplies + ', '
-        print(impliesStr[:-2])
 
         combinesStr = '\t\tCombines: '
         for tagCombines in listCombinations: #tags or keys
             self.rdfGraph.addOSMCombinesLiteral(concept, tagCombines)
             combinesStr = combinesStr + tagCombines + ', '
-        print(combinesStr[:-2])
 
         linksStr = '\t\tLinks: '
         for tagLinks in listLinked: #tags or keys
             self.rdfGraph.addOSMLinksLiteral(concept, tagLinks)
             linksStr = linksStr + tagLinks + ', '
-        print(linksStr[:-2])
 
     def createKey(self, key, keyScheme):
         '''Adds key with name 'key' to the rdfGraph, with as much wiki information as possible.'''
@@ -238,7 +247,6 @@ class BaseThesaurus:
         # result = requests.get('http://' + taglink)
         tagWikiPageJson = self.tagInfo.getWikiPageOfTag(key, value)
         if len(tagWikiPageJson) > 0:
-            print('\t' + taglink)
             tagConcept = self.rdfGraph.addConcept(taglink)
             self.rdfGraph.addInScheme(tagConcept, tagScheme)
             self.rdfGraph.addPrefLabel(tagConcept, key + '=' + value)
@@ -255,15 +263,25 @@ class BaseThesaurus:
         keyScheme = self.rdfGraph.addConceptScheme(self.keySchemeName)
         tagScheme = self.rdfGraph.addConceptScheme(self.tagSchemeName)
 
-        for key in keyList:
-            keyConcept = self.createKey(key, keyScheme)
+        totalParts = self.numberKeys + self.numberTags
+        atPart = 1
+        for filteredKey in self.filterUtil.exactKeyFilter:
+            self.console.printPercent(partInt=atPart, totalInt=totalParts, workingOn='Key: ' + filteredKey)
+            keyConcept = self.createKey(filteredKey, keyScheme)
+            atPart = atPart + 1
 
-            print(self.osmWikiBase + 'Key:' + key)
+        for key in keyList:
+            self.console.printPercent(partInt=atPart, totalInt=totalParts, workingOn='Key: ' + key)
+            keyConcept = self.createKey(key, keyScheme)
+            atPart = atPart + 1
+
             valueList = tagMap.get(key)
             if valueList is None:
                 continue
             for value in valueList:
+                self.console.printPercent(partInt=atPart, totalInt=totalParts, workingOn='Tag: ' + key + '=' + value)
                 self.createTag(key, keyConcept, value, tagScheme)
+                atPart = atPart + 1
 
     def impliesToConcept(self):
         for subject, obj in self.rdfGraph.getSubObjOSMImplies():
@@ -271,7 +289,6 @@ class BaseThesaurus:
             if foundConcept is not None:
                 self.rdfGraph.removeOSMImpliesLiteral(str(subject), str(obj))
                 self.rdfGraph.addOSMImpliesURIRef(str(subject), foundConcept)
-                print('Replacing implies: ' + str(obj) + '\tto: ' + str(foundConcept))
 
     def combinesToConcept(self):
         for subject, obj in self.rdfGraph.getSubObjOSMCombines():
@@ -279,7 +296,6 @@ class BaseThesaurus:
             if foundConcept is not None:
                 self.rdfGraph.removeOSMCombinesLiteral(str(subject), str(obj))
                 self.rdfGraph.addOSMCombinesURIRef(str(subject), foundConcept)
-                print('Replacing combines: ' + str(obj) + '\tto: ' + str(foundConcept))
 
     def linksToConcept(self):
         for subject, obj in self.rdfGraph.getSubObjOSMLinks():
@@ -287,7 +303,6 @@ class BaseThesaurus:
             if foundConcept is not None:
                 self.rdfGraph.removeOSMLinksLiteral(str(subject), str(obj))
                 self.rdfGraph.addOSMLinksURIRef(str(subject), foundConcept)
-                print('Replacing links: ' + str(obj) + '\tto: ' + str(foundConcept))
 
     def osmLinksToConcept(self):
         '''Traverse the rdfGraph and replaces OSM Wiki links literals (implies, combines, links)
@@ -298,26 +313,24 @@ class BaseThesaurus:
         self.linksToConcept()
 
 
-
-
-
-
-if __name__ == '__main__':
+'''if __name__ == '__main__':
     startTime = timeit.default_timer()
     retry = True
+    console = console.Console(sys.stdout)
     while retry:
         try:
-            bt = BaseThesaurus()
+            bt = BaseThesaurus(console)
             retry = False
         except ConnectionError as ce:
-            print(ce)
-            print('Retrying creating BaseGraph')
+            pass
+            console.println(ce)
+            console.println('Retrying creating TagFinder BaseThesaurus...')
 
     endTime = timeit.default_timer()
     elapsed = endTime - startTime
-    print('\nTime elapsed to generate rdfGraph: ' + str(elapsed / 60) + ' mins')
-    print('Number of keys: ' + str(bt.numberKeys))
-    print('Number tags: ' + str(bt.numberTags))
-    print ('Tripples: ' + str(bt.getBaseGraph().triplesCount()))
+    console.println('\nTime elapsed to generate rdfGraph: ' + str(elapsed / 60) + ' mins')
+    console.println('Number of keys: ' + str(bt.numberKeys))
+    console.println('Number tags: ' + str(bt.numberTags))
+    console.println ('Tripples: ' + str(bt.getBaseGraph().triplesCount()))
 
-    bt.getBaseGraph()
+    #bt.getBaseGraph()'''

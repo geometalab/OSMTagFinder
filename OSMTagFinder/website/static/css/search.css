@@ -17,11 +17,23 @@
     margin-right: 15px;
 }
 
+#depic_stats {
+    margin-top: 4px;
+    margin-left: 0px;
+    margin-bottom: 11px;
+    margin-right: 4px;
+    padding-left: 10px;
+    padding-right: 0px;
+    min-height: 160px;
+    height: 160px;
+    min-width:auto;
+    width:auto;
+    float: right;
+}
+
 #tagstats_box {
-    margin-top: 9px;
-    margin-left: 10px;
-    min-height:160px;
-    height:160px;
+    min-height: 160px;
+    height: 160px;
     min-width:auto;
     width:auto;
     float: right;
@@ -43,33 +55,27 @@
   border-left:solid 10px transparent;
 }
 
-.maintag_header {
-    font-size: 20px;
-}
-
-a:link {
-    text-decoration: none
-}
 
 #no_depiction_tag {
-    margin-top: 9px;
     min-height:160px;
     height:160px;
     min-width:210px;
     width:210px;
-    margin-right: 0px;
+    margin-top: 0px;
     margin-left: 10px;
     float: right;
+    margin-bottom: 0px;
 }
 
 #no_depiction_key {
-    margin-top: 9px;
     min-height:160px;
     height:160px;
     min-width:210px;
     width:210px;
-    margin-right: 0px;
+    margin-top: 0px;
     margin-left: 10px;
+    margin-right: 0px;
+    margin-bottom: 0px;
     float: right;
 }
 
@@ -79,44 +85,41 @@ a:link {
     height:160px;
     min-width:210px;
     width:210px;
-    margin-right: 0px;
+    margin-top: 0px;
     margin-left: 10px;
+    margin-right: 0px;
+    margin-bottom: 0px;
     float: right;
 }
 
+.maintag_label {
+    font-size: 20px;
+}
+
+a:link {
+    text-decoration: none
+}
+
+
 #tag_content {
+    margin-top: 10px;
     padding-left: 0px;
-}
-
-#tag_content > h5 {
-    margin-top: 0px;
-    margin-bottom: 5px;
-    line-height: 1.5em
-    color: black;
-    font-size: 17px;
-}
-
-#tag_content a:link {
-    margin-top: 0px;
-    margin-bottom: 5px;
-    line-height: 1.4em
-    color: black;
-    font-size: 17px;
 }
 
 #tag_content table td.first_column {
     vertical-align: top;
     text-align: left;
-    margin-bottom: 5px;
-    font-size: 17px;
+    white-space: nowrap;
+    font-size: 15px;
+    padding-bottom: 5px;
 }
 
 #tag_content table td.second_column {
     border-left: 10;
     border-left:solid 10px transparent;
-    vertical-align: bottom;
-    margin-bottom: 5px;
-    font-size: 17px;
+    vertical-align: top;
+    font-size: 15px;
+    padding-bottom: 5px;
 }
 
 

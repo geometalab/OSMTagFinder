@@ -16,7 +16,7 @@ from website.tagresults import TagResults
 from website.graphsearch import GraphSearch
 
 
-rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141109.rdf')
+rdfGraph = RDFGraph(utils.dataDir() + 'tagfinder_thesaurus_141113.rdf')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '#T0P#SECRET#'

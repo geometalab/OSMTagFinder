@@ -14,35 +14,39 @@ from externalapi.osmsemanticnet import OSMSemanitcNet
 class MapOSMSemanticNet:
 
     def __init__(self, tagFinderFilePath, osnSemNetFilePath=None):
+
+        print('Loading TagFinder graph')
         tagFinderRDF = RDFGraph(tagFinderFilePath)
         osnSemNetRDF = None
         if osnSemNetFilePath is not None:
-            osnSemNetRDF = RDFGraph(osnSemNetRDF)
-        osn = OSMSemanitcNet(osnSemNetRDF)
+            print('Loading OSN graph')
+            osnSemNetRDF = RDFGraph(osnSemNetFilePath)
+        osn = OSMSemanitcNet(osnSemNetRDF) # if osnSemNetRDF is None it will check the web graph
         count = 0;
         for subject, predicate, obj in tagFinderRDF.graph:
-            osnConcept = None
-            if predicate == SKOS.prefLabel:
-                count = count + 1
-                if '=' in str(obj):
-                    splitArray = str(obj).split('=')
-                    osnConcept = osn.getConcept(splitArray[0], splitArray[1])
-                else:
-                    osnConcept = osn.getConcept(str(obj))
+            if not osn.baseUrl in subject: # check if some osn matches have been added already
+                osnConcept = None
+                if predicate == SKOS.prefLabel:
+                    count = count + 1
+                    if '=' in str(obj):
+                        splitArray = str(obj).split('=')
+                        osnConcept = osn.getConcept(splitArray[0], splitArray[1])
+                    else:
+                        osnConcept = osn.getConcept(str(obj))
 
-            if osnConcept:
-                tagFinderRDF.addRelatedMatch(subject, osnConcept)
-                print(str(count) + ' : Added Matching Concept Mapping from: ' + subject + '\t\t\tto: ' + osnConcept)
+                if osnConcept:
+                    tagFinderRDF.addRelatedMatch(subject, osnConcept)
+                    print(str(count) + ' : Added Matching Concept Mapping from: ' + subject + '\t\t\tto: ' + osnConcept)
 
         tagFinderRDF.serialize(tagFinderFilePath)
 
 
 if __name__ == '__main__':
 
-    osnSemNetFilePath = utils.dataDir() + 'semnet\osm_semantic_network.rdf'
-    tagFinderFilePath = utils.dataDir() + 'osm_tag_thesaurus_141109.rdf'
+    tagFinderFilePath = utils.dataDir() + 'tagfinder_thesaurus_141113.rdf'
+    osnSemNetFilePath = utils.dataDir() + 'semnet\\osm_semantic_network.rdf'
 
-    MapOSMSemanticNet(osnSemNetFilePath, tagFinderFilePath)
+    MapOSMSemanticNet(tagFinderFilePath, osnSemNetFilePath)
 
 
 
