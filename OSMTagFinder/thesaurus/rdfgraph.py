@@ -13,7 +13,7 @@ from rdflib.util import guess_format
 
 from utilities import utils
 from utilities.configloader import ConfigLoader
-import logging
+#import logging
 
 # from skosserializer import SKOSSerializer
 

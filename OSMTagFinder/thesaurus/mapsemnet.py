@@ -44,7 +44,7 @@ class MapOSMSemanticNet:
 if __name__ == '__main__':
 
     tagFinderFilePath = utils.dataDir() + 'tagfinder_thesaurus_141113.rdf'
-    osnSemNetFilePath = utils.dataDir() + 'semnet\\osm_semantic_network.rdf'
+    osnSemNetFilePath = utils.dataDir() + 'semnet/osm_semantic_network.rdf'
 
     MapOSMSemanticNet(tagFinderFilePath, osnSemNetFilePath)
 

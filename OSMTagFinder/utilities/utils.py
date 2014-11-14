@@ -29,19 +29,19 @@ def rootDir():
     return os.path.split(os.path.abspath(os.path.dirname(__file__)))[0] # + '\\' + os.path.split(os.path.abspath(os.path.dirname(__file__)))[1]
 
 def dataDir():
-    path = rootDir() + '\\' + _dataFolderName + '\\'
+    path = rootDir() + '/' + _dataFolderName + '/'
     return _checkPath(path)
 
 def indexerDir():
-    path = dataDir() + '\\' + _indexerFolderName + '\\'
+    path = dataDir() + '/' + _indexerFolderName + '/'
     return _checkPath(path)
 
 def staticDir():
-    path = rootDir() + '\\' + _staticFolderName + '\\'
+    path = rootDir() + '/' + _staticFolderName + '/'
     return _checkPath(path)
 
 def templatesDir():
-    path = rootDir() + '\\' + _templatesFolderName + '\\'
+    path = rootDir() + '/' + _templatesFolderName + '/'
     return _checkPath(path)
 
 def isNumber(r):
@@ -62,18 +62,18 @@ def validCharsCheck(r):
     return True
 
 def hasEszett(word):
-    return 'ß' in word
+    return u'\xc3\x9f' in word
 
 def hasSS(word):
     return 'ss' in word
 
 def eszettToSS(word):
     if word is not None:
-        return word.replace('ß', 'ss')
+        return word.replace(u'\xc3\x9f', 'ss')
 
 def ssToEszett(word):
     if word is not None:
-        return word.replace('ss', 'ß')
+        return word.replace('ss', u'\xc3\x9f')
 
 _digits = re.compile('\d')
 def containsDigits(d):
@@ -86,9 +86,9 @@ def outputFile(directory, outputName, outputExtension, useDateEnding):
         dateString = datetime.date.today().isoformat()
         dateString = dateString.replace('-', '')
         dateString = dateString[2:]  # substring from incl. 3rd char to end of string
-        return directory + '\\' + outputName + '_' + dateString + outputExtension
+        return directory + '/' + outputName + '_' + dateString + outputExtension
     else:
-        return directory + '\\' + outputName + outputExtension
+        return directory + '/' + outputName + outputExtension
 
 def fileLoader(baseDir, extension):
     '''Returns a list of files that are in the 'baseDir' directory or in a subdirectory
@@ -111,7 +111,7 @@ def getAsteriskSymbol():
 def genToList(generator):
     retList = []
     for item in generator:
-        retList.append(str(item))
+        retList.append(item)
     return retList
 
 def genToLangDict(generator):

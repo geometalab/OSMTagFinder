@@ -11,7 +11,7 @@ from utilities import utils
 
 class ConfigLoader:
 
-    configFileLoc = utils.dataDir() + 'config.ini'
+    configFileLoc = None
 
     websiteSection = 'Website'
     thesaurusSection = 'Thesaurus'
@@ -24,6 +24,7 @@ class ConfigLoader:
     __parser = SafeConfigParser()
 
     def __init__(self):
+        self.configFileLoc = utils.dataDir() + 'config.ini'
         with codecs.open(self.configFileLoc, 'r', encoding='utf-8') as configFile:  # open the file with the correct encoding
             self.__parser.readfp(configFile)
 

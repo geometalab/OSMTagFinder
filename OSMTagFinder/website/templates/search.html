@@ -75,10 +75,10 @@
                                         <!-- tagstats -->
                                         {% if result['isTag'] %}
                                             {% set taginfo_baseurl = "https://taginfo.openstreetmap.org/tags/" %}
-                                            {% set srcNode =     ["static/img/osm_node_", result['node']['use'], ".png"]|join %}
-                                            {% set srcWay =      ["static/img/osm_way_", result['way']['use'], ".png"]|join %}
-                                            {% set srcArea =     ["static/img/osm_area_", result['area']['use'], ".png"]|join %}
-                                            {% set srcRelation = ["static/img/osm_relation_", result['relation']['use'], ".png"]|join %}
+                                            {% set srcNode =     ["static/img/osm_node_", result['node']['use']|lower, ".png"]|join %}
+                                            {% set srcWay =      ["static/img/osm_way_", result['way']['use']|lower, ".png"]|join %}
+                                            {% set srcArea =     ["static/img/osm_area_", result['area']['use']|lower, ".png"]|join %}
+                                            {% set srcRelation = ["static/img/osm_relation_", result['relation']['use']|lower, ".png"]|join %}
                                         {% else %}
                                             {% set taginfo_baseurl = "https://taginfo.openstreetmap.org/keys/" %}
                                             {% set srcNode =     "static/img/osm_node_unspec.png" %}

@@ -66,7 +66,7 @@ class BaseThesaurus:
         self.console.println('\n Linking OSM "implies", "combines" and "links" relations to graph concepts:')
         self.osmLinksToConcept()
 
-        fullPath = utils.outputFile(utils.dataDir() + 'temp\\', self.outputName, self.outputEnding, useDateEnding=True)
+        fullPath = utils.outputFile(utils.dataDir() + 'temp/', self.outputName, self.outputEnding, useDateEnding=True)
         self.console.println('\n Serializing graph to: ' + fullPath)
         self.rdfGraph.serialize(fullPath)
         self.console.println('\n Finished creating TagFinder BaseThesaurus')
