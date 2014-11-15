@@ -1,26 +1,65 @@
+.page_content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 70%;
+}
+
 .jumbotron {
   padding-top: 5px;
   padding-bottom: 55px;
+  margin-top: 50px;
   margin-bottom: 18px;
   background-color: rgb(223, 240, 216)
 }
 
-#tag_panel {
+#button-lg-en, #button-lg-de {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+hr {
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+
+.search_result {
+    min-width: 600pt;
+    padding-left: 100pt;
     margin-top: 0px;
-    margin-left: 18px;
-    margin-right: 15px;
-    margin-bottom: 60px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
 }
 
-#tag_body {
-    margin-left: 11px;
-    margin-right: 15px;
+.search_result p {
+    padding-bottom: 5px;
+    margin: 0px;
+    line-height: 1.5em;
+    margin-right: 0px;
+    padding-right: 0px;
 }
 
-#depic_stats {
+.search_result h3 {
+    /*position:absolute;*/
+    font-weight: bold;
+    text-indent: -100pt;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.first_column {
+    position: absolute;
+    text-indent: -100pt;
+    font-weight: bold;
+}
+
+.second_column {
+}
+
+.depic_stats {
     margin-top: 4px;
     margin-left: 0px;
-    margin-bottom: 11px;
+    margin-bottom: 10px;
     margin-right: 4px;
     padding-left: 10px;
     padding-right: 0px;
@@ -37,6 +76,7 @@
     min-width:auto;
     width:auto;
     float: right;
+    margin-bottom: 0px;
 }
 
 #tagstats_text {
@@ -55,19 +95,7 @@
   border-left:solid 10px transparent;
 }
 
-
-#no_depiction_tag {
-    min-height:160px;
-    height:160px;
-    min-width:210px;
-    width:210px;
-    margin-top: 0px;
-    margin-left: 10px;
-    float: right;
-    margin-bottom: 0px;
-}
-
-#no_depiction_key {
+#depiction, #no_depiction_key, #no_depiction_tag  {
     min-height:160px;
     height:160px;
     min-width:210px;
@@ -77,52 +105,11 @@
     margin-right: 0px;
     margin-bottom: 0px;
     float: right;
-}
-
-#depiction {
-    margin-top: 9px;
-    min-height:160px;
-    height:160px;
-    min-width:210px;
-    width:210px;
-    margin-top: 0px;
-    margin-left: 10px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    float: right;
-}
-
-.maintag_label {
-    font-size: 20px;
 }
 
 a:link {
     text-decoration: none
 }
-
-
-#tag_content {
-    margin-top: 10px;
-    padding-left: 0px;
-}
-
-#tag_content table td.first_column {
-    vertical-align: top;
-    text-align: left;
-    white-space: nowrap;
-    font-size: 15px;
-    padding-bottom: 5px;
-}
-
-#tag_content table td.second_column {
-    border-left: 10;
-    border-left:solid 10px transparent;
-    vertical-align: top;
-    font-size: 15px;
-    padding-bottom: 5px;
-}
-
-
 
 .found {
     font-size: 16px;

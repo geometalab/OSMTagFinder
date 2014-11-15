@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico') }}">
     <!-- Custom styles for this template -->
     {{super()}}
-    <link id="navbarstyle" href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet">
+    <link id="navbarstyle" href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
     {% set url = "static/css/lang_" + lang + ".css" %}
     <link id="langstyle" href="{{ url }}" rel="stylesheet">
 {% endblock %}
@@ -23,15 +23,23 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{url_for('static', filename='js/language.js')}}"></script>
+
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/searchfade.js') }}"></script>
     {{super()}}
+    <script>
+        $("#navbar-search").hide();
+        $(document).ready(function(){
+            searchfade();
+        });
+    </script>
 {% endblock %}
 
 {% block navbar %}
     <div class="container">
         <div class ="row">
             <div class="col-lg-20 col-md-20">
-                <nav class="navbar navbar-inverse" role="navigation">
+                <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"> <!-- navbar navbar-inverse navbar-fixed-top -->
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
@@ -52,6 +60,7 @@
                                 <li><a href="#">API</a></li>
                                 <li><a lang="en" href="#">About</a></li>
                             </ul>
+
                             <ul class="nav navbar-nav navbar-right" lang="en"> <!-- english dropdown -->
                                 <li class="dropdown">
                                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
@@ -66,6 +75,7 @@
                                     </ul>
                                 </li>
                             </ul>
+
                             <ul class="nav navbar-nav navbar-right" lang="de"> <!-- german dropdown -->
                                 <li class="dropdown">
                                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
@@ -80,6 +90,17 @@
                                     </ul>
                                 </li>
                             </ul>
+
+                            <form class="navbar-form navbar-left" role="search" action="/search" method="get"> <!-- navbar search -->
+                                <div id="navbar-search" class="input-group input-group-sm">
+                                    <input id="navbar-search-input" type="text" value="{{ q }}" name="q" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button id="button-sm-en" class="btn btn-success" type="submit" lang="en">Search</button>
+                                        <button id="button-sm-de" class="btn btn-success" type="submit" lang="de">Suchen</button>
+                                    </span>
+                                </div>
+                            </form>
+
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>

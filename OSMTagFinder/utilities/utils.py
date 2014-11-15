@@ -130,7 +130,7 @@ def genGetFirstItem(generator):
 def genJsonToDict(generator, default=None):
     jsonStr = genGetFirstItem(generator)
     try:
-        return json.loads(jsonStr)
+        return json.loads(str(jsonStr))
     except ValueError:
         return default
 
