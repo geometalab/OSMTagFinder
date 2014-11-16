@@ -8,13 +8,13 @@ Created on 03.10.2014
 # Note: Might wanna checkout GNU Aspell for an alternative library to PyEnchant.
 # GNU Aspell also provides dictionaries in more languages.
 
-import enchant
+from enchant import Dict
 
 class SpellCorrect():
     '''SpellCorrect provides means to get a candidate list for a 'fuzzy search'. Could be used for spell correction too'''
-    dictEN_GB = enchant.Dict('en_GB')
-    dictEN_US = enchant.Dict('en_US')
-    dictDE_DE = enchant.Dict('de_DE')
+    dictEN_GB = Dict('en_GB')
+    dictEN_US = Dict('en_US')
+    dictDE_DE = Dict('de_DE')
     # dictFR_FR = enchant.Dict('fr_FR')
 
     def mergeLists(self, first_list, second_list):
