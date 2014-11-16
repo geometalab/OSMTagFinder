@@ -4,21 +4,26 @@ Created on 12.10.2014
 
 @author: Simon Gwerder
 '''
-import socket
-from ordered_set import OrderedSet
-
-from whoosh.qparser import QueryParser
-from whoosh.index import open_dir
-import whoosh.index as index
+from utilities import utils
 from utilities.spellcorrect import SpellCorrect
 from utilities.translator import Translator
 from thesaurus.rdfgraph import RDFGraph
 from tagresults import TagResults
-from utilities import utils
+
+from ordered_set import OrderedSet
+from whoosh.qparser import QueryParser
+import whoosh.index as index
+from whoosh.index import open_dir
 
 class GraphSearch:
 
     threshold = 2
+    ix = None
+
+    def __init__(self):
+        if not index.exists_in(utils.indexerDir(), utils.indexName):
+            return
+        self.ix = open_dir(utils.indexerDir(), indexname=utils.indexName)
 
     def prepareWord(self, word):
         word = word.replace('"', ' ')
@@ -31,22 +36,19 @@ class GraphSearch:
     def search(self, word, includeScopeNote=False, translateDEToEN=False):
 
         retSet = OrderedSet()
-        if not index.exists_in(utils.indexerDir(), utils.indexName):
+        if self.ix is None:
             return retSet
 
-        ix = open_dir(utils.indexerDir(), indexname=utils.indexName)
-
-        with ix.searcher() as searcher:
-
+        with self.ix.searcher() as searcher:
             if translateDEToEN:
                 try:
                     word = Translator().translateDEtoEN(word)
-                except socket.timeout:
+                except:
                     pass
 
-            queryPrefLabel = QueryParser("prefLabel", ix.schema).parse(unicode(word))
-            queryAltLabel = QueryParser("altLabel", ix.schema).parse(unicode(word))
-            queryHiddenLabel = QueryParser("hiddenLabel", ix.schema).parse(unicode(word))
+            queryPrefLabel = QueryParser("prefLabel", self.ix.schema).parse(unicode(word))
+            queryAltLabel = QueryParser("altLabel", self.ix.schema).parse(unicode(word))
+            queryHiddenLabel = QueryParser("hiddenLabel", self.ix.schema).parse(unicode(word))
 
             resultsPrefLabel = searcher.search(queryPrefLabel, limit=None, terms=True)
             resultsAltLabel = searcher.search(queryAltLabel, limit=None, terms=True)
@@ -62,7 +64,7 @@ class GraphSearch:
                 retSet.add(result['subject'])
 
             if includeScopeNote:
-                queryScopeNote = QueryParser("scopeNote", ix.schema).parse(unicode(word))
+                queryScopeNote = QueryParser("scopeNote", self.ix.schema).parse(unicode(word))
                 resultsScopeNote = searcher.search(queryScopeNote, limit=None, terms=True)
                 for result in resultsScopeNote:
                     retSet.add(result['subject'])

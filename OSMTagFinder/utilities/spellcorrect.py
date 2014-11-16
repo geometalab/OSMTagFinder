@@ -8,43 +8,50 @@ Created on 03.10.2014
 # Note: Might wanna checkout GNU Aspell for an alternative library to PyEnchant.
 # GNU Aspell also provides dictionaries in more languages.
 
-from enchant import Dict
+from utilities import utils
+
+import whoosh.index as index
+from whoosh.index import open_dir
 
 class SpellCorrect():
     '''SpellCorrect provides means to get a candidate list for a 'fuzzy search'. Could be used for spell correction too'''
-    dictEN_GB = Dict('en_GB')
-    dictEN_US = Dict('en_US')
-    dictDE_DE = Dict('de_DE')
-    # dictFR_FR = enchant.Dict('fr_FR')
+
+    ix = None
+
+    def __init__(self):
+        if not index.exists_in(utils.indexerDir(), utils.indexName):
+            return
+        self.ix = open_dir(utils.indexerDir(), indexname=utils.indexName)
+
 
     def mergeLists(self, first_list, second_list):
         '''Merges the two lists 'first_list' and 'second_list', removing duplicate items'''
         return first_list + list(set(second_list) - set(first_list))
 
     def listSuggestionsEN(self, word):
-        '''Gives a list of suggestions for 'word', based on en_GB, en_US dictionaries'''
-        suggestionsGB = self.dictEN_GB.suggest(word)
-        suggestionsUS = self.dictEN_US.suggest(word)
-        return self.mergeLists(suggestionsGB, suggestionsUS)
+        '''Gives a list of EN suggestions for 'word'.'''
+        if self.ix is None: return []
+        corrector = self.ix.searcher().corrector("spellingEN")
+        return corrector.suggest(word, limit=10)
+
 
     def listSuggestionsDE(self, word):
-        '''Gives a list of suggestions for 'word', based on de_DE dictionaries'''
-        return self.dictDE_DE.suggest(word)
+        '''Gives a list DE of suggestions for 'word'.'''
+        if self.ix is None: return []
+        corrector = self.ix.searcher().corrector("spellingDE")
+        return corrector.suggest(word, limit=10)
 
-    # def listSuggestionsFR(self, word):
-        # '''Gives a list of suggestions for 'word', based on de_DE dictionaries'''
-        # return self.dictFR_FR.suggest(word)
 
     def listSuggestions(self, word):
-        '''Gives a list of suggestions for 'word', based on en_GB, en_US and de_DE dictionaries'''
-        suggestionsGB = self.dictEN_GB.suggest(word)
-        suggestionsUS = self.dictEN_US.suggest(word)
-        suggestionsDE = self.dictDE_DE.suggest(word)
+        '''Gives a list of suggestions for 'word'.'''
+        if self.ix is None: return []
+        suggestionsDE = self.listSuggestionsDE(word)
+        suggestionsEN = self.listSuggestionsEN(word)
+        return self.mergeLists(suggestionsDE, suggestionsEN)
 
-        return self.mergeLists(suggestionsDE, self.mergeLists(suggestionsGB, suggestionsUS))
 
 if __name__ == '__main__':
     fw = SpellCorrect()
+    print fw.listSuggestionsEN('tabacco')
+    print fw.listSuggestionsDE('adres')
 
-    print fw.listSuggestionsEN('tabaco')
-    print fw.listSuggestionsDE('Telephon')
