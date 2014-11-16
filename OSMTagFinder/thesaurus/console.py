@@ -9,14 +9,25 @@ import timeit
 import sys
 from colorama import init, deinit
 from termcolor import colored
+import os
+import codecs
 
 from utilities import utils
+from utilities.translator import Translator
+from utilities.configloader import ConfigLoader
 from basethesaurus import BaseThesaurus
+from editterms import EditTerms
+from thesaurus.rdfgraph import RDFGraph
+from externalapi.thesauri import Thesauri
 
 class Console:
 
     fileDescr = None
     percentNewLine = True
+
+    cl = ConfigLoader()
+    outputName = cl.getThesaurusString('OUTPUT_NAME')  # tagfinder_thesaurus
+    outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')  # .rdf
 
     __partInt = 0
     __totalInt = 0
@@ -27,6 +38,8 @@ class Console:
     rdfGraph = None
 
     def __init__(self, fileDescriptor=None, percentNewLine=True):
+        # Work around <http://bugs.python.org/issue6058>.
+        codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
         self.fileDescr = fileDescriptor # e.g sys.stdout
         self.percentNewLine = percentNewLine
 
@@ -34,6 +47,10 @@ class Console:
         self.__commands['-load'] = self.load
         self.__commands['-save'] = self.save
         self.__commands['-exit'] = self.exit
+
+    def copyToCache(self, text):
+        command = 'echo ' + text.strip() + '| clip'
+        os.system(command)
 
     def getPercentDoneStr(self, partInt, totalInt, workingOn=None):
 
@@ -158,12 +175,12 @@ class Console:
         self.printlnWhiteOnBlue('')
         self.printlnWhiteOnBlue(' Commands: ')
         self.printlnWhiteOnBlue(' The following commands can only be used while this application is waiting for')
-        self.printlnWhiteOnBlue(' input and not as application arguments. They start with a hyphen')
+        self.printlnWhiteOnBlue(' ">"-input and not as application arguments. They start with a hyphen')
         self.printlnGreyOnBlue(' (e.g. -info)')
         self.printlnWhiteOnBlue('')
         self.printlnWhiteOnBlue(' -info  : prints this info panel')
         self.printlnWhiteOnBlue(' -load  : loading routine for existing TagFinder graphs')
-        self.printlnWhiteOnBlue(' -save  : serializes the current TagFinder graph and your editing-position')
+        self.printlnWhiteOnBlue(' -save  : serializes the current TagFinder graph and your editing position')
         self.printlnWhiteOnBlue(' -final : serializes the TagFinder graph and performs finalizing operations')
         self.printlnWhiteOnBlue(' -exit  : terminates this application')
         self.printlnWhiteOnBlue('')
@@ -174,7 +191,7 @@ class Console:
         self.printlnWhiteOnBlue(' separated with a comma. They can not be mixed with commands.')
         self.printlnGreyOnBlue(' (e.g. 3-5, 7, Zoo, Tierpark, 1)')
         self.printlnWhiteOnBlue('')
-        self.printlnWhiteOnBlue(' Pressing "Enter" confirms the inputs')
+        self.printlnWhiteOnBlue(' Pressing "Enter" confirms the inputs. Dont forget to -save from time to time!')
         self.printlnWhiteOnBlue('')
         self.println('')
 
@@ -206,7 +223,11 @@ class Console:
         self.rdfGraph = bt.getBaseGraph()
 
     def loadGraph(self, filePath):
-        print 'LoadGraph from: ' + filePath
+        self.println('')
+        self.println(' Loading RDF graph...')
+        self.rdfGraph = RDFGraph(filePath)
+        name = filePath[filePath.rfind('\\') + 1:]
+        print ' Loading of: ' + name + ' complete!'
 
     def load(self):
         self.println('')
@@ -219,7 +240,7 @@ class Console:
         optToActionMap = { }
         optToParamMap = { }
 
-        for f in utils.fileLoader(utils.dataDir() + 'temp\\', '.rdf'):
+        for f in utils.fileLoader(utils.tempDir(), self.outputEnding):
             filename = f[f.rfind('\\') + 1 : len(f)] # r(everse )find: lastindexof
             self.println(' [' + str(optionCount) + '] - ' + filename)
             optToActionMap[str(optionCount)] = self.loadGraph
@@ -233,10 +254,100 @@ class Console:
 
 
     def save(self):
-        print('saved') #TODO
+        self.println('')
+        if self.rdfGraph is not None:
+            path = utils.outputFile(utils.tempDir(), self.outputName, self.outputEnding, True)
+            self.println(' Saving RDF graph...')
+            self.rdfGraph.serialize(path)
+            self.println(' Saving completed, path: ' + path)
+        else:
+            self.println('Saving failed. No graph found.')
+        self.println('')
 
     def edit(self):
-        print('edited') #TODO
+
+        translator = Translator()
+
+        editTerms = EditTerms(self.rdfGraph)
+        while(editTerms.hasNext()):
+            subject = editTerms.getNext()
+
+            if subject is None: continue
+            isKey = self.rdfGraph.isOSMKey(subject)
+            prefLabel = utils.genGetFirstItem(self.rdfGraph.getPrefLabel(subject))
+            if prefLabel is None: continue
+
+            mainWord = prefLabel
+
+            if isKey:
+                headerText = ' Key: ' + prefLabel
+            else:
+                keyValue = prefLabel.split('=')
+                mainWord = keyValue[1]
+                headerText = ' Key: ' + keyValue[0] + ' - Value: ' + mainWord
+
+            self.copyToCache(str(subject))
+
+            translatedLabel = translator.translateENtoDE(mainWord)
+
+            self.println('')
+            self.printlnWhiteOnGreen('')
+            self.printlnWhiteOnGreen(headerText)
+            self.printlnWhiteOnGreen('')
+            self.println('')
+            self.println(' Link in cache: ' + subject)
+            self.println('')
+            self.println(' German translation: ' + translatedLabel)
+            self.println('')
+            self.println('')
+
+            preferredTermEN = self.readLine(' English preferred term: ')
+            preferredTermDE = self.readLine(' German  preferred term: ')
+
+            if len(preferredTermEN) < 1 or len(preferredTermDE) < 1: continue
+            editTerms.createTerm(subject, preferredTermEN, preferredTermDE)
+
+            thesauriEN = Thesauri(preferredTermEN, 'en')
+            thesauriDE = Thesauri(preferredTermDE, 'de')
+
+            self.println('')
+            self.doSuggestions(' Related ', thesauriEN.getRelated(), thesauriDE.getRelated(), editTerms.addAltLabelEN, editTerms.addAltLabelDE)
+
+            self.println('')
+            self.doSuggestions(' Broader ', thesauriEN.getBroader(), thesauriDE.getBroader(), editTerms.addBroaderLiteralEN, editTerms.addBroaderLiteralDE)
+
+            self.println('')
+            self.doSuggestions(' Narrower ', thesauriEN.getNarrower(), thesauriDE.getNarrower(), editTerms.addNarrowerLiteralEN, editTerms.addNarrowerLiteralDE)
+            self.println('')
+
+        self.println('')
+        self.printlnWhiteOnCyan(' FINISHED ALL KEYS AND TAGS')
+
+
+    def doSuggestions(self, text, sugListEN, sugListDE, actionEN, actionDE):
+        self.println(text + ' English terms suggestions:')
+        strToNrMapEN = { }
+        countSug = 1
+        for suggestion in sugListEN:
+            strToNrMapEN[str(countSug)] = suggestion
+            self.println(' [' + str(countSug) + '] - ' + suggestion)
+            countSug = countSug + 1
+        if len(sugListEN) < 1:
+            self.println(' No suggestions found, type your own terms.')
+        self.println('')
+        self.repeatedSugRead(strToNrMapEN, actionEN)
+        self.println('')
+        self.println(text + ' German  terms suggestions: ')
+        strToNrMapDE = { }
+        countSug = 1
+        for suggestion in sugListDE:
+            strToNrMapDE[str(countSug)] = suggestion
+            self.println(' [' + str(countSug) + '] - ' + suggestion)
+            countSug = countSug + 1
+        if len(sugListDE) < 1:
+            self.println(' No suggestions found, type your own terms.')
+        self.println('')
+        self.repeatedSugRead(strToNrMapDE, actionDE)
 
     def exit(self):
         sys.exit()
@@ -343,7 +454,7 @@ if __name__ == '__main__':
     console.printWelcomeMessage() # welcome message
     console.info()
 
-    console.sleep(2)
+    console.sleep(1)
 
     console.printNewOrLoad()
 

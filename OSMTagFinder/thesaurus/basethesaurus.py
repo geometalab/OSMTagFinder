@@ -28,11 +28,12 @@ class BaseThesaurus:
     keySchemeName = cl.getThesaurusString('KEY_SCHEME_NAME')
     tagSchemeName = cl.getThesaurusString('TAG_SCHEME_NAME')
 
-    outputName = cl.getThesaurusString('OUTPUT_NAME')  # osm_tag_thesaurus
+    outputName = cl.getThesaurusString('OUTPUT_NAME')  # tagfinder_thesaurus
     outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')  # .rdf
 
     translationHintDE = cl.getThesaurusString('TRANSLATION_HINT_DE')
     translationHintEN = cl.getThesaurusString('TRANSLATION_HINT_EN')
+    editNote = cl.getThesaurusString('NO_TERM')
 
     valueMinCount = cl.getThesaurusInt('MINIMUM_COUNT')
 
@@ -66,7 +67,7 @@ class BaseThesaurus:
         self.console.println('\n Linking OSM "implies", "combines" and "links" relations to graph concepts:')
         self.osmLinksToConcept()
 
-        fullPath = utils.outputFile(utils.dataDir() + 'temp/', self.outputName, self.outputEnding, useDateEnding=True)
+        fullPath = utils.outputFile(utils.tempDir(), self.outputName, self.outputEnding, useDateEnding=True)
         self.console.println('\n Serializing graph to: ' + fullPath)
         self.rdfGraph.serialize(fullPath)
         self.console.println('\n Finished creating TagFinder BaseThesaurus')
@@ -238,6 +239,7 @@ class BaseThesaurus:
             self.updateTagLinks(concept=keyConcept, key=key, wikiPageJson=keyWikiPageJson)
             self.addImageScopeNote(keyConcept, keyWikiPageJson)
 
+        self.rdfGraph.addEditorialNote(keyConcept, self.editNote)
 
         return keyConcept
 
@@ -257,6 +259,10 @@ class BaseThesaurus:
             self.updateTagLinks(concept=tagConcept, key=key, value=value, wikiPageJson=tagWikiPageJson)
 
             self.addImageScopeNote(tagConcept, tagWikiPageJson)
+
+            self.rdfGraph.addEditorialNote(tagConcept, self.editNote)
+
+            return tagConcept
 
     def createGraph(self, keyList, tagMap):
         '''Fills rdfGraph with keys and tags.'''

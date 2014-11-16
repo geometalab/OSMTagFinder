@@ -55,24 +55,29 @@ class Indexer:
 
         self.commit()
 
-    nonAlpha = re.compile('[^a-zA-Z]')
+    splitChars = re.compile('[ =".,:;/\?\(\)\]\[\!\*]')
     def addToWordList(self, words):
         lang = words.language
-        wordList = self.nonAlpha.split(words)
+        wordList = self.splitChars.split(words)
         if lang == 'en':
             for word in wordList:
-                self.wordSetEN.add(word)
+                if len(word) > 1:
+                    word = utils.eszettToSS(word)
+                    self.wordSetEN.add(word)
         elif lang == 'de':
             for word in wordList:
-                self.wordSetDE.add(word)
+                if len(word) > 1:
+                    word = utils.eszettToSS(word)
+                    self.wordSetDE.add(word)
         else:
             translator = Translator()
             for word in wordList:
-                if word not in self.wordSetDE and word not in self.wordSetEN :
+                if len(word) > 1 and word not in self.wordSetDE and word not in self.wordSetEN :
                     try:
                         transWordDE = translator.translateENToDE(word)
+                        transWordDE = utils.eszettToSS(transWordDE)
                         self.wordSetDE.add(transWordDE)
-                        self.wordSetEN.add(word)
+                        self.wordSetEN.add(utils.eszettToSS(word))
                     except:
                         pass
 
@@ -123,7 +128,7 @@ class Indexer:
 
 
 if __name__ == '__main__':
-    rdfGraph = RDFGraph(utils.dataDir() + 'tagfinder_thesaurus_141113.rdf')
+    rdfGraph = RDFGraph(utils.dataDir() + 'tagfinder_thesaurus_141116.rdf')
     Indexer(rdfGraph)
 
 

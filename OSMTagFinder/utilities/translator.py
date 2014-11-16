@@ -32,3 +32,6 @@ class Translator:
         if lang is None or lang == '':
             lang = 'en'
         return self.gs.translate(text, 'de', lang)
+
+
+

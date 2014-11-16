@@ -25,14 +25,6 @@ class TagResults:
     def sortKey(self, tag):
         return int(tag['countAll'])
 
-    def isKey(self, rdfGraph, subject):
-        keyScheme = self.cl.getThesaurusString('KEY_SCHEME_NAME')
-        return rdfGraph.isInScheme(subject, keyScheme)
-
-    def isTag(self, rdfGraph, subject):
-        tagScheme = self.cl.getThesaurusString('TAG_SCHEME_NAME')
-        return rdfGraph.isInScheme(subject, tagScheme)
-
     def buildOSMLinksDictList(self, listOSMLinks):
         retList = []
         keyBaseLink = self.cl.getThesaurusString('KEY_SCHEME_NAME') + ':' # http://wiki.openstreetmap.org/wiki/Key:
@@ -60,7 +52,7 @@ class TagResults:
         for subject in rawResults:
             tag = {}
 
-            prefLabelGen = rdfGraph.getPrefLabels(subject)
+            prefLabelGen = rdfGraph.getPrefLabel(subject)
             broaderGen = rdfGraph.getBroader(subject)
             narrowerGen = rdfGraph.getNarrower(subject)
             scopeNoteGen = rdfGraph.getScopeNote(subject)
@@ -77,8 +69,8 @@ class TagResults:
 
             tag['subject'] = str(subject)
 
-            tag['isKey'] = self.isKey(rdfGraph, subject)
-            tag['isTag'] = self.isTag(rdfGraph, subject)
+            tag['isKey'] = rdfGraph.isOSMKey(subject)
+            tag['isTag'] = rdfGraph.isOSMTag(subject)
 
             tag['prefLabel'] = utils.genGetFirstItem(prefLabelGen)
             tag['broader']   = utils.genToList(broaderGen)

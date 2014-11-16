@@ -16,6 +16,7 @@ _dataFolderName = 'data'
 _indexerFolderName = 'indexer'
 _staticFolderName = 'static'
 _templatesFolderName = 'templates'
+_tempFolderName = 'temp'
 
 indexName = 'index'  # for indexer and graphsearch
 
@@ -30,6 +31,10 @@ def rootDir():
 
 def dataDir():
     path = rootDir() + '/' + _dataFolderName + '/'
+    return _checkPath(path)
+
+def tempDir():
+    path = rootDir() + '/' + _dataFolderName + '/' + _tempFolderName + '/'
     return _checkPath(path)
 
 def indexerDir():
@@ -62,18 +67,18 @@ def validCharsCheck(r):
     return True
 
 def hasEszett(word):
-    return u'\xc3\x9f' in word
+    return 'ß' in word
 
 def hasSS(word):
     return 'ss' in word
 
 def eszettToSS(word):
     if word is not None:
-        return word.replace(u'\xc3\x9f', 'ss')
+        return word.replace('ß', 'ss') # \xc3\x9f
 
 def ssToEszett(word):
     if word is not None:
-        return word.replace('ss', u'\xc3\x9f')
+        return word.replace('ss', 'ß') # \xc3\x9f
 
 _digits = re.compile('\d')
 def containsDigits(d):
@@ -86,9 +91,9 @@ def outputFile(directory, outputName, outputExtension, useDateEnding):
         dateString = datetime.date.today().isoformat()
         dateString = dateString.replace('-', '')
         dateString = dateString[2:]  # substring from incl. 3rd char to end of string
-        return directory + '/' + outputName + '_' + dateString + outputExtension
+        return directory + outputName + '_' + dateString + outputExtension
     else:
-        return directory + '/' + outputName + outputExtension
+        return directory + outputName + outputExtension
 
 def fileLoader(baseDir, extension):
     '''Returns a list of files that are in the 'baseDir' directory or in a subdirectory
