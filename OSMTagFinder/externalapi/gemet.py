@@ -64,13 +64,16 @@ class Gemet(ThesauriBase):
                     for relation in relativesJson:
                         if 'related' in relation['relation']:
                             thisAltLabel = self.getConceptForUri(relation['target'], apiLang)
-                            self.relatedSet.append(utils.eszettToSS(thisAltLabel))
+                            if thisAltLabel is not None:
+                                self.relatedSet.append(utils.eszettToSS(thisAltLabel))
                         if 'narrower' in relation['relation']:
                             thisNarrowerLabel = self.getConceptForUri(relation['target'], apiLang)
-                            self.narrowerSet.append(utils.eszettToSS(thisNarrowerLabel))
+                            if thisNarrowerLabel is not None:
+                                self.narrowerSet.append(utils.eszettToSS(thisNarrowerLabel))
                         if 'broader' in relation['relation']:
                             thisBroaderLabel = self.getConceptForUri(relation['target'], apiLang)
-                            self.broaderSet.append(utils.eszettToSS(thisBroaderLabel))
+                            if thisBroaderLabel is not None:
+                                self.broaderSet.append(utils.eszettToSS(thisBroaderLabel))
 
 
 
@@ -78,7 +81,9 @@ class Gemet(ThesauriBase):
         conceptResult = requests.get(self.getConceptByID + self.conceptSuffix + gemetConceptUri + self.langSuffix + apiLang)
         if conceptResult.status_code < 300:
             conceptJson = conceptResult.json()
-            return (conceptJson['preferredLabel'])['string']
+            if 'preferredLabel' in conceptJson:
+                return (conceptJson['preferredLabel'])['string']
+        return None
 
     def getRelated(self):
         return self.relatedSet
@@ -91,7 +96,7 @@ class Gemet(ThesauriBase):
 
 
 if __name__ == '__main__':
-    g = Gemet('shop', 'en')
+    g = Gemet('Geschäft', 'de')
 
     print "Related: "
     for related in g.getRelated():

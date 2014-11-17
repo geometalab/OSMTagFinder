@@ -85,27 +85,27 @@ class EditTerms:
         self.__currentRelTerm = self.relatedTerm.createTerm(keyTagConcept, prefLabelEN, prefLabelDE)
 
     def addAltLabelEN(self, altLabelEN):
-        if self.__currentRelTerm is not None and altLabelEN is not None:
+        if self.__currentRelTerm is not None and altLabelEN is not None and len(altLabelEN) > 0:
             self.relatedTerm.addAltLabelEN(self.__currentRelTerm, altLabelEN)
 
     def addAltLabelDE(self, altLabelDE):
-        if self.__currentRelTerm is not None and altLabelDE is not None:
+        if self.__currentRelTerm is not None and altLabelDE is not None and len(altLabelDE) > 0:
             self.relatedTerm.addAltLabelDE(self.__currentRelTerm, altLabelDE)
 
     def addNarrowerLiteralEN(self, narrowerEN):
-        if self.__currentRelTerm is not None and narrowerEN is not None:
+        if self.__currentRelTerm is not None and narrowerEN is not None and len(narrowerEN) > 0:
             self.relatedTerm.addNarrowerLiteralEN(self.__currentRelTerm, narrowerEN)
 
     def addNarrowerLiteralDE(self, narrowerDE):
-        if self.__currentRelTerm is not None and narrowerDE is not None:
+        if self.__currentRelTerm is not None and narrowerDE is not None and len(narrowerDE) > 0:
             self.relatedTerm.addNarrowerLiteralDE(self.__currentRelTerm, narrowerDE)
 
     def addBroaderLiteralEN(self, broaderEN):
-        if self.__currentRelTerm is not None and broaderEN is not None:
+        if self.__currentRelTerm is not None and broaderEN is not None and len(broaderEN) > 0:
             self.relatedTerm.addBroaderLiteralEN(self.__currentRelTerm, broaderEN)
 
     def addBroaderLiteralDE(self, broaderDE):
-        if self.__currentRelTerm is not None and broaderDE is not None:
+        if self.__currentRelTerm is not None and broaderDE is not None and len(broaderDE) > 0:
             self.relatedTerm.addBroaderLiteralDE(self.__currentRelTerm, broaderDE)
 
 

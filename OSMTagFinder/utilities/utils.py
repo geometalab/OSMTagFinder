@@ -9,6 +9,7 @@ import re
 import os
 import datetime
 import json
+import chardet
 
 
 _invalidChars = [' ', ';']
@@ -17,9 +18,31 @@ _indexerFolderName = 'indexer'
 _staticFolderName = 'static'
 _templatesFolderName = 'templates'
 _tempFolderName = 'temp'
+_semnetFolderName = 'semnet'
 
-indexName = 'index'  # for indexer and graphsearch
+indexName = 'index'  # for indexer.py and graphsearch.py
 
+
+def specCharEnc(text):
+    text = encode(text)
+    text = text.replace('Ä', '\xc3\x84')
+    text = text.replace('ä', '\xc3\xa4')
+    text = text.replace('Ö', '\xc3\x96')
+    text = text.replace('ö', '\xc3\xb6')
+    text = text.replace('Ü', '\xc3\x9c')
+    text = text.replace('ü', '\xc3\xbc')
+    text = text.replace('ß', '\xc3\x9f')
+    return encode(text)
+
+def encode(text):
+    if text is not None and not isinstance(text, unicode) and len(text) > 0:
+        encoding = chardet.detect(text)
+        return text.decode(encoding['encoding'])
+    else:
+        return text
+
+def checkFile(filePath):
+    return os.path.isfile(filePath)
 
 def _checkPath(path):
     if not os.path.exists(path):
@@ -35,6 +58,10 @@ def dataDir():
 
 def tempDir():
     path = rootDir() + '/' + _dataFolderName + '/' + _tempFolderName + '/'
+    return _checkPath(path)
+
+def semnetDir():
+    path = rootDir() + '/' + _dataFolderName + '/' + _semnetFolderName + '/'
     return _checkPath(path)
 
 def indexerDir():
@@ -67,6 +94,7 @@ def validCharsCheck(r):
     return True
 
 def hasEszett(word):
+    word = encode(word)
     return 'ß' in word
 
 def hasSS(word):
@@ -74,11 +102,13 @@ def hasSS(word):
 
 def eszettToSS(word):
     if word is not None:
+        word = encode(word)
         return word.replace('ß', 'ss') # \xc3\x9f
 
 def ssToEszett(word):
     if word is not None:
-        return word.replace('ss', 'ß') # \xc3\x9f
+        word = encode(word)
+        return encode(word.replace('ss', 'ß')) # \xc3\x9f
 
 _digits = re.compile('\d')
 def containsDigits(d):

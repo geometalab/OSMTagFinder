@@ -19,6 +19,7 @@ from basethesaurus import BaseThesaurus
 from editterms import EditTerms
 from thesaurus.rdfgraph import RDFGraph
 from externalapi.thesauri import Thesauri
+import chardet
 
 class Console:
 
@@ -288,7 +289,7 @@ class Console:
 
             self.copyToCache(str(subject))
 
-            translatedLabel = translator.translateENtoDE(mainWord)
+            translatedLabel = utils.eszettToSS(translator.translateENtoDE(mainWord))
 
             self.println('')
             self.printlnWhiteOnGreen('')
@@ -305,6 +306,7 @@ class Console:
             preferredTermDE = self.readLine(' German  preferred term: ')
 
             if len(preferredTermEN) < 1 or len(preferredTermDE) < 1: continue
+
             editTerms.createTerm(subject, preferredTermEN, preferredTermDE)
 
             thesauriEN = Thesauri(preferredTermEN, 'en')
@@ -381,8 +383,8 @@ class Console:
         return False
 
     def readLine(self, prefix='>'):
-        inputText = raw_input(prefix)
-        return inputText
+        rawData = raw_input(prefix)
+        return utils.encode(rawData)
 
     def repeatedOptRead(self, optToActionMap, optToParamMap=None, intro=None):
         didAction = False

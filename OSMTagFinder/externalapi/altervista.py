@@ -63,6 +63,7 @@ class Altervista(ThesauriBase):
     def fillToSets(self, splitArray):
         for term in splitArray:
             term = term.replace(' (similar term)', '')
+            term = term.replace(' (related term)', '')
             term = term.replace(' (umgangssprachlich)', '')
             term = term.replace(' (derb)', '')
             term = term.replace(' (fachsprachlich)', '')

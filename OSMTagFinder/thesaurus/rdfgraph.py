@@ -13,14 +13,14 @@ from rdflib.util import guess_format
 
 from utilities import utils
 from utilities.configloader import ConfigLoader
-#import logging
+import logging
 
 # from skosserializer import SKOSSerializer
 
 class RDFGraph:
     encoding = 'utf-8'
 
-    #logging.basicConfig()
+    logging.basicConfig()
 
     graph = None
 
@@ -39,7 +39,7 @@ class RDFGraph:
 
     def __init__ (self, filePath=None):
         self.graph = Graph()
-        if filePath is not None:
+        if filePath is not None and utils.checkFile(filePath):
             self.graph = self.load(filePath)
 
         self.graph.bind('foaf', self.foaf)
@@ -62,20 +62,11 @@ class RDFGraph:
         plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')  # register(name, kind, module_path, class_name)
         self.graph.serialize(destination=filepath, format='skos', encoding=self.encoding)
 
-    def charsReplacing(self, objStr):
-        objStr = objStr.replace('Ä', '\xc3\x84')
-        objStr = objStr.replace('ä', '\xc3\xa4')
-        objStr = objStr.replace('Ö', '\xc3\x96')
-        objStr = objStr.replace('ö', '\xc3\xb6')
-        objStr = objStr.replace('Ü', '\xc3\x9c')
-        objStr = objStr.replace('ü', '\xc3\xbc')
-        objStr = objStr.replace('ß', '\xc3\x9f')
-
     def prepareLiteral(self, objStr):
-        #objStr = self.charsReplacing(objStr)
+        objStr = utils.encode(objStr)
         objStr = objStr.strip()
         objStr = utils.eszettToSS(objStr)
-        return objStr
+        return utils.encode(objStr)
 
     def addConceptScheme(self, subject):
         self.graph.add((URIRef(str(subject)), RDF.type, SKOS.ConceptScheme))
@@ -383,14 +374,12 @@ if __name__ == '__main__':
         print j
     print '\n'
 
-
-
-    graph = Graph()
+    '''graph = Graph()
     g = graph.parse(utils.dataDir() + 'gemet\gemet_concept_en.rdf')
     for i in g.objects(URIRef('http://www.eionet.europa.eu/gemet/concept/8073'), SKOS.prefLabel):
         print i
     print str(len(graph))
 
-    print '\n'
+    print '\n' '''
 
 
