@@ -13,16 +13,17 @@ from rdflib.util import guess_format
 
 from utilities import utils
 from utilities.configloader import ConfigLoader
-import logging
+#import logging
 
 # from skosserializer import SKOSSerializer
 
 class RDFGraph:
     encoding = 'utf-8'
 
-    logging.basicConfig()
+    #logging.basicConfig()
 
     graph = None
+    filePath = None
 
     cl = ConfigLoader()
 
@@ -40,6 +41,7 @@ class RDFGraph:
     def __init__ (self, filePath=None):
         self.graph = Graph()
         if filePath is not None and utils.checkFile(filePath):
+            self.filePath = filePath
             self.graph = self.load(filePath)
 
         self.graph.bind('foaf', self.foaf)
@@ -58,7 +60,7 @@ class RDFGraph:
         guessedFormat = guess_format(filePath)
         return self.graph.parse(filePath, format=guessedFormat)
 
-    def serialize(self, filepath=(utils.dataDir() + 'default.rdf')):
+    def serialize(self, filepath=(utils.tempDir() + 'default.rdf')):
         plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')  # register(name, kind, module_path, class_name)
         self.graph.serialize(destination=filepath, format='skos', encoding=self.encoding)
 
@@ -68,114 +70,117 @@ class RDFGraph:
         objStr = utils.eszettToSS(objStr)
         return utils.encode(objStr)
 
+    def prepareURIRef(self, objStr):
+        return ( self.prepareLiteral(objStr) ).replace(' ','')
+
     def addConceptScheme(self, subject):
-        self.graph.add((URIRef(str(subject)), RDF.type, SKOS.ConceptScheme))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), RDF.type, SKOS.ConceptScheme))
         return subject
 
     def addHasTopConcept(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), SKOS.hasTopConcept, URIRef(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.hasTopConcept, URIRef(obj)))
         return subject
 
     def addInScheme(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), SKOS.inScheme, URIRef(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.inScheme, URIRef(obj)))
         return subject
 
     def addConcept(self, subject):
-        self.graph.add((URIRef(str(subject)), RDF.type, SKOS.Concept))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), RDF.type, SKOS.Concept))
         return subject
 
     def addDefinition(self, subject, obj, language):
-        self.graph.add((URIRef(str(subject)), SKOS.definition, Literal(self.prepareLiteral(str(obj)), lang=language)))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.definition, Literal(self.prepareLiteral(obj), lang=language)))
 
     def addScopeNote(self, subject, obj, language):
-        self.graph.add((URIRef(str(subject)), SKOS.scopeNote, Literal(self.prepareLiteral(str(obj)), lang=language)))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.scopeNote, Literal(self.prepareLiteral(obj), lang=language)))
 
     def addEditorialNote(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), SKOS.editorialNote, Literal(self.prepareLiteral(str(obj)))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.editorialNote, Literal(self.prepareLiteral(obj))))
 
     def addPrefLabel(self, subject, obj, language=None):
         if language is None:
-            self.graph.add((URIRef(str(subject)), SKOS.prefLabel, Literal(self.prepareLiteral(str(obj)))))
+            self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.prefLabel, Literal(self.prepareLiteral(obj))))
         else:
-            self.graph.add((URIRef(str(subject)), SKOS.prefLabel, Literal(self.prepareLiteral(str(obj)), lang=language)))
+            self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.prefLabel, Literal(self.prepareLiteral(obj), lang=language)))
         return subject
 
     def addAltLabel(self, subject, obj, language):
-        self.graph.add((URIRef(str(subject)), SKOS.altLabel, Literal(self.prepareLiteral(str(obj)), lang=language)))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.altLabel, Literal(self.prepareLiteral(obj), lang=language)))
         return subject
 
     def addNarrower(self, subject, obj):
         '''subject > object. E.g. concept_animals narrower concept_mammals: '''
-        self.graph.add((URIRef(str(subject)), SKOS.narrower, URIRef(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.narrower, URIRef(obj)))
         return subject
 
     def addNarrowerLiteral(self, subject, obj, language):
-        self.graph.add((URIRef(str(subject)), SKOS.narrower, Literal(self.prepareLiteral(str(obj)), lang=language)))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.narrower, Literal(self.prepareLiteral(obj), lang=language)))
         return subject
 
     def addBroader(self, subject, obj):
         '''subject > object. E.g. concept_mammals narrower concept_animals: '''
-        self.graph.add((URIRef(str(subject)), SKOS.broader, URIRef(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.broader, URIRef(obj)))
         return subject
 
     def addBroaderLiteral(self, subject, obj, language):
-        self.graph.add((URIRef(str(subject)), SKOS.broader, Literal(self.prepareLiteral(str(obj)), lang=language)))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.broader, Literal(self.prepareLiteral(obj), lang=language)))
         return subject
 
     def addRelated(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), SKOS.related, URIRef(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.related, URIRef(obj)))
         return subject
 
     def addRelatedMatch(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), SKOS.relatedMatch, URIRef(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.relatedMatch, URIRef(obj)))
         return subject
 
     def addDepiction(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), FOAF.depiction, URIRef(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), FOAF.depiction, URIRef(obj)))
         return subject
 
     def addPrefSymbol(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), SKOS.prefSymbol, URIRef(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.prefSymbol, URIRef(obj)))
         return subject
 
     def addOSMNode(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), self.osmNode, Literal(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), self.osmNode, Literal(obj)))
         return subject
 
     def addOSMWay(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), self.osmWay, Literal(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), self.osmWay, Literal(obj)))
         return subject
 
     def addOSMArea(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), self.osmArea, Literal(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), self.osmArea, Literal(obj)))
         return subject
 
     def addOSMRelation(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), self.osmRelation, Literal(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), self.osmRelation, Literal(obj)))
         return subject
 
     def addOSMImpliesLiteral(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), self.osmImplies, Literal(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), self.osmImplies, Literal(obj)))
         return subject
 
     def addOSMImpliesURIRef(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), self.osmImplies, URIRef(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), self.osmImplies, URIRef(obj)))
         return subject
 
     def addOSMCombinesLiteral(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), self.osmCombines, Literal(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), self.osmCombines, Literal(obj)))
         return subject
 
     def addOSMCombinesURIRef(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), self.osmCombines, URIRef(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), self.osmCombines, URIRef(obj)))
         return subject
 
     def addOSMLinksLiteral(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), self.osmLinks, Literal(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), self.osmLinks, Literal(obj)))
         return subject
 
     def addOSMLinksURIRef(self, subject, obj):
-        self.graph.add((URIRef(str(subject)), self.osmLinks, URIRef(str(obj))))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), self.osmLinks, URIRef(obj)))
         return subject
 
     def triplesCount(self):
@@ -185,19 +190,19 @@ class RDFGraph:
         return self.graph.query(query)
 
     def getSubByPrefLabel(self, obj):
-        generatorList = self.graph.subjects(predicate=SKOS.prefLabel, object=Literal(str(obj)))
+        generatorList = self.graph.subjects(predicate=SKOS.prefLabel, object=Literal(obj))
         return utils.genGetFirstItem(generatorList)
 
     def getInScheme(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.inScheme)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.inScheme)
         return generatorList
 
     def getSubByScheme(self, obj):
-        generatorList = self.graph.subjects(predicate=SKOS.inScheme, object=URIRef(str(obj)))
+        generatorList = self.graph.subjects(predicate=SKOS.inScheme, object=URIRef(obj))
         return generatorList
 
     def isInScheme(self, subject, obj):
-        refScheme = URIRef(str(obj))
+        refScheme = URIRef(obj)
         generator = self.getInScheme(subject)
         for item in generator:
             if item == refScheme:
@@ -213,72 +218,72 @@ class RDFGraph:
         return self.isInScheme(subject, tagScheme)
 
     def getDefinition(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.definition)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.definition)
         return generatorList
 
     def getScopeNote(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.scopeNote)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.scopeNote)
         return generatorList
 
     def getEditorialNote(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.editorialNote)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.editorialNote)
         return utils.genGetFirstItem(generatorList)
 
     def getScopeNoteByLang(self, subject):
         pass
 
     def getPrefLabel(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.prefLabel)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.prefLabel)
         return generatorList
 
     def getAltLabel(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.altLabel)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.altLabel)
         return generatorList
 
     def getHiddenLabels(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.hiddenLabel)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.hiddenLabel)
         return generatorList
 
     def getNarrower(self, subject):
         '''Includes narrower literals and concepts. Check with 'type(item) is URIRef' for concept'''
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.narrower)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.narrower)
         return generatorList
 
     def getBroader(self, subject):
         '''Includes broader literals and concepts. Check with 'type(item) is URIRef' for concept'''
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.broader)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.broader)
         return generatorList
 
     def getDepiction(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), FOAF.depiction)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), FOAF.depiction)
         return generatorList
 
     def getPrefSymbol(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.prefSymbol)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.prefSymbol)
         return generatorList
 
     def getRelated(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.related)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.related)
         return generatorList
 
     def getRelatedMatch(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), SKOS.relatedMatch)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.relatedMatch)
         return generatorList
 
     def getOSMNode(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), self.osmNode)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), self.osmNode)
         return generatorList
 
     def getOSMWay(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), self.osmWay)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), self.osmWay)
         return generatorList
 
     def getOSMArea(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), self.osmArea)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), self.osmArea)
         return generatorList
 
     def getOSMRelation(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), self.osmRelation)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), self.osmRelation)
         return generatorList
 
     def getSubObjOSMImplies(self):
@@ -294,28 +299,28 @@ class RDFGraph:
         return genTupleList
 
     def getOSMImplies(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), self.osmImplies)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), self.osmImplies)
         return generatorList
 
     def getOSMCombines(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), self.osmCombines)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), self.osmCombines)
         return generatorList
 
     def getOSMLinks(self, subject):
-        generatorList = self.graph.objects(URIRef(str(subject)), self.osmLinks)
+        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), self.osmLinks)
         return generatorList
 
     def removeOSMImpliesLiteral(self, subject, obj):
-        self.graph.remove( (URIRef(str(subject)), self.osmImplies, Literal(str(obj))) )
+        self.graph.remove( (URIRef(self.prepareURIRef(subject)), self.osmImplies, Literal(obj)) )
 
     def removeOSMCombinesLiteral(self, subject, obj):
-        self.graph.remove( (URIRef(str(subject)), self.osmCombines, Literal(str(obj))) )
+        self.graph.remove( (URIRef(self.prepareURIRef(subject)), self.osmCombines, Literal(obj)) )
 
     def removeOSMLinksLiteral(self, subject, obj):
-        self.graph.remove( (URIRef(str(subject)), self.osmLinks, Literal(str(obj))) )
+        self.graph.remove( (URIRef(self.prepareURIRef(subject)), self.osmLinks, Literal(obj)) )
 
     def removeEditorialNote(self, subject, obj):
-        self.graph.remove( (URIRef(str(subject)), SKOS.editorialNote, Literal(str(obj))) )
+        self.graph.remove( (URIRef(self.prepareURIRef(subject)), SKOS.editorialNote, Literal(obj)) )
 
 
 if __name__ == '__main__':

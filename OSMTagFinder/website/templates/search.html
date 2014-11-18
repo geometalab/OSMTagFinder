@@ -163,8 +163,8 @@
             {% endfor %}
 
         {% elif q %} <!-- None found or no search (if q is None) -->
-            <h5 lang="en" class="none_found">Your search - {{ q }} - did not match any Open Street Map  tags. </h5>
-            <h5 lang="de" class="none_found">Es wurden keine mit Ihrer Suchanfrage - {{ q }} - übereinstimmende Open Street Map Tags gefunden.</h5>
+            <h5 lang="en" class="none_found">Your search - <b>{{ q }}</b> - did not match any Open Street Map  tags. </h5>
+            <h5 lang="de" class="none_found">Es wurden keine mit Ihrer Suchanfrage - <b>{{ q }}</b> - übereinstimmende Open Street Map Tags gefunden.</h5>
             <h5 lang="en" class="suggestion_header">Suggestions:</h5>
             <h5 lang="de" class="suggestion_header">Vorschläge:</h5>
             <ul id="suggestion_list">

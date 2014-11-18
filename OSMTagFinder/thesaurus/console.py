@@ -19,7 +19,6 @@ from basethesaurus import BaseThesaurus
 from editterms import EditTerms
 from thesaurus.rdfgraph import RDFGraph
 from externalapi.thesauri import Thesauri
-import chardet
 
 class Console:
 
@@ -33,14 +32,17 @@ class Console:
     __partInt = 0
     __totalInt = 0
     __commands = { }
+    editTerms = None
+
     prefix = '>'
     unknownMsg = 'Undefined suggestion or command.'
 
     rdfGraph = None
 
     def __init__(self, fileDescriptor=None, percentNewLine=True):
-        # Work around <http://bugs.python.org/issue6058>.
-        codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None)
+
+        codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None) # Work around <http://bugs.python.org/issue6058>.
+
         self.fileDescr = fileDescriptor # e.g sys.stdout
         self.percentNewLine = percentNewLine
 
@@ -228,7 +230,7 @@ class Console:
         self.println(' Loading RDF graph...')
         self.rdfGraph = RDFGraph(filePath)
         name = filePath[filePath.rfind('\\') + 1:]
-        print ' Loading of: ' + name + ' complete!'
+        self.println(' Loading of: ' + name + ' complete!')
 
     def load(self):
         self.println('')
@@ -256,22 +258,22 @@ class Console:
 
     def save(self):
         self.println('')
-        if self.rdfGraph is not None:
-            path = utils.outputFile(utils.tempDir(), self.outputName, self.outputEnding, True)
+        if self.editTerms is not None:
             self.println(' Saving RDF graph...')
-            self.rdfGraph.serialize(path)
-            self.println(' Saving completed, path: ' + path)
+            filePath = self.editTerms.save()
+            name = filePath[filePath.rfind('\\') + 1:]
+            self.println(' Saving of: ' + name + ' complete!')
         else:
-            self.println('Saving failed. No graph found.')
+            self.println('No graph found or there were no changes!')
         self.println('')
 
     def edit(self):
 
         translator = Translator()
 
-        editTerms = EditTerms(self.rdfGraph)
-        while(editTerms.hasNext()):
-            subject = editTerms.getNext()
+        self.editTerms = EditTerms(self.rdfGraph)
+        while(self.editTerms.hasNext()):
+            subject = self.editTerms.getNext()
 
             if subject is None: continue
             isKey = self.rdfGraph.isOSMKey(subject)
@@ -307,19 +309,19 @@ class Console:
 
             if len(preferredTermEN) < 1 or len(preferredTermDE) < 1: continue
 
-            editTerms.createTerm(subject, preferredTermEN, preferredTermDE)
+            self.editTerms.createTerm(subject, preferredTermEN, preferredTermDE)
 
             thesauriEN = Thesauri(preferredTermEN, 'en')
             thesauriDE = Thesauri(preferredTermDE, 'de')
 
             self.println('')
-            self.doSuggestions(' Related ', thesauriEN.getRelated(), thesauriDE.getRelated(), editTerms.addAltLabelEN, editTerms.addAltLabelDE)
+            self.doSuggestions(' Related ', thesauriEN.getRelated(), thesauriDE.getRelated(), self.editTerms.addAltLabelEN, self.editTerms.addAltLabelDE)
 
             self.println('')
-            self.doSuggestions(' Broader ', thesauriEN.getBroader(), thesauriDE.getBroader(), editTerms.addBroaderLiteralEN, editTerms.addBroaderLiteralDE)
+            self.doSuggestions(' Broader ', thesauriEN.getBroader(), thesauriDE.getBroader(), self.editTerms.addBroaderLiteralEN, self.editTerms.addBroaderLiteralDE)
 
             self.println('')
-            self.doSuggestions(' Narrower ', thesauriEN.getNarrower(), thesauriDE.getNarrower(), editTerms.addNarrowerLiteralEN, editTerms.addNarrowerLiteralDE)
+            self.doSuggestions(' Narrower ', thesauriEN.getNarrower(), thesauriDE.getNarrower(), self.editTerms.addNarrowerLiteralEN, self.editTerms.addNarrowerLiteralDE)
             self.println('')
 
         self.println('')

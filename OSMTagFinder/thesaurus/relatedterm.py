@@ -56,5 +56,9 @@ class RelatedTerm:
         self.rdfGraph.addBroaderLiteral(termConcept, broaderDE, 'de')
         return termConcept
 
+    def save(self):
+        self.rdfGraph.serialize(self.rdfGraph.filePath)
+        return self.rdfGraph.filePath
+
 
 

@@ -128,7 +128,7 @@ class Indexer:
 
 
 if __name__ == '__main__':
-    rdfGraph = RDFGraph(utils.dataDir() + 'tagfinder_thesaurus_141116.rdf')
+    rdfGraph = RDFGraph(utils.dataDir() + 'tagfinder_thesaurus.rdf')
     Indexer(rdfGraph)
 
 
