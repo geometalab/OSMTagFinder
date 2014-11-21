@@ -66,7 +66,7 @@ class TagResults:
 
             default = { 'count' : '0', 'use' : 'False' }
 
-            tag['subject'] = str(subject)
+            tag['subject'] = utils.encode(subject)
             tag['searchMeta'] = searchMeta
 
             tag['isKey'] = rdfGraph.isOSMKey(subject)

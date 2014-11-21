@@ -102,7 +102,7 @@ def validCharsCheck(r):
 
 def hasEszett(word):
     word = encode(word)
-    return 'ß' in word
+    return encode('ß') in word
 
 def hasSS(word):
     return 'ss' in word
@@ -110,12 +110,12 @@ def hasSS(word):
 def eszettToSS(word):
     if word is not None:
         word = encode(word)
-        return word.replace('ß', 'ss') # \xc3\x9f
+        return word.replace(encode('ß'), 'ss') # \xc3\x9f
 
 def ssToEszett(word):
     if word is not None:
         word = encode(word)
-        return encode(word.replace('ss', 'ß')) # \xc3\x9f
+        return encode(word.replace('ss', encode('ß'))) # \xc3\x9f
 
 _digits = re.compile('\d')
 def containsDigits(d):
@@ -167,7 +167,7 @@ def genGetFirstItem(generator):
         firstItem = generator.next()
     except StopIteration:
         return None
-    return str(firstItem)
+    return encode(firstItem)
 
 def genJsonToDict(generator, default=None):
     jsonStr = genGetFirstItem(generator)
