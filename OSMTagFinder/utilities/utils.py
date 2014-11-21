@@ -15,6 +15,7 @@ import chardet
 _invalidChars = [' ', ';']
 _dataFolderName = 'data'
 _indexerFolderName = 'indexer'
+_websiteFolderName = 'website'
 _staticFolderName = 'static'
 _templatesFolderName = 'templates'
 _tempFolderName = 'temp'
@@ -62,6 +63,10 @@ def tempDir():
     path = rootDir() + '/' + _dataFolderName + '/' + _tempFolderName + '/'
     return _checkPath(path)
 
+def websiteDir():
+    path = rootDir() + '/' + _dataFolderName + '/' + _websiteFolderName + '/'
+    return _checkPath(path)
+
 def semnetDir():
     path = rootDir() + '/' + _dataFolderName + '/' + _semnetFolderName + '/'
     return _checkPath(path)
@@ -71,11 +76,11 @@ def indexerDir():
     return _checkPath(path)
 
 def staticDir():
-    path = rootDir() + '/' + _staticFolderName + '/'
+    path = websiteDir() + '/' + _staticFolderName + '/'
     return _checkPath(path)
 
 def templatesDir():
-    path = rootDir() + '/' + _templatesFolderName + '/'
+    path = websiteDir() + '/' + _templatesFolderName + '/'
     return _checkPath(path)
 
 def isNumber(r):
@@ -167,7 +172,15 @@ def genGetFirstItem(generator):
 def genJsonToDict(generator, default=None):
     jsonStr = genGetFirstItem(generator)
     try:
-        return json.loads(str(jsonStr))
+        jsonData = json.loads(str(jsonStr))
+        retDict = { }
+        for key in jsonData:
+            value = jsonData[key]
+            if isNumber(value):
+                retDict[key] = int(value)
+            else:
+                retDict[key] = value
+        return retDict
     except ValueError:
         return default
 

@@ -20,7 +20,7 @@ class Indexer:
                     prefLabel=NGRAM(stored=True),
                     altLabel=NGRAM(stored=True),
                     hiddenLabel=NGRAM(stored=True),
-                    scopeNote=TEXT(stored=False),
+                    scopeNote=TEXT(stored=True),
                     spellingEN=TEXT(stored=True, spelling=True),
                     spellingDE=TEXT(stored=True, spelling=True))
 

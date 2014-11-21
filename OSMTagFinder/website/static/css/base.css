@@ -32,3 +32,11 @@ body {
 h5 {
     margin-bottom: 2px;
 }
+
+.jumbotron {
+    padding-top: 5px;
+    padding-bottom: 55px;
+    margin-top: 50px;
+    margin-bottom: 18px;
+    background-color: rgb(223, 240, 216)
+}

@@ -8,7 +8,6 @@ Created on 20.10.2014
 from utilities.configloader import ConfigLoader
 from utilities import utils
 
-
 class TagResults:
 
     cl = ConfigLoader()
@@ -46,11 +45,11 @@ class TagResults:
             retList.append(retDict)
         return retList
 
-
-
     def fillResultList(self, rdfGraph, rawResults):
         for subject in rawResults:
-            tag = {}
+            tag = { }
+
+            searchMeta = rawResults[subject]
 
             prefLabelGen = rdfGraph.getPrefLabel(subject)
             broaderGen = rdfGraph.getBroader(subject)
@@ -68,6 +67,7 @@ class TagResults:
             default = { 'count' : '0', 'use' : 'False' }
 
             tag['subject'] = str(subject)
+            tag['searchMeta'] = searchMeta
 
             tag['isKey'] = rdfGraph.isOSMKey(subject)
             tag['isTag'] = rdfGraph.isOSMTag(subject)
@@ -87,7 +87,7 @@ class TagResults:
             tag['combines'] = self.buildOSMLinksDictList( utils.genToList(osmCombinesGen) )
             tag['links'] = self.buildOSMLinksDictList( utils.genToList(osmLinksGen) )
 
-            tag['countAll'] = str(int(tag['node']['count']) + int(tag['way']['count']) + int(tag['relation']['count']) + int(tag['area']['count']))
+            tag['countAll'] = int(tag['node']['count']) + int(tag['way']['count']) + int(tag['relation']['count']) + int(tag['area']['count'])
 
             self.results.append(tag)
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block head %}
+    {{super()}}
+    <link href="{{ url_for('static', filename='css/error.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {{super()}}
+    <div class="container">
+        <div class="col-lg-20 col-md-20">
+            <div class="jumbotron">
+                <h3 lang="en"><b>405: Method Not Allowed</b></h3>
+                <h3 lang="de"><b>405: Methode ist nicht zugelassen</b></h3>
+                <p></p>
+                <h4 id="first_line_en" lang="en">The HTTP-method used to request a resource is not allowed.</h4>
+                <h4 id="first_line_de" lang="de">Die Anfrage auf gewünschte Ressource darf nur mit anderen HTTP-Methoden erfolgen.</h4>
+                <a id="tagfinder_link" href="{{ url_for('search') }}">Tag Finder</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

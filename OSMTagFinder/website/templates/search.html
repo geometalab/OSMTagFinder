@@ -30,8 +30,8 @@
 
         <!-- searchresults / content -->
         {% if results %}
-            <h5 lang="en" class="found">Found <b>{{ results|count }}</b> Open Street Map tags.</h5>
-            <h5 lang="de" class="found">Es wurden <b>{{ results|count }}</b> Open Street Map Tags gefunden.</h5>
+            <h5 lang="en" class="found">Found <b>{{ results|count }}</b> OpenStreetMap tags.</h5>
+            <h5 lang="de" class="found">Es wurden <b>{{ results|count }}</b> OpenStreetMap Tags gefunden.</h5>
             {% for result in results %}
                 <!--<hr>-->
                 <div class ="row">
@@ -44,16 +44,16 @@
                                     {% if result['depiction'] is none %}
                                         {% if result['isTag'] %}
                                             <a id="no_depiction_tag" class="thumbnail">
-                                                <p><img src="{{ url_for('static', filename='img/kv200_150_gray.png') }}" alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
+                                                <p><img class="image" src="{{ url_for('static', filename='img/kv200_150_gray.png') }}" alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
                                             </a>
                                         {% else %}
                                             <a id="no_depiction_key" class="thumbnail">
-                                                <p><img src="{{ url_for('static', filename='img/k200_150_gray.png') }}" alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
+                                                <p><img  class="image" src="{{ url_for('static', filename='img/k200_150_gray.png') }}" alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
                                             </a>
                                         {% endif %}
                                     {% else %}
                                         <a id="depiction" target="_tag" href="{{ result['depiction'] }}" class="thumbnail">
-                                            <p><img src="{{ result['depiction'] }}" alt="{{ result['prefLabel'] }}" align="left" width="200" height="150"></p>
+                                            <p><img class="image" src="{{ result['depiction'] }}" alt="{{ result['prefLabel'] }}" align="left" width="200" height="150"></p>
                                         </a>
                                     {% endif %}
 
@@ -107,34 +107,58 @@
                                 <h3><a target="_tag" href="{{ result['subject'] }}">{{ result['prefLabel'] }}=✱</a></h3> <!--✱✲-->
                             {% endif %}
 
+                            {% set no_element_en = '-' %}
+                            {% set no_element_de = '-' %}
+
+                            <!-- searchmeta -->
+                            {% if result['searchMeta'] %}
+                                <p class="meta_first_column" lang="en">Searchmeta:</p>
+                                <p class="meta_first_column" lang="de">Suchmeta:</p>
+                                {% set score = result['searchMeta']['score'] %}
+                                {% set searchMetasEN = 'Score: ' ~ score|round(2, 'floor') %} <!-- ~ converts to string in jinja2 and concatenates -->
+                                {% set searchMetasDE = 'Score: ' ~ score|round(2, 'floor') %}
+                                {% if result['searchMeta']['prefLabel']|count > 0 %}
+                                    {% set metasPrefLabel = result['searchMeta']['prefLabel']|join(", ") %}
+                                    {% set searchMetasEN = searchMetasEN + ' - Found in tag: ' ~ metasPrefLabel %}
+                                    {% set searchMetasDE = searchMetasDE + ' - Gefunden im Tag: ' ~ metasPrefLabel %}
+                                {% endif %}
+                                {% if result['searchMeta']['scopeNote']|count > 0 %}
+                                    {% set metasScopeNote = result['searchMeta']['scopeNote']|join(", ") %}
+                                    {% set searchMetasEN = searchMetasEN + ' - Found in description: ' ~ metasScopeNote %}
+                                    {% set searchMetasDE = searchMetasDE + ' - Gefunden in Beschreibung: ' ~ metasScopeNote %}
+                                {% endif %}
+                                <p class="meta_second_column" lang="en">{{ searchMetasEN }}</p>
+                                <p class="meta_second_column" lang="de">{{ searchMetasDE }}</p>
+                            {% endif %}
+
                             <!-- description logic -->
                             {% if result['scopeNote']['en']|count > 0 %}
                                 {% set scopeNote_en = result['scopeNote']['en'] %}
                             {% else %}
-                                {% set scopeNote_en = "No description available" %}
+                                {% set scopeNote_en = no_element_en %}
                             {% endif %}
                             {% if result['scopeNote']['de']|count > 0 %}
                                 {% set scopeNote_de = result['scopeNote']['de'] %}
                             {% else %}
-                                {% set scopeNote_de = "Keine Beschreibung vorhanden" %}
+                                {% set scopeNote_de = no_element_de %}
                             {% endif %}
 
-                            <!-- list macro -->
+                            <!-- link list macro -->
                             {%- macro listlinks(linkLabelList, no_element_en, no_element_de, separator=", ") -%}
-                                {%- if linkLabelList|count > 0 %}
+                                {%- if linkLabelList|count > 0 -%}
                                     {%- for linkLabel in linkLabelList -%}
-                                        {%- if linkLabel['link'] is none %}
+                                        {%- if linkLabel['link'] is none -%}
                                             {{ linkLabel['label'] }}
-                                        {%- else %}
+                                        {%- else -%}
                                             <a class="osm_links" target="_tag" href="{{ linkLabel['link'] }}">{{ linkLabel['label'] }}</a>
                                         {%- endif %}
-                                        {%- if not loop.last %}{{ separator }}&shy;{%- endif %}
+                                        {%- if not loop.last -%}{{ separator }}&shy;{%- endif -%}
                                     {%- endfor %}
-                                {%- else %}
+                                {%- else -%}
                                     <div lang ="en">{{ no_element_en }}</div>
                                     <div lang ="de">{{ no_element_de }}</div>
-                                {%- endif %}
-                            {%- endmacro %}
+                                {%- endif -%}
+                            {%- endmacro -%}
 
                             <!-- description -->
                             <p class="first_column" lang="en">Description:</p>
@@ -145,17 +169,17 @@
                             <!-- implied tags -->
                             <p class="first_column" lang="en">Implies:</p>
                             <p class="first_column" lang="de">Impliziert:</p>
-                            <p class="second_column">{{ listlinks(result['implies'], 'No implied tags available', 'Keine implizierten Tags vorhanden' ) }}</p>
+                            <p class="second_column">{{ listlinks(result['implies'], no_element_en, no_element_de ) }}</p>
 
                             <!-- combined tags -->
                             <p class="first_column" lang="en">Combined with:</p>
                             <p class="first_column" lang="de">Kombiniert mit:</p>
-                            <p class="second_column">{{ listlinks(result['combines'], 'No combinations available', 'Keine Kombinationen vorhanden' ) }}</p>
+                            <p class="second_column">{{ listlinks(result['combines'], no_element_en, no_element_de ) }}</p>
 
                             <!-- linked tags -->
                             <p class="first_column" lang="en">Linked with:</p>
                             <p class="first_column" lang="de">Verlinkt mit:</p>
-                            <p class="second_column">{{ listlinks(result['links'], 'No linked tags available', 'Keine verlinkten Tags vorhanden' ) }}</p>
+                            <p class="second_column">{{ listlinks(result['links'], no_element_en, no_element_de ) }}</p>
 
                         </div>
                     </div>
@@ -163,8 +187,8 @@
             {% endfor %}
 
         {% elif q %} <!-- None found or no search (if q is None) -->
-            <h5 lang="en" class="none_found">Your search - <b>{{ q }}</b> - did not match any Open Street Map  tags. </h5>
-            <h5 lang="de" class="none_found">Es wurden keine mit Ihrer Suchanfrage - <b>{{ q }}</b> - übereinstimmende Open Street Map Tags gefunden.</h5>
+            <h5 lang="en" class="none_found">Your search - <b>{{ q }}</b> - did not match any OpenStreetMap tags. </h5>
+            <h5 lang="de" class="none_found">Es wurden keine mit Ihrer Suchanfrage - <b>{{ q }}</b> - übereinstimmende OpenStreetMap Tags gefunden.</h5>
             <h5 lang="en" class="suggestion_header">Suggestions:</h5>
             <h5 lang="de" class="suggestion_header">Vorschläge:</h5>
             <ul id="suggestion_list">

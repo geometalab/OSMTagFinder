@@ -10,8 +10,9 @@ from utilities.translator import Translator
 from thesaurus.rdfgraph import RDFGraph
 from tagresults import TagResults
 
-from ordered_set import OrderedSet
+from collections import OrderedDict
 from whoosh.qparser import QueryParser
+#from whoosh.qparser import MultifieldParser
 import whoosh.index as index
 from whoosh.index import open_dir
 
@@ -33,81 +34,125 @@ class GraphSearch:
         word = utils.eszettToSS(word)
         return word
 
-    def search(self, word, includeScopeNote=False, translateDEToEN=False):
+    def searchPrefLabel(self, word, searcher):
+        if self.ix is None or searcher is None:
+            return None
+        query = QueryParser("prefLabel", self.ix.schema).parse(unicode(word))
+        return searcher.search(query, limit=None, terms=True)
 
-        retSet = OrderedSet()
-        if self.ix is None:
-            return retSet
+    def searchScopeNote(self, word, searcher):
+        if self.ix is None or searcher is None:
+            return None
+        query = QueryParser("scopeNote", self.ix.schema).parse(unicode(word))
+        return searcher.search(query, limit=None, terms=True)
 
-        with self.ix.searcher() as searcher:
-            if translateDEToEN:
-                try:
-                    word = Translator().translateDEtoEN(word)
-                except:
-                    pass
+    def fullSearch(self, word, translateDEToEN=False):
 
-            queryPrefLabel = QueryParser("prefLabel", self.ix.schema).parse(unicode(word))
-            queryAltLabel = QueryParser("altLabel", self.ix.schema).parse(unicode(word))
-            queryHiddenLabel = QueryParser("hiddenLabel", self.ix.schema).parse(unicode(word))
-
-            resultsPrefLabel = searcher.search(queryPrefLabel, limit=None, terms=True)
-            resultsAltLabel = searcher.search(queryAltLabel, limit=None, terms=True)
-            resultsHiddenLabel = searcher.search(queryHiddenLabel, limit=None, terms=True)
-
-            for result in resultsPrefLabel:
-                retSet.add(result['subject'])
-
-            for result in resultsAltLabel:
-                retSet.add(result['subject'])
-
-            for result in resultsHiddenLabel:
-                retSet.add(result['subject'])
-
-            if includeScopeNote:
-                queryScopeNote = QueryParser("scopeNote", self.ix.schema).parse(unicode(word))
-                resultsScopeNote = searcher.search(queryScopeNote, limit=None, terms=True)
-                for result in resultsScopeNote:
-                    retSet.add(result['subject'])
-
-        return retSet
-
-    def extendedSearch(self, word, translateDEToEN=False):
+        results = OrderedDict()
 
         word = self.prepareWord(word)
+        translatedWord = word
 
-        results = OrderedSet()
+        if translateDEToEN:
+            try:
+                translatedWord = Translator().translateDEtoEN(word)
+            except:
+                pass
 
-        if not translateDEToEN:
-            results = results | self.search(word, includeScopeNote=False, translateDEToEN=False)
+        # don't leave the following statement until all results are copied into another datastructure,
+        # otherwise the reader is closed.
+        with self.ix.searcher() as searcher:
 
-        if len(results) < self.threshold:
-            results = results | self.search(word, includeScopeNote=False, translateDEToEN=True)
+            allHits = None # only to get the correct whoosh score
 
-        if len(results) < self.threshold:
-            results = results | self.search(word, includeScopeNote=True, translateDEToEN=False)
+            if not translateDEToEN:
+                hits = self.searchPrefLabel(word, searcher)
+                self.updateResults(results, hits)
+                allHits = self.upgradeAndExtend(allHits, hits)
 
-        if len(results) < self.threshold:
-            results = results | self.search(word, includeScopeNote=True, translateDEToEN=True)
+            else:
+                hits = self.searchPrefLabel(translatedWord, searcher)
+                self.updateResults(results, hits)
+                allHits = self.upgradeAndExtend(allHits, hits)
 
-        if len(results) < self.threshold:
-            suggestions = SpellCorrect().listSuggestions(word)
-            for s in suggestions:
-                results = results | self.search(s, includeScopeNote=False, translateDEToEN=True)
+            if not translateDEToEN and len(hits) < self.threshold:
+                hits = self.searchScopeNote(word, searcher)
+                self.updateResults(results, hits)
+                allHits = self.upgradeAndExtend(allHits, hits)
 
-        if len(results) < self.threshold:
-            suggestions = SpellCorrect().listSuggestions(word)
-            for s in suggestions:
-                results = results | self.search(s, includeScopeNote=True, translateDEToEN=True)
+            elif translateDEToEN and len(hits) < self.threshold:
+                hits = self.searchScopeNote(translatedWord, searcher)
+                self.updateResults(results, hits)
+                allHits = self.upgradeAndExtend(allHits, hits)
+
+            if len(hits) < self.threshold:
+                suggestions = SpellCorrect().listSuggestions(word)
+                for s in suggestions:
+                    #s = Translator().translateDEtoEN(word)
+                    hits = self.searchPrefLabel(s, searcher)
+                    self.updateResults(results, hits)
+                    allHits = self.upgradeAndExtend(allHits, hits)
+
+                if len(hits) < self.threshold:
+                    for s in suggestions:
+                        hits = self.searchScopeNote(s, searcher)
+                        self.updateResults(results, hits)
+                        allHits = self.upgradeAndExtend(allHits, hits)
+
+            results = self.updateScore(results, allHits)
 
         return results
 
+    def upgradeAndExtend(self, allHits, hits):
+        if allHits is None:
+            allHits = hits
+        else:
+            allHits.upgrade_and_extend(hits)
+        return allHits
+
+    def updateScore(self, results, allHits):
+        if allHits is None: return results
+        for hit in allHits:
+            subject = hit['subject']
+            searchMeta = { } # temp
+            if subject in results:
+                searchMeta = results[subject]
+                searchMeta['score'] = hit.score
+            else:
+                searchMeta['score'] = hit.score
+            results[subject] = searchMeta
+        return results
+
+    def updateResults(self, results, hits):
+        if hits is None or not hits.has_matched_terms(): return results
+        for hit in hits:
+            matchedTerms = hit.matched_terms()
+            for matchedPair in matchedTerms:
+                searchedField = matchedPair[0]
+                searchedTerm = matchedPair[1]
+                subject = hit['subject']
+                searchMeta = { } # temp
+                if subject in results:
+                    searchMeta = results[subject]
+                    if searchedField in searchMeta:
+                        searchTerms = searchMeta[searchedField]
+                        searchTerms.append(searchedTerm)
+                        searchMeta[searchedField] = searchTerms
+                    else:
+                        searchMeta[searchedField] = [ searchedTerm ]
+                else:
+                    searchMeta[searchedField] = [ searchedTerm ]
+                results[subject] = searchMeta
+        return results
+
+
 if __name__ == '__main__':
 
-    rdfGraph = RDFGraph(utils.dataDir() + 'osm_tag_thesaurus_141030.rdf')
+    rdfGraph = RDFGraph(utils.dataDir() + 'tagfinder_thesaurus.rdf')
     gs = GraphSearch()
     while True:
         word = raw_input('Enter word to search for: ')
-        rawResults = gs.extendedSearch(word)
+        rawResults = gs.fullSearch(word)
         searchResults = TagResults(rdfGraph, rawResults)
         for item in searchResults.getResults():
             print '\t' + str(item)

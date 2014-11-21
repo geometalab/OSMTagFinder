@@ -46,10 +46,10 @@ class Console:
         self.fileDescr = fileDescriptor # e.g sys.stdout
         self.percentNewLine = percentNewLine
 
-        self.__commands['-info'] = self.info # adding function pointer to command
-        self.__commands['-load'] = self.load
-        self.__commands['-save'] = self.save
-        self.__commands['-exit'] = self.exit
+        self.__commands['\\info'] = self.info # adding function pointer to command
+        self.__commands['\\load'] = self.load
+        self.__commands['\\save'] = self.save
+        self.__commands['\\exit'] = self.exit
 
     def copyToCache(self, text):
         command = 'echo ' + text.strip() + '| clip'
@@ -179,13 +179,13 @@ class Console:
         self.printlnWhiteOnBlue(' Commands: ')
         self.printlnWhiteOnBlue(' The following commands can only be used while this application is waiting for')
         self.printlnWhiteOnBlue(' ">"-input and not as application arguments. They start with a hyphen')
-        self.printlnGreyOnBlue(' (e.g. -info)')
+        self.printlnGreyOnBlue(' (e.g. \\info)')
         self.printlnWhiteOnBlue('')
-        self.printlnWhiteOnBlue(' -info  : prints this info panel')
-        self.printlnWhiteOnBlue(' -load  : loading routine for existing TagFinder graphs')
-        self.printlnWhiteOnBlue(' -save  : serializes the current TagFinder graph and your editing position')
-        self.printlnWhiteOnBlue(' -final : serializes the TagFinder graph and performs finalizing operations')
-        self.printlnWhiteOnBlue(' -exit  : terminates this application')
+        self.printlnWhiteOnBlue(' \\info  : prints this info panel')
+        self.printlnWhiteOnBlue(' \\load  : loading routine for existing TagFinder graphs')
+        self.printlnWhiteOnBlue(' \\save  : serializes the current TagFinder graph and your editing position')
+        self.printlnWhiteOnBlue(' \\final : serializes the TagFinder graph and performs finalizing operations')
+        self.printlnWhiteOnBlue(' \\exit  : terminates this application')
         self.printlnWhiteOnBlue('')
         self.printlnWhiteOnBlue('')
         self.printlnWhiteOnBlue(' Suggestion lists:')
@@ -272,6 +272,8 @@ class Console:
         translator = Translator()
 
         self.editTerms = EditTerms(self.rdfGraph)
+        countToEdit = len(self.editTerms.editStack)
+        currentNr = 1
         while(self.editTerms.hasNext()):
             subject = self.editTerms.getNext()
 
@@ -283,11 +285,13 @@ class Console:
             mainWord = prefLabel
 
             if isKey:
-                headerText = ' Key: ' + prefLabel
+                headerText = ' ' + str(currentNr) + "/" + str(countToEdit) + '  Key: ' + prefLabel
             else:
                 keyValue = prefLabel.split('=')
                 mainWord = keyValue[1]
-                headerText = ' Key: ' + keyValue[0] + ' - Value: ' + mainWord
+                headerText = ' ' + str(currentNr) + "/" + str(countToEdit) + '  Key: ' + keyValue[0] + ' - Value: ' + mainWord
+
+            currentNr = currentNr + 1
 
             self.copyToCache(str(subject))
 
@@ -298,7 +302,7 @@ class Console:
             self.printlnWhiteOnGreen(headerText)
             self.printlnWhiteOnGreen('')
             self.println('')
-            self.println(' Link in cache: ' + subject)
+            self.println(' Weblink in clipboard: ' + subject)
             self.println('')
             self.println(' German translation: ' + translatedLabel)
             self.println('')

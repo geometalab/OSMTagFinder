@@ -19,7 +19,7 @@ class EditTerms:
     __currentRelTerm = None
 
     relatedTerm = None
-    editStack = None
+    editStack = []
 
     def __init__(self, rdfGraph):
         self.relatedTerm = RelatedTerm(rdfGraph)

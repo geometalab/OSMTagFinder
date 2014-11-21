@@ -3,7 +3,7 @@
 
 {% block head %}
     {{super()}}
-    <link href="{{ url_for('static', filename='css/404.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/error.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -16,7 +16,7 @@
                 <p></p>
                 <h4 id="first_line_en" lang="en">The page you're looking for might have been removed or is temporarily unavailable. You could try the front page:</h4>
                 <h4 id="first_line_de" lang="de">Die gewünschte Seite wurde entfernt oder ist zur Zeit nicht verfügbar. Die Startseite ist unter folgendem Link erreichbar:</h4>
-                <a href="{{ url_for('search') }}">Tag Finder</a>
+                <a id="tagfinder_link" href="{{ url_for('search') }}">Tag Finder</a>
             </div>
         </div>
     </div>

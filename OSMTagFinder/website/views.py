@@ -43,10 +43,10 @@ def searchCall(query):
         return None
 
     if getLocale() == 'de':
-        translateDEToEN=True
+        translateDEToEN = True
     else:
-        translateDEToEN=False
-    rawResults = graphSearch.extendedSearch(query, translateDEToEN=False) # TODO e.g. "sport" scenario
+        translateDEToEN = False
+    rawResults = graphSearch.fullSearch(query, translateDEToEN) # TODO e.g. "sport" scenario
 
     return TagResults(rdfGraph, rawResults)
 
@@ -67,7 +67,7 @@ def changeLanguage():
 
 @app.errorhandler(405)
 def methodNotAllowed(e):
-    return render_template('404.html', lang=getLocale()), 404
+    return render_template('405.html', lang=getLocale()), 405
 
 @app.errorhandler(404)
 def pageNotFound(e):
