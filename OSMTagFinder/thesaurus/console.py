@@ -305,7 +305,7 @@ class Console:
             subject = self.editTerms.getNext()
 
             if subject is None: continue
-            isKey = self.rdfGraph.isOSMKey(subject)
+            isKey = self.rdfGraph.isInKeyScheme(subject)
             prefLabel = utils.genGetFirstItem(self.rdfGraph.getPrefLabel(subject))
             if prefLabel is None: continue
 
@@ -375,12 +375,12 @@ class Console:
             prefTermEN = None
             while(prefTermEN is None or len(prefTermEN) < 0):
                 prefTermEN = self.readLine(' Input English preferred term (only text): ')
-                if self.runCommand(prefTermEN):
+                if self.runCommand(prefTermEN) or utils.containsDigits(prefTermEN) or ',' in prefTermEN:
                     prefTermEN = None
             prefTermDE = None
             while(prefTermDE is None or len(prefTermDE) < 0):
                 prefTermDE = self.readLine(' Input German preferred term (only text): ')
-                if self.runCommand(prefTermDE):
+                if self.runCommand(prefTermDE) or utils.containsDigits(prefTermDE) or ',' in prefTermDE:
                     prefTermDE = None
             self.editTerms.createTerm(subject, prefTermEN, prefTermDE)
 

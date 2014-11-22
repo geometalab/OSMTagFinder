@@ -217,13 +217,17 @@ class RDFGraph:
                 return True
         return False
 
-    def isOSMKey(self, subject):
+    def isInKeyScheme(self, subject):
         keyScheme = self.cl.getThesaurusString('KEY_SCHEME_NAME')
         return self.isInScheme(subject, keyScheme)
 
-    def isOSMTag(self, subject):
+    def isInTagScheme(self, subject):
         tagScheme = self.cl.getThesaurusString('TAG_SCHEME_NAME')
         return self.isInScheme(subject, tagScheme)
+
+    def isInTermScheme(self, subject):
+        termScheme = self.cl.getThesaurusString('TERM_SCHEME_NAME')
+        return self.isInScheme(subject, termScheme)
 
     def getDefinition(self, subject):
         generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.definition)
@@ -247,10 +251,6 @@ class RDFGraph:
 
     def getAltLabel(self, subject):
         generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.altLabel)
-        return generatorList
-
-    def getHiddenLabels(self, subject):
-        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.hiddenLabel)
         return generatorList
 
     def getNarrower(self, subject):

@@ -7,7 +7,8 @@ Created on 01.11.2014
 from thesauribase import ThesauriBase
 from utilities import utils
 from utilities.configloader import ConfigLoader
-from utilities.retry import retry
+from utilities.timeout import timeout
+#from utilities.retry import retry
 
 from wordnik import swagger, WordApi
 from ordered_set import OrderedSet
@@ -24,6 +25,7 @@ class WordnikApi(ThesauriBase):
     narrowerSet = OrderedSet()
 
     # dont retry here: @retry(Exception, tries=3)
+    @timeout(5)
     def apiCall(self, word, apiLang):
         client = swagger.ApiClient(self.apiKey, self.apiUrl)
         wordApi = WordApi.WordApi(client)
@@ -39,7 +41,11 @@ class WordnikApi(ThesauriBase):
 
         if language in self.supportedLang:
             for word in self.searchTerms:
-                relatedWords = self.apiCall(word, language)
+                relatedWords = None
+                try:
+                    relatedWords = self.apiCall(word, language)
+                except:
+                    relatedWords = None
                 if relatedWords is not None:
                     for related in relatedWords:
                         relationship = related.relationshipType
@@ -53,6 +59,7 @@ class WordnikApi(ThesauriBase):
                         if('hyponym' in relationship):
                             for word in related.words:
                                 self.narrowerSet.append(utils.eszettToSS(word))
+
 
     def getRelated(self):
         return self.relatedSet
@@ -86,3 +93,5 @@ if __name__ == '__main__':
     print "\nBroader: "
     for broader in wa.getBroader():
         print broader
+
+    print wa.checkConnection()

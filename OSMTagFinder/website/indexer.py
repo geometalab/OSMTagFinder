@@ -16,11 +16,14 @@ from whoosh.index import create_in
 
 class Indexer:
 
-    schema = Schema(subject=ID(stored=True),
-                    prefLabel=NGRAM(stored=True),
-                    altLabel=NGRAM(stored=True),
-                    hiddenLabel=NGRAM(stored=True),
-                    scopeNote=TEXT(stored=True),
+    schema = Schema(tagSubject=ID(stored=True),
+                    termSubject=ID(stored=True),
+                    tagPrefLabel=NGRAM(stored=True),
+                    termPrefLabelEN=NGRAM(stored=True),
+                    termPrefLabelDE=NGRAM(stored=True),
+                    termAltLabelEN=NGRAM(stored=True),
+                    termAltLabelDE=NGRAM(stored=True),
+                    tagScopeNote=TEXT(stored=True),
                     spellingEN=TEXT(stored=True, spelling=True),
                     spellingDE=TEXT(stored=True, spelling=True))
 
@@ -34,22 +37,34 @@ class Indexer:
 
         count = 0
         for subject, predicate, obj in rdfGraph.graph:
-            if predicate == SKOS.prefLabel:
-                count += 1
-                print str(count) + ': Indexing prefLabel: ' + str(obj)
-                self.addPrefLabel(subject, obj)
-            elif predicate == SKOS.altLabel:
-                count += 1
-                print str(count) + ': Indexing altLabel: ' + str(obj)
-                self.addAltLabel(subject, obj)
-            elif predicate == SKOS.hiddenLabel:
-                count += 1
-                print str(count) + ': Indexing hiddenLabel: ' + str(obj)
-                self.addHiddenLabel(subject, obj)
-            elif predicate == SKOS.scopeNote:
-                count += 1
-                print str(count) + ': Indexing scopeNote: ' + str(obj)
-                self.addScopeNote(subject, obj)
+            if rdfGraph.isInKeyScheme(subject) or rdfGraph.isInTagScheme(subject):
+                if predicate == SKOS.prefLabel:
+                    count += 1
+                    print str(count) + ': Indexing tagPrefLabel: ' + str(obj)
+                    self.addTagPrefLabel(subject, obj)
+                elif predicate == SKOS.scopeNote:
+                    count += 1
+                    print str(count) + ': Indexing tagScopeNote: ' + str(obj)
+                    self.addTagScopeNote(subject, obj)
+            elif rdfGraph.isInTermScheme(subject):
+                if predicate == SKOS.prefLabel:
+                    count += 1
+                    lang = obj.language
+                    if lang == 'en':
+                        print str(count) + ': Indexing termPrefLabelEN: ' + str(obj)
+                        self.addTermPrefLabelEN(subject, obj)
+                    elif lang == 'de':
+                        print str(count) + ': Indexing termPrefLabelDE: ' + str(obj)
+                        self.addTermPrefLabelDE(subject, obj)
+                if predicate == SKOS.altLabel:
+                    count += 1
+                    lang = obj.language
+                    if lang == 'en':
+                        print str(count) + ': Indexing termAltLabelEN: ' + str(obj)
+                        self.addTermAltLabelEN(subject, obj)
+                    elif lang == 'de':
+                        print str(count) + ': Indexing termAltLabelDE: ' + str(obj)
+                        self.addTermAltLabelDE(subject, obj)
 
         self.addSpellings()
 
@@ -99,29 +114,41 @@ class Indexer:
         ix = create_in(utils.indexerDir(), self.schema, indexname=utils.indexName)
         self.__writer = ix.writer()
 
-    def addPrefLabel(self, subject, prefLabel):
+    def addTagPrefLabel(self, tagSubject, tagPrefLabel):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
-        self.__writer.add_document(subject=unicode(subject), prefLabel=unicode(prefLabel))
-        self.addToWordList(prefLabel)
+        self.__writer.add_document(tagSubject=unicode(tagSubject), tagPrefLabel=unicode(tagPrefLabel))
+        self.addToWordList(tagPrefLabel)
 
-    def addAltLabel(self, subject, altLabel):
+    def addTagScopeNote(self, tagSubject, tagScopeNote):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
-        self.__writer.add_document(subject=unicode(subject), altLabel=unicode(altLabel))
-        self.addToWordList(altLabel)
+        self.__writer.add_document(tagSubject=unicode(tagSubject), tagScopeNote=unicode(tagScopeNote))
+        self.addToWordList(tagScopeNote)
 
-    def addHiddenLabel(self, subject, hiddenLabel):
+    def addTermPrefLabelEN(self, termSubject, termPrefLabelEN):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
-        self.__writer.add_document(subject=unicode(subject), hiddenLabel=unicode(hiddenLabel))
-        self.addToWordList(hiddenLabel)
+        self.__writer.add_document(termSubject=unicode(termSubject), termPrefLabelEN=unicode(termPrefLabelEN))
+        self.addToWordList(termPrefLabelEN)
 
-    def addScopeNote(self, subject, scopeNote):
+    def addTermPrefLabelDE(self, termSubject, termPrefLabelDE):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
-        self.__writer.add_document(subject=unicode(subject), scopeNote=unicode(scopeNote))
-        self.addToWordList(scopeNote)
+        self.__writer.add_document(termSubject=unicode(termSubject), termPrefLabelDE=unicode(termPrefLabelDE))
+        self.addToWordList(termPrefLabelDE)
+
+    def addTermAltLabelEN(self, termSubject, termAltLabelEN):
+        if not index.exists_in(utils.indexerDir(), utils.indexName):
+            self.createNewIndex()
+        self.__writer.add_document(termSubject=unicode(termSubject), termAltLabelEN=unicode(termAltLabelEN))
+        self.addToWordList(termAltLabelEN)
+
+    def addTermAltLabelDE(self, termSubject, termAltLabelDE):
+        if not index.exists_in(utils.indexerDir(), utils.indexName):
+            self.createNewIndex()
+        self.__writer.add_document(termSubject=unicode(termSubject), termAltLabelDE=unicode(termAltLabelDE))
+        self.addToWordList(termAltLabelDE)
 
     def commit(self):
         self.__writer.commit()

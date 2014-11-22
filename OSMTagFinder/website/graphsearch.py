@@ -34,25 +34,25 @@ class GraphSearch:
         word = utils.eszettToSS(word)
         return word
 
-    def searchPrefLabel(self, word, searcher):
+    def searchTagPrefLabel(self, word, searcher):
         if self.ix is None or searcher is None:
             return None
-        query = QueryParser("prefLabel", self.ix.schema).parse(unicode(word))
+        query = QueryParser("tagPrefLabel", self.ix.schema).parse(unicode(word))
         return searcher.search(query, limit=None, terms=True)
 
-    def extSearchPrefLabel(self, word, searcher, results, allHits):
-        hits = self.searchPrefLabel(word, searcher)
+    def extTagSearchPrefLabel(self, word, searcher, results, allHits):
+        hits = self.searchTagPrefLabel(word, searcher)
         self.updateResults(results, hits)
         return self.upgradeAndExtend(allHits, hits)
 
-    def searchScopeNote(self, word, searcher):
+    def searchTagScopeNote(self, word, searcher):
         if self.ix is None or searcher is None:
             return None
-        query = QueryParser("scopeNote", self.ix.schema).parse(unicode(word))
+        query = QueryParser("tagScopeNote", self.ix.schema).parse(unicode(word))
         return searcher.search(query, limit=None, terms=True)
 
-    def extSearchScopeNote(self, word, searcher, results, allHits):
-        hits = self.searchScopeNote(word, searcher)
+    def extSearchTagScopeNote(self, word, searcher, results, allHits):
+        hits = self.searchTagScopeNote(word, searcher)
         self.updateResults(results, hits)
         return self.upgradeAndExtend(allHits, hits)
 
@@ -74,26 +74,25 @@ class GraphSearch:
             allHits = None # only to get the correct whoosh score
 
             if not translateDEToEN:
-                allHits = self.extSearchPrefLabel(word, searcher, results, allHits)
+                allHits = self.extTagSearchPrefLabel(word, searcher, results, allHits)
 
             else:
-                allHits = self.extSearchPrefLabel(translatedWord, searcher, results, allHits)
+                allHits = self.extTagSearchPrefLabel(translatedWord, searcher, results, allHits)
 
             if not translateDEToEN and len(allHits) < self.threshold:
-                allHits = self.extSearchScopeNote(word, searcher, results, allHits)
+                allHits = self.extSearchTagScopeNote(word, searcher, results, allHits)
 
             elif translateDEToEN and len(allHits) < self.threshold:
-                allHits = self.extSearchScopeNote(translatedWord, searcher, results, allHits)
+                allHits = self.extSearchTagScopeNote(translatedWord, searcher, results, allHits)
 
             if len(allHits) < self.threshold:
                 suggestions = SpellCorrect().listSuggestions(word)
                 for s in suggestions:
-                    #s = Translator().translateDEtoEN(word)
-                    allHits = self.extSearchPrefLabel(s, searcher, results, allHits)
+                    allHits = self.extTagSearchPrefLabel(s, searcher, results, allHits)
 
                 if len(allHits) < self.threshold:
                     for s in suggestions:
-                        allHits = self.extSearchScopeNote(s, searcher, results, allHits)
+                        allHits = self.extSearchTagScopeNote(s, searcher, results, allHits)
 
             results = self.updateScore(results, allHits)
 
@@ -109,7 +108,7 @@ class GraphSearch:
     def updateScore(self, results, allHits):
         if allHits is None: return results
         for hit in allHits:
-            subject = hit['subject']
+            subject = hit['tagSubject']
             searchMeta = { } # temp
             if subject in results:
                 searchMeta = results[subject]
@@ -126,7 +125,7 @@ class GraphSearch:
             for matchedPair in matchedTerms:
                 searchedField = matchedPair[0]
                 searchedTerm = matchedPair[1]
-                subject = hit['subject']
+                subject = hit['tagSubject']
                 searchMeta = { } # temp
                 if subject in results:
                     searchMeta = results[subject]

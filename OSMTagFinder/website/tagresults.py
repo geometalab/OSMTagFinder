@@ -69,8 +69,8 @@ class TagResults:
             tag['subject'] = utils.encode(subject)
             tag['searchMeta'] = searchMeta
 
-            tag['isKey'] = rdfGraph.isOSMKey(subject)
-            tag['isTag'] = rdfGraph.isOSMTag(subject)
+            tag['isKey'] = rdfGraph.isInKeyScheme(subject)
+            tag['isTag'] = rdfGraph.isInTagScheme(subject)
 
             tag['prefLabel'] = utils.genGetFirstItem(prefLabelGen)
             tag['broader']   = utils.genToList(broaderGen)
