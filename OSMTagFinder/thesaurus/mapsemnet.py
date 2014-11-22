@@ -9,6 +9,7 @@ from rdflib.namespace import SKOS
 
 from thesaurus.rdfgraph import RDFGraph
 from utilities import utils
+from utilities.configloader import ConfigLoader
 from externalapi.osmsemanticnet import OSMSemanitcNet
 
 class MapOSMSemanticNet:
@@ -22,9 +23,12 @@ class MapOSMSemanticNet:
             print('Loading OSN graph')
             osnSemNetRDF = RDFGraph(osnSemNetFilePath)
         osn = OSMSemanitcNet(osnSemNetRDF) # if osnSemNetRDF is None it will check the web graph
+
+        termSchemeName = ConfigLoader().getThesaurusString('TERM_SCHEME_NAME')
+
         count = 0;
         for subject, predicate, obj in tagFinderRDF.graph:
-            if not osn.baseUrl in subject: # check if some osn matches have been added already
+            if not osn.baseUrl in subject and not termSchemeName in subject: # check if some osn matches have been added already
                 osnConcept = None
                 if predicate == SKOS.prefLabel:
                     count = count + 1

@@ -17,18 +17,35 @@ class Thesauri:
     broaderSet = OrderedSet()
     narrowerSet = OrderedSet()
 
-    def __init__(self, word, language):
-        gemet = Gemet(word, language)
-        altervista = Altervista(word, language)
-        wordnik = WordnikApi(word, language)
-        openthesaurus = OpenThesaurus(word, language)
+    gemet = None
+    altervista = None
+    wordnik = None
+    openthesaurus = None
 
-        self.callThesauri(gemet)
-        self.callThesauri(altervista)
-        self.callThesauri(wordnik)
-        self.callThesauri(openthesaurus)
+    def __init__(self, word, language):
+        self.gemet = Gemet(word, language)
+        self.altervista = Altervista(word, language)
+        self.wordnik = WordnikApi(word, language)
+        self.openthesaurus = OpenThesaurus(word, language)
+
+        self.callThesauri(self.gemet)
+        self.callThesauri(self.altervista)
+        self.callThesauri(self.wordnik)
+        self.callThesauri(self.openthesaurus)
 
         self.removeRelatedWord(word) # making sure no self relation occurs
+
+    def checkConGemet(self):
+        return self.gemet.checkConnection()
+
+    def checkConAltervista(self):
+        return self.altervista.checkConnection()
+
+    def checkConOpenThesaurus(self):
+        return self.openthesaurus.checkConnection()
+
+    def checkConWordnik(self):
+        return self.wordnik.checkConnection()
 
     def removeRelatedWord(self, word):
         if word in self.relatedSet:
@@ -58,7 +75,7 @@ class Thesauri:
 
 
 if __name__ == '__main__':
-    t = Thesauri('railway', 'en')
+    t = Thesauri('rail', 'en')
 
     print "Related: "
     relatedStr = ''

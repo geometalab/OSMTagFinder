@@ -14,21 +14,25 @@ class RelatedTerm:
     cl = ConfigLoader()
 
     termSchemeName = cl.getThesaurusString('TERM_SCHEME_NAME')
+    termSchemeTitle = cl.getThesaurusString('TERM_SCHEME_TITLE')
+    creator = cl.getThesaurusString('CREATOR')
+
     termScheme = None
 
     def __init__(self, rdfGraph):
         if rdfGraph is not None:
             self.rdfGraph = rdfGraph
 
-        self.termScheme = self.rdfGraph.addConceptScheme(self.termSchemeName) # doesn't matter if called a lot
+        self.termScheme = self.rdfGraph.addConceptScheme(self.termSchemeName, self.termSchemeTitle, self.creator) # doesn't matter if called a lot
 
     def createTerm(self, keyTagConcept, prefLabelEN, prefLabelDE):
-        termConcept = self.rdfGraph.addConcept(self.termSchemeName + '/' + prefLabelEN)
+        linkEN = prefLabelEN.replace(' ', '_')
+        termConcept = self.rdfGraph.addConcept(self.termSchemeName + '/' + linkEN)
         self.rdfGraph.addInScheme(termConcept, self.termSchemeName)
         self.rdfGraph.addPrefLabel(termConcept, prefLabelEN, language='en')
         self.rdfGraph.addPrefLabel(termConcept, prefLabelDE, language='de')
-        self.rdfGraph.addRelated(keyTagConcept, termConcept)
-        self.rdfGraph.addRelated(termConcept, keyTagConcept)
+        self.rdfGraph.addRelatedMatch(keyTagConcept, termConcept)
+        self.rdfGraph.addRelatedMatch(termConcept, keyTagConcept)
         #TODO if is tag => add broader narrower to key term equivalent
         return termConcept
 

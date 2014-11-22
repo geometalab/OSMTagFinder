@@ -47,6 +47,7 @@ class Console:
         self.percentNewLine = percentNewLine
 
         self.__commands['\\info'] = self.info # adding function pointer to command
+        self.__commands['\\conn'] = self.conn
         self.__commands['\\load'] = self.load
         self.__commands['\\save'] = self.save
         self.__commands['\\exit'] = self.exit
@@ -182,9 +183,9 @@ class Console:
         self.printlnGreyOnBlue(' (e.g. \\info)')
         self.printlnWhiteOnBlue('')
         self.printlnWhiteOnBlue(' \\info  : prints this info panel')
+        self.printlnWhiteOnBlue(' \\conn  : checks connection with external webservices')
         self.printlnWhiteOnBlue(' \\load  : loading routine for existing TagFinder graphs')
         self.printlnWhiteOnBlue(' \\save  : serializes the current TagFinder graph and your editing position')
-        self.printlnWhiteOnBlue(' \\final : serializes the TagFinder graph and performs finalizing operations')
         self.printlnWhiteOnBlue(' \\exit  : terminates this application')
         self.printlnWhiteOnBlue('')
         self.printlnWhiteOnBlue('')
@@ -206,6 +207,32 @@ class Console:
         self.println('')
         self.println(' [1] - Create a new TagFinder graph, based on Open Street Map keys and tags.')
         self.println(' [2] - Load an existing TagFinder graph at its last editing position.')
+        self.println('')
+
+    def conn(self):
+        self.println('')
+        self.printlnWhiteOnGreen('')
+        self.printlnWhiteOnGreen(' Checking connections:')
+        self.printlnWhiteOnGreen('')
+        self.println('')
+
+        thesauri = Thesauri('', '')
+        if thesauri.checkConGemet():
+            self.println(' Gemet WebService: Connection Ok')
+        else:
+            self.println(' Gemet WebService: Connection Failed')
+        if thesauri.checkConAltervista():
+            self.println(' Altervista WebService: Connection Ok')
+        else:
+            self.println(' Altervista WebService: Connection Failed')
+        if thesauri.checkConOpenThesaurus():
+            self.println(' OpenThesaurus WebService: Connection Ok')
+        else:
+            self.println(' OpenThesaurus WebService: Connection Failed')
+        if thesauri.checkConWordnik():
+            self.println(' Wordnik WebService: Connection Ok')
+        else:
+            self.println(' Wordnik WebService: Connection Failed')
         self.println('')
 
     def create(self):
@@ -308,31 +335,58 @@ class Console:
             self.println('')
             self.println('')
 
-            preferredTermEN = self.readLine(' English preferred term: ')
-            preferredTermDE = self.readLine(' German  preferred term: ')
+            searchTermEN = None
+            searchTermDE = None
+            while(searchTermEN is None):
+                searchTermEN = self.readLine(' English search term: ')
+                if self.runCommand(searchTermEN):
+                    searchTermEN = None
 
-            if len(preferredTermEN) < 1 or len(preferredTermDE) < 1: continue
+            while(searchTermDE is None):
+                searchTermDE = self.readLine(' German search term: ')
+                if self.runCommand(searchTermDE):
+                    searchTermDE = None
 
-            self.editTerms.createTerm(subject, preferredTermEN, preferredTermDE)
+            if len(searchTermEN) < 1 or len(searchTermDE) < 1: continue # going to next concept
 
-            thesauriEN = Thesauri(preferredTermEN, 'en')
-            thesauriDE = Thesauri(preferredTermDE, 'de')
+            thesauriEN = Thesauri(searchTermEN, 'en')
+            thesauriDE = Thesauri(searchTermDE, 'de')
 
-            self.println('')
-            self.doSuggestions(' Related ', thesauriEN.getRelated(), thesauriDE.getRelated(), self.editTerms.addAltLabelEN, self.editTerms.addAltLabelDE)
 
-            self.println('')
-            self.doSuggestions(' Broader ', thesauriEN.getBroader(), thesauriDE.getBroader(), self.editTerms.addBroaderLiteralEN, self.editTerms.addBroaderLiteralDE)
+            self.doSuggestions(' Related ', thesauriEN.getRelated(), thesauriDE.getRelated(),
+                               self.editTerms.addAltLabelEN, self.editTerms.addAltLabelDE, subject=subject)
 
-            self.println('')
-            self.doSuggestions(' Narrower ', thesauriEN.getNarrower(), thesauriDE.getNarrower(), self.editTerms.addNarrowerLiteralEN, self.editTerms.addNarrowerLiteralDE)
+            self.doSuggestions(' Broader ', thesauriEN.getBroader(), thesauriDE.getBroader(),
+                               self.editTerms.addBroaderLiteralEN, self.editTerms.addBroaderLiteralDE)
+
+            self.doSuggestions(' Narrower ', thesauriEN.getNarrower(), thesauriDE.getNarrower(),
+                               self.editTerms.addNarrowerLiteralEN, self.editTerms.addNarrowerLiteralDE)
             self.println('')
 
         self.println('')
+        self.printlnWhiteOnCyan('')
         self.printlnWhiteOnCyan(' FINISHED ALL KEYS AND TAGS')
+        self.printlnWhiteOnCyan('')
 
+    def createTerm(self, subject):
+        if subject is not None:
+            self.println('')
+            self.println('')
+            prefTermEN = None
+            while(prefTermEN is None or len(prefTermEN) < 0):
+                prefTermEN = self.readLine(' Input English preferred term (only text): ')
+                if self.runCommand(prefTermEN):
+                    prefTermEN = None
+            prefTermDE = None
+            while(prefTermDE is None or len(prefTermDE) < 0):
+                prefTermDE = self.readLine(' Input German preferred term (only text): ')
+                if self.runCommand(prefTermDE):
+                    prefTermDE = None
+            self.editTerms.createTerm(subject, prefTermEN, prefTermDE)
 
-    def doSuggestions(self, text, sugListEN, sugListDE, actionEN, actionDE):
+    def doSuggestions(self, text, sugListEN, sugListDE, actionEN, actionDE, subject=None):
+        self.println('')
+        self.println('')
         self.println(text + ' English terms suggestions:')
         strToNrMapEN = { }
         countSug = 1
@@ -343,8 +397,6 @@ class Console:
         if len(sugListEN) < 1:
             self.println(' No suggestions found, type your own terms.')
         self.println('')
-        self.repeatedSugRead(strToNrMapEN, actionEN)
-        self.println('')
         self.println(text + ' German  terms suggestions: ')
         strToNrMapDE = { }
         countSug = 1
@@ -354,7 +406,16 @@ class Console:
             countSug = countSug + 1
         if len(sugListDE) < 1:
             self.println(' No suggestions found, type your own terms.')
+
+        self.createTerm(subject) # skipps if subject is none
+
         self.println('')
+        self.println('')
+        self.println(' Input ' + text + ' English terms. Suggestions can be taken from English list:')
+        self.repeatedSugRead(strToNrMapEN, actionEN)
+        self.println('')
+        self.println('')
+        self.println(' Input ' + text + ' German terms. Suggestions can be taken from German list:')
         self.repeatedSugRead(strToNrMapDE, actionDE)
 
     def exit(self):
@@ -450,7 +511,6 @@ class Console:
         return retList
 
 
-
 if __name__ == '__main__':
 
     init() #essential for colorama to work on windows
@@ -461,8 +521,7 @@ if __name__ == '__main__':
 
     console.printWelcomeMessage() # welcome message
     console.info()
-
-    console.sleep(1)
+    console.conn()
 
     console.printNewOrLoad()
 

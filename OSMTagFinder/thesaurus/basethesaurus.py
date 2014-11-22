@@ -27,6 +27,9 @@ class BaseThesaurus:
     osmWikiBase = cl.getThesaurusString('OSM_WIKI_PAGE')
     keySchemeName = cl.getThesaurusString('KEY_SCHEME_NAME')
     tagSchemeName = cl.getThesaurusString('TAG_SCHEME_NAME')
+    keySchemeTitle = cl.getThesaurusString('KEY_SCHEME_TITLE')
+    tagSchemeTitle = cl.getThesaurusString('TAG_SCHEME_TITLE')
+    creator = cl.getThesaurusString('CREATOR')
 
     outputName = cl.getThesaurusString('OUTPUT_NAME')  # tagfinder_thesaurus
     outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')  # .rdf
@@ -64,11 +67,12 @@ class BaseThesaurus:
         self.console.println('\n Requesting detailed information from "' + self.cl.getTagInfoAPIString('TAGINFO_PAGE')  + '":')
         self.createGraph(keyList, tagMap)
 
-        self.console.println('\n Linking OSM "implies", "combines" and "links" relations to graph concepts:')
+        self.console.println('\n Linking OSM "implies", "combines" and "links" relations to graph concepts')
         self.osmLinksToConcept()
 
         fullPath = utils.outputFile(utils.tempDir(), self.outputName, self.outputEnding, useDateEnding=True)
-        self.console.println('\n Serializing graph to: ' + fullPath)
+        name = fullPath[fullPath.rfind('\\') + 1:]
+        self.console.println('\n Serializing graph to: ' + name)
         self.rdfGraph.serialize(fullPath)
         self.console.println('\n Finished creating TagFinder BaseThesaurus')
 
@@ -266,8 +270,8 @@ class BaseThesaurus:
 
     def createGraph(self, keyList, tagMap):
         '''Fills rdfGraph with keys and tags.'''
-        keyScheme = self.rdfGraph.addConceptScheme(self.keySchemeName)
-        tagScheme = self.rdfGraph.addConceptScheme(self.tagSchemeName)
+        keyScheme = self.rdfGraph.addConceptScheme(self.keySchemeName, self.keySchemeTitle, self.creator)
+        tagScheme = self.rdfGraph.addConceptScheme(self.tagSchemeName, self.tagSchemeTitle, self.creator)
 
         totalParts = self.numberKeys + self.numberTags
         atPart = 1

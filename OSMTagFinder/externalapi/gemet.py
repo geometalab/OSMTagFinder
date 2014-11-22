@@ -9,6 +9,7 @@ from ordered_set import OrderedSet
 from thesauribase import ThesauriBase
 from utilities.configloader import ConfigLoader
 from utilities import utils
+from utilities.retry import retry
 
 import requests
 
@@ -44,11 +45,15 @@ class Gemet(ThesauriBase):
             for word in self.searchTerms:
                 self.runAPICall(word, language)
 
+    @retry(Exception, tries=3)
+    def apiCall(self, word, apiLang):
+        return requests.get(self.getConceptByKeyword + word + self.langSuffix + apiLang +
+                            self.searchModeSuffix + str(self.searchMode) +
+                            self.thesaaurusSuffix + self.uri)
+
     def runAPICall(self, word, apiLang):
 
-        searchResult = requests.get(self.getConceptByKeyword + word + self.langSuffix + apiLang +
-                                    self.searchModeSuffix + str(self.searchMode) +
-                                    self.thesaaurusSuffix + self.uri)
+        searchResult = self.apiCall(word, apiLang)
 
         if searchResult.status_code < 300:
             searchJson = searchResult.json()
@@ -93,6 +98,12 @@ class Gemet(ThesauriBase):
 
     def getBroader(self):
         return self.broaderSet
+
+    def checkConnection(self):
+        response = self.apiCall('test', 'en')
+        if response is not None and response.status_code < 300:
+            return True
+        return False
 
 
 if __name__ == '__main__':

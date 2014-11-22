@@ -12,6 +12,7 @@ import xml.etree.ElementTree as ET
 from thesauribase import ThesauriBase
 from utilities.configloader import ConfigLoader
 from utilities import utils
+from utilities.retry import retry
 
 class OpenThesaurus(ThesauriBase):
 
@@ -32,12 +33,16 @@ class OpenThesaurus(ThesauriBase):
 
         if language in self.supportedLang:
             for word in self.searchTerms:
-                result = requests.get(self.apiPrefix + word + self.apiSuffix)
+                result = self.apiCall(word, language)
                 if result.status_code < 300:
                     xmlString = result.text
                     self.parseXML(xmlString)
                     if len(self.relatedSet) > 0:
                         break
+
+    @retry(Exception, tries=3)
+    def apiCall(self, word, apiLang):
+        return requests.get(self.apiPrefix + word + self.apiSuffix)
 
     def parseXML(self, xmlString):
         root = ET.fromstring(xmlString)
@@ -72,6 +77,12 @@ class OpenThesaurus(ThesauriBase):
 
     def getBroader(self):
         return self.broaderSet
+
+    def checkConnection(self):
+        response = self.apiCall('test', 'de')
+        if response is not None and response.status_code < 300:
+            return True
+        return False
 
 if __name__ == '__main__':
     ot = OpenThesaurus('Coiffeur', 'de')

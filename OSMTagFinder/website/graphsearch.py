@@ -40,16 +40,24 @@ class GraphSearch:
         query = QueryParser("prefLabel", self.ix.schema).parse(unicode(word))
         return searcher.search(query, limit=None, terms=True)
 
+    def extSearchPrefLabel(self, word, searcher, results, allHits):
+        hits = self.searchPrefLabel(word, searcher)
+        self.updateResults(results, hits)
+        return self.upgradeAndExtend(allHits, hits)
+
     def searchScopeNote(self, word, searcher):
         if self.ix is None or searcher is None:
             return None
         query = QueryParser("scopeNote", self.ix.schema).parse(unicode(word))
         return searcher.search(query, limit=None, terms=True)
 
+    def extSearchScopeNote(self, word, searcher, results, allHits):
+        hits = self.searchScopeNote(word, searcher)
+        self.updateResults(results, hits)
+        return self.upgradeAndExtend(allHits, hits)
+
     def fullSearch(self, word, translateDEToEN=False):
-
         results = OrderedDict()
-
         word = self.prepareWord(word)
         translatedWord = word
 
@@ -66,38 +74,26 @@ class GraphSearch:
             allHits = None # only to get the correct whoosh score
 
             if not translateDEToEN:
-                hits = self.searchPrefLabel(word, searcher)
-                self.updateResults(results, hits)
-                allHits = self.upgradeAndExtend(allHits, hits)
+                allHits = self.extSearchPrefLabel(word, searcher, results, allHits)
 
             else:
-                hits = self.searchPrefLabel(translatedWord, searcher)
-                self.updateResults(results, hits)
-                allHits = self.upgradeAndExtend(allHits, hits)
+                allHits = self.extSearchPrefLabel(translatedWord, searcher, results, allHits)
 
-            if not translateDEToEN and len(hits) < self.threshold:
-                hits = self.searchScopeNote(word, searcher)
-                self.updateResults(results, hits)
-                allHits = self.upgradeAndExtend(allHits, hits)
+            if not translateDEToEN and len(allHits) < self.threshold:
+                allHits = self.extSearchScopeNote(word, searcher, results, allHits)
 
-            elif translateDEToEN and len(hits) < self.threshold:
-                hits = self.searchScopeNote(translatedWord, searcher)
-                self.updateResults(results, hits)
-                allHits = self.upgradeAndExtend(allHits, hits)
+            elif translateDEToEN and len(allHits) < self.threshold:
+                allHits = self.extSearchScopeNote(translatedWord, searcher, results, allHits)
 
-            if len(hits) < self.threshold:
+            if len(allHits) < self.threshold:
                 suggestions = SpellCorrect().listSuggestions(word)
                 for s in suggestions:
                     #s = Translator().translateDEtoEN(word)
-                    hits = self.searchPrefLabel(s, searcher)
-                    self.updateResults(results, hits)
-                    allHits = self.upgradeAndExtend(allHits, hits)
+                    allHits = self.extSearchPrefLabel(s, searcher, results, allHits)
 
-                if len(hits) < self.threshold:
+                if len(allHits) < self.threshold:
                     for s in suggestions:
-                        hits = self.searchScopeNote(s, searcher)
-                        self.updateResults(results, hits)
-                        allHits = self.upgradeAndExtend(allHits, hits)
+                        allHits = self.extSearchScopeNote(s, searcher, results, allHits)
 
             results = self.updateScore(results, allHits)
 

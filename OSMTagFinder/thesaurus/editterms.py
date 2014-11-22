@@ -24,6 +24,10 @@ class EditTerms:
     def __init__(self, rdfGraph):
         self.relatedTerm = RelatedTerm(rdfGraph)
         self.editStack = self.__getEditConceptList()
+        savePointConcept = self.relatedTerm.rdfGraph.getSubByEditNote(self.savePointNote)
+        if savePointConcept is not None:
+            self.__savePoint = savePointConcept
+            self.editStack.insert(0, self.__savePoint) # add savePoint to the beginning of the list
 
     def hasNext(self):
         return len(self.editStack) > 0
@@ -31,7 +35,7 @@ class EditTerms:
     def getNext(self):
         if self.hasNext():
             if self.__savePoint is not None: # savePoint still on old position
-                self.removeLastPosNote(self.__savePoint)
+                self.removeSavePointNote(self.__savePoint)
             nextSubject = self.editStack[0]
             self.editStack.remove(nextSubject)
             self.__savePoint = nextSubject # advancing savePoint to first element in list (top of stack)
@@ -39,36 +43,22 @@ class EditTerms:
             return nextSubject
         return None
 
-    def __getKeyConceptList(self):
-        keyConcepts = self.relatedTerm.rdfGraph.getSubByScheme(self.keySchemeName)
-        retList = []
-        #if len(list(keyConcepts)) > 0:
-        for keyConcept in keyConcepts:
-            editNote = self.relatedTerm.rdfGraph.getEditorialNote(keyConcept)
-            if editNote is not None and editNote == self.savePointNote:
-                self.__savePoint = keyConcept
-            elif editNote is not None and editNote == self.noTermNote:
-                retList.append(keyConcept)
-        return retList
-
     def __getEditConceptList(self):
         retList = []
-        keyConcepts = self.__getKeyConceptList()
+        keyConcepts = self.relatedTerm.rdfGraph.getSubByScheme(self.keySchemeName)
         for keyConcept in keyConcepts:
-            retList.append(keyConcept)
+            editNote = self.relatedTerm.rdfGraph.getEditorialNote(keyConcept)
+            if editNote is not None and str(editNote) == str(self.noTermNote):
+                retList.append(keyConcept)
             tagConcepts = self.relatedTerm.rdfGraph.getNarrower(keyConcept)
             #if len(list(tagConcepts)) > 0:
             for tagConcept in tagConcepts:
                 editNote = self.relatedTerm.rdfGraph.getEditorialNote(tagConcept)
-                if editNote is not None and editNote == self.savePointNote:
-                    self.__savePoint = tagConcept
-                elif editNote is not None and editNote == self.noTermNote:
+                if editNote is not None and str(editNote) == str(self.noTermNote):
                     retList.append(tagConcept)
-        if self.__savePoint is not None:
-            retList.insert(0, self.__savePoint) # add last editing position to the beginning of the list
         return retList
 
-    def removeLastPosNote(self, keyTagConcept):
+    def removeSavePointNote(self, keyTagConcept):
         self.relatedTerm.rdfGraph.removeEditorialNote(keyTagConcept, self.savePointNote) # doesnt matter if notes do not exist
 
     def removeNoTermNote(self, keyTagConcept):

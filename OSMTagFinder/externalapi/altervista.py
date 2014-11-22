@@ -8,6 +8,7 @@ Created on 01.11.2014
 from thesauribase import ThesauriBase
 from utilities.configloader import ConfigLoader
 from utilities import utils
+from utilities.retry import retry
 
 from ordered_set import OrderedSet
 import requests
@@ -19,7 +20,7 @@ class Altervista(ThesauriBase):
     splitChar = '|'
 
     cl = ConfigLoader()
-    apiCall = cl.getAltervistaAPIString('API_CALL')
+    apiStr = cl.getAltervistaAPIString('API_CALL')
     keySuffix = cl.getAltervistaAPIString('KEY_SUFFIX')
     langSuffix = cl.getAltervistaAPIString('LANGUAGE_SUFFIX')
 
@@ -45,12 +46,17 @@ class Altervista(ThesauriBase):
             for word in self.searchTerms:
                 self.runAPICall(word, apiLang)
 
-    def runAPICall(self, word, apiLang):
+    @retry(Exception, tries=3)
+    def apiCall(self, word, apiLang):
         key = 0
-        result = requests.get(self.apiCall + word + self.keySuffix + self.apiKeys[key] + self.langSuffix + apiLang)
+        result = requests.get(self.apiStr + word + self.keySuffix + self.apiKeys[key] + self.langSuffix + apiLang)
         while(result.status_code == 403 and key < len(self.apiKeys)): # Forbidden 403: No permission, or key over rate limit
             key = key + 1
-            result = requests.get(self.apiCall + word + self.keySuffix + self.apiKeys[key] + self.langSuffix + apiLang)
+            result = requests.get(self.apiStr + word + self.keySuffix + self.apiKeys[key] + self.langSuffix + apiLang)
+        return result
+
+    def runAPICall(self, word, apiLang):
+        result = self.apiCall(word, apiLang)
         if result.status_code < 300: # found some terms
             resultJson = result.json()
             response = resultJson['response']
@@ -87,8 +93,14 @@ class Altervista(ThesauriBase):
     def getBroader(self):
         return self.broaderSet
 
+    def checkConnection(self):
+        response = self.apiCall('Test', 'de_DE')
+        if response is not None and response.status_code < 300:
+            return True
+        return False
+
 if __name__ == '__main__':
-    av = Altervista('Coiffeur', 'de')
+    av = Altervista('Test', 'de')
 
     print "Related: "
     for related in av.getRelated():
@@ -101,3 +113,5 @@ if __name__ == '__main__':
     print "\nBroader: "
     for broader in av.getBroader():
         print broader
+
+    print av.checkConnection()

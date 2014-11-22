@@ -7,6 +7,7 @@ Created on 01.11.2014
 from thesauribase import ThesauriBase
 from utilities import utils
 from utilities.configloader import ConfigLoader
+from utilities.retry import retry
 
 from wordnik import swagger, WordApi
 from ordered_set import OrderedSet
@@ -22,6 +23,12 @@ class WordnikApi(ThesauriBase):
     broaderSet = OrderedSet()
     narrowerSet = OrderedSet()
 
+    # dont retry here: @retry(Exception, tries=3)
+    def apiCall(self, word, apiLang):
+        client = swagger.ApiClient(self.apiKey, self.apiUrl)
+        wordApi = WordApi.WordApi(client)
+        relatedWords = wordApi.getRelatedWords(word)
+        return relatedWords
 
     def __init__(self, searchTerm, language):
         ThesauriBase.__init__(self, searchTerm, language)
@@ -32,9 +39,7 @@ class WordnikApi(ThesauriBase):
 
         if language in self.supportedLang:
             for word in self.searchTerms:
-                client = swagger.ApiClient(self.apiKey, self.apiUrl)
-                wordApi = WordApi.WordApi(client)
-                relatedWords = wordApi.getRelatedWords(word)
+                relatedWords = self.apiCall(word, language)
                 if relatedWords is not None:
                     for related in relatedWords:
                         relationship = related.relationshipType
@@ -57,6 +62,15 @@ class WordnikApi(ThesauriBase):
 
     def getBroader(self):
         return self.broaderSet
+
+    def checkConnection(self):
+        try:
+            client = swagger.ApiClient(self.apiKey, self.apiUrl)
+            wordApi = WordApi.WordApi(client)
+            wordApi.getRelatedWords('test')
+            return True
+        except:
+            return False
 
 if __name__ == '__main__':
     wa = WordnikApi('hairdresser', 'en')

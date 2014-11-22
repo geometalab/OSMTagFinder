@@ -5,11 +5,13 @@ Created on 26.09.2014
 @author: Simon Gwerder
 '''
 
-from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin
+from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin, XSD
 from rdflib.namespace import SKOS
 from rdflib.namespace import FOAF
+from rdflib.namespace import DCTERMS
 from rdflib.serializer import Serializer
 from rdflib.util import guess_format
+from datetime import datetime
 
 from utilities import utils
 from utilities.configloader import ConfigLoader
@@ -28,6 +30,7 @@ class RDFGraph:
     cl = ConfigLoader()
 
     foaf = Namespace("http://xmlns.com/foaf/0.1/")  # only for depictions
+    dcterms = Namespace('http://purl.org/dc/terms/') # only for metadata
     skos = Namespace('http://www.w3.org/2004/02/skos/core#')
     osm = Namespace(cl.getThesaurusString('OSM_WIKI_PAGE'))
     osmNode = osm[cl.getThesaurusString('OSM_NODE')] # = rdflib.term.URIRef(u'http://wiki.openstreetmap.org/wiki/node')
@@ -45,6 +48,7 @@ class RDFGraph:
             self.graph = self.load(filePath)
 
         self.graph.bind('foaf', self.foaf)
+        self.graph.bind('dcterms', self.dcterms)
         self.graph.bind('skos', self.skos)
         self.graph.bind('osm', self.osm)
         self.graph.bind('osmNode', self.osmNode)
@@ -73,8 +77,12 @@ class RDFGraph:
     def prepareURIRef(self, objStr):
         return ( self.prepareLiteral(objStr) ).replace(' ','')
 
-    def addConceptScheme(self, subject):
-        self.graph.add((URIRef(self.prepareURIRef(subject)), RDF.type, SKOS.ConceptScheme))
+    def addConceptScheme(self, subject, title, creator):
+        self.graph.add(( URIRef(self.prepareURIRef(subject)), RDF.type, SKOS.ConceptScheme ))
+        self.graph.add(( URIRef(self.prepareURIRef(subject)), DCTERMS.creator, Literal(self.prepareLiteral(creator)) ))
+        self.graph.add(( URIRef(self.prepareURIRef(subject)), DCTERMS.title, Literal(self.prepareLiteral(title)) ))
+        self.graph.add(( URIRef(self.prepareURIRef(subject)), DCTERMS.created, Literal(datetime.utcnow(), datatype=XSD.date) ))
+
         return subject
 
     def addHasTopConcept(self, subject, obj):
@@ -229,8 +237,9 @@ class RDFGraph:
         generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.editorialNote)
         return utils.genGetFirstItem(generatorList)
 
-    def getScopeNoteByLang(self, subject):
-        pass
+    def getSubByEditNote(self, editorialNote):
+        generatorList = self.graph.subjects(SKOS.editorialNote, Literal(editorialNote))
+        return utils.genGetFirstItem(generatorList)
 
     def getPrefLabel(self, subject):
         generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.prefLabel)
@@ -326,7 +335,7 @@ class RDFGraph:
 if __name__ == '__main__':
     r = RDFGraph()
 
-    keyScheme = r.addConceptScheme('www.example.com')
+    keyScheme = r.addConceptScheme('www.example.com', 'Example', 'Simon Gwerder')
 
     animals = r.addConcept('www.example.com/animals')
     prefLabel = r.addPrefLabel(animals, 'Animals')
