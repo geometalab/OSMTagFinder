@@ -42,6 +42,7 @@ class Console:
     def __init__(self, fileDescriptor=None, percentNewLine=True):
 
         codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp65001' else None) # Work around <http://bugs.python.org/issue6058>.
+        codecs.register(lambda name: codecs.lookup('utf-8') if name == 'cp1252' else None)
 
         self.fileDescr = fileDescriptor # e.g sys.stdout
         self.percentNewLine = percentNewLine

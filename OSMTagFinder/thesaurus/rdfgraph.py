@@ -75,7 +75,7 @@ class RDFGraph:
         return utils.encode(objStr)
 
     def prepareURIRef(self, objStr):
-        return ( self.prepareLiteral(objStr) ).replace(' ','')
+        return ( self.prepareLiteral(objStr) ).replace(' ','_')
 
     def addConceptScheme(self, subject, title, creator):
         self.graph.add(( URIRef(self.prepareURIRef(subject)), RDF.type, SKOS.ConceptScheme ))

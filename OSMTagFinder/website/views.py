@@ -43,10 +43,10 @@ def searchCall(query):
         return None
 
     if getLocale() == 'de':
-        translateDEToEN = True
+        localDE = True
     else:
-        translateDEToEN = False
-    rawResults = graphSearch.fullSearch(query, translateDEToEN) # TODO e.g. "sport" scenario
+        localDE = False
+    rawResults = graphSearch.fullSearch(query, localDE) # TODO e.g. "sport" scenario
 
     return TagResults(rdfGraph, rawResults)
 

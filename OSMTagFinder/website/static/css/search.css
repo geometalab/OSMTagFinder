@@ -16,7 +16,7 @@ hr {
 
 .search_result {
     min-width: 600pt;
-    padding-left: 100pt;
+    padding-left: 110pt;
     margin-top: 0px;
     margin-left: 30px;
     margin-right: 30px;
@@ -33,14 +33,14 @@ hr {
 
 .search_result h3 {
     font-weight: bold;
-    text-indent: -100pt;
+    text-indent: -110pt;
     font-size: 20px;
     margin-bottom: 15px;
 }
 
 .meta_first_column {
     position: absolute;
-    text-indent: -100pt;
+    text-indent: -110pt;
     font-weight: bold;
     color: #006621;
 }
@@ -52,7 +52,7 @@ hr {
 
 .first_column {
     position: absolute;
-    text-indent: -100pt;
+    text-indent: -110pt;
     font-weight: bold;
 }
 

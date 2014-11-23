@@ -39,7 +39,7 @@ def encode(text):
     if text is not None and not isinstance(text, unicode) and len(text) > 0:
         encoding = chardet.detect(text)
         try:
-            return text.decode(encoding['encoding'])
+            return str( text.decode(encoding['encoding']) )
         except:
             pass
     return text
@@ -64,7 +64,7 @@ def tempDir():
     return _checkPath(path)
 
 def websiteDir():
-    path = rootDir() + '/' + _dataFolderName + '/' + _websiteFolderName + '/'
+    path = rootDir() + '/' + _websiteFolderName + '/'
     return _checkPath(path)
 
 def semnetDir():

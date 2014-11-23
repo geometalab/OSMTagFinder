@@ -34,34 +34,23 @@ class GraphSearch:
         word = utils.eszettToSS(word)
         return word
 
-    def searchTagPrefLabel(self, word, searcher):
+    def search(self, word, searcher, indexerField):
         if self.ix is None or searcher is None:
             return None
-        query = QueryParser("tagPrefLabel", self.ix.schema).parse(unicode(word))
+        query = QueryParser(indexerField, self.ix.schema).parse(unicode(word))
         return searcher.search(query, limit=None, terms=True)
 
-    def extTagSearchPrefLabel(self, word, searcher, results, allHits):
-        hits = self.searchTagPrefLabel(word, searcher)
+    def extendedSearch(self, word, searcher, indexerField, results, allHits):
+        hits = self.search(word, searcher, indexerField)
         self.updateResults(results, hits)
         return self.upgradeAndExtend(allHits, hits)
 
-    def searchTagScopeNote(self, word, searcher):
-        if self.ix is None or searcher is None:
-            return None
-        query = QueryParser("tagScopeNote", self.ix.schema).parse(unicode(word))
-        return searcher.search(query, limit=None, terms=True)
-
-    def extSearchTagScopeNote(self, word, searcher, results, allHits):
-        hits = self.searchTagScopeNote(word, searcher)
-        self.updateResults(results, hits)
-        return self.upgradeAndExtend(allHits, hits)
-
-    def fullSearch(self, word, translateDEToEN=False):
+    def fullSearch(self, word, localDE=False):
         results = OrderedDict()
         word = self.prepareWord(word)
         translatedWord = word
 
-        if translateDEToEN:
+        if localDE:
             try:
                 translatedWord = Translator().translateDEtoEN(word)
             except:
@@ -73,26 +62,35 @@ class GraphSearch:
 
             allHits = None # only to get the correct whoosh score
 
-            if not translateDEToEN:
-                allHits = self.extTagSearchPrefLabel(word, searcher, results, allHits)
+            '''if not localDE and (allHits is None or allHits.scored_length() < self.threshold):'''
+            allHits = self.extendedSearch(word, searcher, 'termPrefLabel', results, allHits)
+            '''elif localDE and (allHits is None or allHits.scored_length() < self.threshold):
+                allHits = self.extendedSearch(translatedWord, searcher, 'termPrefLabel', results, allHits)'''
 
-            else:
-                allHits = self.extTagSearchPrefLabel(translatedWord, searcher, results, allHits)
+            '''if not localDE and (allHits is None or allHits.scored_length() < self.threshold):'''
+            allHits = self.extendedSearch(word, searcher, 'termAltLabel', results, allHits)
+            '''elif localDE and (allHits is None or allHits.scored_length() < self.threshold):
+                allHits = self.extendedSearch(translatedWord, searcher, 'termAltLabel', results, allHits)'''
 
-            if not translateDEToEN and len(allHits) < self.threshold:
-                allHits = self.extSearchTagScopeNote(word, searcher, results, allHits)
+            if not localDE and (allHits is None or allHits.scored_length() < self.threshold):
+                allHits = self.extendedSearch(word, searcher, 'tagPrefLabel', results, allHits)
+            elif localDE and (allHits is None or allHits.scored_length() < self.threshold):
+                allHits = self.extendedSearch(translatedWord, searcher, 'tagPrefLabel', results, allHits)
 
-            elif translateDEToEN and len(allHits) < self.threshold:
-                allHits = self.extSearchTagScopeNote(translatedWord, searcher, results, allHits)
+            if not localDE and (allHits is None or allHits.scored_length() < self.threshold):
+                allHits = self.extendedSearch(word, searcher, 'tagScopeNote', results, allHits)
+            elif localDE and (allHits is None or allHits.scored_length() < self.threshold):
 
-            if len(allHits) < self.threshold:
+                allHits = self.extendedSearch(translatedWord, searcher, 'tagScopeNote', results, allHits)
+
+            if allHits is None or allHits.scored_length() < self.threshold:
                 suggestions = SpellCorrect().listSuggestions(word)
                 for s in suggestions:
-                    allHits = self.extTagSearchPrefLabel(s, searcher, results, allHits)
+                    allHits = self.extendedSearch(s, searcher, 'tagPrefLabel', results, allHits)
 
-                if len(allHits) < self.threshold:
+                if allHits.scored_length() < self.threshold:
                     for s in suggestions:
-                        allHits = self.extSearchTagScopeNote(s, searcher, results, allHits)
+                        allHits = self.extendedSearch(s, searcher, 'tagScopeNote', results, allHits)
 
             results = self.updateScore(results, allHits)
 

@@ -24,7 +24,7 @@ class TagResults:
     def sortKey(self, tag):
         return int(tag['countAll'])
 
-    def buildOSMLinksDictList(self, listOSMLinks):
+    def buildOSMLinksListDict(self, listOSMLinks):
         retList = []
         keyBaseLink = self.cl.getThesaurusString('KEY_SCHEME_NAME') + ':' # http://wiki.openstreetmap.org/wiki/Key:
         tagBaseLink = self.cl.getThesaurusString('TAG_SCHEME_NAME') + ':' # http://wiki.openstreetmap.org/wiki/Tag:
@@ -45,6 +45,36 @@ class TagResults:
             retList.append(retDict)
         return retList
 
+    def buildRelTermsDictList(self, rdfGraph, listRelatedMatches):
+        relatedTerms = { }
+        relatedTerms['en'] = []
+        relatedTerms['de'] = []
+        for relMatchSubject in listRelatedMatches:
+            if rdfGraph.isInTermScheme(relMatchSubject):
+                termAltLabelGen = rdfGraph.getAltLabel(relMatchSubject)
+                for termAltLabel in termAltLabelGen:
+                    if termAltLabel.language == 'en':
+                        listTerms = relatedTerms['en']
+                        listTerms.append(utils.encode(termAltLabel))
+                        relatedTerms['en'] = listTerms
+                    elif termAltLabel.language == 'de':
+                        listTerms = relatedTerms['de']
+                        listTerms.append(utils.encode(termAltLabel))
+                        relatedTerms['de'] = listTerms
+                termPrefLabelGen = rdfGraph.getPrefLabel(relMatchSubject)
+                for termPrefLabel in termPrefLabelGen:
+                    if termPrefLabel.language == 'en':
+                        listTerms = relatedTerms['en']
+                        listTerms.insert(0, termPrefLabel)
+                        relatedTerms['en'] = listTerms
+                    elif termPrefLabel.language == 'de':
+                        listTerms = relatedTerms['de']
+                        listTerms.insert(0, termPrefLabel)
+                        relatedTerms['de'] = listTerms
+        return relatedTerms
+
+
+
     def fillResultList(self, rdfGraph, rawResults):
         for subject in rawResults:
             tag = { }
@@ -63,6 +93,8 @@ class TagResults:
             osmImpliesGen = rdfGraph.getOSMImplies(subject)
             osmCombinesGen = rdfGraph.getOSMCombines(subject)
             osmLinksGen = rdfGraph.getOSMLinks(subject)
+
+            relatedMatchGen = rdfGraph.getRelatedMatch(subject)
 
             default = { 'count' : '0', 'use' : 'False' }
 
@@ -83,11 +115,13 @@ class TagResults:
             tag['area'] = utils.genJsonToDict(osmAreaGen, default)
             tag['relation'] = utils.genJsonToDict(osmRelationGen, default)
 
-            tag['implies'] = self.buildOSMLinksDictList( utils.genToList(osmImpliesGen) )
-            tag['combines'] = self.buildOSMLinksDictList( utils.genToList(osmCombinesGen) )
-            tag['links'] = self.buildOSMLinksDictList( utils.genToList(osmLinksGen) )
+            tag['implies'] = self.buildOSMLinksListDict( utils.genToList(osmImpliesGen) )
+            tag['combines'] = self.buildOSMLinksListDict( utils.genToList(osmCombinesGen) )
+            tag['links'] = self.buildOSMLinksListDict( utils.genToList(osmLinksGen) )
 
             tag['countAll'] = int(tag['node']['count']) + int(tag['way']['count']) + int(tag['relation']['count']) + int(tag['area']['count'])
+
+            tag['relatedTerm'] = self.buildRelTermsDictList( rdfGraph, utils.genToList(relatedMatchGen) )
 
             self.results.append(tag)
 

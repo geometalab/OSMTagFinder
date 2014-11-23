@@ -83,12 +83,14 @@ class Gemet(ThesauriBase):
 
 
     def getConceptForUri(self, gemetConceptUri, apiLang):
-        conceptResult = requests.get(self.getConceptByID + self.conceptSuffix + gemetConceptUri + self.langSuffix + apiLang)
-        if conceptResult.status_code < 300:
-            conceptJson = conceptResult.json()
-            if 'preferredLabel' in conceptJson:
-                return (conceptJson['preferredLabel'])['string']
-        return None
+        try:
+            conceptResult = requests.get(self.getConceptByID + self.conceptSuffix + gemetConceptUri + self.langSuffix + apiLang)
+            if conceptResult.status_code < 300:
+                conceptJson = conceptResult.json()
+                if 'preferredLabel' in conceptJson:
+                    return (conceptJson['preferredLabel'])['string']
+        except:
+            return None
 
     def getRelated(self):
         return self.relatedSet

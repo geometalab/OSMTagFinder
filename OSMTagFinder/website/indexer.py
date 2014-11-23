@@ -17,12 +17,9 @@ from whoosh.index import create_in
 class Indexer:
 
     schema = Schema(tagSubject=ID(stored=True),
-                    termSubject=ID(stored=True),
                     tagPrefLabel=NGRAM(stored=True),
-                    termPrefLabelEN=NGRAM(stored=True),
-                    termPrefLabelDE=NGRAM(stored=True),
-                    termAltLabelEN=NGRAM(stored=True),
-                    termAltLabelDE=NGRAM(stored=True),
+                    termPrefLabel=TEXT(stored=True),
+                    termAltLabel=TEXT(stored=True),
                     tagScopeNote=TEXT(stored=True),
                     spellingEN=TEXT(stored=True, spelling=True),
                     spellingDE=TEXT(stored=True, spelling=True))
@@ -46,25 +43,22 @@ class Indexer:
                     count += 1
                     print str(count) + ': Indexing tagScopeNote: ' + str(obj)
                     self.addTagScopeNote(subject, obj)
+
             elif rdfGraph.isInTermScheme(subject):
+                altLabelTermTags = self.tagsOfAltLabelTerm(rdfGraph, subject)
+
                 if predicate == SKOS.prefLabel:
                     count += 1
                     lang = obj.language
-                    if lang == 'en':
-                        print str(count) + ': Indexing termPrefLabelEN: ' + str(obj)
-                        self.addTermPrefLabelEN(subject, obj)
-                    elif lang == 'de':
-                        print str(count) + ': Indexing termPrefLabelDE: ' + str(obj)
-                        self.addTermPrefLabelDE(subject, obj)
+                    if lang == 'en' or lang == 'de':
+                        print str(count) + ': Indexing termPrefLabel: ' + str(obj)
+                        self.addTermPrefLabel(altLabelTermTags, obj)
                 if predicate == SKOS.altLabel:
                     count += 1
                     lang = obj.language
-                    if lang == 'en':
-                        print str(count) + ': Indexing termAltLabelEN: ' + str(obj)
-                        self.addTermAltLabelEN(subject, obj)
-                    elif lang == 'de':
-                        print str(count) + ': Indexing termAltLabelDE: ' + str(obj)
-                        self.addTermAltLabelDE(subject, obj)
+                    if lang == 'en' or lang == 'de':
+                        print str(count) + ': Indexing termAltLabel: ' + str(obj)
+                        self.addTermAltLabel(altLabelTermTags, obj)
 
         self.addSpellings()
 
@@ -110,6 +104,10 @@ class Indexer:
             print str(countDE) + ': Indexing DE spelling for word: ' + word
             self.__writer.add_document(spellingDE=unicode(word))
 
+    def tagsOfAltLabelTerm(self, rdfGraph, relTermSubject):
+        generatorList = rdfGraph.getRelatedMatch(relTermSubject)
+        return utils.genToList(generatorList)
+
     def createNewIndex(self):
         ix = create_in(utils.indexerDir(), self.schema, indexname=utils.indexName)
         self.__writer = ix.writer()
@@ -126,29 +124,19 @@ class Indexer:
         self.__writer.add_document(tagSubject=unicode(tagSubject), tagScopeNote=unicode(tagScopeNote))
         self.addToWordList(tagScopeNote)
 
-    def addTermPrefLabelEN(self, termSubject, termPrefLabelEN):
+    def addTermPrefLabel(self, tagSubjectList, termPrefLabel):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
-        self.__writer.add_document(termSubject=unicode(termSubject), termPrefLabelEN=unicode(termPrefLabelEN))
-        self.addToWordList(termPrefLabelEN)
+        for tagSubject in tagSubjectList:
+            self.__writer.add_document(tagSubject=unicode(tagSubject), termPrefLabel=unicode(termPrefLabel))
+        self.addToWordList(termPrefLabel)
 
-    def addTermPrefLabelDE(self, termSubject, termPrefLabelDE):
+    def addTermAltLabel(self, tagSubjectList, termAltLabel):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
-        self.__writer.add_document(termSubject=unicode(termSubject), termPrefLabelDE=unicode(termPrefLabelDE))
-        self.addToWordList(termPrefLabelDE)
-
-    def addTermAltLabelEN(self, termSubject, termAltLabelEN):
-        if not index.exists_in(utils.indexerDir(), utils.indexName):
-            self.createNewIndex()
-        self.__writer.add_document(termSubject=unicode(termSubject), termAltLabelEN=unicode(termAltLabelEN))
-        self.addToWordList(termAltLabelEN)
-
-    def addTermAltLabelDE(self, termSubject, termAltLabelDE):
-        if not index.exists_in(utils.indexerDir(), utils.indexName):
-            self.createNewIndex()
-        self.__writer.add_document(termSubject=unicode(termSubject), termAltLabelDE=unicode(termAltLabelDE))
-        self.addToWordList(termAltLabelDE)
+        for tagSubject in tagSubjectList:
+            self.__writer.add_document(tagSubject=unicode(tagSubject), termAltLabel=unicode(termAltLabel))
+        self.addToWordList(termAltLabel)
 
     def commit(self):
         self.__writer.commit()

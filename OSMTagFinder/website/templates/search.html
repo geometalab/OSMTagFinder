@@ -117,19 +117,43 @@
                                 {% set score = result['searchMeta']['score'] %}
                                 {% set searchMetasEN = 'Score: ' ~ score|round(2, 'floor') %} <!-- ~ converts to string in jinja2 and concatenates -->
                                 {% set searchMetasDE = 'Score: ' ~ score|round(2, 'floor') %}
+                                {% set searchMetasEN = searchMetasEN + '  ' %}
+                                {% set searchMetasDE = searchMetasDE + '  ' %}
+                                {% if result['searchMeta']['termPrefLabel']|count > 0 %}
+                                    {% set metasTermPrefLabel = result['searchMeta']['termPrefLabel']|join(", ") %}
+                                    {% set searchMetasEN = searchMetasEN + ' / main term: ' ~ metasTermPrefLabel %}
+                                    {% set searchMetasDE = searchMetasDE + ' / Hauptbegriff: ' ~ metasTermPrefLabel %}
+                                {% endif %}
+                                {% if result['searchMeta']['termAltLabel']|count > 0 %}
+                                    {% set metasTermRelated = result['searchMeta']['termAltLabel']|join(", ") %}
+                                    {% set searchMetasEN = searchMetasEN + ' / related term: ' ~ metasTermRelated %}
+                                    {% set searchMetasDE = searchMetasDE + ' / verwandter Begriff: ' ~ metasTermRelated %}
+                                {% endif %}
                                 {% if result['searchMeta']['tagPrefLabel']|count > 0 %}
                                     {% set metasPrefLabel = result['searchMeta']['tagPrefLabel']|join(", ") %}
-                                    {% set searchMetasEN = searchMetasEN + ' - Found in tag: ' ~ metasPrefLabel %}
-                                    {% set searchMetasDE = searchMetasDE + ' - Gefunden im Tag: ' ~ metasPrefLabel %}
+                                    {% set searchMetasEN = searchMetasEN + ' / tag name: ' ~ metasPrefLabel %}
+                                    {% set searchMetasDE = searchMetasDE + ' / Tagname: ' ~ metasPrefLabel %}
                                 {% endif %}
                                 {% if result['searchMeta']['tagScopeNote']|count > 0 %}
                                     {% set metasScopeNote = result['searchMeta']['tagScopeNote']|join(", ") %}
-                                    {% set searchMetasEN = searchMetasEN + ' - Found in description: ' ~ metasScopeNote %}
-                                    {% set searchMetasDE = searchMetasDE + ' - Gefunden in Beschreibung: ' ~ metasScopeNote %}
+                                    {% set searchMetasEN = searchMetasEN + ' / description: ' ~ metasScopeNote %}
+                                    {% set searchMetasDE = searchMetasDE + ' / Beschreibung: ' ~ metasScopeNote %}
                                 {% endif %}
                                 <p class="meta_second_column" lang="en">{{ searchMetasEN }}</p>
                                 <p class="meta_second_column" lang="de">{{ searchMetasDE }}</p>
                             {% endif %}
+
+                            <!-- related term logic -->
+                            {%- if result['relatedTerm']['en']|count > 0 -%}
+                                {% set relTermList_en = result['relatedTerm']['en']|join(", ") %}
+                            {%- else -%}
+                                {% set relTermList_en = no_element_en %}
+                            {%- endif -%}
+                            {%- if result['relatedTerm']['de']|count > 0 -%}
+                                {% set relTermList_de = result['relatedTerm']['de']|join(", ") %}
+                            {%- else -%}
+                                {% set relTermList_de = no_element_de %}
+                            {%- endif -%}
 
                             <!-- description logic -->
                             {% if result['scopeNote']['en']|count > 0 %}
@@ -160,6 +184,12 @@
                                 {%- endif -%}
                             {%- endmacro -%}
 
+                            <!-- related terms -->
+                            <p class="first_column" lang="en">Related terms:</p>
+                            <p class="first_column" lang="de">Verwandte Begriffe:</p>
+                            <p class="second_column" lang="en">{{ relTermList_en }}</p>
+                            <p class="second_column" lang="de">{{ relTermList_de }}</p>
+
                             <!-- description -->
                             <p class="first_column" lang="en">Description:</p>
                             <p class="first_column" lang="de">Beschreibung:</p>
@@ -177,8 +207,8 @@
                             <p class="second_column">{{ listlinks(result['combines'], no_element_en, no_element_de ) }}</p>
 
                             <!-- linked tags -->
-                            <p class="first_column" lang="en">Linked with:</p>
-                            <p class="first_column" lang="de">Verlinkt mit:</p>
+                            <p class="first_column" lang="en">Weblinks in wiki:</p>
+                            <p class="first_column" lang="de">Weblinks im Wiki:</p>
                             <p class="second_column">{{ listlinks(result['links'], no_element_en, no_element_de ) }}</p>
 
                         </div>
