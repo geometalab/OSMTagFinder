@@ -40,6 +40,7 @@
 
         });
     </script>
+
 {% endblock %}
 
 {% block navbar %}
@@ -96,6 +97,15 @@
                                     </ul>
                                 </li>
                             </ul>
+                            <form class="navbar-form navbar-left" role="search" action="/search" method="get"> <!-- navbar search -->
+                                <div id="navbarsearch-ingroup" class="input-group input-group-sm">
+                                    <input id="navbarsearch" type="text" value="{{ q }}" name="q" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button id="button-sm-en" class="btn btn-success" type="submit" lang="en">Search</button>
+                                        <button id="button-sm-de" class="btn btn-success" type="submit" lang="de">Suchen</button>
+                                    </span>
+                                </div>
+                            </form>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>
@@ -111,15 +121,13 @@
 
 {% block bgfooter %}
     <div class="background-footer"></div>
-    <form class="navbar-form navbar-left" role="search" action="/search" method="get"> <!-- navbar search -->
-        <div id="navbarsearch-ingroup" class="input-group input-group-sm">
-            <input id="navbarsearch" type="text" value="{{ q }}" name="q" class="form-control">
-            <span class="input-group-btn">
-                <button id="button-sm-en" class="btn btn-success" type="submit" lang="en">Search</button>
-                <button id="button-sm-de" class="btn btn-success" type="submit" lang="de">Suchen</button>
-            </span>
-        </div>
-    </form>
+    <!-- copyright footer -->
+    <nav id="nav_footer" class="navbar navbar-default navbar-fixed-bottom" role="footer">
+        <p class="navbar-text">&copy; Copyright: <a href="http://opendatacommons.org/licenses/odbl" target="_tag">OBdL</a> / <a href="https://www.openstreetmap.org/copyright" target="_tag">OSM contributors</a></p>
+        <p class="navbar-text" lang="en">Data from 21.11.2014</p>
+        <p class="navbar-text" lang="de">Daten vom 21.11.2014</p>
+        <p class="navbar-text navbar-right" id="logo_hsr"><a href="https://www.hsr.ch/geometalab" target="_tag"><img class="image" src="{{ url_for('static', filename='img/logo_hsr.png') }}" alt="hsr.ch" height="30"></a></p>
+        <p class="navbar-text navbar-right" id="logo_taginfo"><a href="https://taginfo.openstreetmap.org" target="_tag"><img class="image" src="{{ url_for('static', filename='img/logo_taginfo.png') }}" alt="hsr.ch" height="30"></a></p>
+        <p class="navbar-text navbar-right" id="logo_osm"><a href="https://www.openstreetmap.org" target="_tag"><img class="image" src="{{ url_for('static', filename='img/logo_osm.png') }}" alt="hsr.ch" height="30"></a></p>
+    </nav>
 {% endblock %}
-
-
