@@ -8,6 +8,11 @@
 
 {% block content %}
     {{super()}}
+
+    {% block bgheader %}
+        {{super()}}
+    {% endblock %}
+
     <div class="container">
         <div class="col-lg-20 col-md-20">
             <div class="jumbotron">
@@ -20,4 +25,8 @@
             </div>
         </div>
     </div>
+
+    {% block bgfooter %}
+        {{super()}}
+    {% endblock %}
 {% endblock %}

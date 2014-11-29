@@ -40,7 +40,6 @@
 
         });
     </script>
-
 {% endblock %}
 
 {% block navbar %}
@@ -97,15 +96,6 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <form class="navbar-form navbar-left" role="search" action="/search" method="get"> <!-- navbar search -->
-                                <div id="navbarsearch-ingroup" class="input-group input-group-sm">
-                                    <input id="navbarsearch" type="text" value="{{ q }}" name="q" class="form-control">
-                                    <span class="input-group-btn">
-                                        <button id="button-sm-en" class="btn btn-success" type="submit" lang="en">Search</button>
-                                        <button id="button-sm-de" class="btn btn-success" type="submit" lang="de">Suchen</button>
-                                    </span>
-                                </div>
-                            </form>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>
@@ -121,6 +111,15 @@
 
 {% block bgfooter %}
     <div class="background-footer"></div>
+    <form class="navbar-form navbar-left" role="search" action="/search" method="get"> <!-- navbar search -->
+        <div id="navbarsearch-ingroup" class="input-group input-group-sm">
+            <input id="navbarsearch" type="text" value="{{ q }}" name="q" class="form-control">
+            <span class="input-group-btn">
+                <button id="button-sm-en" class="btn btn-success" type="submit" lang="en">Search</button>
+                <button id="button-sm-de" class="btn btn-success" type="submit" lang="de">Suchen</button>
+            </span>
+        </div>
+    </form>
 {% endblock %}
 
 
