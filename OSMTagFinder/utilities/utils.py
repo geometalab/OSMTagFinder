@@ -38,10 +38,10 @@ def specCharEnc(text):
 def encode(text):
     if text is not None and not isinstance(text, unicode) and len(text) > 0:
         encoding = chardet.detect(text)
-        try:
-            return str( text.decode(encoding['encoding']) )
-        except:
-            pass
+        #try:
+            #return str(u''+ text.decode(encoding['encoding']) )
+        #except:
+            #pass
     return text
 
 def checkFile(filePath):

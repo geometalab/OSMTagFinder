@@ -10,14 +10,14 @@ from rdflib.namespace import SKOS
 from thesaurus.rdfgraph import RDFGraph
 
 import re
-from whoosh.fields import TEXT, ID, NGRAM, Schema
+from whoosh.fields import TEXT, ID, Schema
 import whoosh.index as index
 from whoosh.index import create_in
 
 class Indexer:
 
     schema = Schema(tagSubject=ID(stored=True),
-                    tagPrefLabel=NGRAM(stored=True),
+                    tagPrefLabel=TEXT(stored=True),
                     termPrefLabel=TEXT(stored=True),
                     termAltLabel=TEXT(stored=True),
                     tagScopeNote=TEXT(stored=True),
@@ -65,23 +65,25 @@ class Indexer:
         self.commit()
 
     splitChars = re.compile('[ =".,:;/\?\(\)\]\[\!\*]')
-    def addToWordList(self, words):
+    def addToWordList(self, words, filterShort=None):
         lang = words.language
         wordList = self.splitChars.split(words)
-        if lang == 'en':
-            for word in wordList:
-                if len(word) > 1:
-                    word = utils.eszettToSS(word)
-                    self.wordSetEN.add(word)
-        elif lang == 'de':
-            for word in wordList:
-                if len(word) > 1:
-                    word = utils.eszettToSS(word)
-                    self.wordSetDE.add(word)
-        else:
-            translator = Translator()
-            for word in wordList:
-                if len(word) > 1 and word not in self.wordSetDE and word not in self.wordSetEN :
+        for word in wordList:
+            if len(word) <= 1:
+                continue;
+
+            if filterShort and len(word) <= filterShort: # skips short lowercased words if 'filterShort'
+                continue;
+
+            if lang == 'en':
+                word = utils.eszettToSS(word)
+                self.wordSetEN.add(word)
+            elif lang == 'de':
+                word = utils.eszettToSS(word)
+                self.wordSetDE.add(word)
+            else:
+                translator = Translator()
+                if not word in self.wordSetDE and word not in self.wordSetEN :
                     try:
                         transWordDE = translator.translateENToDE(word)
                         transWordDE = utils.eszettToSS(transWordDE)
@@ -122,7 +124,7 @@ class Indexer:
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             self.createNewIndex()
         self.__writer.add_document(tagSubject=unicode(tagSubject), tagScopeNote=unicode(tagScopeNote))
-        self.addToWordList(tagScopeNote)
+        self.addToWordList(tagScopeNote, 5)
 
     def addTermPrefLabel(self, tagSubjectList, termPrefLabel):
         if not index.exists_in(utils.indexerDir(), utils.indexName):

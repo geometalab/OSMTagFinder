@@ -7,21 +7,27 @@
 
 {% block scripts %}
     {{super()}}
+    <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
 {% endblock %}
+
+
 
 {% block content %}
     {{super()}}
-    <div class="container">
 
-        <div class="jumbotron">
-            <h3>Tag Finder</h3>
-            <p></p>
-            <form action="/search" method="get"> <!-- searchbar -->
-                <div class="input-group input-group-lg">
-                    <input type="text" value="{{ q }}" name="q" class="form-control" >
+    {% block bgheader %}
+        {{super()}}
+    {% endblock %}
+
+    <div id="page_content">
+
+        <div id="jumbotron_search" class="jumbotron">
+            <form action="/search" method="get" name="search_form"> <!-- searchbar -->
+                <div id="main_search_ingroup" class="input-group input-group-lg">
+                    <input type="text" value="{{ q }}" name="q" class="form-control" id="mainsearch" autocomplete="off" data-provide="typeahead">
                     <span class="input-group-btn">
-                        <button id="button-lg-en" class="btn btn-success btn-lg" type="submit" lang="en">Search</button>
-                        <button id="button-lg-de" class="btn btn-success btn-lg" type="submit" lang="de">Suchen</button>
+                        <button id="btn_main_search_en" class="btn btn-success" type="submit" lang="en">Search</button>
+                        <button id="btn_main_search_de" class="btn btn-success" type="submit" lang="de">Suchen</button>
                     </span>
                 </div>
             </form>
@@ -33,6 +39,10 @@
             <h5 lang="en" class="found">Found <b>{{ results|count }}</b> OpenStreetMap tags.</h5>
             <h5 lang="de" class="found">Es wurden <b>{{ results|count }}</b> OpenStreetMap Tags gefunden.</h5>
             {% for result in results %}
+
+
+                {% set currentIndex = loop.index %} <!-- 1 indexed, use loop.index0 to start indexing at 0 -->
+
                 <!--<hr>-->
                 <div class ="row">
                     <div class="col-lg-50 col-md-50">
@@ -80,18 +90,18 @@
                                                 <td title="total count">{{ result['countAll'] }}</td>
                                             </tr>
                                             <tr>
-                                                <td title="may be used on nodes"><img src="{{ srcNode }}" alt="Node" align="left" width="30" height="30"></td>
+                                                <td title="use on nodes"><img src="{{ srcNode }}" alt="Node" align="left" width="30" height="30"></td>
                                                 <td></td>
                                                 <td title="count nodes">{{ result['node']['count'] }}</td>
                                             </tr>
                                            <tr>
-                                                <td title="may be used on relations"><img src="{{ srcRelation }}" alt="Node" align="left" width="30" height="30"></td>
+                                                <td title="use on relations"><img src="{{ srcRelation }}" alt="Node" align="left" width="30" height="30"></td>
                                                 <td></td>
                                                 <td title="count relations">{{ result['relation']['count'] }}</td>
                                             </tr>
                                              <tr>
-                                                <td title="may be used on ways"><img src="{{ srcWay }}" alt="Node" align="left" width="30" height="30"></td>
-                                                <td title="may be used on areas"><img src="{{ srcArea }}" alt="Node" align="left" width="30" height="30"></td>
+                                                <td title="use on ways"><img src="{{ srcWay }}" alt="Node" align="left" width="30" height="30"></td>
+                                                <td title="use on areas"><img src="{{ srcArea }}" alt="Node" align="left" width="30" height="30"></td>
                                                 <td title="count ways and areas">{{ result['way']['count'] }}</td>
                                             </tr>
                                         </table>
@@ -102,46 +112,13 @@
 
                             <!-- maintag label -->
                             {% if result['isTag'] %}
-                                <h3><a target="_tag" href="{{ result['subject'] }}">{{ result['prefLabel'] }}</a></h3>
+                                <h3><a id="tagLabel_{{ currentIndex }}" target="_tag" href="{{ result['subject'] }}">{{ result['prefLabel'] }}</a></h3>
                             {% else %}
-                                <h3><a target="_tag" href="{{ result['subject'] }}">{{ result['prefLabel'] }}=✱</a></h3> <!--✱✲-->
+                                <h3><a id="keyLabel_{{ currentIndex }}" target="_tag" href="{{ result['subject'] }}">{{ result['prefLabel'] }}=✱</a></h3> <!--✱✲-->
                             {% endif %}
 
                             {% set no_element_en = '-' %}
                             {% set no_element_de = '-' %}
-
-                            <!-- searchmeta -->
-                            {% if result['searchMeta'] %}
-                                <p class="meta_first_column" lang="en">Searchmeta:</p>
-                                <p class="meta_first_column" lang="de">Suchmeta:</p>
-                                {% set score = result['searchMeta']['score'] %}
-                                {% set searchMetasEN = 'Score: ' ~ score|round(2, 'floor') %} <!-- ~ converts to string in jinja2 and concatenates -->
-                                {% set searchMetasDE = 'Score: ' ~ score|round(2, 'floor') %}
-                                {% set searchMetasEN = searchMetasEN + '  ' %}
-                                {% set searchMetasDE = searchMetasDE + '  ' %}
-                                {% if result['searchMeta']['termPrefLabel']|count > 0 %}
-                                    {% set metasTermPrefLabel = result['searchMeta']['termPrefLabel']|join(", ") %}
-                                    {% set searchMetasEN = searchMetasEN + ' / main term: ' ~ metasTermPrefLabel %}
-                                    {% set searchMetasDE = searchMetasDE + ' / Hauptbegriff: ' ~ metasTermPrefLabel %}
-                                {% endif %}
-                                {% if result['searchMeta']['termAltLabel']|count > 0 %}
-                                    {% set metasTermRelated = result['searchMeta']['termAltLabel']|join(", ") %}
-                                    {% set searchMetasEN = searchMetasEN + ' / related term: ' ~ metasTermRelated %}
-                                    {% set searchMetasDE = searchMetasDE + ' / verwandter Begriff: ' ~ metasTermRelated %}
-                                {% endif %}
-                                {% if result['searchMeta']['tagPrefLabel']|count > 0 %}
-                                    {% set metasPrefLabel = result['searchMeta']['tagPrefLabel']|join(", ") %}
-                                    {% set searchMetasEN = searchMetasEN + ' / tag name: ' ~ metasPrefLabel %}
-                                    {% set searchMetasDE = searchMetasDE + ' / Tagname: ' ~ metasPrefLabel %}
-                                {% endif %}
-                                {% if result['searchMeta']['tagScopeNote']|count > 0 %}
-                                    {% set metasScopeNote = result['searchMeta']['tagScopeNote']|join(", ") %}
-                                    {% set searchMetasEN = searchMetasEN + ' / description: ' ~ metasScopeNote %}
-                                    {% set searchMetasDE = searchMetasDE + ' / Beschreibung: ' ~ metasScopeNote %}
-                                {% endif %}
-                                <p class="meta_second_column" lang="en">{{ searchMetasEN }}</p>
-                                <p class="meta_second_column" lang="de">{{ searchMetasDE }}</p>
-                            {% endif %}
 
                             <!-- related term logic -->
                             {%- if result['relatedTerm']['en']|count > 0 -%}
@@ -187,29 +164,96 @@
                             <!-- related terms -->
                             <p class="first_column" lang="en">Related terms:</p>
                             <p class="first_column" lang="de">Verwandte Begriffe:</p>
-                            <p class="second_column" lang="en">{{ relTermList_en }}</p>
-                            <p class="second_column" lang="de">{{ relTermList_de }}</p>
+                            <p class="second_column" id="relTermsEN_{{ currentIndex }}" lang="en">{{ relTermList_en }}</p>
+                            <p class="second_column" id="relTermsDE_{{ currentIndex }}" lang="de">{{ relTermList_de }}</p>
 
                             <!-- description -->
                             <p class="first_column" lang="en">Description:</p>
                             <p class="first_column" lang="de">Beschreibung:</p>
-                            <p class="second_column" lang="en">{{ scopeNote_en }}</p>
-                            <p class="second_column" lang="de">{{ scopeNote_de }}</p>
+                            <p class="second_column" id="descriptionEN_{{ currentIndex }}" lang="en">{{ scopeNote_en }}</p>
+                            <p class="second_column" id="descriptionDE_{{ currentIndex }}" lang="de">{{ scopeNote_de }}</p>
 
                             <!-- implied tags -->
                             <p class="first_column" lang="en">Implies:</p>
                             <p class="first_column" lang="de">Impliziert:</p>
-                            <p class="second_column">{{ listlinks(result['implies'], no_element_en, no_element_de ) }}</p>
+                            <p class="second_column" id="implies_{{ currentIndex }}">{{ listlinks(result['implies'], no_element_en, no_element_de ) }}</p>
 
                             <!-- combined tags -->
                             <p class="first_column" lang="en">Combined with:</p>
                             <p class="first_column" lang="de">Kombiniert mit:</p>
-                            <p class="second_column">{{ listlinks(result['combines'], no_element_en, no_element_de ) }}</p>
+                            <p class="second_column" id="combines_{{ currentIndex }}">{{ listlinks(result['combines'], no_element_en, no_element_de ) }}</p>
 
                             <!-- linked tags -->
                             <p class="first_column" lang="en">Weblinks in wiki:</p>
                             <p class="first_column" lang="de">Weblinks im Wiki:</p>
-                            <p class="second_column">{{ listlinks(result['links'], no_element_en, no_element_de ) }}</p>
+                            <p class="second_column" id="linked_{{ currentIndex }}">{{ listlinks(result['links'], no_element_en, no_element_de ) }}</p>
+
+                            <!-- searchmeta and highlighting -->
+                            {% if result['searchMeta'] %}
+                                <p class="meta_first_column" lang="en">Searchmeta:</p>
+                                <p class="meta_first_column" lang="de">Suchmeta:</p>
+                                {% set score = result['searchMeta']['score'] %}
+                                {% set searchMetasEN = 'Score: ' ~ score|round(2, 'floor') %} <!-- ~ converts to string in jinja2 and concatenates -->
+                                {% set searchMetasDE = 'Score: ' ~ score|round(2, 'floor') %}
+                                {% set searchMetasEN = searchMetasEN + '  ' %}
+                                {% set searchMetasDE = searchMetasDE + '  ' %}
+                                {% if result['searchMeta']['termPrefLabel']|count > 0 %}
+                                    {% set metasTermPrefLabel = result['searchMeta']['termPrefLabel']|join(", ") %}
+                                    {% set searchMetasEN = searchMetasEN + ' / main term: ' ~ metasTermPrefLabel %}
+                                    {% set searchMetasDE = searchMetasDE + ' / Hauptbegriff: ' ~ metasTermPrefLabel %}
+                                    {% for termPrefLabel in result['searchMeta']['termPrefLabel'] %}
+                                        <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+                                        <script type="text/javascript">
+                                            highlight(document.getElementById('relTermsEN_{{ currentIndex }}'), '{{ termPrefLabel }}')
+                                            highlight(document.getElementById('relTermsDE_{{ currentIndex }}'), '{{ termPrefLabel }}')
+                                        </script>
+                                    {% endfor %}
+                                {% endif %}
+                                {% if result['searchMeta']['termAltLabel']|count > 0 %}
+                                    {% set metasTermAltLabel = result['searchMeta']['termAltLabel']|join(", ") %}
+                                    {% set searchMetasEN = searchMetasEN + ' / related term: ' ~ metasTermAltLabel %}
+                                    {% set searchMetasDE = searchMetasDE + ' / verwandter Begriff: ' ~ metasTermAltLabel %}
+                                    {% for termAltLabel in result['searchMeta']['termAltLabel'] %}
+                                        <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+                                        <script type="text/javascript">
+                                            highlight(document.getElementById('relTermsEN_{{ currentIndex }}'), '{{ termAltLabel }}')
+                                            highlight(document.getElementById('relTermsDE_{{ currentIndex }}'), '{{ termAltLabel }}')
+                                        </script>
+                                    {% endfor %}
+                                {% endif %}
+                                {% if result['searchMeta']['tagPrefLabel']|count > 0 %}
+                                    {% set metasTagPrefLabel = result['searchMeta']['tagPrefLabel']|join(", ") %}
+                                    {% set searchMetasEN = searchMetasEN + ' / tag name: ' ~ metasTagPrefLabel %}
+                                    {% set searchMetasDE = searchMetasDE + ' / Tagname: ' ~ metasTagPrefLabel %}
+                                    {% for tagPrefLabel in result['searchMeta']['tagPrefLabel'] %}
+                                        {% if result['isTag'] %}
+                                            <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+                                            <script type="text/javascript">
+                                                highlight(document.getElementById('tagLabel_{{ currentIndex }}'), '{{ tagPrefLabel }}')
+                                            </script>
+                                        {% else %}
+                                            <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+                                            <script type="text/javascript">
+                                                highlight(document.getElementById('keyLabel_{{ currentIndex }}'), '{{ tagPrefLabel }}')
+                                            </script>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                {% if result['searchMeta']['tagScopeNote']|count > 0 %}
+                                    {% set metasScopeNote = result['searchMeta']['tagScopeNote']|join(", ") %}
+                                    {% set searchMetasEN = searchMetasEN + ' / description: ' ~ metasScopeNote %}
+                                    {% set searchMetasDE = searchMetasDE + ' / Beschreibung: ' ~ metasScopeNote %}
+                                    {% for scopeNote in result['searchMeta']['tagScopeNote'] %}
+                                        <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+                                        <script type="text/javascript">
+                                            highlight(document.getElementById('descriptionEN_{{ currentIndex }}'), '{{ scopeNote }}')
+                                            highlight(document.getElementById('descriptionDE_{{ currentIndex }}'), '{{ scopeNote }}')
+                                        </script>
+                                    {% endfor %}
+                                {% endif %}
+                                <p class="meta_second_column" lang="en">{{ searchMetasEN }}</p>
+                                <p class="meta_second_column" lang="de">{{ searchMetasDE }}</p>
+                            {% endif %}
 
                         </div>
                     </div>
@@ -217,18 +261,38 @@
             {% endfor %}
 
         {% elif q %} <!-- None found or no search (if q is None) -->
-            <h5 lang="en" class="none_found">Your search - <b>{{ q }}</b> - did not match any OpenStreetMap tags. </h5>
-            <h5 lang="de" class="none_found">Es wurden keine mit Ihrer Suchanfrage - <b>{{ q }}</b> - übereinstimmende OpenStreetMap Tags gefunden.</h5>
-            <h5 lang="en" class="suggestion_header">Suggestions:</h5>
-            <h5 lang="de" class="suggestion_header">Vorschläge:</h5>
-            <ul id="suggestion_list">
-                <li lang="en">Make sure that all words are spelled correctly.</li>
-                <li lang="en">Try different keywords.</li>
-                <li lang="en">Try more general keywords.</li>
-                <li lang="de">Achten Sie darauf, dass alle Wörter richtig geschrieben sind.</li>
-                <li lang="de">Probieren Sie es mit anderen Suchbegriffen.</li>
-                <li lang="de">Probieren Sie es mit allgemeineren Suchbegriffen.</li>
-            </ul>
+            <div class="none_found">
+                <h5 lang="en" class="none_found_header">Your search - <b>{{ q }}</b> - did not match any OpenStreetMap tags. </h5>
+                <h5 lang="de" class="none_found_header">Es wurden keine mit Ihrer Suchanfrage - <b>{{ q }}</b> - übereinstimmende OpenStreetMap Tags gefunden.</h5>
+                <h5 lang="en" class="suggestion_header">Suggestions:</h5>
+                <h5 lang="de" class="suggestion_header">Vorschläge:</h5>
+                <ul id="suggestion_list">
+                    <li lang="en">Make sure that all words are spelled correctly.</li>
+                    <li lang="en">Try different keywords.</li>
+                    <li lang="en">Try more general keywords.</li>
+                    <li lang="de">Achten Sie darauf, dass alle Wörter richtig geschrieben sind.</li>
+                    <li lang="de">Probieren Sie es mit anderen Suchbegriffen.</li>
+                    <li lang="de">Probieren Sie es mit allgemeineren Suchbegriffen.</li>
+                </ul>
+            </div>
         {% endif %}
+
+        <div id="push"></div>
+
     </div>
+
+    {% block bgfooter %}
+        {{super()}}
+    {% endblock %}
+
+    <!-- copyright footer -->
+    <nav id="nav_footer" class="navbar navbar-default navbar-fixed-bottom" role="footer">
+        <p class="navbar-text">&copy; Copyright: <a href="http://opendatacommons.org/licenses/odbl" target="_tag">OBdL</a> / <a href="https://www.openstreetmap.org/copyright" target="_tag">OSM contributors</a></p>
+        <p class="navbar-text" lang="en">Data from 21.11.2014</p>
+        <p class="navbar-text" lang="de">Daten vom 21.11.2014</p>
+        <p class="navbar-text navbar-right" id="logo_hsr"><a href="https://www.hsr.ch/geometalab" target="_tag"><img class="image" src="{{ url_for('static', filename='img/logo_hsr.png') }}" alt="hsr.ch" height="30"></a></p>
+        <p class="navbar-text navbar-right" id="logo_taginfo"><a href="https://taginfo.openstreetmap.org" target="_tag"><img class="image" src="{{ url_for('static', filename='img/logo_taginfo.png') }}" alt="hsr.ch" height="30"></a></p>
+        <p class="navbar-text navbar-right" id="logo_osm"><a href="https://www.openstreetmap.org" target="_tag"><img class="image" src="{{ url_for('static', filename='img/logo_osm.png') }}" alt="hsr.ch" height="30"></a></p>
+    </nav>
+
 {% endblock %}

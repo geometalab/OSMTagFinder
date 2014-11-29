@@ -19,6 +19,7 @@ from basethesaurus import BaseThesaurus
 from editterms import EditTerms
 from thesaurus.rdfgraph import RDFGraph
 from externalapi.thesauri import Thesauri
+from externalapi.taginfo import TagInfo
 
 class Console:
 
@@ -216,6 +217,12 @@ class Console:
         self.printlnWhiteOnGreen(' Checking connections:')
         self.printlnWhiteOnGreen('')
         self.println('')
+
+        tagInfo = TagInfo()
+        if tagInfo.checkConnection():
+            self.println(' TagInfo WebService: Connection Ok')
+        else:
+            self.println(' TagInfo WebService: Connection Failed')
 
         thesauri = Thesauri('', '')
         if thesauri.checkConGemet():

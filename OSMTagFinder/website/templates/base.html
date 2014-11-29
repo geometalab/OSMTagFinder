@@ -2,7 +2,7 @@
 <html lang="{{ lang }}">
 {% extends "bootstrap/base.html" %}
 {% block head %}
-    <title>OSM Tag Finder{% block title %}{% endblock %}</title>
+    <title>OSM TagFinder{% block title %}{% endblock %}</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico') }}">
     <!-- Custom styles for this template -->
     {{super()}}
@@ -14,25 +14,33 @@
 <!--{% block html_attribs %}lang="de"{% endblock %}-->
 
 {% block metas %}
-    {{super()}}
+    {{super()}} <!-- also loads bootstrap and jQuery -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Open Street Map Tag Finder">
-    <meta name="keywords" content="Open Street Map, OSM, Tag Finder, Search, Tag, Key, Value">
+    <meta name="description" content="OpenStreetMap TagFinder">
+    <meta name="keywords" content="OpenStreetMap, OSM, TagFinder, Search, Tag, Key, Value">
     <meta name="author" content="Simon Gwerder">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
 {% endblock %}
 
 {% block scripts %}
-
+    {{super()}}
+    <script src="{{ url_for('static', filename='js/bootstrap3-typeahead.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/typeahead-noselect.js') }}"></script>
     <script src="{{ url_for('static', filename='js/language.js') }}"></script>
     <script src="{{ url_for('static', filename='js/searchfade.js') }}"></script>
-    {{super()}}
-    <script>
-        $("#navbar-search").hide();
-        $(document).ready(function(){
-            searchfade();
+    <script src="{{ url_for('static', filename='js/spellcorrect.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.getScript( "{{ url_for('static', filename='js/typeahead-noselect.js') }}"); /* loads and executes selection fix */
+            searchfade({{ results|count }});
+            spellcorrect('#mainsearch', '{{ q }}', '{{ lang }}');
+            spellcorrect('#navbarsearch', '{{ q }}', '{{lang }}');
+
         });
     </script>
+
 {% endblock %}
 
 {% block navbar %}
@@ -50,13 +58,12 @@
                                 <span class="icon-bar"></span>
                             </button>
                             <a class="navbar-brand">
-                                 <img width="35" style="max-width:100px; margin-top: -6px;" src="{{ url_for('static', filename='img/tf_logo_128.png') }}">
+                                 <img width="35" style="max-width:100px; margin-top: -6px;" src="{{ url_for('static', filename='img/logo_tf_128.png') }}">
                             </a>
                         </div>
                         <div class="collapse navbar-collapse" id="top-navbar-collapse"><!-- grouping for better mobile display -->
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="{{ url_for('search') }}">Tag Finder</a></li>
-                                <li><a href="#">Help</a></li>
+                                <li class="active"><a href="{{ url_for('search') }}">TagFinder</a></li>
                                 <li><a href="#">API</a></li>
                                 <li><a lang="en" href="#">About</a></li>
                             </ul>
@@ -90,23 +97,30 @@
                                     </ul>
                                 </li>
                             </ul>
-
                             <form class="navbar-form navbar-left" role="search" action="/search" method="get"> <!-- navbar search -->
-                                <div id="navbar-search" class="input-group input-group-sm">
-                                    <input id="navbar-search-input" type="text" value="{{ q }}" name="q" class="form-control">
+                                <div id="navbarsearch-ingroup" class="input-group input-group-sm">
+                                    <input id="navbarsearch" type="text" value="{{ q }}" name="q" class="form-control">
                                     <span class="input-group-btn">
                                         <button id="button-sm-en" class="btn btn-success" type="submit" lang="en">Search</button>
                                         <button id="button-sm-de" class="btn btn-success" type="submit" lang="de">Suchen</button>
                                     </span>
                                 </div>
                             </form>
-
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>
             </div>
         </div>
     </div><!-- /.container -->
+
+{% endblock %}
+
+{% block bgheader %}
+    <div class="background-header"></div>
+{% endblock %}
+
+{% block bgfooter %}
+    <div class="background-footer"></div>
 {% endblock %}
 
 

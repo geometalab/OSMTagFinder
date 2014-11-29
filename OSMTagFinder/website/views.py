@@ -14,6 +14,20 @@ from utilities import utils
 from thesaurus.rdfgraph import RDFGraph
 from website.tagresults import TagResults
 from website.graphsearch import GraphSearch
+from utilities.spellcorrect import SpellCorrect
+from utilities.jsonpdeco import support_jsonp
+
+try:
+    # The typical way to import flask-cors
+    from flask.ext.cors import cross_origin
+except ImportError:
+    # Path hack allows examples to be run without installation.
+    import os
+    parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    os.sys.path.insert(0, parentdir)
+    from flask.ext.cors import cross_origin
+
+
 
 
 rdfGraph = RDFGraph(utils.dataDir() + 'tagfinder_thesaurus.rdf')
@@ -82,6 +96,8 @@ def search():
     return render_template('search.html', lang=getLocale(), q=q, results=searchResults.getResults())
 
 @app.route('/api/search', methods = ['GET'])
+@cross_origin()
+@support_jsonp
 def apiSearch():
     searchResults = searchCall(request.args.get('q', ''))
     if searchResults is None:
@@ -89,6 +105,18 @@ def apiSearch():
     #return jsonify(results=searchResults.getResults())
     return Response(json.dumps(searchResults.getResults()),  mimetype='application/json')
 
-
+@app.route('/api/suggest', methods = ['GET'])
+@cross_origin()
+@support_jsonp
+def apiSuggest():
+    spellCorrect = SpellCorrect()
+    word = request.args.get('q','')
+    lang = request.args.get('lang','')
+    if lang == 'en':
+        return Response(json.dumps(spellCorrect.listSuggestionsEN(word)), mimetype='application/json')
+    elif lang == 'de':
+        return Response(json.dumps(spellCorrect.listSuggestionsDE(word)), mimetype='application/json')
+    else:
+        return Response(json.dumps(spellCorrect.listSuggestions(word)), mimetype='application/json')
 
 

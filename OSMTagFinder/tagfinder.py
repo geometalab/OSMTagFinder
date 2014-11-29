@@ -12,7 +12,6 @@ from utilities.configloader import ConfigLoader
 from website.views import app
 #import logging
 
-
 if __name__ == '__main__':
 
     #sys.stdout = codecs.getwriter('utf-8')(sys.stdout)

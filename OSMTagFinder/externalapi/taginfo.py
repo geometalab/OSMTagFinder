@@ -6,6 +6,8 @@ Created on 25.10.2014
 '''
 
 from utilities.configloader import ConfigLoader
+from utilities.retry import retry
+
 import requests
 
 class TagInfo:
@@ -59,10 +61,18 @@ class TagInfo:
         tagWikiPage = requests.get(self.tagInfoWikiPageOfTag + key + self.tagInfoTagPostfix + value)
         return tagWikiPage.json()
 
+    @retry(Exception, tries=3)
+    def checkConnection(self):
+        response = requests.get(self.tagInfoWikiPageOfTag + 'building' + self.tagInfoTagPostfix + 'yes')
+        if response is not None and response.status_code < 300:
+            return True
+        return False
 
 if __name__ == '__main__':
     ti = TagInfo()
+    print str(ti.checkConnection())
     statsJson = ti.getKeyStats('amenity')
-    print str(statsJson['all'])
+    print str(statsJson)
+
 
 

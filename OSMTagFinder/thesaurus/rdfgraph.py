@@ -15,6 +15,7 @@ from datetime import datetime
 
 from utilities import utils
 from utilities.configloader import ConfigLoader
+
 #import logging
 
 # from skosserializer import SKOSSerializer
@@ -73,15 +74,18 @@ class RDFGraph:
         objStr = objStr.strip()
         objStr = utils.eszettToSS(objStr)
         return utils.encode(objStr)
+        return objStr
 
     def prepareURIRef(self, objStr):
         return ( self.prepareLiteral(objStr) ).replace(' ','_')
 
     def addConceptScheme(self, subject, title, creator):
-        self.graph.add(( URIRef(self.prepareURIRef(subject)), RDF.type, SKOS.ConceptScheme ))
-        self.graph.add(( URIRef(self.prepareURIRef(subject)), DCTERMS.creator, Literal(self.prepareLiteral(creator)) ))
-        self.graph.add(( URIRef(self.prepareURIRef(subject)), DCTERMS.title, Literal(self.prepareLiteral(title)) ))
-        self.graph.add(( URIRef(self.prepareURIRef(subject)), DCTERMS.created, Literal(datetime.utcnow(), datatype=XSD.date) ))
+        thisScheme = self.graph.add(( URIRef(self.prepareURIRef(subject)), RDF.type, SKOS.ConceptScheme ))
+        creationDate = utils.genGetFirstItem(self.graph.objects(thisScheme, DCTERMS.created))
+        if creationDate is None: # dont add the following if this concept was already created
+            self.graph.add(( URIRef(self.prepareURIRef(subject)), DCTERMS.creator, Literal(self.prepareLiteral(creator)) ))
+            self.graph.add(( URIRef(self.prepareURIRef(subject)), DCTERMS.title, Literal(self.prepareLiteral(title)) ))
+            self.graph.add(( URIRef(self.prepareURIRef(subject)), DCTERMS.created, Literal(datetime.utcnow(), datatype=XSD.date) ))
 
         return subject
 
@@ -360,7 +364,6 @@ if __name__ == '__main__':
 
     r.addNarrower(animals, mammals)
     r.addBroader(mammals, animals)
-    r.addBroaderLiteral(mammals, 'Vieh', 'de')
     r.addHasTopConcept(keyScheme, animals)
 
     r.addRelatedMatch(animals, mammals)
@@ -375,7 +378,6 @@ if __name__ == '__main__':
 
     plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')
     print r.graph.serialize(format='skos', encoding=r.encoding)
-
 
     for i, j in r.graph.subject_objects(r.osmImplies):
         print i

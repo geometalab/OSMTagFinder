@@ -1,13 +1,17 @@
-function searchfade() {
+function searchfade(found) {
     $(function() {
-        $(window).scroll(function() {
-            // set distance user needs to scroll before we fadeIn navbar
-            if ($(this).scrollTop() > 180) {
-                $('#navbar-search').fadeIn();
-            } else {
-                //$('#navbar-search').hide('easing');
-                $('#navbar-search').fadeOut();
-            }
-        });
+        if(found > 0) { // truthy check
+            $('#jumbotron_search').hide();
+            $('#nav_footer').hide();
+            $('#navbarsearch-ingroup').show();
+            $('.background-footer').hide();
+        }
+        else {
+            $('#jumbotron_search').show();
+            $('#nav_footer').show();
+            $('#navbarsearch-ingroup').hide();
+            $('.background-footer').show();
+        }
+
     });
 }

@@ -1,0 +1,6 @@
+<script>
+    window.testJsonP = function(data) {
+      alert(data);
+    };
+</script>
+ <script src="http://localhost:5000/api/suggest?q=pool&lang=de&callback=testJsonP"></script>
