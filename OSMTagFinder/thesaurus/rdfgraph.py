@@ -206,7 +206,7 @@ class RDFGraph:
         return utils.genGetFirstItem(generatorList)
 
     def getInScheme(self, subject):
-        generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), SKOS.inScheme)
+        generatorList = self.graph.objects(URIRef(subject), SKOS.inScheme)
         return generatorList
 
     def getSubByScheme(self, obj):
@@ -215,7 +215,7 @@ class RDFGraph:
 
     def isInScheme(self, subject, obj):
         refScheme = URIRef(obj)
-        generator = self.getInScheme(subject)
+        generator = utils.genToList(self.getInScheme(subject))
         for item in generator:
             if item == refScheme:
                 return True

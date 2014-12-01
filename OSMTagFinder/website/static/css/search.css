@@ -1,36 +1,54 @@
-@media (max-width: 340px) {
+@media (max-width: 320px) {
+
+    #page_content {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    .jumbotron {
+        position: absolute;
+        min-width: 320px;
+        width: 320px;
+        max-width: 320px;
+        display: none;
+        border-radius: 5px;
+        margin-top: -200px;
+        margin-left: -170px;
+        margin-right: 60px;
+        background-color: rgb(223, 240, 216)
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+
     #main_search_bar {
         margin-top: 54px;
         margin-left: 35px;
-        margin-right: 35px;
+        margin-right: 35x;
         min-width: 100px;
+        min-height: 100px;
+    }
+
+    #btn_main_search {
+        margin-right: 10px;
+        border-bottom-right-radius: 4px;
+        border-top-right-radius: 4px;
     }
 
     .background-footer, .background-header, #nav_footer {
         display: none;
     }
 
-    .jumbotron {
-        margin-left: -75px;
-        display: none;
-        min-width: 340px;
-        border-radius: 5px;
-        padding-top: 5px;
-        padding-bottom: 55px;
-        margin-top: 50px;
-        margin-bottom: 18px;
-        background-color: rgb(223, 240, 216)
-    }
-
     #navbarsearch-ingroup {
         margin-top: 3px;
-        margin-right: 64px;
+        margin-right: 75px;
         text-align: center;
     }
 
     #navbarsearch  {
-        width: 195px;
+        width: 220px;
     }
+
 
 }
 
@@ -41,6 +59,7 @@
     min-height: 100%;
     height: auto !important;
     height: 100%;
+    min-height: 480px;
 }
 
 #main_search_ingroup {
@@ -48,9 +67,10 @@
     margin-left: 35px;
     margin-right: 35px;
     min-width: 200px;
+    width: 85%;
 }
 
-#btn_main_search_en, #btn_main_search_de {
+#btn_main_search {
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
 }

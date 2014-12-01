@@ -62,33 +62,33 @@ class GraphSearch:
 
             allHits = None # only to get the correct whoosh score
 
-            '''if not localDE and (allHits is None or allHits.scored_length() < self.threshold):'''
+            '''if not localDE and (allHits is None or len(results) < self.threshold):'''
             allHits = self.extendedSearch(word, searcher, 'termPrefLabel', results, allHits)
-            '''elif localDE and (allHits is None or allHits.scored_length() < self.threshold):
+            '''elif localDE and (allHits is None or len(results) < self.threshold):
                 allHits = self.extendedSearch(translatedWord, searcher, 'termPrefLabel', results, allHits)'''
 
-            '''if not localDE and (allHits is None or allHits.scored_length() < self.threshold):'''
+            '''if not localDE and (allHits is None or len(results) < self.threshold):'''
             allHits = self.extendedSearch(word, searcher, 'termAltLabel', results, allHits)
-            '''elif localDE and (allHits is None or allHits.scored_length() < self.threshold):
+            '''elif localDE and (allHits is None or len(results) < self.threshold):
                 allHits = self.extendedSearch(translatedWord, searcher, 'termAltLabel', results, allHits)'''
 
-            if not localDE and (allHits is None or allHits.scored_length() < self.threshold):
+            if not localDE and (allHits is None or len(results) < self.threshold):
                 allHits = self.extendedSearch(word, searcher, 'tagPrefLabel', results, allHits)
-            elif localDE and (allHits is None or allHits.scored_length() < self.threshold):
+            elif localDE and (allHits is None or len(results) < self.threshold):
                 allHits = self.extendedSearch(translatedWord, searcher, 'tagPrefLabel', results, allHits)
 
-            if not localDE and (allHits is None or allHits.scored_length() < self.threshold):
+            if not localDE and (allHits is None or len(results) < self.threshold):
                 allHits = self.extendedSearch(word, searcher, 'tagScopeNote', results, allHits)
-            elif localDE and (allHits is None or allHits.scored_length() < self.threshold):
+            elif localDE and (allHits is None or len(results) < self.threshold):
 
                 allHits = self.extendedSearch(translatedWord, searcher, 'tagScopeNote', results, allHits)
 
-            if allHits is None or allHits.scored_length() < self.threshold:
+            if allHits is None or len(results) < self.threshold:
                 suggestions = SpellCorrect().listSuggestions(word)
                 for s in suggestions:
                     allHits = self.extendedSearch(s, searcher, 'tagPrefLabel', results, allHits)
 
-                if allHits.scored_length() < self.threshold:
+                if len(results) < self.threshold:
                     for s in suggestions:
                         allHits = self.extendedSearch(s, searcher, 'tagScopeNote', results, allHits)
 
@@ -116,6 +116,8 @@ class GraphSearch:
             results[subject] = searchMeta
         return results
 
+
+
     def updateResults(self, results, hits):
         if hits is None or not hits.has_matched_terms(): return results
         for hit in hits:
@@ -135,6 +137,11 @@ class GraphSearch:
                         searchMeta[searchedField] = [ searchedTerm ]
                 else:
                     searchMeta[searchedField] = [ searchedTerm ]
+
+                for searchedField in searchMeta: # making sure that the searchTerm lists are unique
+                    searchTerms = searchMeta[searchedField]
+                    #searchMeta[searchedField] = utils.uniquifyList(searchTerms)
+
                 results[subject] = searchMeta
         return results
 

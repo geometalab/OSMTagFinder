@@ -14,14 +14,20 @@ Johann Burkard
 
 */
 
-function highlight(node, pat) {
+function highlight(node, pat, isTag) {
     pat = pat.toUpperCase()
     var skip = 0;
     if (node.nodeType == 3) {
         var pos = node.data.toUpperCase().indexOf(pat);
         if (pos >= 0) {
             var spannode = document.createElement('span');
-            spannode.className = 'highlight';
+            if (isTag === true)  {
+                spannode.className = 'highlight-tag';
+            }
+            else {
+                spannode.className = 'highlight-text';
+            }
+
             var middlebit = node.splitText(pos);
             var endbit = middlebit.splitText(pat.length);
             var middleclone = middlebit.cloneNode(true);
@@ -31,7 +37,7 @@ function highlight(node, pat) {
         }
     } else if (node.nodeType == 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
         for (var i = 0; i < node.childNodes.length; ++i) {
-            i += highlight(node.childNodes[i], pat);
+            i += highlight(node.childNodes[i], pat, isTag);
         }
     }
     return skip;
@@ -62,9 +68,11 @@ function removeHighlight() {
         }
     }
 
-    return this.find("span.highlight").each(function() {
-            var thisParent = this.parentNode;
-            thisParent.replaceChild(this.firstChild, this);
-            newNormalize(thisParent);
-        }).end();
+    return this.find('span.highlight-tag, highlight-text').each(function() {
+                var thisParent = this.parentNode;
+                thisParent.replaceChild(this.firstChild, this);
+                newNormalize(thisParent);
+           }).end();
+
+
 };

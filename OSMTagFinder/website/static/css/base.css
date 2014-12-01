@@ -33,7 +33,12 @@ body {
     width: 100%;
 }
 
-.highlight {
+.highlight-tag {
+    font-weight: bold;
+    text-shadow: 1px 1px 0px #000;
+}
+
+.highlight-text {
     font-weight: bold;
 }
 
@@ -50,23 +55,28 @@ body {
 }
 
 #navbarsearch  {
-    width: 350px;
+    width: 250px;
 }
 
 .jumbotron {
     border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    min-width: 825px;
-    max-width: 825px;
+
+    position: absolute;
+    top: 50%;
+    min-height: 160px;
+    margin-top: -120px;
+    left: 50%;
+    width: auto;
+    min-width: 550px;
+    margin-left: -270px;
+
+    max-width: 600px;
     padding-top: 5px;
     padding-bottom: 55px;
-    margin-top: 350px;
-    margin-bottom: 18px;
-    background-color: rgb(223, 240, 216)
+    background-color: rgb(223, 240, 216);
 }
 
-#button-sm-en, #button-sm-de {
+#button-sm {
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
 }

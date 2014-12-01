@@ -6,7 +6,10 @@ Created on 16.11.2014
 '''
 
 from utilities.configloader import ConfigLoader
+from utilities import utils
 from relatedterm import RelatedTerm
+
+import operator
 
 class EditTerms:
 
@@ -43,9 +46,23 @@ class EditTerms:
             return nextSubject
         return None
 
+    def sortByStats(self, keyConcepts):
+        keyStatsDict = { }
+        default = { 'count' : '0', 'use' : 'False' }
+        for keyConcept in keyConcepts:
+            nodeCount = int((utils.genJsonToDict(self.relatedTerm.rdfGraph.getOSMNode(keyConcept), default))['count'])
+            wayCount = int((utils.genJsonToDict(self.relatedTerm.rdfGraph.getOSMWay(keyConcept), default))['count'])
+            areaCount = int((utils.genJsonToDict(self.relatedTerm.rdfGraph.getOSMArea(keyConcept), default))['count'])
+            relationCount = int((utils.genJsonToDict(self.relatedTerm.rdfGraph.getOSMRelation(keyConcept), default))['count'])
+            totalCount = nodeCount + wayCount + areaCount + relationCount
+            keyStatsDict[keyConcept] = totalCount
+        keyStatsDict = sorted(keyStatsDict.items(), reverse=True, key=operator.itemgetter(1))
+        return [i[0] for i in keyStatsDict]
+
     def __getEditConceptList(self):
         retList = []
         keyConcepts = self.relatedTerm.rdfGraph.getSubByScheme(self.keySchemeName)
+        keyConcepts = self.sortByStats(keyConcepts)
         for keyConcept in keyConcepts:
             editNote = self.relatedTerm.rdfGraph.getEditorialNote(keyConcept)
             if editNote is not None and str(editNote) == str(self.noTermNote):

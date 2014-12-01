@@ -9,7 +9,7 @@ import re
 import os
 import datetime
 import json
-import chardet
+#import chardet
 
 
 _invalidChars = [' ', ';']
@@ -37,11 +37,11 @@ def specCharEnc(text):
 
 def encode(text):
     if text is not None and not isinstance(text, unicode) and len(text) > 0:
-        encoding = chardet.detect(text)
-        #try:
-            #return str(u''+ text.decode(encoding['encoding']) )
-        #except:
-            #pass
+        #encoding = chardet.detect(text)
+        try:
+            return str( text.decode(encoding='UTF-8') ) #encoding['encoding']
+        except:
+            pass
     return text
 
 def checkFile(filePath):
@@ -119,7 +119,19 @@ def ssToEszett(word):
 
 _digits = re.compile('\d')
 def containsDigits(d):
+    '''Returns true, if string 'd' contains a digit.'''
     return bool(_digits.search(d))
+
+def uniquifyList(items):
+    '''Removes duplicate elements in list 'items', while keeping order intact.'''
+    seen = set()
+    for i in xrange(len(items)-1, -1, -1):
+        it = items[i]
+        if it in seen:
+            del items[i]
+        else:
+            seen.add(it)
+    return items
 
 def outputFile(directory, outputName, outputExtension, useDateEnding):
     '''Returns full file path. If 'useDateEnding' is True, a date postfix is added between

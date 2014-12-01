@@ -26,8 +26,7 @@
                 <div id="main_search_ingroup" class="input-group input-group-lg">
                     <input type="text" value="{{ q }}" name="q" class="form-control" id="mainsearch" autocomplete="off" data-provide="typeahead">
                     <span class="input-group-btn">
-                        <button id="btn_main_search_en" class="btn btn-success" type="submit" lang="en">Search</button>
-                        <button id="btn_main_search_de" class="btn btn-success" type="submit" lang="de">Suchen</button>
+                        <button id="btn_main_search" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </span>
                 </div>
             </form>
@@ -36,8 +35,8 @@
 
         <!-- searchresults / content -->
         {% if results %}
-            <h5 lang="en" class="found">Found <b>{{ results|count }}</b> OpenStreetMap tags.</h5>
-            <h5 lang="de" class="found">Es wurden <b>{{ results|count }}</b> OpenStreetMap Tags gefunden.</h5>
+            <h5 lang="en" class="found">Found <b>{{ results|count }}</b> OpenStreetMap tag(s).</h5>
+            <h5 lang="de" class="found">Es wurden <b>{{ results|count }}</b> OpenStreetMap Tag(s) gefunden.</h5>
             {% for result in results %}
 
 
@@ -190,8 +189,8 @@
 
                             <!-- searchmeta and highlighting -->
                             {% if result['searchMeta'] %}
-                                <p class="meta_first_column" lang="en">Searchmeta:</p>
-                                <p class="meta_first_column" lang="de">Suchmeta:</p>
+                                <p class="meta_first_column" lang="en">Search infos:</p>
+                                <p class="meta_first_column" lang="de">Such-Infos:</p>
                                 {% set score = result['searchMeta']['score'] %}
                                 {% set searchMetasEN = 'Score: ' ~ score|round(2, 'floor') %} <!-- ~ converts to string in jinja2 and concatenates -->
                                 {% set searchMetasDE = 'Score: ' ~ score|round(2, 'floor') %}
@@ -229,12 +228,12 @@
                                         {% if result['isTag'] %}
                                             <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
                                             <script type="text/javascript">
-                                                highlight(document.getElementById('tagLabel_{{ currentIndex }}'), '{{ tagPrefLabel }}')
+                                                highlight(document.getElementById('tagLabel_{{ currentIndex }}'), '{{ tagPrefLabel }}', true)
                                             </script>
                                         {% else %}
                                             <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
                                             <script type="text/javascript">
-                                                highlight(document.getElementById('keyLabel_{{ currentIndex }}'), '{{ tagPrefLabel }}')
+                                                highlight(document.getElementById('keyLabel_{{ currentIndex }}'), '{{ tagPrefLabel }}', true)
                                             </script>
                                         {% endif %}
                                     {% endfor %}
