@@ -22,11 +22,20 @@
     <div id="page_content">
 
         <div id="jumbotron_search" class="jumbotron">
-            <form action="/search" method="get" name="search_form"> <!-- searchbar -->
-                <div id="main_search_ingroup" class="input-group input-group-lg">
-                    <input type="text" value="{{ q }}" name="q" class="form-control" id="mainsearch" autocomplete="off" data-provide="typeahead">
+            <form class="main_search_form" action="/search" method="get" name="search_form"> <!-- searchbar en -->
+                <div id="main_search_ingroup_en" class="input-group input-group-lg" lang="en">
+                    <input type="search" value="{{ q }}" name="q" class="form-control" id="mainsearch_en" autocomplete="off" data-provide="typeahead" placeholder="Search Tags...">
                     <span class="input-group-btn">
-                        <button id="btn_main_search" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        <button id="btn_main_search_en" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </span>
+                </div>
+            </form>
+
+            <form class="main_search_form" action="/search" method="get" name="search_form"> <!-- searchbar de -->
+                <div id="main_search_ingroup_de" class="input-group input-group-lg" lang="de">
+                    <input type="search" value="{{ q }}" name="q" class="form-control" id="mainsearch_de" autocomplete="off" data-provide="typeahead" placeholder="Nach Tags suchen...">
+                    <span class="input-group-btn">
+                        <button id="btn_main_search_de" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </span>
                 </div>
             </form>
@@ -36,7 +45,7 @@
         <!-- searchresults / content -->
         {% if results %}
             <h5 lang="en" class="found">Found <b>{{ results|count }}</b> OpenStreetMap tag(s).</h5>
-            <h5 lang="de" class="found">Es wurden <b>{{ results|count }}</b> OpenStreetMap Tag(s) gefunden.</h5>
+            <h5 lang="de" class="found">Es wurde(n) <b>{{ results|count }}</b> OpenStreetMap Tag(s) gefunden.</h5>
             {% for result in results %}
 
 
@@ -62,7 +71,7 @@
                                         {% endif %}
                                     {% else %}
                                         <a id="depiction" target="_tag" href="{{ result['depiction'] }}" class="thumbnail">
-                                            <p><img class="image" src="{{ result['depiction'] }}" alt="{{ result['prefLabel'] }}" align="left" width="200" height="150"></p>
+                                            <p><img class="image" src="{{ result['depiction'] }}" alt="{{ result['prefLabel'] }}" title="{{ result['depiction'] }}" align="left" width="200" height="150"></p>
                                         </a>
                                     {% endif %}
 
@@ -81,7 +90,7 @@
                                         {% set srcRelation = "static/img/osm_relation_unspec.png" %}
                                     {% endif %}
 
-                                    <a id="tagstats_box" target="_tag" href="{{ taginfo_baseurl}}{{ result['prefLabel'] }}" class="thumbnail">
+                                    <a id="tagstats_box" target="_tag" href="{{ taginfo_baseurl }}{{ result['prefLabel'] }}" title="{{ taginfo_baseurl }}{{ result['prefLabel'] }}" class="thumbnail">
                                          <table>
                                             <tr>
                                                 <td title="all"><img src="{{ url_for('static', filename='img/osm_count_all_v2.png') }}" alt="Node" align="left" width="30" height="30"></td>
@@ -111,9 +120,16 @@
 
                             <!-- maintag label -->
                             {% if result['isTag'] %}
-                                <h3><a id="tagLabel_{{ currentIndex }}" target="_tag" href="{{ result['subject'] }}">{{ result['prefLabel'] }}</a></h3>
+                                {% set tempLink = result['subject'].split('=')[0] %}
+                                {% set keyPartLink = tempLink.replace('Tag:','Key:') %}
+                                {% set tempLabel = keyPartLink.split('Key:')[1] %}
+                                {% set keyPartLabel = tempLabel.split('=')[0] %}
+                                {% set tagPartLabel = result['subject'].split('=')[1] %}
+                                <h3>
+                                    <a id="keyPartLabel_{{ currentIndex }}" target="_tag" href="{{ keyPartLink }}" title="{{ keyPartLink }}">{{ keyPartLabel }}=</a><a id="tagLabel_{{ currentIndex }}" target="_tag" href="{{ result['subject'] }}" title="{{ result['subject'] }}">{{ tagPartLabel }}</a>
+                                </h3>
                             {% else %}
-                                <h3><a id="keyLabel_{{ currentIndex }}" target="_tag" href="{{ result['subject'] }}">{{ result['prefLabel'] }}=✱</a></h3> <!--✱✲-->
+                                <h3><a id="keyLabel_{{ currentIndex }}" target="_tag" href="{{ result['subject'] }}" title="{{ result['subject'] }}">{{ result['prefLabel'] }}=✱</a></h3> <!--✱✲-->
                             {% endif %}
 
                             {% set no_element_en = '-' %}
@@ -222,12 +238,13 @@
                                 {% endif %}
                                 {% if result['searchMeta']['tagPrefLabel']|count > 0 %}
                                     {% set metasTagPrefLabel = result['searchMeta']['tagPrefLabel']|join(", ") %}
-                                    {% set searchMetasEN = searchMetasEN + ' / tag name: ' ~ metasTagPrefLabel %}
-                                    {% set searchMetasDE = searchMetasDE + ' / Tagname: ' ~ metasTagPrefLabel %}
+                                    {% set searchMetasEN = searchMetasEN + ' / tag: ' ~ metasTagPrefLabel %}
+                                    {% set searchMetasDE = searchMetasDE + ' / Tag: ' ~ metasTagPrefLabel %}
                                     {% for tagPrefLabel in result['searchMeta']['tagPrefLabel'] %}
                                         {% if result['isTag'] %}
                                             <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
                                             <script type="text/javascript">
+                                                highlight(document.getElementById('keyPartLabel_{{ currentIndex }}'), '{{ tagPrefLabel }}', true)
                                                 highlight(document.getElementById('tagLabel_{{ currentIndex }}'), '{{ tagPrefLabel }}', true)
                                             </script>
                                         {% else %}
@@ -236,6 +253,30 @@
                                                 highlight(document.getElementById('keyLabel_{{ currentIndex }}'), '{{ tagPrefLabel }}', true)
                                             </script>
                                         {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                {% if result['searchMeta']['termBroader']|count > 0 %}
+                                    {% set metasTermBroader = result['searchMeta']['termBroader']|join(", ") %}
+                                    {% set searchMetasEN = searchMetasEN + ' / broader term: ' ~ metasTermBroader %}
+                                    {% set searchMetasDE = searchMetasDE + ' / Oberbegriff: ' ~ metasTermBroader %}
+                                    <!--{% for termBroader in result['searchMeta']['termBroader'] %}
+                                        <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+                                        <script type="text/javascript">
+                                            highlight(document.getElementById('broaderTermsEN_{{ currentIndex }}'), '{{ termBroader }}')
+                                            highlight(document.getElementById('broaderTermsDE_{{ currentIndex }}'), '{{ termBroader }}')
+                                        </script>-->
+                                    {% endfor %}
+                                {% endif %}
+                                {% if result['searchMeta']['termNarrower']|count > 0 %}
+                                    {% set metasTermNarrower = result['searchMeta']['termNarrower']|join(", ") %}
+                                    {% set searchMetasEN = searchMetasEN + ' / narrower term: ' ~ metasTermNarrower %}
+                                    {% set searchMetasDE = searchMetasDE + ' / Unterbegriff: ' ~ metasTermNarrower %}
+                                    <!--{% for termNarrower in result['searchMeta']['termNarrower'] %}
+                                        <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+                                        <script type="text/javascript">
+                                            highlight(document.getElementById('broaderTermsEN_{{ currentIndex }}'), '{{ termNarrower }}')
+                                            highlight(document.getElementById('broaderTermsDE_{{ currentIndex }}'), '{{ termNarrower }}')
+                                        </script>-->
                                     {% endfor %}
                                 {% endif %}
                                 {% if result['searchMeta']['tagScopeNote']|count > 0 %}

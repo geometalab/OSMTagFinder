@@ -1,35 +1,30 @@
-@media (max-width: 320px) {
+@media (max-width: 370px) {
 
     #page_content {
         margin-left: auto;
         margin-right: auto;
     }
 
-
     .jumbotron {
         position: absolute;
-        min-width: 320px;
-        width: 320px;
-        max-width: 320px;
+        min-width: 350px;
+        width: 350px;
+        max-width: 370px;
         display: none;
         border-radius: 5px;
         margin-top: -200px;
-        margin-left: -170px;
+        margin-left: -175px;
         margin-right: 60px;
         background-color: rgb(223, 240, 216)
         padding-bottom: 0px;
         margin-bottom: 0px;
     }
 
-    #main_search_bar {
-        margin-top: 54px;
-        margin-left: 35px;
-        margin-right: 35x;
-        min-width: 100px;
-        min-height: 100px;
+    .main_search_form {
+        margin-left: -20px;
     }
 
-    #btn_main_search {
+    #btn_main_search_de, #btn_main_search_en {
         margin-right: 10px;
         border-bottom-right-radius: 4px;
         border-top-right-radius: 4px;
@@ -39,17 +34,25 @@
         display: none;
     }
 
+    .navbar-form.navbar-left {
+        width: 315px;
+    }
+
     #navbarsearch-ingroup {
         margin-top: 3px;
-        margin-right: 75px;
+        margin-right: 0px;
+        width: auto;
         text-align: center;
     }
 
     #navbarsearch  {
-        width: 220px;
+        width: 250px;
     }
 
+}
 
+#jumbotron_search {
+    display: none;
 }
 
 #page_content {
@@ -62,7 +65,7 @@
     min-height: 480px;
 }
 
-#main_search_ingroup {
+#main_search_ingroup_en, #main_search_ingroup_de {
     margin-top: 54px;
     margin-left: 35px;
     margin-right: 35px;
@@ -70,7 +73,7 @@
     width: 85%;
 }
 
-#btn_main_search {
+#btn_main_search_en, #btn_main_search_de {
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
 }
@@ -193,7 +196,7 @@ a:link {
 }
 
 .none_found {
-    margin-left: auto;
+    margin-top: 160px;
     margin-right: auto;
     min-width: 825px;
     max-width: 825px;

@@ -7,6 +7,7 @@ Created on 11.10.2014
 from utilities import utils
 from utilities.translator import Translator
 from rdflib.namespace import SKOS
+from rdflib import Literal
 from thesaurus.rdfgraph import RDFGraph
 
 import re
@@ -20,6 +21,8 @@ class Indexer:
                     tagPrefLabel=TEXT(stored=True),
                     termPrefLabel=TEXT(stored=True),
                     termAltLabel=TEXT(stored=True),
+                    termBroader=TEXT(stored=True),
+                    termNarrower=TEXT(stored=True),
                     tagScopeNote=TEXT(stored=True),
                     spellingEN=TEXT(stored=True, spelling=True),
                     spellingDE=TEXT(stored=True, spelling=True))
@@ -38,33 +41,47 @@ class Indexer:
                 if predicate == SKOS.prefLabel:
                     count += 1
                     print str(count) + ': Indexing tagPrefLabel: ' + str(obj)
-                    self.addTagPrefLabel(subject, obj)
+                    label = utils.prepareWord(obj)
+                    lit = Literal(label, obj.language)
+                    self.addTagPrefLabel(subject, lit)
                 elif predicate == SKOS.scopeNote:
                     count += 1
                     print str(count) + ': Indexing tagScopeNote: ' + str(obj)
                     self.addTagScopeNote(subject, obj)
 
             elif rdfGraph.isInTermScheme(subject):
-                altLabelTermTags = self.tagsOfAltLabelTerm(rdfGraph, subject)
+                tagSubjectList = self.getTagsOfRelTerm(rdfGraph, subject)
 
                 if predicate == SKOS.prefLabel:
                     count += 1
                     lang = obj.language
                     if lang == 'en' or lang == 'de':
                         print str(count) + ': Indexing termPrefLabel: ' + str(obj)
-                        self.addTermPrefLabel(altLabelTermTags, obj)
+                        self.addTermPrefLabel(tagSubjectList, obj)
                 if predicate == SKOS.altLabel:
                     count += 1
                     lang = obj.language
                     if lang == 'en' or lang == 'de':
                         print str(count) + ': Indexing termAltLabel: ' + str(obj)
-                        self.addTermAltLabel(altLabelTermTags, obj)
+                        self.addTermAltLabel(tagSubjectList, obj)
+                if predicate == SKOS.broader:
+                    count += 1
+                    lang = obj.language
+                    if lang == 'en' or lang == 'de':
+                        print str(count) + ': Indexing termBroader: ' + str(obj)
+                        self.addTermBroader(tagSubjectList, obj)
+                if predicate == SKOS.narrower:
+                    count += 1
+                    lang = obj.language
+                    if lang == 'en' or lang == 'de':
+                        print str(count) + ': Indexing termNarrower: ' + str(obj)
+                        self.addTermNarrower(tagSubjectList, obj)
 
         self.addSpellings()
 
         self.commit()
 
-    splitChars = re.compile('[ =".,:;/\?\(\)\]\[\!\*]')
+    splitChars = re.compile('[ ="._,:;/\?\(\)\]\[\!\*]')
     def addToWordList(self, words, filterShort=None):
         lang = words.language
         wordList = self.splitChars.split(words)
@@ -106,7 +123,8 @@ class Indexer:
             print str(countDE) + ': Indexing DE spelling for word: ' + word
             self.__writer.add_document(spellingDE=unicode(word))
 
-    def tagsOfAltLabelTerm(self, rdfGraph, relTermSubject):
+    def getTagsOfRelTerm(self, rdfGraph, relTermSubject):
+        '''Returns a list of subjects, that point to this RelatedTerm 'subject'.'''
         generatorList = rdfGraph.getRelatedMatch(relTermSubject)
         return utils.genToList(generatorList)
 
@@ -139,6 +157,20 @@ class Indexer:
         for tagSubject in tagSubjectList:
             self.__writer.add_document(tagSubject=unicode(tagSubject), termAltLabel=unicode(termAltLabel))
         self.addToWordList(termAltLabel)
+
+    def addTermBroader(self, tagSubjectList, termBroader):
+        if not index.exists_in(utils.indexerDir(), utils.indexName):
+            self.createNewIndex()
+        for tagSubject in tagSubjectList:
+            self.__writer.add_document(tagSubject=unicode(tagSubject), termBroader=unicode(termBroader))
+        self.addToWordList(termBroader)
+
+    def addTermNarrower(self, tagSubjectList, termNarrower):
+        if not index.exists_in(utils.indexerDir(), utils.indexName):
+            self.createNewIndex()
+        for tagSubject in tagSubjectList:
+            self.__writer.add_document(tagSubject=unicode(tagSubject), termNarrower=unicode(termNarrower))
+        self.addToWordList(termNarrower)
 
     def commit(self):
         self.__writer.commit()

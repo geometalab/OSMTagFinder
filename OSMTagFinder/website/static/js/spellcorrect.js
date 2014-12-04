@@ -1,6 +1,7 @@
 // depends on bootstrap3-typeahead.min.js
 
-function spellcorrect(idElement, query, lang) {
+function spellcorrect(idElement, query) {
+    var timeout;
     $(idElement).typeahead({
             minLength: 3,
             matcher: function(item) {
@@ -8,16 +9,20 @@ function spellcorrect(idElement, query, lang) {
                 return true
             },
             source: function(query, process) {
-                $.ajax({
-                        url: '/api/suggest',
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+                timeout = setTimeout(function() {
+                    $.ajax({
+                        url: '/suggest',
                         data: {
-                            q: query,
-                            lang: lang
+                            q: query
                         },
                         dataType: 'json'
                     }).success(function(data) {
                         process(data)
                     });
+                }, 1000);
             }
         });
 }

@@ -18,21 +18,13 @@ from whoosh.index import open_dir
 
 class GraphSearch:
 
-    threshold = 2
+    threshold = 1
     ix = None
 
     def __init__(self):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
             return
         self.ix = open_dir(utils.indexerDir(), indexname=utils.indexName)
-
-    def prepareWord(self, word):
-        word = word.replace('"', ' ')
-        word = word.replace(',', ' ')
-        word = word.replace(';', ' ')
-        word = word.replace(' = ', '=')
-        word = utils.eszettToSS(word)
-        return word
 
     def search(self, word, searcher, indexerField):
         if self.ix is None or searcher is None:
@@ -47,7 +39,7 @@ class GraphSearch:
 
     def fullSearch(self, word, localDE=False):
         results = OrderedDict()
-        word = self.prepareWord(word)
+        word = utils.prepareWord(word)
         translatedWord = word
 
         if localDE:
@@ -62,30 +54,34 @@ class GraphSearch:
 
             allHits = None # only to get the correct whoosh score
 
-            '''if not localDE and (allHits is None or len(results) < self.threshold):'''
             allHits = self.extendedSearch(word, searcher, 'termPrefLabel', results, allHits)
-            '''elif localDE and (allHits is None or len(results) < self.threshold):
-                allHits = self.extendedSearch(translatedWord, searcher, 'termPrefLabel', results, allHits)'''
 
-            '''if not localDE and (allHits is None or len(results) < self.threshold):'''
             allHits = self.extendedSearch(word, searcher, 'termAltLabel', results, allHits)
-            '''elif localDE and (allHits is None or len(results) < self.threshold):
-                allHits = self.extendedSearch(translatedWord, searcher, 'termAltLabel', results, allHits)'''
 
-            if not localDE and (allHits is None or len(results) < self.threshold):
+            if localDE and (allHits is None or len(results) < self.threshold): # in this case, searching with translated word too
+                allHits = self.extendedSearch(translatedWord, searcher, 'termPrefLabel', results, allHits)
+                allHits = self.extendedSearch(translatedWord, searcher, 'termAltLabel', results, allHits)
+
+            if not localDE:
                 allHits = self.extendedSearch(word, searcher, 'tagPrefLabel', results, allHits)
-            elif localDE and (allHits is None or len(results) < self.threshold):
+            elif localDE:
                 allHits = self.extendedSearch(translatedWord, searcher, 'tagPrefLabel', results, allHits)
+                allHits = self.extendedSearch(word, searcher, 'tagPrefLabel', results, allHits)
+
+            allHits = self.extendedSearch(word, searcher, 'termNarrower', results, allHits) # Note: Searching in termNarrower gives me all broader for this term
+            allHits = self.extendedSearch(word, searcher, 'termBroader', results, allHits)
 
             if not localDE and (allHits is None or len(results) < self.threshold):
                 allHits = self.extendedSearch(word, searcher, 'tagScopeNote', results, allHits)
             elif localDE and (allHits is None or len(results) < self.threshold):
-
                 allHits = self.extendedSearch(translatedWord, searcher, 'tagScopeNote', results, allHits)
+                allHits = self.extendedSearch(word, searcher, 'tagScopeNote', results, allHits)
 
             if allHits is None or len(results) < self.threshold:
                 suggestions = SpellCorrect().listSuggestions(word)
                 for s in suggestions:
+                    allHits = self.extendedSearch(s, searcher, 'termPrefLabel', results, allHits)
+                    allHits = self.extendedSearch(s, searcher, 'termAltLabel', results, allHits)
                     allHits = self.extendedSearch(s, searcher, 'tagPrefLabel', results, allHits)
 
                 if len(results) < self.threshold:
@@ -140,7 +136,7 @@ class GraphSearch:
 
                 for searchedField in searchMeta: # making sure that the searchTerm lists are unique
                     searchTerms = searchMeta[searchedField]
-                    #searchMeta[searchedField] = utils.uniquifyList(searchTerms)
+                    searchMeta[searchedField] = utils.uniquifyList(searchTerms)
 
                 results[subject] = searchMeta
         return results

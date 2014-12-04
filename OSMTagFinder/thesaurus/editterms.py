@@ -15,6 +15,7 @@ class EditTerms:
 
     cl = ConfigLoader()
     keySchemeName = cl.getThesaurusString('KEY_SCHEME_NAME')
+    termSchemeName = cl.getThesaurusString('TERM_SCHEME_NAME')
     noTermNote = cl.getThesaurusString('NO_TERM')
     savePointNote = cl.getThesaurusString('SAVE_POINT')
 
@@ -75,18 +76,85 @@ class EditTerms:
                     retList.append(tagConcept)
         return retList
 
-    def removeSavePointNote(self, keyTagConcept):
-        self.relatedTerm.rdfGraph.removeEditorialNote(keyTagConcept, self.savePointNote) # doesnt matter if notes do not exist
+    def removeDuplicates(self, relTermSubject):
+        altLabelList = utils.genToList(self.relatedTerm.rdfGraph.getAltLabel(relTermSubject))
+        broaderList = utils.genToList(self.relatedTerm.rdfGraph.getBroader(relTermSubject))
+        narrowerList = utils.genToList(self.relatedTerm.rdfGraph.getNarrower(relTermSubject))
+        for altLabel in altLabelList:
+            if altLabel in broaderList or altLabel in narrowerList:
+                self.relatedTerm.removeAltLabelLiteral(relTermSubject, altLabel)
+        for narrower in narrowerList:
+            if narrower in broaderList:
+                self.relatedTerm.removeNarrowerLiteral(relTermSubject, narrower)
 
-    def removeNoTermNote(self, keyTagConcept):
-        self.relatedTerm.rdfGraph.removeEditorialNote(keyTagConcept, self.noTermNote) # doesnt matter if notes do not exist
+    def manageNarrowerRelations(self, relTermSubject, keySubject):
+        keysNarrowerList = utils.genToList(self.relatedTerm.rdfGraph.getNarrower(keySubject))
+        thisPrefLabelList = utils.genToList(self.relatedTerm.rdfGraph.getPrefLabel(relTermSubject))
+        for narrowerTag in keysNarrowerList: # is a tag, not a key
+            relTermsOfNarrower = utils.genToList(self.relatedTerm.rdfGraph.getRelatedMatch(narrowerTag))
+            for narrowerRelTerm in relTermsOfNarrower:
+                if self.relatedTerm.rdfGraph.isInTermScheme(narrowerRelTerm) and not narrowerRelTerm == relTermSubject:
+                    prefLabelList = utils.genToList(self.relatedTerm.rdfGraph.getPrefLabel(narrowerRelTerm))
+                    altLabelList = utils.genToList(self.relatedTerm.rdfGraph.getAltLabel(narrowerRelTerm))
+                    for prefLabel in prefLabelList:  # adding those to narrower
+                        if prefLabel.language == 'en' and prefLabel not in thisPrefLabelList:
+                            self.relatedTerm.addNarrowerLiteralEN(relTermSubject, str(prefLabel))
+                        elif prefLabel.language == 'de' and prefLabel not in thisPrefLabelList:
+                            self.relatedTerm.addNarrowerLiteralDE(relTermSubject, str(prefLabel))
+                    for altLabel in altLabelList:  # adding those to narrower
+                        if altLabel.language == 'en' and altLabel not in thisPrefLabelList:
+                            self.relatedTerm.addNarrowerLiteralEN(relTermSubject, str(altLabel))
+                        elif altLabel.language == 'de' and altLabel not in thisPrefLabelList:
+                            self.relatedTerm.addNarrowerLiteralDE(relTermSubject, str(altLabel))
 
-    def addLastPosNote(self, keyTagConcept):
-        self.relatedTerm.rdfGraph.addEditorialNote(keyTagConcept, self.savePointNote)
+    def manageBroaderRelations(self, relTermSubject, tagSubject):
+        tagsBroaderList = utils.genToList(self.relatedTerm.rdfGraph.getBroader(tagSubject))
+        thisPrefLabelList = utils.genToList(self.relatedTerm.rdfGraph.getPrefLabel(relTermSubject))
+        for broaderKey in tagsBroaderList: # is a key, not a tag, and actually just one
+            relTermsOfBroader = utils.genToList(self.relatedTerm.rdfGraph.getRelatedMatch(broaderKey))
+            for broaderRelTerm in relTermsOfBroader:
+                if self.relatedTerm.rdfGraph.isInTermScheme(broaderRelTerm) and not broaderRelTerm == relTermSubject:
+                    prefLabelList = utils.genToList(self.relatedTerm.rdfGraph.getPrefLabel(broaderRelTerm))
+                    altLabelList = utils.genToList(self.relatedTerm.rdfGraph.getAltLabel(broaderRelTerm))
+                    for prefLabel in prefLabelList:  # adding those to broader
+                        if prefLabel.language == 'en' and prefLabel not in thisPrefLabelList:
+                            self.relatedTerm.addBroaderLiteralEN(relTermSubject, str(prefLabel))
+                        elif prefLabel.language == 'de' and prefLabel not in thisPrefLabelList:
+                            self.relatedTerm.addBroaderLiteralDE(relTermSubject, str(prefLabel))
+                    for altLabel in altLabelList:  # adding those to broader
+                        if altLabel.language == 'en' and altLabel not in thisPrefLabelList:
+                            self.relatedTerm.addBroaderLiteralEN(relTermSubject, str(altLabel))
+                        elif altLabel.language == 'de' and altLabel not in thisPrefLabelList:
+                            self.relatedTerm.addBroaderLiteralDE(relTermSubject, str(altLabel))
 
-    def createTerm(self, keyTagConcept, prefLabelEN, prefLabelDE):
-        self.removeNoTermNote(keyTagConcept)
-        self.__currentRelTerm = self.relatedTerm.createTerm(keyTagConcept, prefLabelEN, prefLabelDE)
+    def manageRelations(self, relTermSubject):
+        keyTagSubjectList = utils.genToList(self.relatedTerm.rdfGraph.getRelatedMatch(relTermSubject))
+        for keyTagSubject in keyTagSubjectList: # will just be one most of times
+            if self.relatedTerm.rdfGraph.isInKeyScheme(keyTagSubject): # if is key
+                self.manageNarrowerRelations(relTermSubject, keyTagSubject)
+            elif self.relatedTerm.rdfGraph.isInTagScheme(keyTagSubject): # else if its tag
+                self.manageBroaderRelations(relTermSubject, keyTagSubject)
+
+    def finalize(self):
+        relTermGen = self.relatedTerm.rdfGraph.getSubByScheme(self.termSchemeName)
+        relTermList = utils.genToList(relTermGen)
+        for relTermSubject in relTermList:
+            self.manageRelations(relTermSubject)
+            self.removeDuplicates(relTermSubject)
+        return self.save()
+
+    def removeSavePointNote(self, keyTagSubject):
+        self.relatedTerm.rdfGraph.removeEditorialNote(keyTagSubject, self.savePointNote) # doesnt matter if notes do not exist
+
+    def removeNoTermNote(self, keyTagSubject):
+        self.relatedTerm.rdfGraph.removeEditorialNote(keyTagSubject, self.noTermNote) # doesnt matter if notes do not exist
+
+    def addLastPosNote(self, keyTagSubject):
+        self.relatedTerm.rdfGraph.addEditorialNote(keyTagSubject, self.savePointNote)
+
+    def createTerm(self, keyTagSubject, prefLabelEN, prefLabelDE):
+        self.removeNoTermNote(keyTagSubject)
+        self.__currentRelTerm = self.relatedTerm.createTerm(keyTagSubject, prefLabelEN, prefLabelDE)
 
     def addAltLabelEN(self, altLabelEN):
         if self.__currentRelTerm is not None and altLabelEN is not None and len(altLabelEN) > 0:

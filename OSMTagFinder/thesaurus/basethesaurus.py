@@ -148,6 +148,21 @@ class BaseThesaurus:
                 temp = wikiData['description']
                 if temp is not None and not temp == '':
                     temp = temp.replace('\'', '')
+                    temp = temp.replace('[[w:','')
+                    temp = temp.replace('[[w', '')
+                    temp = temp.replace('[[de:','')
+                    temp = temp.replace('[[en:','')
+                    temp = temp.replace('en=','')
+                    temp = temp.replace('[[wikipedia:de:', '')
+                    temp = temp.replace('[[wikipedia:en:', '')
+                    temp = temp.replace('[[wikipedia:','')
+                    temp = temp.replace('[[Wikipedia:','')
+                    temp = temp.replace('[[wiktionary:de:', '')
+                    temp = temp.replace('[[wiktionary:en:', '')
+                    temp = temp.replace('[[Wiktionary:','')
+                    temp = temp.replace('[[wiktionary:','')
+                    temp = temp.replace('[[','')
+                    temp = temp.replace(']]', '')
                     scopeNoteDE = temp
             elif wikiData['lang'] == 'en':
                 temp = wikiData['description']

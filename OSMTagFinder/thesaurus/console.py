@@ -52,6 +52,7 @@ class Console:
         self.__commands['\\conn'] = self.conn
         self.__commands['\\load'] = self.load
         self.__commands['\\save'] = self.save
+        self.__commands['\\fina'] = self.fina
         self.__commands['\\exit'] = self.exit
 
     def copyToCache(self, text):
@@ -188,6 +189,7 @@ class Console:
         self.printlnWhiteOnBlue(' \\conn  : checks connection with external webservices')
         self.printlnWhiteOnBlue(' \\load  : loading routine for existing TagFinder graphs')
         self.printlnWhiteOnBlue(' \\save  : serializes the current TagFinder graph and your editing position')
+        self.printlnWhiteOnBlue(' \\fina  : performs finalization operation on the current TagFinder graph')
         self.printlnWhiteOnBlue(' \\exit  : terminates this application')
         self.printlnWhiteOnBlue('')
         self.printlnWhiteOnBlue('')
@@ -298,6 +300,18 @@ class Console:
             filePath = self.editTerms.save()
             name = filePath[filePath.rfind('\\') + 1:]
             self.println(' Saving of: ' + name + ' complete!')
+        else:
+            self.println('No graph found or there were no changes!')
+        self.println('')
+
+    def fina(self):
+        self.println('')
+        if self.editTerms is not None:
+            self.rdfGraph.triplesCount()
+            self.println(' Finalizing RDF graph... (' + str(self.rdfGraph.triplesCount()) + ' tripples)')
+            filePath = self.editTerms.finalize()
+            name = filePath[filePath.rfind('\\') + 1:]
+            self.println(' Finalization of: ' + name + ' complete! (' + str(self.rdfGraph.triplesCount()) + ' tripples)')
         else:
             self.println('No graph found or there were no changes!')
         self.println('')

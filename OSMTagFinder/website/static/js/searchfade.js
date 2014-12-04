@@ -1,6 +1,6 @@
-function searchfade(found) {
+function searchfade(found, query) {
     $(function() {
-        if(found > 0) { // truthy check
+        if(found >= 0 && query) { // truthy check
             $('#jumbotron_search').hide();
             $('#nav_footer').hide();
             $('#navbarsearch-ingroup').show();

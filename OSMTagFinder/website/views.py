@@ -5,9 +5,10 @@ Created on 17.10.2014
 @author: Simon Gwerder
 '''
 
+import json
 from flask import Flask, session, send_from_directory, render_template, request, redirect, jsonify, Response
 from flask_bootstrap import Bootstrap
-import json
+from utilities.jsonpdeco import support_jsonp
 
 
 from utilities import utils
@@ -15,7 +16,6 @@ from thesaurus.rdfgraph import RDFGraph
 from website.tagresults import TagResults
 from website.graphsearch import GraphSearch
 from utilities.spellcorrect import SpellCorrect
-from utilities.jsonpdeco import support_jsonp
 
 try:
     # The typical way to import flask-cors
@@ -93,6 +93,7 @@ def search():
     searchResults = searchCall(q)
     if searchResults is None:
         return redirect('/')
+
     return render_template('search.html', lang=getLocale(), q=q, results=searchResults.getResults())
 
 @app.route('/api/search', methods = ['GET'])
@@ -100,10 +101,36 @@ def search():
 @support_jsonp
 def apiSearch():
     searchResults = searchCall(request.args.get('q', ''))
+    prettyPrint = request.args.get('prettyprint', '')
     if searchResults is None:
         return jsonify([])
-    #return jsonify(results=searchResults.getResults())
-    return Response(json.dumps(searchResults.getResults()),  mimetype='application/json')
+
+    jsonDump = None
+
+    if prettyPrint is not None and prettyPrint.lower() == 'true':
+        #return jsonify(results=searchResults.getResults())
+        jsonDump = json.dumps(searchResults.getResults(), indent=4, sort_keys=True)
+    else:
+        jsonDump = json.dumps(searchResults.getResults())
+    return Response(jsonDump,  mimetype='application/json')
+
+@app.route('/suggest', methods = ['GET'])
+def suggest():
+    spellCorrect = SpellCorrect()
+    word = request.args.get('q','')
+
+    suggestList = []
+    lang = getLocale()
+
+    if lang == 'en':
+        suggestList = spellCorrect.listSuggestionsEN(word)
+    elif lang == 'de':
+        suggestList = spellCorrect.listSuggestionsDE(word)
+
+    if len(suggestList) == 0:
+        suggestList = spellCorrect.listSuggestions(word)
+
+    return Response(json.dumps(suggestList), mimetype='application/json')
 
 @app.route('/api/suggest', methods = ['GET'])
 @cross_origin()
@@ -112,6 +139,7 @@ def apiSuggest():
     spellCorrect = SpellCorrect()
     word = request.args.get('q','')
     lang = request.args.get('lang','')
+
     if lang == 'en':
         return Response(json.dumps(spellCorrect.listSuggestionsEN(word)), mimetype='application/json')
     elif lang == 'de':

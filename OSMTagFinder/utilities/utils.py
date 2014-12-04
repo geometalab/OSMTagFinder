@@ -44,6 +44,15 @@ def encode(text):
             pass
     return text
 
+def prepareWord(word):
+    word = word.replace('"', ' ')
+    word = word.replace('_', ' ')
+    word = word.replace(',', ' ')
+    word = word.replace(';', ' ')
+    word = word.replace(' = ', '=')
+    word = eszettToSS(word)
+    return word
+
 def checkFile(filePath):
     return os.path.isfile(filePath)
 

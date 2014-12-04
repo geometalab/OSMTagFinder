@@ -59,6 +59,15 @@ class RelatedTerm:
         self.rdfGraph.addBroaderLiteral(termConcept, broaderDE, 'de')
         return termConcept
 
+    def removeAltLabelLiteral(self, termConcept, altLabelObj):
+        self.rdfGraph.removeAltLabelLiteral(termConcept, altLabelObj)
+
+    def removeBroaderLiteral(self, termConcept, broaderObj):
+        self.rdfGraph.removeAltLabelLiteral(termConcept, broaderObj)
+
+    def removeNarrowerLiteral(self, termConcept, narrowerObj):
+        self.rdfGraph.removeAltLabelLiteral(termConcept, narrowerObj)
+
     def save(self):
         self.rdfGraph.serialize(self.rdfGraph.filePath)
         return self.rdfGraph.filePath

@@ -335,6 +335,18 @@ class RDFGraph:
     def removeEditorialNote(self, subject, obj):
         self.graph.remove( (URIRef(self.prepareURIRef(subject)), SKOS.editorialNote, Literal(obj)) )
 
+    def removeRelatedMatch(self, subject, obj):
+        self.graph.remove( (URIRef(subject), SKOS.relatedMatch, URIRef(obj)) )
+
+    def removeAltLabelLiteral(self, subject, obj):
+        self.graph.remove( (URIRef(subject), SKOS.altLabel, Literal(obj)) )
+
+    def removeBroaderLiteral(self, subject, obj):
+        self.graph.remove( (URIRef(subject), SKOS.broader, Literal(obj)) )
+
+    def removeNarrowerLiteral(self, subject, obj):
+        self.graph.remove( (URIRef(subject), SKOS.narrower, Literal(obj)) )
+
 
 if __name__ == '__main__':
     r = RDFGraph()
