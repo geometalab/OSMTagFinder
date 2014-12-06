@@ -9,32 +9,46 @@ import json
 from flask import Flask, session, send_from_directory, render_template, request, redirect, jsonify, Response
 from flask_bootstrap import Bootstrap
 from utilities.jsonpdeco import support_jsonp
+import datetime
 
 
 from utilities import utils
+from utilities.configloader import ConfigLoader
 from thesaurus.rdfgraph import RDFGraph
 from website.tagresults import TagResults
 from website.graphsearch import GraphSearch
 from utilities.spellcorrect import SpellCorrect
 
 try:
-    # The typical way to import flask-cors
+    # The typical way to import flask-cors. From documentation!
     from flask.ext.cors import cross_origin
 except ImportError:
-    # Path hack allows examples to be run without installation.
+    # This allows examples to be run without installation.
     import os
     parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     os.sys.path.insert(0, parentdir)
     from flask.ext.cors import cross_origin
 
+websiteRdfGraph = None # global var is assigned in loadRdfGraph()! Because there's no way to restart a running 'app' in FLASK!!!
+dataDate = datetime.date.today().strftime("%d.%m.%y") # will be assigned aswell
 
+def loadRdfGraph():
+    cl = ConfigLoader()
+    outputName = cl.getThesaurusString('OUTPUT_NAME')
+    outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')
+    global websiteRdfGraph # blowing your mind, thanks FLASK for beeing so global :(
+    websiteRdfGraph = RDFGraph(utils.outputFile(utils.dataDir(), outputName, outputEnding, useDateEnding=False))
+    global dataDate
+    dataDate = cl.getWebsiteString('DATA_DATE')
 
+def createApp():
+    app = Flask(__name__)
+    app.config['SECRET_KEY'] = '#T0P#SECRET#'
+    Bootstrap(app)
+    loadRdfGraph()
+    return app
 
-rdfGraph = RDFGraph(utils.dataDir() + 'tagfinder_thesaurus.rdf')
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '#T0P#SECRET#'
-Bootstrap(app)
+app = createApp()
 
 def getLocale():
     if 'language' in session:
@@ -62,17 +76,26 @@ def searchCall(query):
         localDE = False
     rawResults = graphSearch.fullSearch(query, localDE) # TODO e.g. "sport" scenario
 
-    return TagResults(rdfGraph, rawResults)
+    return TagResults(websiteRdfGraph, rawResults)
 
 
-@app.route('/favicon.ico')
+@app.route('/favicon.ico', methods = ['GET'])
 def favicon():
-    return send_from_directory(utils.staticDir(), '/ico/favicon.ico', mimetype='image/vnd.microsoft.icon')
+    return send_from_directory(utils.staticDir(), 'ico/favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+@app.route('/tagfinder_thesaurus.rdf', methods = ['GET'])
+def tagfindergraph():
+    return send_from_directory(utils.dataDir(), 'tagfinder_thesaurus.rdf', mimetype='application/rdf+xml')
+
+@app.route('/search/opensearch.xml', methods = ['GET'])
+def opensearch():
+    return send_from_directory(utils.templatesDir(), 'opensearch.xml', mimetype='application/opensearchdescription+xml')
+
 
 @app.route('/', methods = ['GET'])
 @app.route('/index', methods = ['GET'])
 def index():
-    return render_template('search.html', lang=getLocale())
+    return render_template('search.html', lang=getLocale(), dataDate=dataDate)
 
 @app.route('/lang', methods = ['POST'])
 def changeLanguage():

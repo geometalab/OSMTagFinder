@@ -5,15 +5,14 @@ Created on 27.09.2014
 @author: Simon Gwerder
 '''
 
-#from requests.exceptions import ConnectionError
-
 from filter import Filter
 from utilities import utils
 from utilities.configloader import ConfigLoader
 from thesaurus.rdfgraph import RDFGraph
 from externalapi.taginfo import TagInfo
-from externalapi.tagupdate import TagInfoUpdate
+from externalapi.taginfoupdate import TagInfoUpdate
 from utilities.translator import Translator
+from thesaurus.mapsemnet import MapOSMSemanticNet
 
 class BaseThesaurus:
 
@@ -43,38 +42,59 @@ class BaseThesaurus:
     filterUtil = Filter()
     translator = Translator()
 
+    console = None
 
-    def __init__(self, console):
+    def __init__(self, rdfGraph=None, console=None):
+        if rdfGraph is not None:
+            self.rdfGraph = rdfGraph
         if console is not None:
             self.console = console
 
-        self.console.println(' Requesting valid OSM keys from "' + self.cl.getTagInfoAPIString('TAGINFO_PAGE')  + '":')
+    def createBaseThesaurus(self, console):
+        if console is not None:
+            self.console = console
+
+        self.printMessage(' Requesting valid OSM keys from "' + self.cl.getTagInfoAPIString('TAGINFO_PAGE')  + '":')
         keyList = self.getListOfValidKeys()
 
         self.numberKeys = len(keyList) + len(self.filterUtil.exactKeyFilter)
-        self.console.println(' Got ' + str(len(keyList)) + ' valid OSM keys. ' + str(len(self.filterUtil.exactKeyFilter)) + ' are additional keys from filter.')
+        self.printMessage(' Got ' + str(len(keyList)) + ' valid OSM keys. ' + str(len(self.filterUtil.exactKeyFilter)) + ' are additional keys from filter.')
 
-        self.console.println('\n Requesting valid OSM tags from "' + self.cl.getTagInfoAPIString('TAGINFO_PAGE')  + '":')
+        self.printMessage('\n Requesting valid OSM tags from "' + self.cl.getTagInfoAPIString('TAGINFO_PAGE')  + '":')
         tagMap = self.bundleToTagMap(keyList)
 
         self.numberTags = self.numberTags(tagMap)
-        self.console.println(' Got ' + str(self.numberTags) + ' valid OSM tags.')
+        self.printMessage(' Got ' + str(self.numberTags) + ' valid OSM tags.')
 
         empty = []
         for filteredKey in self.filterUtil.exactKeyFilter:
             tagMap[filteredKey] = empty
 
-        self.console.println('\n Requesting detailed information from "' + self.cl.getTagInfoAPIString('TAGINFO_PAGE')  + '":')
+        self.printMessage('\n Requesting detailed information from "' + self.cl.getTagInfoAPIString('TAGINFO_PAGE')  + '":')
         self.createGraph(keyList, tagMap)
 
-        self.console.println('\n Linking OSM "implies", "combines" and "links" relations to graph concepts')
+        self.printMessage('\n Linking OSM "implies", "combines" and "links" relations to graph concepts')
         self.osmLinksToConcept()
+
+        self.printMessage('\n Create mapping to OSM Semantic Net')
+        osnSemNetFilePath = utils.semnetDir() + 'osm_semantic_network.rdf'
+        MapOSMSemanticNet(self.rdfGraph, osnSemNetFilePath)
 
         fullPath = utils.outputFile(utils.tempDir(), self.outputName, self.outputEnding, useDateEnding=True)
         name = fullPath[fullPath.rfind('\\') + 1:]
-        self.console.println('\n Serializing graph to: ' + name)
+        self.printMessage('\n Serializing graph to: ' + name)
         self.rdfGraph.serialize(fullPath)
-        self.console.println('\n Finished creating TagFinder BaseThesaurus')
+        self.printMessage('\n Finished creating TagFinder BaseThesaurus')
+
+    def printPercent(self, partInt, totalInt, workingOn=None):
+        '''Only print percents if according outwriter was defined'''
+        if self.console is not None:
+            self.console.printPercent(partInt, totalInt, workingOn)
+
+    def printMessage(self, message):
+        '''Only print message if according outwriter was defined'''
+        if self.console is not None:
+            self.console.println(message)
 
     def numberTags(self, tagMap):
         '''Returns number of tags in 'tagMap'.'''
@@ -105,9 +125,9 @@ class BaseThesaurus:
                 #break;  # speedup because of sorted list
             if not self.filterUtil.hasKey(keyItem['key']) and utils.validCharsCheck(keyItem['key']) and keyItem['values_all'] >= self.valueMinCount:
                 keyList.append(keyItem['key'])
-                self.console.printPercent(partInt=atPart, totalInt=len(keyData), workingOn='Getting key: ' + keyItem['key'])
+                self.printPercent(partInt=atPart, totalInt=len(keyData), workingOn='Getting key: ' + keyItem['key'])
             atPart = atPart + 1
-        self.console.printPercent(partInt=1, totalInt=1)
+        self.printPercent(partInt=1, totalInt=1)
 
         return keyList
 
@@ -129,13 +149,13 @@ class BaseThesaurus:
         tagMap = {}
         atPart = 1
         for key in keyList:
-            self.console.printPercent(atPart, len(keyList), 'Getting all tags for key: ' + key)
+            self.printPercent(atPart, len(keyList), 'Getting all tags for key: ' + key)
             tagData = self.tagInfo.getAllTagData(key)
             tagMap = self.filterTagData(key, tagMap, tagData)
             atPart = atPart + 1
         return tagMap
 
-    def addImageScopeNote(self, concept, wikiPageJson):
+    def addDepictionScopeNote(self, concept, wikiPageJson, new=True):
         '''Adds a depiction and scopeNote in EN and DE to the 'concept' (if available,
            also translates to the other language if only one is).'''
         scopeNoteDE = ''
@@ -176,19 +196,34 @@ class BaseThesaurus:
                 depiction = imageData['image_url']
 
         if scopeNoteDE == '' and not scopeNoteEN == '':
-            self.rdfGraph.addScopeNote(concept, scopeNoteEN, 'en')
-            self.rdfGraph.addScopeNote(concept, self.translator.translateENtoDE(scopeNoteEN) + ' ' + self.translationHintDE, 'de')
+            if new:
+                self.rdfGraph.addScopeNote(concept, scopeNoteEN, 'en')
+                self.rdfGraph.addScopeNote(concept, self.translator.translateENtoDE(scopeNoteEN) + ' ' + self.translationHintDE, 'de')
+            else:
+                self.rdfGraph.setScopeNote(concept, scopeNoteEN, 'en')
+                self.rdfGraph.addScopeNote(concept, self.translator.translateENtoDE(scopeNoteEN) + ' ' + self.translationHintDE, 'de')
         elif not scopeNoteDE == '' and scopeNoteEN == '':
-            self.rdfGraph.addScopeNote(concept, self.translator.translateDEtoEN(scopeNoteDE) + ' ' + self.translationHintEN, 'en')
-            self.rdfGraph.addScopeNote(concept, scopeNoteDE, 'de')
+            if new:
+                self.rdfGraph.addScopeNote(concept, self.translator.translateDEtoEN(scopeNoteDE) + ' ' + self.translationHintEN, 'en')
+                self.rdfGraph.addScopeNote(concept, scopeNoteDE, 'de')
+            else:
+                self.rdfGraph.setScopeNote(concept, self.translator.translateDEtoEN(scopeNoteDE) + ' ' + self.translationHintEN, 'en')
+                self.rdfGraph.addScopeNote(concept, scopeNoteDE, 'de')
         elif not scopeNoteDE == '' and not scopeNoteEN == '':
-            self.rdfGraph.addScopeNote(concept, scopeNoteEN, 'en')
-            self.rdfGraph.addScopeNote(concept, scopeNoteDE, 'de')
+            if new:
+                self.rdfGraph.addScopeNote(concept, scopeNoteEN, 'en')
+                self.rdfGraph.addScopeNote(concept, scopeNoteDE, 'de')
+            else:
+                self.rdfGraph.setScopeNote(concept, scopeNoteEN, 'en')
+                self.rdfGraph.addScopeNote(concept, scopeNoteDE, 'de')
 
-        if depiction is not None and not depiction == '':
+        if depiction is not None and not depiction == '' and new:
             self.rdfGraph.addDepiction(concept, depiction)
 
-    def updateTagStats(self, concept, key, value=None, wikiPageJson=None):
+        if depiction is not None and not depiction == '' and not new:
+            self.rdfGraph.setDepiction(concept, depiction)
+
+    def updateTagStats(self, concept, key, value=None, wikiPageJson=None, new=True):
         '''Updates stats counts, node use, way use, area use and relation use.'''
         tagInfoUpdate = TagInfoUpdate(key=key, value=value, wikiPageJson=wikiPageJson)
 
@@ -206,28 +241,56 @@ class BaseThesaurus:
             onNode =  tagInfoUpdate.getOnNode()
             onWay = tagInfoUpdate.getOnWay()
             onRelation = tagInfoUpdate.getOnRelation()
-            if not onNode and not onWay and not onRelation:
-                onArea = True
-            else:
-                onArea = tagInfoUpdate.getOnArea()
+            #if not onNode and not onWay and not onRelation:
+            #    onArea = True
+            #else:
+            #    onArea = tagInfoUpdate.getOnArea()
+            onArea = tagInfoUpdate.getOnArea()
 
             nodeStr = '{ "count": "' + str(tagInfoUpdate.getCountNodes()) + '", "use": "' + str(onNode) + '" }'
             wayStr = '{ "count": "' + str(tagInfoUpdate.getCountWays()) + '", "use": "' + str(onWay) + '" }'
             areaStr = '{ "count": "0"' + ', "use": "' + str(onArea) + '" }'
             relationStr = '{ "count": "' + str(tagInfoUpdate.getCountRelations()) + '", "use": "' + str(onRelation) + '" }'
 
-        self.rdfGraph.addOSMNode(concept, nodeStr)
-        self.rdfGraph.addOSMWay(concept, wayStr)
-        self.rdfGraph.addOSMArea(concept, areaStr)
-        self.rdfGraph.addOSMRelation(concept, relationStr)
+        if new:
+            self.rdfGraph.addOSMNode(concept, nodeStr)
+            self.rdfGraph.addOSMWay(concept, wayStr)
+            self.rdfGraph.addOSMArea(concept, areaStr)
+            self.rdfGraph.addOSMRelation(concept, relationStr)
+        else:
+            self.rdfGraph.setOSMNode(concept, nodeStr)
+            self.rdfGraph.setOSMWay(concept, wayStr)
+            self.rdfGraph.setOSMArea(concept, areaStr)
+            self.rdfGraph.setOSMRelation(concept, relationStr)
 
-    def updateTagLinks(self, concept, key, value=None, wikiPageJson=None):
+    def deleteAllLinks(self, concept):
+        '''Deletes all link for 'concept', UriRefs and Literals.'''
+        self.rdfGraph.setOSMImpliesUriRef(concept, 'dummy')
+        self.rdfGraph.setOSMCombinesUriRef(concept, 'dummy')
+        self.rdfGraph.setOSMLinksUriRef(concept, 'dummy')
+
+        self.rdfGraph.setOSMImpliesLiteral(concept, 'dummy')
+        self.rdfGraph.setOSMCombinesLiteral(concept, 'dummy')
+        self.rdfGraph.setOSMLinksLiteral(concept, 'dummy')
+
+        self.rdfGraph.removeOSMImpliesUriRef(concept, 'dummy')
+        self.rdfGraph.removeOSMCombinesUriRef(concept, 'dummy')
+        self.rdfGraph.removeOSMLinksUriRef(concept, 'dummy')
+
+        self.rdfGraph.removeOSMImpliesLiteral(concept, 'dummy')
+        self.rdfGraph.removeOSMCombinesLiteral(concept, 'dummy')
+        self.rdfGraph.removeOSMLinksLiteral(concept, 'dummy')
+
+    def updateTagLinks(self, concept, key, value=None, wikiPageJson=None, new=True):
         '''Updates the tag links from OSM wiki: implies, combinations and linked. Just as Literals.'''
         tagInfoUpdate = TagInfoUpdate(key=key, value=value, wikiPageJson=wikiPageJson)
 
         listImplies = tagInfoUpdate.getListImplies()
         listCombinations = tagInfoUpdate.getListCombinations()
         listLinked = tagInfoUpdate.getListLinked()
+
+        if not new:
+            self.deleteAllLinks(concept)
 
         impliesStr = '\t\tImplies: '
         for tagImplies in listImplies: #tags or keys
@@ -256,7 +319,7 @@ class BaseThesaurus:
         if len(keyWikiPageJson) > 0:
             self.updateTagStats(concept=keyConcept, key=key, wikiPageJson=keyWikiPageJson)
             self.updateTagLinks(concept=keyConcept, key=key, wikiPageJson=keyWikiPageJson)
-            self.addImageScopeNote(keyConcept, keyWikiPageJson)
+            self.addDepictionScopeNote(keyConcept, keyWikiPageJson)
 
         self.rdfGraph.addEditorialNote(keyConcept, self.editNote)
 
@@ -277,7 +340,7 @@ class BaseThesaurus:
             self.updateTagStats(concept=tagConcept, key=key, value=value, wikiPageJson=tagWikiPageJson)
             self.updateTagLinks(concept=tagConcept, key=key, value=value, wikiPageJson=tagWikiPageJson)
 
-            self.addImageScopeNote(tagConcept, tagWikiPageJson)
+            self.addDepictionScopeNote(tagConcept, tagWikiPageJson)
 
             self.rdfGraph.addEditorialNote(tagConcept, self.editNote)
 
@@ -296,15 +359,15 @@ class BaseThesaurus:
             atPart = atPart + 1
 
         for key in keyList:
-            self.console.printPercent(partInt=atPart, totalInt=totalParts, workingOn='Key: ' + key)
+            self.printPercent(partInt=atPart, totalInt=totalParts, workingOn='Key: ' + key)
             keyConcept = self.createKey(key, keyScheme)
             atPart = atPart + 1
 
             valueList = tagMap.get(key)
-            if valueList is None:
+            if valueList is None or len(valueList) == 0:
                 continue
             for value in valueList:
-                self.console.printPercent(partInt=atPart, totalInt=totalParts, workingOn='Tag: ' + key + '=' + value)
+                self.printPercent(partInt=atPart, totalInt=totalParts, workingOn='Tag: ' + key + '=' + value)
                 self.createTag(key, keyConcept, value, tagScheme)
                 atPart = atPart + 1
 
@@ -341,7 +404,7 @@ class BaseThesaurus:
 '''if __name__ == '__main__':
     startTime = timeit.default_timer()
     retry = True
-    console = console.Console(sys.stdout)
+    console = Console(sys.stdout)
     while retry:
         try:
             bt = BaseThesaurus(console)

@@ -23,7 +23,6 @@ _semnetFolderName = 'semnet'
 
 indexName = 'index'  # for indexer.py and graphsearch.py
 
-
 def specCharEnc(text):
     text = encode(text)
     text = text.replace('Ä', '\xc3\x84')

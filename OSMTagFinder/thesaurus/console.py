@@ -7,7 +7,7 @@ Created on 10.11.2014
 import time
 import timeit
 import sys
-from colorama import init, deinit
+
 from termcolor import colored
 import os
 import codecs
@@ -182,7 +182,7 @@ class Console:
         self.printlnWhiteOnBlue('')
         self.printlnWhiteOnBlue(' Commands: ')
         self.printlnWhiteOnBlue(' The following commands can only be used while this application is waiting for')
-        self.printlnWhiteOnBlue(' ">"-input and not as application arguments. They start with a hyphen')
+        self.printlnWhiteOnBlue(' ">"-input and not as application arguments. They start with a backslash.')
         self.printlnGreyOnBlue(' (e.g. \\info)')
         self.printlnWhiteOnBlue('')
         self.printlnWhiteOnBlue(' \\info  : prints this info panel')
@@ -253,7 +253,8 @@ class Console:
         self.println('')
 
         startTime = timeit.default_timer()
-        bt = BaseThesaurus(self)
+        bt = BaseThesaurus()
+        bt.createBaseThesaurus(self)
         endTime = timeit.default_timer()
         elapsed = endTime - startTime
         self.println('\n Time elapsed: ' + str((int) (elapsed / 60)) + ' mins')
@@ -533,21 +534,5 @@ class Console:
         return retList
 
 
-if __name__ == '__main__':
 
-    init() #essential for colorama to work on windows
 
-    console = Console(sys.stdout, percentNewLine=False)
-
-    console.printASCIITitle()
-
-    console.printWelcomeMessage() # welcome message
-    console.info()
-    console.conn()
-
-    console.printNewOrLoad()
-
-    optToActionMap = { '1' : console.create, '2' : console.load }
-    console.repeatedOptRead(optToActionMap)
-
-    deinit()

@@ -323,6 +323,47 @@ class RDFGraph:
         generatorList = self.graph.objects(URIRef(self.prepareURIRef(subject)), self.osmLinks)
         return generatorList
 
+    def setScopeNote(self, subject, obj, language):
+        self.graph.set((URIRef(self.prepareURIRef(subject)), SKOS.scopeNote, Literal(self.prepareLiteral(obj), lang=language)))
+
+    def setDepiction(self, subject, obj):
+        self.graph.set((URIRef(self.prepareURIRef(subject)), FOAF.depiction, URIRef(obj)))
+        return subject
+
+    def setOSMNode(self, subject, obj):
+        '''Remove any existing triples for subject and predicate before adding node for (subject, object)'''
+        self.graph.set( (URIRef(self.prepareURIRef(subject)), self.osmNode, Literal(obj)) )
+
+    def setOSMWay(self, subject, obj):
+        '''Remove any existing triples for subject and predicate before adding way for (subject, object)'''
+        self.graph.set( (URIRef(self.prepareURIRef(subject)), self.osmWay, Literal(obj)) )
+
+    def setOSMArea(self, subject, obj):
+        '''Remove any existing triples for subject and predicate before adding area for (subject, object)'''
+        self.graph.set( (URIRef(self.prepareURIRef(subject)), self.osmArea, Literal(obj)) )
+
+    def setOSMRelation(self, subject, obj):
+        '''Remove any existing triples for subject and predicate before adding relation for (subject, object)'''
+        self.graph.set( (URIRef(self.prepareURIRef(subject)), self.osmRelation, Literal(obj)) )
+
+    def setOSMImpliesUriRef(self, subject, obj):
+        self.graph.set( (URIRef(self.prepareURIRef(subject)), self.osmImplies, URIRef(obj)) )
+
+    def setOSMCombinesUriRef(self, subject, obj):
+        self.graph.set( (URIRef(self.prepareURIRef(subject)), self.osmCombines, URIRef(obj)) )
+
+    def setOSMLinksUriRef(self, subject, obj):
+        self.graph.set( (URIRef(self.prepareURIRef(subject)), self.osmLinks, Literal(obj)) )
+
+    def setOSMImpliesLiteral(self, subject, obj):
+        self.graph.set( (URIRef(self.prepareURIRef(subject)), self.osmImplies, Literal(obj)) )
+
+    def setOSMCombinesLiteral(self, subject, obj):
+        self.graph.set( (URIRef(self.prepareURIRef(subject)), self.osmCombines, Literal(obj)) )
+
+    def setOSMLinksLiteral(self, subject, obj):
+        self.graph.set( (URIRef(self.prepareURIRef(subject)), self.osmLinks, URIRef(obj)) )
+
     def removeOSMImpliesLiteral(self, subject, obj):
         self.graph.remove( (URIRef(self.prepareURIRef(subject)), self.osmImplies, Literal(obj)) )
 
@@ -331,6 +372,15 @@ class RDFGraph:
 
     def removeOSMLinksLiteral(self, subject, obj):
         self.graph.remove( (URIRef(self.prepareURIRef(subject)), self.osmLinks, Literal(obj)) )
+
+    def removeOSMImpliesUriRef(self, subject, obj):
+        self.graph.remove( (URIRef(self.prepareURIRef(subject)), self.osmImplies, URIRef(obj)) )
+
+    def removeOSMCombinesUriRef(self, subject, obj):
+        self.graph.remove( (URIRef(self.prepareURIRef(subject)), self.osmCombines, URIRef(obj)) )
+
+    def removeOSMLinksUriRef(self, subject, obj):
+        self.graph.remove( (URIRef(self.prepareURIRef(subject)), self.osmLinks, URIRef(obj)) )
 
     def removeEditorialNote(self, subject, obj):
         self.graph.remove( (URIRef(self.prepareURIRef(subject)), SKOS.editorialNote, Literal(obj)) )

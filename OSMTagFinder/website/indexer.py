@@ -14,6 +14,7 @@ import re
 from whoosh.fields import TEXT, ID, Schema
 import whoosh.index as index
 from whoosh.index import create_in
+from utilities.configloader import ConfigLoader
 
 class Indexer:
 
@@ -33,6 +34,7 @@ class Indexer:
     wordSetDE = set()
 
     def __init__(self, rdfGraph):
+        if rdfGraph is None: return
         self.createNewIndex()
 
         count = 0
@@ -177,8 +179,12 @@ class Indexer:
 
 
 if __name__ == '__main__':
-    rdfGraph = RDFGraph(utils.dataDir() + 'tagfinder_thesaurus.rdf')
+    cl = ConfigLoader()
+    outputName = cl.getThesaurusString('OUTPUT_NAME')
+    outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')
+    rdfGraph = RDFGraph(utils.outputFile(utils.dataDir(), outputName, outputEnding, useDateEnding=False))
     Indexer(rdfGraph)
+
 
 
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+    <ShortName>OSM TagFinder</ShortName>
+    <Description>Find OpenStreetMap tags</Description>
+    <Tags>OpenStreetMap OSM TagFinder Search Tag Key Value</Tags>
+    <Contact>sgwerder@hsr.ch</Contact>
+    <Url type="application/x-suggestions+json" rel="suggestions" template="http://taginder.herokuapp.com/api/suggest?q={searchTerms}"/>
+    <Url type="text/html" method="get" template="http://taginder.herokuapp.com/search?q={searchTerms}"/>
+	<Url type="application/json" method="get" template="http://taginder.herokuapp.com/api/search?q={searchTerms}"/>
+    <Url type="application/opensearchdescription+xml" rel="self" template="http://taginder.herokuapp.com/search/opensearch.xml"/>
+    <Image height="16" width="16" type="image/x-icon">http://taginder.herokuapp.com/favicon.ico</Image>
+    <OutputEncoding>UTF-8</OutputEncoding>
+    <InputEncoding>UTF-8</InputEncoding>
+    <SyndicationRight>open</SyndicationRight>
+    <AdultContent>false</AdultContent>
+    <Language>en</Language>
+    <Language>de</Language>
+</OpenSearchDescription>

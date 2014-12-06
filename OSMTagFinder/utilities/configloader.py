@@ -40,8 +40,14 @@ class ConfigLoader:
     def getWebsiteString(self, option):
         return self.__parser.get(self.websiteSection, option)
 
+    def getWebsiteBoolean(self, option):
+        return self.__parser.getboolean(self.websiteSection, option)
+
     def getWebsiteInt(self, option):
         return self.__parser.getint(self.websiteSection, option)
+
+    def setWebsiteString(self, option, strValue):
+        self.__parser.set(self.websiteSection, option, strValue)
 
     def getOpenThesaurusAPIString(self, option):
         return self.__parser.get(self.openThesaurusSection, option)
@@ -54,6 +60,11 @@ class ConfigLoader:
 
     def getWordnikAPIString(self, option):
         return self.__parser.get(self.wordnikSection, option)
+
+    def write(self):
+        self.configFileLoc = utils.dataDir() + 'config.ini'
+        with codecs.open(self.configFileLoc, 'wb', encoding='utf-8') as configFile:  # open the file with the correct encoding
+            self.__parser.write(configFile)
 
 
 

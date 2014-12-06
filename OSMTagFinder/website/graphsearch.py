@@ -142,18 +142,4 @@ class GraphSearch:
         return results
 
 
-if __name__ == '__main__':
-
-    rdfGraph = RDFGraph(utils.dataDir() + 'tagfinder_thesaurus.rdf')
-    gs = GraphSearch()
-    while True:
-        word = raw_input('Enter word to search for: ')
-        rawResults = gs.fullSearch(word)
-        searchResults = TagResults(rdfGraph, rawResults)
-        for item in searchResults.getResults():
-            print '\t' + str(item)
-
-
-
-
 
