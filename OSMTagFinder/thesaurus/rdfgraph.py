@@ -18,7 +18,8 @@ from utilities.configloader import ConfigLoader
 
 #import logging
 
-# from skosserializer import SKOSSerializer
+from skosserializer import SKOSSerializer
+from thesaurus import skosserializer
 
 class RDFGraph:
     encoding = 'utf-8'

@@ -9,9 +9,14 @@ from externalapi.taginfo import TagInfo
 from utilities import utils
 from utilities.configloader import ConfigLoader
 from utilities.translator import Translator
-from basethesaurus import BaseThesaurus
 from filter import Filter
-from mapsemnet import MapOSMSemanticNet
+from thesaurus.maintenance import Console
+from thesaurus.basethesaurus import BaseThesaurus
+from thesaurus.rdfgraph import RDFGraph
+from thesaurus.mapsemnet import MapOSMSemanticNet
+
+import timeit
+import sys
 
 class UpdateThesaurus:
 
@@ -56,7 +61,7 @@ class UpdateThesaurus:
         MapOSMSemanticNet(self.rdfGraph, osnSemNetFilePath)
 
         self.bt.printMessage('\nFinished. Serializing rdfGraph: New ' + str(rdfGraph.triplesCount()) + ' tripples')
-        rdfGraph.serialize(rdfGraph.filePath)
+        self.rdfGraph.serialize(rdfGraph.filePath)
 
     def handleNewKeys(self, keyList):
         current = 1
@@ -178,8 +183,18 @@ class UpdateThesaurus:
                 tagList.append(key + '=' + value)
         return tagList
 
+if __name__ == '__main__':
+    startTime = timeit.default_timer()
+    retry = True
+    console = Console(sys.stdout)
+    cl = ConfigLoader()
+    outputName = cl.getThesaurusString('OUTPUT_NAME')
+    outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')
+    rdfGraph = RDFGraph(utils.outputFile(utils.dataDir(), outputName, outputEnding, useDateEnding=False))
+    UpdateThesaurus(rdfGraph, console)
 
-
-
+    endTime = timeit.default_timer()
+    elapsed = endTime - startTime
+    console.println('\nTime elapsed to update rdfGraph: ' + str(elapsed / 60) + ' mins')
 
 

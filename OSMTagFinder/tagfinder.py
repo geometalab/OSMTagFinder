@@ -18,7 +18,7 @@ from utilities.configloader import ConfigLoader
 from website.views import app, loadRdfGraph
 from website.indexer import Indexer
 from thesaurus.rdfgraph import RDFGraph
-from thesaurus.updatethesaurus import UpdateThesaurus
+from thesaurus.updater import UpdateThesaurus
 
 def runFlaskApp():
     cl = ConfigLoader()

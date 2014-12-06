@@ -7,7 +7,7 @@ Created on 10.11.2014
 import time
 import timeit
 import sys
-
+from colorama import init, deinit
 from termcolor import colored
 import os
 import codecs
@@ -534,5 +534,22 @@ class Console:
         return retList
 
 
+if __name__ == '__main__':
 
+    init() #essential for colorama to work on windows
+
+    console = Console(sys.stdout, percentNewLine=False)
+
+    console.printASCIITitle()
+
+    console.printWelcomeMessage() # welcome message
+    console.info()
+    console.conn()
+
+    console.printNewOrLoad()
+
+    optToActionMap = { '1' : console.create, '2' : console.load }
+    console.repeatedOptRead(optToActionMap)
+
+    deinit()
 
