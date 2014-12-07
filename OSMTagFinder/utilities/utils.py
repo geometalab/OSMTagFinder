@@ -20,6 +20,7 @@ _staticFolderName = 'static'
 _templatesFolderName = 'templates'
 _tempFolderName = 'temp'
 _semnetFolderName = 'semnet'
+_testFolderName = 'test'
 
 indexName = 'index'  # for indexer.py and graphsearch.py
 
@@ -55,7 +56,7 @@ def prepareWord(word):
 def checkFile(filePath):
     return os.path.isfile(filePath)
 
-def _checkPath(path):
+def _checkCreatePath(path):
     if not os.path.exists(path):
         os.mkdir(path)
     return path
@@ -65,31 +66,35 @@ def rootDir():
 
 def dataDir():
     path = rootDir() + '/' + _dataFolderName + '/'
-    return _checkPath(path)
+    return _checkCreatePath(path)
 
 def tempDir():
     path = rootDir() + '/' + _dataFolderName + '/' + _tempFolderName + '/'
-    return _checkPath(path)
+    return _checkCreatePath(path)
 
 def websiteDir():
     path = rootDir() + '/' + _websiteFolderName + '/'
-    return _checkPath(path)
+    return _checkCreatePath(path)
 
 def semnetDir():
     path = rootDir() + '/' + _dataFolderName + '/' + _semnetFolderName + '/'
-    return _checkPath(path)
+    return _checkCreatePath(path)
 
 def indexerDir():
     path = dataDir() + '/' + _indexerFolderName + '/'
-    return _checkPath(path)
+    return _checkCreatePath(path)
+
+def testDir():
+    path = dataDir() + '/' + _testFolderName + '/'
+    return _checkCreatePath(path)
 
 def staticDir():
     path = websiteDir() + '/' + _staticFolderName + '/'
-    return _checkPath(path)
+    return _checkCreatePath(path)
 
 def templatesDir():
     path = websiteDir() + '/' + _templatesFolderName + '/'
-    return _checkPath(path)
+    return _checkCreatePath(path)
 
 def isNumber(r):
     try:

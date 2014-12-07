@@ -7,8 +7,6 @@ Created on 12.10.2014
 from utilities import utils
 from utilities.spellcorrect import SpellCorrect
 from utilities.translator import Translator
-from thesaurus.rdfgraph import RDFGraph
-from tagresults import TagResults
 
 from collections import OrderedDict
 from whoosh.qparser import QueryParser

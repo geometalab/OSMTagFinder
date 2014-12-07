@@ -145,7 +145,7 @@ class RDFGraph:
         return subject
 
     def addRelatedMatch(self, subject, obj):
-        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.relatedMatch, URIRef(obj)))
+        self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.relatedMatch, URIRef(self.prepareURIRef(obj))))
         return subject
 
     def addDepiction(self, subject, obj):

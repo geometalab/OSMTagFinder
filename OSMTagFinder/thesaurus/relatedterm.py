@@ -32,7 +32,6 @@ class RelatedTerm:
         self.rdfGraph.addPrefLabel(termConcept, prefLabelDE, language='de')
         self.rdfGraph.addRelatedMatch(keyTagConcept, termConcept)
         self.rdfGraph.addRelatedMatch(termConcept, keyTagConcept)
-        #TODO if is tag => add broader narrower to key term equivalent
         return termConcept
 
     def addAltLabelEN(self, termConcept, altLabelEN):

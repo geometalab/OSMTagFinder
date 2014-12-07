@@ -65,15 +65,15 @@ def setLocale(lang=None):
     else:
         session['language'] = lang
 
-def searchCall(query):
+def searchCall(query, lang=None):
     graphSearch = GraphSearch()
     if query is None or query == '':
         return None
 
-    if getLocale() == 'de':
+    localDE = False
+
+    if (lang is None and getLocale() == 'de') or (lang is not None and lang == 'de'):
         localDE = True
-    else:
-        localDE = False
     rawResults = graphSearch.fullSearch(query, localDE) # TODO e.g. "sport" scenario
 
     return TagResults(websiteRdfGraph, rawResults)
@@ -123,8 +123,10 @@ def search():
 @cross_origin()
 @support_jsonp
 def apiSearch():
-    searchResults = searchCall(request.args.get('q', ''))
+    query = request.args.get('q', '')
+    lang = request.args.get('lang','')
     prettyPrint = request.args.get('prettyprint', '')
+    searchResults = searchCall(query, lang)
     if searchResults is None:
         return jsonify([])
 
