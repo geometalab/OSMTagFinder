@@ -1,19 +1,4 @@
 {
-    "address": {
-        "fields": [
-            "address"
-        ],
-        "geometry": [
-            "point"
-        ],
-        "tags": {
-            "addr:housenumber": "*"
-        },
-        "addTags": {},
-        "removeTags": {},
-        "matchScore": 0.2,
-        "name": "Address"
-    },
     "aerialway": {
         "fields": [
             "aerialway"
@@ -2223,34 +2208,6 @@
         },
         "name": "Entrance/Exit",
         "searchable": false
-    },
-    "building/garage": {
-        "fields": [
-            "capacity"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "building": "garage"
-        },
-        "name": "Garage",
-        "icon": "warehouse"
-    },
-    "building/garages": {
-        "icon": "warehouse",
-        "fields": [
-            "capacity"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "building": "garages"
-        },
-        "name": "Garages"
     },
     "building/greenhouse": {
         "icon": "building",

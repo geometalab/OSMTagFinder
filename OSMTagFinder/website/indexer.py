@@ -43,7 +43,7 @@ class Indexer:
                 if predicate == SKOS.prefLabel:
                     count += 1
                     print str(count) + ': Indexing tagPrefLabel: ' + str(obj)
-                    label = utils.prepareWord(obj)
+                    label = utils.wsWord(obj)
                     lit = Literal(label, obj.language)
                     self.addTagPrefLabel(subject, lit)
                 elif predicate == SKOS.scopeNote:

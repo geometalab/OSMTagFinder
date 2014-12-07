@@ -44,7 +44,7 @@ def encode(text):
             pass
     return text
 
-def prepareWord(word):
+def wsWord(word):
     word = word.replace('"', ' ')
     word = word.replace('_', ' ')
     word = word.replace(',', ' ')

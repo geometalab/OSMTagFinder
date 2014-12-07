@@ -76,18 +76,18 @@ class TestRun:
             return response.json()
         return None
 
-    def getTagListFromCall(self, responseJson):
-        retList = []
+    def getTagDictFromCall(self, responseJson):
+        retDict = { }
         for tfTag in responseJson:
             prefLabel = tfTag['prefLabel']
             if not '=' in prefLabel: # is a key
                 prefLabel = prefLabel + '=*'
-            retList.append(prefLabel)
-        return retList
+            retDict[prefLabel] = tfTag['searchMeta']
+        return retDict
 
     def __init__(self, idPresetsSetup):
 
-        print 'STARTING ID PRESETS TESTS'
+        print 'IDEDITOR PRESET TESTS'
         current = 1
         testTotal = len(idPresetsSetup.getIDPresets())
         nameTotal = len(idPresetsSetup.getIDPresets())
@@ -106,13 +106,15 @@ class TestRun:
                 if responseJson is None:
                     print 'Call failed!'
                 else:
-                    foundList = self.getTagListFromCall(responseJson)
-                    interSectionSet = set(idPreset.tags).intersection(set(foundList))
+                    foundList = self.getTagDictFromCall(responseJson)
+                    interSectionSet = set(idPreset.tags).intersection(set(foundList.keys()))
                     if len(interSectionSet) == 0:
                         print '{0}{1:<20s}{2}'.format('Term: ', term, ' > none found')
                     else:
                         found = True
-                        print '{0}{1:<20s}{2}{3}'.format('Term: ', term, ' > found: ', ' ,'.join(interSectionSet))
+                        print '{0}{1:<20s}{2}{3}'.format('Term: ', term, ' > found: ', ', '.join(interSectionSet))
+                        #for searchMeta in foundList.values():
+                        #    print searchMeta
                         if term is idPreset.name:
                             nameFound = nameFound + 1
                         else:
@@ -126,9 +128,9 @@ class TestRun:
         print '\n\n'
         print '=' * 60
         print '=' * 60
-        print 'Found test tag     : ' + str(testFound) + '/' + str(testTotal)
+        print 'Found test tags  : ' + str(testFound) + '/' + str(testTotal)
         print 'Found \"names\"    : ' + str(nameFound) + '/' + str(nameTotal)
-        print 'Found \"alt term\" : ' + str(altTermFound) + '/' + str(altTermTotal)
+        print 'Found \"terms\"  : ' + str(altTermFound) + '/' + str(altTermTotal)
 
 
 
@@ -137,7 +139,7 @@ if __name__ == '__main__':
 
     startTime = timeit.default_timer()
 
-    setup = IDPresetsSetup(utils.testDir() + 'presets.json')
+    setup = IDPresetsSetup(utils.testDir() + 'blackboxtests.json')
 
     #TagFinder needs to be running. Can also start TagFinder locally here.
     TestRun(setup)

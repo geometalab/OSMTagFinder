@@ -70,11 +70,10 @@ def searchCall(query, lang=None):
     if query is None or query == '':
         return None
 
-    localDE = False
+    if lang is None:
+        lang = getLocale()
 
-    if (lang is None and getLocale() == 'de') or (lang is not None and lang == 'de'):
-        localDE = True
-    rawResults = graphSearch.fullSearch(query, localDE) # TODO e.g. "sport" scenario
+    rawResults = graphSearch.fullSearch(query, lang)
 
     return TagResults(websiteRdfGraph, rawResults)
 
@@ -126,6 +125,10 @@ def apiSearch():
     query = request.args.get('q', '')
     lang = request.args.get('lang','')
     prettyPrint = request.args.get('prettyprint', '')
+
+    if lang is None:
+        lang = 'en'
+
     searchResults = searchCall(query, lang)
     if searchResults is None:
         return jsonify([])

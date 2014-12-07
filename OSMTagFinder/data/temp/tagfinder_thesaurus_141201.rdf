@@ -47570,7 +47570,7 @@
     <skos:altLabel xml:lang="de">Zebrastreifen</skos:altLabel>
     <skos:altLabel xml:lang="en">zebra crossing</skos:altLabel>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/RelatedTerms"/>
-    <skos:prefLabel xml:lang="de">crossing</skos:prefLabel>
+    <skos:altLabel xml:lang="en">crossing</skos:altLabel>
     <skos:prefLabel xml:lang="de">Fussgängerstreifen</skos:prefLabel>
   </skos:Concept>
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/RelatedTerms/highway_trunk_link">
