@@ -62,8 +62,6 @@ class GraphSearch:
                 translatedWords = translatedWords + self.translateWord(word, lang)
         return utils.wsWord(translatedWords)
 
-
-
     def fullSearch(self, words, lang=None):
         if words is None: return None
 
@@ -82,12 +80,11 @@ class GraphSearch:
             allHits = None # only to get the correct whoosh score
 
             allHits = self.extendedSearch(words, searcher, 'termPrefLabel', results, allHits)
-
             allHits = self.extendedSearch(words, searcher, 'termAltLabel', results, allHits)
 
-            if allHits is None or len(results) < self.threshold: # in this case, searching with translated words too
-                allHits = self.extendedSearch(translatedWords, searcher, 'termPrefLabel', results, allHits)
-                allHits = self.extendedSearch(translatedWords, searcher, 'termAltLabel', results, allHits)
+            #if allHits is None or len(results) < self.threshold: # in this case, searching with translated words too
+            allHits = self.extendedSearch(translatedWords, searcher, 'termPrefLabel', results, allHits)
+            allHits = self.extendedSearch(translatedWords, searcher, 'termAltLabel', results, allHits)
 
             if lang == 'en':
                 allHits = self.extendedSearch(words, searcher, 'tagPrefLabel', results, allHits) # english first
@@ -144,8 +141,6 @@ class GraphSearch:
             results[subject] = searchMeta
         return results
 
-
-
     def updateResults(self, results, hits):
         if hits is None or not hits.has_matched_terms(): return results
         for hit in hits:
@@ -172,6 +167,7 @@ class GraphSearch:
 
                 results[subject] = searchMeta
         return results
+
 
 
 

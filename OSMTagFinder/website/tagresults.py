@@ -38,6 +38,9 @@ class TagResults:
         sortedResults = []
 
         for result in unsortedResults:
+
+            if not 'searchMeta' in result: return unsortedResults
+
             searchMeta = result['searchMeta']
 
             hasTermBroader = 'termBroader' in searchMeta
@@ -151,7 +154,9 @@ class TagResults:
             default = { 'count' : '0', 'use' : 'False' }
 
             tag['subject'] = utils.encode(subject)
-            tag['searchMeta'] = searchMeta
+
+            if searchMeta is not None and len(searchMeta) > 0:
+                tag['searchMeta'] = searchMeta
 
             tag['isKey'] = rdfGraph.isInKeyScheme(subject)
             tag['isTag'] = rdfGraph.isInTagScheme(subject)

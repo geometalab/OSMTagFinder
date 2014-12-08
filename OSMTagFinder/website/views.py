@@ -67,7 +67,7 @@ def setLocale(lang=None):
 
 def searchCall(query, lang=None):
     graphSearch = GraphSearch()
-    if query is None or query == '':
+    if websiteRdfGraph is None or query is None or len(query) == 0:
         return None
 
     if lang is None:
@@ -174,5 +174,38 @@ def apiSuggest():
         return Response(json.dumps(spellCorrect.listSuggestionsDE(word)), mimetype='application/json')
     else:
         return Response(json.dumps(spellCorrect.listSuggestions(word)), mimetype='application/json')
+
+@app.route('/api/tag', methods = ['GET'])
+@cross_origin()
+@support_jsonp
+def apiTag():
+    prefLabel = None
+    key = request.args.get('key','')
+    if websiteRdfGraph is None or key is None or len(key) == 0:
+        return jsonify({})
+    value = request.args.get('value')
+    if not value == '*' and not value is None and not len(value) == 0 :
+        prefLabel = key + '=' + value
+    else:
+        prefLabel = key
+    subject = websiteRdfGraph.getSubByPrefLabel(prefLabel)
+    if subject is None:
+        return jsonify({})
+
+    rawResults = { subject : { } } # add empty dictionary for the searchMeta
+    results = TagResults(websiteRdfGraph, rawResults)
+    if len(results.getResults()) < 1:
+        return jsonify({})
+
+    prettyPrint = request.args.get('prettyprint', '')
+    if prettyPrint is not None and prettyPrint.lower() == 'true':
+        #return jsonify(results=searchResults.getResults())
+        jsonDump = json.dumps(results.getResults()[0], indent=4, sort_keys=True)
+    else:
+        jsonDump = json.dumps(results.getResults()[0])
+    return Response(jsonDump,  mimetype='application/json')
+
+
+
 
 

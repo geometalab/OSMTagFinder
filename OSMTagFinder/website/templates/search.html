@@ -204,11 +204,12 @@
                             <p class="second_column" id="linked_{{ currentIndex }}">{{ listlinks(result['links'], no_element_en, no_element_de ) }}</p>
 
                             <!-- searchmeta and highlighting -->
+                            <!-- ~ converts to string in jinja2 and concatenates -->
                             {% if result['searchMeta'] %}
                                 <p class="meta_first_column" lang="en">Search infos:</p>
                                 <p class="meta_first_column" lang="de">Such-Infos:</p>
                                 {% set score = result['searchMeta']['score'] %}
-                                {% set searchMetasEN = 'Score: ' ~ score|round(2, 'floor') %} <!-- ~ converts to string in jinja2 and concatenates -->
+                                {% set searchMetasEN = 'Score: ' ~ score|round(2, 'floor') %}
                                 {% set searchMetasDE = 'Score: ' ~ score|round(2, 'floor') %}
                                 {% set searchMetasEN = searchMetasEN + '  ' %}
                                 {% set searchMetasDE = searchMetasDE + '  ' %}
@@ -227,7 +228,7 @@
                                 {% if result['searchMeta']['termAltLabel']|count > 0 %}
                                     {% set metasTermAltLabel = result['searchMeta']['termAltLabel']|join(", ") %}
                                     {% set searchMetasEN = searchMetasEN + ' / related term: ' ~ metasTermAltLabel %}
-                                    {% set searchMetasDE = searchMetasDE + ' / verwandter Begriff: ' ~ metasTermAltLabel %}
+                                    {% set searchMetasDE = searchMetasDE + ' / Verwandter Begriff: ' ~ metasTermAltLabel %}
                                     {% for termAltLabel in result['searchMeta']['termAltLabel'] %}
                                         <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
                                         <script type="text/javascript">
@@ -259,25 +260,25 @@
                                     {% set metasTermBroader = result['searchMeta']['termBroader']|join(", ") %}
                                     {% set searchMetasEN = searchMetasEN + ' / broader term: ' ~ metasTermBroader %}
                                     {% set searchMetasDE = searchMetasDE + ' / Oberbegriff: ' ~ metasTermBroader %}
-                                    <!--{% for termBroader in result['searchMeta']['termBroader'] %}
+                                <!--{% for termBroader in result['searchMeta']['termBroader'] %}
                                         <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
                                         <script type="text/javascript">
                                             highlight(document.getElementById('broaderTermsEN_{{ currentIndex }}'), '{{ termBroader }}')
                                             highlight(document.getElementById('broaderTermsDE_{{ currentIndex }}'), '{{ termBroader }}')
-                                        </script>-->
-                                    {% endfor %}
+                                        </script>
+                                    {% endfor %}-->
                                 {% endif %}
                                 {% if result['searchMeta']['termNarrower']|count > 0 %}
                                     {% set metasTermNarrower = result['searchMeta']['termNarrower']|join(", ") %}
                                     {% set searchMetasEN = searchMetasEN + ' / narrower term: ' ~ metasTermNarrower %}
                                     {% set searchMetasDE = searchMetasDE + ' / Unterbegriff: ' ~ metasTermNarrower %}
-                                    <!--{% for termNarrower in result['searchMeta']['termNarrower'] %}
+                                <!--{% for termNarrower in result['searchMeta']['termNarrower'] %}
                                         <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
                                         <script type="text/javascript">
                                             highlight(document.getElementById('broaderTermsEN_{{ currentIndex }}'), '{{ termNarrower }}')
                                             highlight(document.getElementById('broaderTermsDE_{{ currentIndex }}'), '{{ termNarrower }}')
-                                        </script>-->
-                                    {% endfor %}
+                                        </script>
+                                    {% endfor %}-->
                                 {% endif %}
                                 {% if result['searchMeta']['tagScopeNote']|count > 0 %}
                                     {% set metasScopeNote = result['searchMeta']['tagScopeNote']|join(", ") %}
