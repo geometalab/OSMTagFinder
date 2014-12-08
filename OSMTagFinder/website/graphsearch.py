@@ -7,6 +7,7 @@ Created on 12.10.2014
 from utilities import utils
 from utilities.spellcorrect import SpellCorrect
 from utilities.translator import Translator
+from utilities.configloader import ConfigLoader
 
 from collections import OrderedDict
 from whoosh.qparser import QueryParser
@@ -17,7 +18,7 @@ import re
 
 class GraphSearch:
 
-    threshold = 1
+    threshold = ConfigLoader().getWebsiteInt('THRESHOLD')
     ix = None
 
     def __init__(self):
