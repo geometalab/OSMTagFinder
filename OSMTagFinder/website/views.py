@@ -65,6 +65,16 @@ def setLocale(lang=None):
     else:
         session['language'] = lang
 
+def addLiteralToLangDict(retDict, literalList):
+    for literal in literalList:
+        if not hasattr(literal, 'language'): continue # is not Literal in that case
+        if literal.language == 'en' or literal.language == 'de':
+            listTerms = retDict[str(literal.language)]
+            listTerms.append(utils.encode(literal))
+            retDict[str(literal.language)] = utils.uniquifyList(listTerms)
+    return retDict
+
+
 def searchCall(query, lang=None):
     graphSearch = GraphSearch()
     if websiteRdfGraph is None or query is None or len(query) == 0:
@@ -76,7 +86,6 @@ def searchCall(query, lang=None):
     rawResults = graphSearch.fullSearch(query, lang)
 
     return TagResults(websiteRdfGraph, rawResults)
-
 
 @app.route('/favicon.ico', methods = ['GET'])
 def favicon():
@@ -145,18 +154,18 @@ def apiSearch():
 @app.route('/suggest', methods = ['GET'])
 def suggest():
     spellCorrect = SpellCorrect()
-    word = request.args.get('q','')
+    query = request.args.get('q','')
 
     suggestList = []
     lang = getLocale()
 
     if lang == 'en':
-        suggestList = spellCorrect.listSuggestionsEN(word)
+        suggestList = spellCorrect.listSuggestionsEN(query)
     elif lang == 'de':
-        suggestList = spellCorrect.listSuggestionsDE(word)
+        suggestList = spellCorrect.listSuggestionsDE(query)
 
-    if len(suggestList) == 0:
-        suggestList = spellCorrect.listSuggestions(word)
+    #if len(suggestList) == 0:
+    #    suggestList = spellCorrect.listSuggestions(word)
 
     return Response(json.dumps(suggestList), mimetype='application/json')
 
@@ -165,15 +174,25 @@ def suggest():
 @support_jsonp
 def apiSuggest():
     spellCorrect = SpellCorrect()
-    word = request.args.get('q','')
+    query = request.args.get('q','')
     lang = request.args.get('lang','')
+    prettyPrint = request.args.get('prettyprint', '')
+
+    suggestList = []
 
     if lang == 'en':
-        return Response(json.dumps(spellCorrect.listSuggestionsEN(word)), mimetype='application/json')
+        suggestList = spellCorrect.listSuggestionsEN(query)
     elif lang == 'de':
-        return Response(json.dumps(spellCorrect.listSuggestionsDE(word)), mimetype='application/json')
+        suggestList = spellCorrect.listSuggestionsDE(query)
     else:
-        return Response(json.dumps(spellCorrect.listSuggestions(word)), mimetype='application/json')
+        suggestList = spellCorrect.listSuggestions(query)
+
+    if prettyPrint is not None and prettyPrint.lower() == 'true':
+        jsonDump = json.dumps(suggestList, indent=4, sort_keys=True)
+    else:
+        jsonDump = json.dumps(suggestList)
+
+    return Response(jsonDump,  mimetype='application/json')
 
 @app.route('/api/tag', methods = ['GET'])
 @cross_origin()
@@ -189,6 +208,7 @@ def apiTag():
     else:
         prefLabel = key
     subject = websiteRdfGraph.getSubByPrefLabel(prefLabel)
+    # subject will only be tag subject and not term subject, because of missing language
     if subject is None:
         return jsonify({})
 
@@ -199,11 +219,56 @@ def apiTag():
 
     prettyPrint = request.args.get('prettyprint', '')
     if prettyPrint is not None and prettyPrint.lower() == 'true':
-        #return jsonify(results=searchResults.getResults())
         jsonDump = json.dumps(results.getResults()[0], indent=4, sort_keys=True)
     else:
         jsonDump = json.dumps(results.getResults()[0])
+
     return Response(jsonDump,  mimetype='application/json')
+
+@app.route('/api/terms', methods = ['GET'])
+@cross_origin()
+@support_jsonp
+def apiTerms():
+    term = request.args.get('term','')
+    prettyPrint = request.args.get('prettyprint', '')
+
+    listRelatedMatches = []
+
+    if websiteRdfGraph is None or term is None or len(term) == 0:
+        return jsonify({})
+
+    # subject will only be term subject and not tag subject, because of language
+    listRelatedMatches.extend( websiteRdfGraph.getSubByPrefLabelLang(term, 'en') )
+    listRelatedMatches.extend( websiteRdfGraph.getSubByPrefLabelLang(term, 'de') )
+    listRelatedMatches.extend( websiteRdfGraph.getSubByAltLabelLang(term, 'en') )
+    listRelatedMatches.extend( websiteRdfGraph.getSubByAltLabelLang(term, 'de') )
+    listRelatedMatches.extend( websiteRdfGraph.getSubByBroaderLang(term, 'en') )
+    listRelatedMatches.extend( websiteRdfGraph.getSubByBroaderLang(term, 'de') )
+    listRelatedMatches.extend( websiteRdfGraph.getSubByNarrowerLang(term, 'en') )
+    listRelatedMatches.extend( websiteRdfGraph.getSubByNarrowerLang(term, 'de') )
+
+    termRelated  = { 'en' : [], 'de' : [] }
+    termBroader  = { 'en' : [], 'de' : [] }
+    termNarrower = { 'en' : [], 'de' : [] }
+
+    for relSubject in listRelatedMatches:
+        termRelated = addLiteralToLangDict(termRelated, utils.genToList(websiteRdfGraph.getPrefLabel(relSubject)))
+        termRelated = addLiteralToLangDict(termRelated, utils.genToList(websiteRdfGraph.getAltLabel(relSubject)))
+        termBroader = addLiteralToLangDict(termBroader, utils.genToList(websiteRdfGraph.getBroader(relSubject)))
+        termNarrower = addLiteralToLangDict(termNarrower, utils.genToList(websiteRdfGraph.getNarrower(relSubject)))
+
+    retDict = {}
+    retDict['termRelated'] = termRelated
+    retDict['termBroader'] = termBroader
+    retDict['termNarrower'] = termNarrower
+
+    if prettyPrint is not None and prettyPrint.lower() == 'true':
+        jsonDump = json.dumps(retDict, indent=4, sort_keys=True)
+    else:
+        jsonDump = json.dumps(retDict)
+
+    return Response(jsonDump,  mimetype='application/json')
+
 
 
 

@@ -18,8 +18,8 @@ from utilities.configloader import ConfigLoader
 
 #import logging
 
-from skosserializer import SKOSSerializer
-from thesaurus import skosserializer
+#from skosserializer import SKOSSerializer
+#from thesaurus import skosserializer
 
 class RDFGraph:
     encoding = 'utf-8'
@@ -205,6 +205,26 @@ class RDFGraph:
     def getSubByPrefLabel(self, obj):
         generatorList = self.graph.subjects(predicate=SKOS.prefLabel, object=Literal(obj))
         return utils.genGetFirstItem(generatorList)
+
+    def getSubByAltLabel(self, obj):
+        generatorList = self.graph.subjects(predicate=SKOS.altLabel, object=Literal(obj))
+        return utils.genToList(generatorList)
+
+    def getSubByPrefLabelLang(self, obj, language):
+        generatorList = self.graph.subjects(predicate=SKOS.prefLabel, object=Literal(obj, lang=language))
+        return utils.genToList(generatorList)
+
+    def getSubByAltLabelLang(self, obj, language):
+        generatorList = self.graph.subjects(predicate=SKOS.altLabel, object=Literal(obj, lang=language))
+        return utils.genToList(generatorList)
+
+    def getSubByBroaderLang(self, obj, language):
+        generatorList = self.graph.subjects(predicate=SKOS.broader, object=Literal(obj, lang=language))
+        return utils.genToList(generatorList)
+
+    def getSubByNarrowerLang(self, obj, language):
+        generatorList = self.graph.subjects(predicate=SKOS.narrower, object=Literal(obj, lang=language))
+        return utils.genToList(generatorList)
 
     def getInScheme(self, subject):
         generatorList = self.graph.objects(URIRef(subject), SKOS.inScheme)

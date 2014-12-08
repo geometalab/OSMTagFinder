@@ -136,13 +136,13 @@
                             {% set no_element_de = '-' %}
 
                             <!-- related term logic -->
-                            {%- if result['relatedTerm']['en']|count > 0 -%}
-                                {% set relTermList_en = result['relatedTerm']['en']|join(", ") %}
+                            {%- if result['termRelated']['en']|count > 0 -%}
+                                {% set relTermList_en = result['termRelated']['en']|join(", ") %}
                             {%- else -%}
                                 {% set relTermList_en = no_element_en %}
                             {%- endif -%}
-                            {%- if result['relatedTerm']['de']|count > 0 -%}
-                                {% set relTermList_de = result['relatedTerm']['de']|join(", ") %}
+                            {%- if result['termRelated']['de']|count > 0 -%}
+                                {% set relTermList_de = result['termRelated']['de']|join(", ") %}
                             {%- else -%}
                                 {% set relTermList_de = no_element_de %}
                             {%- endif -%}

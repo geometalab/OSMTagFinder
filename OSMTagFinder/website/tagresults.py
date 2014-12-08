@@ -108,24 +108,18 @@ class TagResults:
             if rdfGraph.isInTermScheme(relMatchSubject):
                 termAltLabelGen = rdfGraph.getAltLabel(relMatchSubject)
                 for termAltLabel in termAltLabelGen:
-                    if termAltLabel.language == 'en':
-                        listTerms = relatedTerms['en']
+                    if not hasattr(termAltLabel, 'language'): continue # is not Literal in that case
+                    if termAltLabel.language == 'en' or termAltLabel.language == 'de':
+                        listTerms = relatedTerms[str(termAltLabel.language)]
                         listTerms.append(utils.encode(termAltLabel))
-                        relatedTerms['en'] = listTerms
-                    elif termAltLabel.language == 'de':
-                        listTerms = relatedTerms['de']
-                        listTerms.append(utils.encode(termAltLabel))
-                        relatedTerms['de'] = listTerms
+                        relatedTerms[str(termAltLabel.language)] = listTerms
                 termPrefLabelGen = rdfGraph.getPrefLabel(relMatchSubject)
                 for termPrefLabel in termPrefLabelGen:
-                    if termPrefLabel.language == 'en':
-                        listTerms = relatedTerms['en']
+                    if not hasattr(termPrefLabel, 'language'): continue # is not Literal in that case
+                    if termPrefLabel.language == 'en' or termPrefLabel.language == 'de':
+                        listTerms = relatedTerms[str(termPrefLabel.language)]
                         listTerms.insert(0, termPrefLabel)
-                        relatedTerms['en'] = listTerms
-                    elif termPrefLabel.language == 'de':
-                        listTerms = relatedTerms['de']
-                        listTerms.insert(0, termPrefLabel)
-                        relatedTerms['de'] = listTerms
+                        relatedTerms[str(termPrefLabel.language)] = listTerms
         return relatedTerms
 
 
@@ -178,7 +172,7 @@ class TagResults:
 
             tag['countAll'] = int(tag['node']['count']) + int(tag['way']['count']) + int(tag['relation']['count']) + int(tag['area']['count'])
 
-            tag['relatedTerm'] = self.buildRelTermsDictList( rdfGraph, utils.genToList(relatedMatchGen) )
+            tag['termRelated'] = self.buildRelTermsDictList( rdfGraph, utils.genToList(relatedMatchGen) )
 
             self.results.append(tag)
 

@@ -25,7 +25,7 @@ def runFlaskApp():
     tagFinderHost = cl.getWebsiteString('HOST')
     tagFinderPort = int(os.environ.get("PORT", cl.getWebsiteInt('PORT')))
     loadRdfGraph()
-    app.run(debug=True, host=tagFinderHost, port=tagFinderPort, threaded=True) # TODO debug=False, # Alternately app.run(..., processes=3)
+    app.run(debug=True, host=tagFinderHost, port=tagFinderPort, threaded=True) # debug=False/True, alternately app.run(..., processes=3)
 
 
 if __name__ == '__main__':

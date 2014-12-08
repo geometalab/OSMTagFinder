@@ -26,7 +26,13 @@ class RelatedTerm:
         self.termScheme = self.rdfGraph.addConceptScheme(self.termSchemeName, self.termSchemeTitle, self.creator) # doesn't matter if called a lot
 
     def createTerm(self, keyTagConcept, prefLabelEN, prefLabelDE):
-        termConcept = self.rdfGraph.addConcept(self.termSchemeName + '/' + prefLabelEN.decode("utf-8"))
+        label = prefLabelEN.decode("utf-8")
+        if self.rdfGraph.isInKeyScheme(keyTagConcept):
+            label = keyTagConcept.split('Key:')[1]
+        else:
+            label = keyTagConcept.split('Tag:')[1]
+        label = (label.replace('=','_')).decode("utf-8")
+        termConcept = self.rdfGraph.addConcept(self.termSchemeName + '/' + label)
         self.rdfGraph.addInScheme(termConcept, self.termSchemeName)
         self.rdfGraph.addPrefLabel(termConcept, prefLabelEN, language='en')
         self.rdfGraph.addPrefLabel(termConcept, prefLabelDE, language='de')
