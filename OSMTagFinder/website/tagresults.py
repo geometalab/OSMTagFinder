@@ -145,7 +145,7 @@ class TagResults:
 
             relatedMatchGen = rdfGraph.getRelatedMatch(subject)
 
-            default = { 'count' : '0', 'use' : 'False' }
+            default = { 'count' : '0', 'use' : False }
 
             tag['subject'] = utils.encode(subject)
 

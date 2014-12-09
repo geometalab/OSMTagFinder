@@ -51,10 +51,6 @@
 
 }
 
-#jumbotron_search {
-    display: none;
-}
-
 #page_content {
     margin-left: auto;
     margin-right: auto;
@@ -63,6 +59,10 @@
     height: auto !important;
     height: 100%;
     min-height: 480px;
+}
+
+#jumbotron_search {
+    display: none;
 }
 
 #main_search_ingroup_en, #main_search_ingroup_de {

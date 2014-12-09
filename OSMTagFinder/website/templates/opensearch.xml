@@ -4,11 +4,11 @@
     <Description>Find OpenStreetMap tags</Description>
     <Tags>OpenStreetMap OSM TagFinder Search Tag Key Value</Tags>
     <Contact>sgwerder@hsr.ch</Contact>
-    <Url type="application/x-suggestions+json" rel="suggestions" template="http://taginder.herokuapp.com/api/suggest?q={searchTerms}"/>
-    <Url type="text/html" method="get" template="http://taginder.herokuapp.com/search?q={searchTerms}"/>
-	<Url type="application/json" method="get" template="http://taginder.herokuapp.com/api/search?q={searchTerms}"/>
-    <Url type="application/opensearchdescription+xml" rel="self" template="http://taginder.herokuapp.com/search/opensearch.xml"/>
-    <Image height="16" width="16" type="image/x-icon">http://taginder.herokuapp.com/favicon.ico</Image>
+    <Url type="application/x-suggestions+json" rel="suggestions" template="http://tagfinder.herokuapp.com/ossuggest?query={searchTerms}"/>
+    <Url type="text/html" method="get" template="http://tagfinder.herokuapp.com/search?query={searchTerms}"/>
+	<Url type="application/json" method="get" template="http://tagfinder.herokuapp.com/api/search?query={searchTerms}"/>
+    <Url type="application/opensearchdescription+xml" rel="self" template="http://tagfinder.herokuapp.com/opensearch.xml"/>
+    <Image height="16" width="16" type="image/vnd.microsoft.icon">http://tagfinder.herokuapp.com/favicon.ico</Image>
     <OutputEncoding>UTF-8</OutputEncoding>
     <InputEncoding>UTF-8</InputEncoding>
     <SyndicationRight>open</SyndicationRight>

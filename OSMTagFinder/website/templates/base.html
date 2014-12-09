@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 {% extends "bootstrap/base.html" %}
+{% set navigation_bar = [
+    ( '/', 'search', 'TagFinder'),
+    ( '/api', 'api', 'API'),
+    ( '/about', 'about', 'About')
+] -%}
+{% set active_page = active_page|default('search') -%}
 {% block head %}
     <title>OSM TagFinder{% block title %}{% endblock %}</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico') }}">
@@ -9,7 +15,7 @@
     <link id="navbarstyle" href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
     {% set url = "static/css/lang_" + lang + ".css" %}
     <link id="langstyle" href="{{ url }}" rel="stylesheet">
-    <link rel="search" type="application/opensearchdescription+xml" href="/search/opensearch.xml" title="OpenStreetMap TagFinder" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="OSM TagFinder" />
 {% endblock %}
 
 <!--{% block html_attribs %}lang="de"{% endblock %}-->
@@ -17,7 +23,7 @@
 {% block metas %}
     {{super()}} <!-- also loads bootstrap and jQuery -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="OpenStreetMap TagFinder">
+    <meta name="description" content="OSM TagFinder">
     <meta name="keywords" content="OpenStreetMap, OSM, TagFinder, Search, Tag, Key, Value">
     <meta name="author" content="Simon Gwerder">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,11 +42,11 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
-            searchfade({{ results|count }}, '{{ q }}');
+            searchfade({{ results|count }}, '{{ query }}');
             $.getScript( "{{ url_for('static', filename='js/typeahead-noselect.js') }}"); /* loads and executes selection fix */
-            spellcorrect('#mainsearch_de', '{{ q }}');
-            spellcorrect('#mainsearch_en', '{{ q }}');
-            spellcorrect('#navbarsearch', '{{ q }}');
+            spellcorrect('#mainsearch_de', '{{ query }}');
+            spellcorrect('#mainsearch_en', '{{ query }}');
+            spellcorrect('#navbarsearch', '{{ query }}');
 
         });
     </script>
@@ -61,15 +67,19 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand">
+                            <a class="navbar-brand" href="/">
                                  <img width="35" style="max-width:100px; margin-top: -6px;" src="{{ url_for('static', filename='img/logo_tf_128.png') }}">
                             </a>
                         </div>
                         <div class="collapse navbar-collapse" id="top-navbar-collapse"><!-- grouping for better mobile display -->
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="{{ url_for('search') }}">TagFinder</a></li>
-                                <li><a href="#">API</a></li>
-                                <li><a lang="en" href="#">About</a></li>
+                                {% for href, id, caption in navigation_bar %}
+                                    {% if id == active_page %}
+                                        <li class="active"><a href="{{ href|e }}">{{ caption|e }}</a></li>
+                                    {% else %}
+                                        <li><a href="{{ href|e }}">{{ caption|e }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right" lang="en"> <!-- english dropdown -->
@@ -103,7 +113,7 @@
                             </ul>
                             <form class="navbar-form navbar-left" role="search" action="/search" method="get"> <!-- navbar search -->
                                 <div id="navbarsearch-ingroup" class="input-group input-group-sm">
-                                    <input id="navbarsearch" type="search" value="{{ q }}" name="q" class="form-control" autocomplete="off">
+                                    <input id="navbarsearch" type="search" value="{{ query }}" name="query" class="form-control" autocomplete="off">
                                     <span class="input-group-btn">
                                         <button id="btn_navbar" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                     </span>

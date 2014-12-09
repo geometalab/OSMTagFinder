@@ -29,23 +29,20 @@ except ImportError:
     os.sys.path.insert(0, parentdir)
     from flask.ext.cors import cross_origin
 
-websiteRdfGraph = None # global var is assigned in loadRdfGraph()! Because there's no way to restart a running 'app' in FLASK!!!
-dataDate = datetime.date.today().strftime("%d.%m.%y") # will be assigned aswell
+websiteRdfGraph = None # global var is assigned in setRdfGraph()! Because there's no way to restart a running 'app' in FLASK!!!
+websiteDataDate = datetime.date.today().strftime("%d.%m.%y") # will be assigned aswell
 
-def loadRdfGraph():
-    cl = ConfigLoader()
-    outputName = cl.getThesaurusString('OUTPUT_NAME')
-    outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')
+def setRdfGraph(rdfGraph, dataDate):
     global websiteRdfGraph # blowing your mind, thanks FLASK for beeing so global :(
-    websiteRdfGraph = RDFGraph(utils.outputFile(utils.dataDir(), outputName, outputEnding, useDateEnding=False))
-    global dataDate
-    dataDate = cl.getWebsiteString('DATA_DATE')
+    websiteRdfGraph = rdfGraph
+    global websiteDataDate
+    websiteDataDate = dataDate
 
 def createApp():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = '#T0P#SECRET#'
     Bootstrap(app)
-    loadRdfGraph()
+    #setRdfGraph()
     return app
 
 app = createApp()
@@ -95,7 +92,7 @@ def favicon():
 def tagfindergraph():
     return send_from_directory(utils.dataDir(), 'tagfinder_thesaurus.rdf', mimetype='application/rdf+xml')
 
-@app.route('/search/opensearch.xml', methods = ['GET'])
+@app.route('/opensearch.xml', methods = ['GET'])
 def opensearch():
     return send_from_directory(utils.templatesDir(), 'opensearch.xml', mimetype='application/opensearchdescription+xml')
 
@@ -103,7 +100,7 @@ def opensearch():
 @app.route('/', methods = ['GET'])
 @app.route('/index', methods = ['GET'])
 def index():
-    return render_template('search.html', lang=getLocale(), dataDate=dataDate)
+    return render_template('search.html', lang=getLocale(), dataDate=websiteDataDate)
 
 @app.route('/lang', methods = ['POST'])
 def changeLanguage():
@@ -120,20 +117,28 @@ def pageNotFound(e):
 
 @app.route('/search', methods = ['GET'])
 def search():
-    q = request.args.get('q', '')
-    searchResults = searchCall(q)
+    query = request.args.get('query', '')
+    searchResults = searchCall(query)
     if searchResults is None:
         return redirect('/')
 
-    return render_template('search.html', lang=getLocale(), q=q, results=searchResults.getResults())
+    return render_template('search.html', lang=getLocale(), query=query, results=searchResults.getResults())
+
+@app.route('/api', methods = ['GET'])
+def api():
+    return render_template('api.html', lang=getLocale())
+
+@app.route('/about', methods = ['GET'])
+def about():
+    return render_template('about.html', lang=getLocale(), dataDate=websiteDataDate)
 
 @app.route('/api/search', methods = ['GET'])
 @cross_origin()
 @support_jsonp
 def apiSearch():
-    query = request.args.get('q', '')
+    query = request.args.get('query', '')
     lang = request.args.get('lang','')
-    prettyPrint = request.args.get('prettyprint', '')
+    prettyPrint = request.args.get('format', '')
 
     if lang is None:
         lang = 'en'
@@ -144,9 +149,9 @@ def apiSearch():
 
     jsonDump = None
 
-    if prettyPrint is not None and prettyPrint.lower() == 'true':
+    if prettyPrint is not None and prettyPrint.lower() == 'json_pretty':
         #return jsonify(results=searchResults.getResults())
-        jsonDump = json.dumps(searchResults.getResults(), indent=4, sort_keys=True)
+        jsonDump = json.dumps(searchResults.getResults(), indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(searchResults.getResults())
     return Response(jsonDump,  mimetype='application/json')
@@ -154,7 +159,7 @@ def apiSearch():
 @app.route('/suggest', methods = ['GET'])
 def suggest():
     spellCorrect = SpellCorrect()
-    query = request.args.get('q','')
+    query = request.args.get('query','')
 
     suggestList = []
     lang = getLocale()
@@ -174,25 +179,38 @@ def suggest():
 @support_jsonp
 def apiSuggest():
     spellCorrect = SpellCorrect()
-    query = request.args.get('q','')
+    query = request.args.get('query','')
     lang = request.args.get('lang','')
-    prettyPrint = request.args.get('prettyprint', '')
-
+    prettyPrint = request.args.get('format', '')
     suggestList = []
-
     if lang == 'en':
         suggestList = spellCorrect.listSuggestionsEN(query)
     elif lang == 'de':
         suggestList = spellCorrect.listSuggestionsDE(query)
     else:
         suggestList = spellCorrect.listSuggestions(query)
-
-    if prettyPrint is not None and prettyPrint.lower() == 'true':
-        jsonDump = json.dumps(suggestList, indent=4, sort_keys=True)
+    if prettyPrint is not None and prettyPrint.lower() == 'json_pretty':
+        jsonDump = json.dumps(suggestList, indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(suggestList)
-
     return Response(jsonDump,  mimetype='application/json')
+
+@app.route('/ossuggest', methods = ['GET'])
+@cross_origin()
+@support_jsonp
+def osSuggest():
+    spellCorrect = SpellCorrect()
+    query = request.args.get('query','')
+    suggestList = []
+    lang = getLocale()
+    if lang == 'en':
+        suggestList = spellCorrect.listSuggestionsEN(query)
+    elif lang == 'de':
+        suggestList = spellCorrect.listSuggestionsDE(query)
+    opensearchSug = [query, suggestList, [], []]
+    jsonDump = json.dumps(opensearchSug)
+    return Response(jsonDump,  mimetype='application/json')
+
 
 @app.route('/api/tag', methods = ['GET'])
 @cross_origin()
@@ -217,12 +235,11 @@ def apiTag():
     if len(results.getResults()) < 1:
         return jsonify({})
 
-    prettyPrint = request.args.get('prettyprint', '')
-    if prettyPrint is not None and prettyPrint.lower() == 'true':
-        jsonDump = json.dumps(results.getResults()[0], indent=4, sort_keys=True)
+    prettyPrint = request.args.get('format', '')
+    if prettyPrint is not None and prettyPrint.lower() == 'json_pretty':
+        jsonDump = json.dumps(results.getResults()[0], indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(results.getResults()[0])
-
     return Response(jsonDump,  mimetype='application/json')
 
 @app.route('/api/terms', methods = ['GET'])
@@ -230,7 +247,7 @@ def apiTag():
 @support_jsonp
 def apiTerms():
     term = request.args.get('term','')
-    prettyPrint = request.args.get('prettyprint', '')
+    prettyPrint = request.args.get('format', '')
 
     listRelatedMatches = []
 
@@ -262,8 +279,8 @@ def apiTerms():
     retDict['termBroader'] = termBroader
     retDict['termNarrower'] = termNarrower
 
-    if prettyPrint is not None and prettyPrint.lower() == 'true':
-        jsonDump = json.dumps(retDict, indent=4, sort_keys=True)
+    if prettyPrint is not None and prettyPrint.lower() == 'json_pretty':
+        jsonDump = json.dumps(retDict, indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(retDict)
 

@@ -14778,7 +14778,7 @@
     <skos:narrower xml:lang="en">planetarium</skos:narrower>
     <skos:narrower xml:lang="de">restaurant</skos:narrower>
     <skos:narrower xml:lang="en">scrutiny</skos:narrower>
-    <skos:narrower xml:lang="de">Kneippe</skos:narrower>
+    <skos:narrower xml:lang="de">Kneipe</skos:narrower>
     <skos:narrower xml:lang="en">restauruant</skos:narrower>
     <skos:narrower xml:lang="en">infirmary</skos:narrower>
     <skos:narrower xml:lang="de">car parking</skos:narrower>
@@ -27610,7 +27610,7 @@
     <skos:broader xml:lang="en">useful</skos:broader>
     <skos:broader xml:lang="de">öffentliche Gebäude</skos:broader>
     <skos:altLabel xml:lang="en">bar</skos:altLabel>
-    <skos:altLabel xml:lang="de">Kneippe</skos:altLabel>
+    <skos:altLabel xml:lang="de">Kneipe</skos:altLabel>
     <skos:broader xml:lang="en">agreeableness</skos:broader>
   </skos:Concept>
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/RelatedTerms/train_station">

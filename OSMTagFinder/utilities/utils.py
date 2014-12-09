@@ -203,6 +203,10 @@ def genJsonToDict(generator, default=None):
             value = jsonData[key]
             if isNumber(value):
                 retDict[key] = int(value)
+            elif value == 'False':
+                retDict[key] = False
+            elif value == 'True':
+                retDict[key] = True
             else:
                 retDict[key] = value
         return retDict

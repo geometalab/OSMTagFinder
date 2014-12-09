@@ -16,7 +16,7 @@ function spellcorrect(idElement, query) {
                     $.ajax({
                         url: '/suggest',
                         data: {
-                            q: query
+                            query: query
                         },
                         dataType: 'json'
                     }).success(function(data) {

@@ -15,16 +15,24 @@ from utilities import crython
 
 from utilities import utils
 from utilities.configloader import ConfigLoader
-from website.views import app, loadRdfGraph
+from website.views import app, setRdfGraph
 from website.indexer import Indexer
 from thesaurus.rdfgraph import RDFGraph
 from thesaurus.updater import UpdateThesaurus
 
-def runFlaskApp():
+def runFlaskApp(rdfGraph=None, dataDate=None):
     cl = ConfigLoader()
+
+    if rdfGraph is None or dataDate is None:
+        outputName = cl.getThesaurusString('OUTPUT_NAME')
+        outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')
+        rdfGraph = RDFGraph(utils.outputFile(utils.dataDir(), outputName, outputEnding, useDateEnding=False))
+        dataDate = cl.getWebsiteString('DATA_DATE')
+
+    setRdfGraph(rdfGraph, dataDate)
+
     tagFinderHost = cl.getWebsiteString('HOST')
     tagFinderPort = int(os.environ.get("PORT", cl.getWebsiteInt('PORT')))
-    loadRdfGraph()
     app.run(debug=True, host=tagFinderHost, port=tagFinderPort, threaded=True) # debug=False/True, alternately app.run(..., processes=3)
 
 
@@ -40,10 +48,10 @@ if __name__ == '__main__':
         rdfGraph = RDFGraph(utils.outputFile(utils.dataDir(), outputName, outputEnding, useDateEnding=False))
         UpdateThesaurus(rdfGraph) # will update the rdfGraph
         Indexer(rdfGraph) # will index it anew
-        today = datetime.date.today().strftime("%d.%m.%y")
-        cl.setWebsiteString('DATA_DATE', str(today))
+        today = str(datetime.date.today().strftime("%d.%m.%y"))
+        cl.setWebsiteString('DATA_DATE', today)
         cl.write() # storing the date change in config file
-        runFlaskApp()
+        runFlaskApp(rdfGraph, today)
 
     #sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
     #logging.basicConfig()

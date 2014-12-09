@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+{% set active_page = "search" %}
 {% block head %}
     {{super()}}
     <link href="{{ url_for('static', filename='css/search.css') }}" rel="stylesheet">
@@ -24,7 +25,7 @@
         <div id="jumbotron_search" class="jumbotron">
             <form class="main_search_form" action="/search" method="get" name="search_form"> <!-- searchbar en -->
                 <div id="main_search_ingroup_en" class="input-group input-group-lg" lang="en">
-                    <input type="search" value="{{ q }}" name="q" class="form-control" id="mainsearch_en" autocomplete="off" data-provide="typeahead" placeholder="Search Tags...">
+                    <input type="search" value="{{ query }}" name="query" class="form-control" id="mainsearch_en" autocomplete="off" data-provide="typeahead" placeholder="Search Tags...">
                     <span class="input-group-btn">
                         <button id="btn_main_search_en" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </span>
@@ -33,7 +34,7 @@
 
             <form class="main_search_form" action="/search" method="get" name="search_form"> <!-- searchbar de -->
                 <div id="main_search_ingroup_de" class="input-group input-group-lg" lang="de">
-                    <input type="search" value="{{ q }}" name="q" class="form-control" id="mainsearch_de" autocomplete="off" data-provide="typeahead" placeholder="Nach Tags suchen...">
+                    <input type="search" value="{{ query }}" name="query" class="form-control" id="mainsearch_de" autocomplete="off" data-provide="typeahead" placeholder="Nach Tags suchen...">
                     <span class="input-group-btn">
                         <button id="btn_main_search_de" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </span>
@@ -176,12 +177,6 @@
                                 {%- endif -%}
                             {%- endmacro -%}
 
-                            <!-- related terms -->
-                            <p class="first_column" lang="en">Related terms:</p>
-                            <p class="first_column" lang="de">Verwandte Begriffe:</p>
-                            <p class="second_column" id="relTermsEN_{{ currentIndex }}" lang="en">{{ relTermList_en }}</p>
-                            <p class="second_column" id="relTermsDE_{{ currentIndex }}" lang="de">{{ relTermList_de }}</p>
-
                             <!-- description -->
                             <p class="first_column" lang="en">Description:</p>
                             <p class="first_column" lang="de">Beschreibung:</p>
@@ -202,6 +197,12 @@
                             <p class="first_column" lang="en">Weblinks in wiki:</p>
                             <p class="first_column" lang="de">Weblinks im Wiki:</p>
                             <p class="second_column" id="linked_{{ currentIndex }}">{{ listlinks(result['links'], no_element_en, no_element_de ) }}</p>
+
+                            <!-- related terms -->
+                            <p class="first_column" lang="en">Related terms:</p>
+                            <p class="first_column" lang="de">Verwandte Begriffe:</p>
+                            <p class="second_column" id="relTermsEN_{{ currentIndex }}" lang="en">{{ relTermList_en }}</p>
+                            <p class="second_column" id="relTermsDE_{{ currentIndex }}" lang="de">{{ relTermList_de }}</p>
 
                             <!-- searchmeta and highlighting -->
                             <!-- ~ converts to string in jinja2 and concatenates -->
@@ -301,10 +302,10 @@
                  </div>
             {% endfor %}
 
-        {% elif q %} <!-- None found or no search (if q is None) -->
+        {% elif query %} <!-- None found or no search (if query is None) -->
             <div class="none_found">
-                <h5 lang="en" class="none_found_header">Your search - <b>{{ q }}</b> - did not match any OpenStreetMap tags. </h5>
-                <h5 lang="de" class="none_found_header">Es wurden keine mit Ihrer Suchanfrage - <b>{{ q }}</b> - übereinstimmende OpenStreetMap Tags gefunden.</h5>
+                <h5 lang="en" class="none_found_header">Your search - <b>{{ query }}</b> - did not match any OpenStreetMap tags. </h5>
+                <h5 lang="de" class="none_found_header">Es wurden keine mit Ihrer Suchanfrage - <b>{{ query }}</b> - übereinstimmende OpenStreetMap Tags gefunden.</h5>
                 <h5 lang="en" class="suggestion_header">Suggestions:</h5>
                 <h5 lang="de" class="suggestion_header">Vorschläge:</h5>
                 <ul id="suggestion_list">
