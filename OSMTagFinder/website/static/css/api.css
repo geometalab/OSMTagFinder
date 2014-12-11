@@ -1,4 +1,4 @@
-#page_content {
+#page-content {
     margin-left: auto;
     margin-right: auto;
     max-width: 63%;
@@ -8,11 +8,44 @@
     min-height: 480px;
 }
 
-.api_container {
+.api-container {
     margin-top: 170px;
 }
 
-table.api_table {
+.api-title {
+    font-weight: bold;
+}
+
+a.api-anchor {
+    display: block;
+    position: relative;
+    top: -120px;
+    visibility: hidden;
+}
+
+.bottom-space {
+    padding-top: 360px;
+}
+
+.api-list > a:link {
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+ul {
+    margin-left: 0;
+    padding-left: 14px;
+}
+
+.api-list {
+    padding-left: 5px;
+}
+
+.api-headers {
+    padding-top: 20px;
+}
+
+table.api-table {
     border-collapse: separate; border-spacing: 5px;
     padding: 6px;
     background-color: rgb(223, 240, 216);
@@ -20,7 +53,7 @@ table.api_table {
     width: 100%;
 }
 
-table.api_table > tbody > tr > th {
+table.api-table > tbody > tr > th {
     padding: 6px;
     padding-left: 10px;
     text-align: left;
@@ -30,7 +63,7 @@ table.api_table > tbody > tr > th {
     line-height: 130%;
 }
 
-table.api_table > tbody > tr > td {
+table.api-table > tbody > tr > td {
     vertical-align: top;
     background-color: rgb(249, 252, 247);
     padding: 6px 10px;
@@ -38,10 +71,10 @@ table.api_table > tbody > tr > td {
     line-height: 130%;
 }
 
-table.apiresults {
+table.api-results {
 }
 
-table.apiresults td {
+table.api-results td {
     font-size: 80%;
     padding-top: 6px;
     padding-bottom: 6px;
@@ -49,8 +82,8 @@ table.apiresults td {
     line-height: 100%;
 }
 
-.param_var {
-    display: inline-block; width: 60px;
+.param-var {
+    display: inline-block; width: 70px;
 }
 
 

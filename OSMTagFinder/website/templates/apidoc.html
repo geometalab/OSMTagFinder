@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% set active_page = "api" %}
+{% block head %}
+    {{super()}}
+    <link href="{{ url_for('static', filename='css/api.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {{super()}}
+
+    {% block bgheader %}
+        {{super()}}
+    {% endblock %}
+
+    <div id="page-content">
+        <div class ="row">
+            <div class="col-lg-50 col-md-50">
+                <div class="api-container">
+
+                    <div class="api-info" lang="de">
+                        <h3 class="api-title" lang="de">API DOKUMENTATION</h3>
+                        <h5>OSM TagFinder hat ein API, dass die zugrunde liegenden Daten zugänglich macht. Ein Teil des APIs wird intern auch für das Web User Interface verwendet und kann auch von
+                        jedem benutzt werden, der die TagFinder Daten in seiner Webseite oder Applikation integrieren will. Der TagFinder Server hat jedoch nicht unbegrenzte Ressourcen: Bitte verwenden Sie
+                        das API verantwortungsvoll!<br/>
+                        Der OSM TagFinder basiert nicht auf einer relationalen Datenbank. Die gesamten Informationen sind als Semantic Web Graph aufgebaut und als <a href="http://www.w3.org/RDF/" target="_blank">RDF</a>/<a href="http://www.w3.org/XML/" target="_blank">XML</a>
+                        verfügbar: <a href="/tagfinder_thesaurus.rdf" target="_blank">tagfinder_thesaurus.rdf</a><br/>
+                        Alle Statistik Daten - wie Anzahl der einzelnen Tags - stammen von dem hervorragenden <a href="https://taginfo.openstreetmap.org/taginfo/apidoc" target="_blank">TagInfo.org Web Service</a> und sollten
+                        falls gewünscht von dort bezogen werden.</h5>
+
+                        <h3 class="api-headers">Allgemeine Infos</h3>
+                        <h5>Das TagFinder API ist ein RESTful HTTP API. Alle Anfragen fordern Informationen von TagFinder an und erfolgen über die HTTP GET Methode. Die API Resultate sind im JSON Format.<br/>
+                        Für eine einfachere Lesbarkeit is es möglich den Parameter 'format=json_pretty' anzuhängen.</h5>
+
+                        <h3 class="api-headers">CORS und JSONP</h3>
+                        <h5>Das TagFinder API unterstützt <a href="http://de.wikipedia.org/wiki/Cross-Origin_Resource_Sharing" target="_blank">Cross-Origin Resource Sharing (CORS)</a>, indem bei jedem API Resultat
+                        'Access-Control-Allow-Origin: * ' in den Header gesetzt wird.<br/>
+                        Desweiteren wird die ältere <a href="http://de.wikipedia.org/wiki/JavaScript_Object_Notation#JSONP" target="_blank">JSONP</a> Technik unterstüzt. Wenn als Parameter 'callback' angehängt wird,
+                        erfolgt die Rückgabe innerhalb der definierten Callback-Funktion.<br/>(Zum Beispiel: <a href="/api/suggest?query=garten&amp;callback=foo">/api/suggest?query=garten&amp;callback=foo</a>)
+                        </h5>
+                    </div>
+
+                    <div class="api-info" lang="en">
+                        <h3 class="api-title" lang="en">API DOCUMENTATION</h3>
+                        <h5>OSM TagFinder has an API, that lets you access the underlying data. A part of the API is used internally for the Web User Interface and can also be used by anybody
+                        who wants to integrate TagFinder data in their webpage or application. The server running the TagFinder API does not have unlimited resources: Please use the API responsibly!<br/>
+                        The OSM TagFinder isn't based on a relational database. All information is built as a Semantic Web Graph and stored as <a href="http://www.w3.org/RDF/" target="_blank">RDF</a>/<a href="http://www.w3.org/XML/" target="_blank">XML</a>.
+                        Available here: <a href="/tagfinder_thesaurus.rdf" target="_blank">tagfinder_thesaurus.rdf</a><br/>
+                        All statistics data - like the count of a tag - come from the great <a href="https://taginfo.openstreetmap.org/taginfo/apidoc" target="_blank">TagInfo.org Web Service</a>. If you wish to get statistical data, please use TagInfo.org instead.</h5>
+
+                        <h3 class="api-headers">Basics</h3>
+                        <h5>The TagFinder API is a RESTful HTTP API. All calls request information and use the HTTP GET method. All API result are in JSON format.<br/>
+                        For easy readability it's possible to add the parameter 'format=json_pretty'.</h5>
+
+                        <h3 class="api-headers">CORS and JSONP</h3>
+                        <h5>The TagFinder API supports <a href="http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing" target="_blank">Cross-Origin Resource Sharing (CORS)</a>, by setting the header
+                        'Access-Control-Allow-Origin: * ' for every API call result.<br/>
+                        It also supports the older <a href="http://en.wikipedia.org/wiki/JSONP" target="_blank">JSONP</a> technique. When the parameter 'callback' is added,
+                        the result will be packed inside the specified callback-function.<br/>(Example: <a href="/api/suggest?query=garten&amp;callback=foo">/api/suggest?query=garten&amp;callback=foo</a>)
+                        </h5>
+                    </div>
+
+                    <h3 class="api-headers">Web Services:</h3>
+                    <ul>
+                        <li class="api-list"><a href="#apidoc_search">/api/search</a></li>
+                        <li class="api-list"><a href="#apidoc_tag">/api/tag</a></li>
+                        <li class="api-list"><a href="#apidoc_terms">/api/terms</a></li>
+                        <li class="api-list"><a href="#apidoc_suggest">/api/suggest</a></li>
+                    </ul>
+
+
+                    <a class="api-anchor" name="apidoc_search"></a>
+                    <h3 class="api-headers">/api/search</h3>
+                    <!-- german api/search webservice description -->
+                    <table class="api-table" lang="de">
+                        <tr>
+                            <th>Pfad:</th>
+                            <td><tt>/api/search</tt></td>
+                        </tr>
+                        <tr>
+                            <th>Beschreibung:</th>
+                            <td>Sucheanfrage an TagFinder für OpenStreetMap Tags.</td>
+                        </tr>
+                        <tr>
+                            <th>Parameter:</th>
+                            <td>
+                                <span class="param-var"><tt>query</tt></span><span class="param-desc">- Der Suchbegriff vom Typ STRING. (erforderlich)</span><br/>
+                                <span class="param-var"><tt>lang</tt></span><span class="param-desc">- Gibt die Sprache des Suchbegriffs an. Wechselt nur die Reihenfolge, in der zuerst nachgeschlagen wird. Unterstützt: 'de' und 'en'. (optional, default: 'en')</span><br/>
+                                <span class="param-var"><tt>format</tt></span><span class="param-desc">- Bei Wert json_pretty wird die JSON Rückgabe eingerückt. (optional)</span><br/>
+                                <span class="param-var"><tt>callback</tt></span><span class="param-desc">- JSONP Callback Parameter. (optional)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Bemerkung:</th>
+                            <td>Wenn für den Suchbegriff keine Tags gefunden wurden, wird ein leeres ARRAY zurückgegeben. Mit Anführungszeichen um ein Wort kann die Rechtschreibkorrektur und der Übersetzer deaktiviert werden.</td>
+                        </tr>
+                        <tr>
+                            <th>Resultat:</th>
+                            <td>
+                                <table class="api-results">
+                                    <tr><td><tt>:</tt></td><td>ARRAY OF HASHES</td><td>Sortierte Liste mit den Resultaten der Suchanfrage.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>subject:</tt></td><td>STRING</td><td>Weblink zur OpenStreetMap Wiki-Seite des Tags.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>isKey:</tt></td><td>BOOL</td><td>true falls es sich um einen Schlüssel handelt, false wenn es ein Schlüssel=Wert Paar ist.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>isTag:</tt></td><td>BOOL</td><td>true falls es ein Schlüssel=Wert Paar ist, false wenn es sich um einen Schlüssel handelt.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>prefLabel:</tt></td><td>STRING</td><td>Bezeichnung des Tags, im Format:  Schlüssel oder Schlüssel=Wert</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>depiction:</tt></td><td>STRING</td><td>Weblink zu einem Bild, dass den Tag auszeichnet.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>termRelated:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>ARRAY OF STRING</td><td>Liste mit englischen, verwandten Begriffen.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>ARRAY OF STRING</td><td>Liste mit deutschen, verwandten Begriffen.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>scopeNote:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>STRING</td><td>Englische Kurzbeschreibung.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>STRING</td><td>Deutsche Kurzbeschreibung.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>countAll:</tt></td><td>INT</td><td>Anzahl Total.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>node:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Anzahl Punkte.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Soll der Tag Punkten zugeordnet werden?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>way:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Anzahl Linien.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Soll der Tag Linien zugeordnet werden?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>area:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Anzahl Flächen.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Soll der Tag Flächen zugeordnet werden?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>relation:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Anzahl Relationen.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Soll der Tag Relationen zugeordnet werden?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>implies:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Bezeichnung des implizierten Tags, im Format: Schlüssel=* oder Schlüssel=Wert.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink zur OpenStreetMap Wiki-Seite des implizierten Tags. Kann null sein.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>combines:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Bezeichnung des häufig kombinierten Tags, im Format: Schlüssel=* oder Schlüssel=Wert.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink zur OpenStreetMap Wiki-Seite des häufig kombinierten Tags. Kann null sein.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>links:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Bezeichnung des verlinkten Tags, im Format: Schlüssel=* oder Schlüssel=Wert.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink zur OpenStreetMap Wiki-Seite des verlinkten Tags. Kann null sein.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>searchMeta:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>score:</tt></td><td>INT</td><td>Sortierbarer Trefferscore, berechnet nach einer Okapi BM25f Variante.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>&lt;field&gt;:</tt></td><td>ARRAY OF STRINGS</td><td>Liste mit gefundenen Begriffen.&lt;field&gt; ist entweder 'tagPrefLabel', 'termPrefLabel', 'termAltLabel', 'termBroader', 'termNarrower' oder 'tagScopeNote'.</td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Beispiel:</th>
+                            <td><a rel="nofollow" href="/api/search?query=zoo&amp;format=json_pretty&amp;lang=de" target="_blank">/api/search?query=Zoo&amp;format=json_pretty&amp;lang=de</a></td>
+                        </tr>
+                        <tr>
+                            <th title="Das User Interface, bei dem das API verwendet wird.">UI Beispiel:</th>
+                            <td><a href="/search?query=zoo" target="_blank">/search?query=zoo</a></td>
+                        </tr>
+                    </table>
+
+                    <!-- english api/search webservice description -->
+                    <table class="api-table" lang="en">
+                        <tr>
+                            <th>Path:</th>
+                            <td><tt>/api/search</tt></td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Query TagFinder for OpenStreetMap tags.</td>
+                        </tr>
+                        <tr>
+                            <th>Parameters:</th>
+                            <td>
+                                <span class="param-var"><tt>query</tt></span><span class="param-desc">- Search query of type STRING. (required)</span><br/>
+                                <span class="param-var"><tt>lang</tt></span><span class="param-desc">- Defines language of the search term. Only changes lookup order. Currently supported: 'en' and 'de'. (optional, default: 'en')</span><br/>
+                                <span class="param-var"><tt>format</tt></span><span class="param-desc">- With value json_pretty the JSON output gets pretty-printed. (optional)</span><br/>
+                                <span class="param-var"><tt>callback</tt></span><span class="param-desc">- JSONP callback parameter. (optional)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Notes:</th>
+                            <td>If no Tags were found for the search query, an empty ARRAY is returned. Using quotation marks around terms turns off the spell correction and the translator.</td>
+                        </tr>
+                        <tr>
+                            <th>Result:</th>
+                            <td>
+                                <table class="api-results">
+                                    <tr><td><tt>:</tt></td><td>ARRAY OF HASHES</td><td>Sorted list containing the results of this query.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>subject:</tt></td><td>STRING</td><td>Weblink to the OpenStreetMap Wiki of this tag.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>isKey:</tt></td><td>BOOL</td><td>true if its a key, false if its a key=value pair.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>isTag:</tt></td><td>BOOL</td><td>true if its a key=value pair, false if its a key.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>prefLabel:</tt></td><td>STRING</td><td>Label of the tag: key or key=value</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>depiction:</tt></td><td>STRING</td><td>Weblink to the image denoting this tag.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>termRelated:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>ARRAY OF STRING</td><td>List of English related terms.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>ARRAY OF STRING</td><td>List of German related terms.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>scopeNote:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>STRING</td><td>Short description in English.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>STRING</td><td>Short description in German.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>countAll:</tt></td><td>INT</td><td>Total count.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>node:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Count of nodes.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Is node-use encouraged?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>way:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Count of ways.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Is way-use encouraged?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>area:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Count of areas.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Is area-use encouraged?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>relation:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Count of relations.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Is relation-use encouraged?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>implies:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Label of the implied tag, key=* or key=value.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink to the OpenStreetMap Wiki of this implied tag. Can be null.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>combines:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Label of the combined tag, key=* or key=value.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink to the OpenStreetMap Wiki of this combined tag. Can be null.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>links:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Label of the linked tag, key=* or key=value.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink to the OpenStreetMap Wiki of this linked tag. Can be null.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>searchMeta:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>score:</tt></td><td>INT</td><td>Sortable hit score, Okapi BM25f variant.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>&lt;field&gt;:</tt></td><td>ARRAY OF STRINGS</td><td>List of hit terms.&lt;field&gt; can be one of 'tagPrefLabel', 'termPrefLabel', 'termAltLabel', 'termBroader', 'termNarrower' or 'tagScopeNote'.</td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Example:</th>
+                            <td><a rel="nofollow" href="/api/search?query=zoo&amp;format=json_pretty&amp;lang=de" target="_blank">/api/search?query=Zoo&amp;format=json_pretty&amp;lang=de</a></td>
+                        </tr>
+                        <tr>
+                            <th title="User interface page where this API is used.">UI Example:</th>
+                            <td><a href="/search?query=zoo" target="_blank">/search?query=zoo</a></td>
+                        </tr>
+                    </table>
+
+                    <a class="api-anchor" name="apidoc_tag"></a>
+                    <h3 class="api-headers">/api/tag</h3>
+                    <!-- german api/tag webservice description -->
+                    <table class="api-table" lang="de">
+                        <tr>
+                            <th>Pfad:</th>
+                            <td><tt>/api/tag</tt></td>
+                        </tr>
+                        <tr>
+                            <th>Beschreibung:</th>
+                            <td>Erhalte Taginformationen für einen spezifischen Schlüssel oder Schlüssel=Wert Paare.</td>
+                        </tr>
+                        <tr>
+                            <th>Parameter:</th>
+                            <td>
+                                <span class="param-var"><tt>key</tt></span><span class="param-desc">- Der Schlüssel des Tags vom Typ STRING. (erforderlich)</span><br/>
+                                <span class="param-var"><tt>value</tt></span><span class="param-desc">- Der Wert des Tags vom Typ STRING. (optional)</span><br/>
+                                <span class="param-var"><tt>format</tt></span><span class="param-desc">- Bei Wert json_pretty wird die JSON Rückgabe eingerückt. (optional)</span><br/>
+                                <span class="param-var"><tt>callback</tt></span><span class="param-desc">- JSONP Callback Parameter. (optional)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Bemerkung:</th>
+                            <td>Es handelt sich hier um einen direkten Zugriff und keine Suchanfrage, d.h. die Gross- und Kleinschreibung muss beachtet werden. Falls der Tag nicht gefunden wurde, wird ein leerer HASH zurückgegeben. Die Rückgabe entspricht sonst der von <tt>/api/search</tt> ohne 'searchMeta'.</td>
+                        </tr>
+                        <tr>
+                            <th>Resultat:</th>
+                            <td>
+                                <table class="api-results">
+                                    <tr><td><tt>:</tt></td><td>HASH</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>subject:</tt></td><td>STRING</td><td>Weblink zur OpenStreetMap Wiki-Seite des Tags.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>isKey:</tt></td><td>BOOL</td><td>true falls es sich um einen Schlüssel handelt, false wenn es ein Schlüssel=Wert Paar ist.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>isTag:</tt></td><td>BOOL</td><td>true falls es ein Schlüssel=Wert Paar ist, false wenn es sich um einen Schlüssel handelt.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>prefLabel:</tt></td><td>STRING</td><td>Bezeichnung des Tags, im Format:  Schlüssel oder Schlüssel=Wert</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>depiction:</tt></td><td>STRING</td><td>Weblink zu einem Bild, dass den Tag auszeichnet.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>termRelated:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>ARRAY OF STRING</td><td>Liste mit englischen, verwandten Begriffen.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>ARRAY OF STRING</td><td>Liste mit deutschen, verwandten Begriffen.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>scopeNote:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>STRING</td><td>Englische Kurzbeschreibung.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>STRING</td><td>Deutsche Kurzbeschreibung.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>countAll:</tt></td><td>INT</td><td>Anzahl Total.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>node:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Anzahl Punkte.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Soll der Tag Punkten zugeordnet werden?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>way:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Anzahl Linien.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Soll der Tag Linien zugeordnet werden?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>area:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Anzahl Flächen.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Soll der Tag Flächen zugeordnet werden?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>relation:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Anzahl Relationen.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Soll der Tag Relationen zugeordnet werden?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>implies:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Bezeichnung des implizierten Tags, im Format: Schlüssel=* oder Schlüssel=Wert.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink zur OpenStreetMap Wiki-Seite des implizierten Tags. Kann null sein.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>combines:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Bezeichnung des häufig kombinierten Tags, im Format: Schlüssel=* oder Schlüssel=Wert.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink zur OpenStreetMap Wiki-Seite des häufig kombinierten Tags. Kann null sein.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>links:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Bezeichnung des verlinkten Tags, im Format: Schlüssel=* oder Schlüssel=Wert.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink zur OpenStreetMap Wiki-Seite des verlinkten Tags. Kann null sein.</td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Beispiel:</th>
+                            <td><a rel="nofollow" href="/api/tag?key=shop&amp;value=pet" target="_blank">/api/tag?key=shop&amp;value=pet</a></td>
+                        </tr>
+                        <tr>
+                            <th title="Dieses API wird nicht für das User Interface verwendet.">UI (kein Beispiel):</th>
+                            <td><a href="/search?query=shop%3Dpet" target="_blank">/search?query=shop%3Dpet</a></td>
+                        </tr>
+                    </table>
+
+
+                    <!-- english api/tag webservice description -->
+                    <table class="api-table" lang="en">
+                        <tr>
+                            <th>Path:</th>
+                            <td><tt>/api/tag</tt></td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Get tag information for one specific key or key=value pair.</td>
+                        </tr>
+                        <tr>
+                            <th>Parameters:</th>
+                            <td>
+                                <span class="param-var"><tt>key</tt></span><span class="param-desc">- The key of the tag of type STRING. (required)</span><br/>
+                                <span class="param-var"><tt>lang</tt></span><span class="param-desc">- The value of the tag of type STRING. (optional)</span><br/>
+                                <span class="param-var"><tt>format</tt></span><span class="param-desc">- With value json_pretty the JSON output gets pretty-printed. (optional)</span><br/>
+                                <span class="param-var"><tt>callback</tt></span><span class="param-desc">- JSONP callback parameter. (optional)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Notes:</th>
+                            <td>The webservice is case-sensitive: Its using direct access instead of querying it. If no tag is found an empty HASH is returned, otherwise the returned JSON is the same as <tt>/api/search</tt> without 'searchMeta'.</td>
+                        </tr>
+                        <tr>
+                            <th>Result:</th>
+                            <td>
+                                <table class="api-results">
+                                    <tr><td><tt>:</tt></td><td>HASH</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>subject:</tt></td><td>STRING</td><td>Weblink to the OpenStreetMap Wiki of this tag.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>isKey:</tt></td><td>BOOL</td><td>true if its a key, false if its a key-value pair.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>isTag:</tt></td><td>BOOL</td><td>true if its a key-value pair, false if its a key.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>prefLabel:</tt></td><td>STRING</td><td>Label of the tag: key or key=value</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>depiction:</tt></td><td>STRING</td><td>Weblink to the image denoting this tag.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>termRelated:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>ARRAY OF STRING</td><td>List of English related terms.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>ARRAY OF STRING</td><td>List of German related terms.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>scopeNote:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>STRING</td><td>Short description in English.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>STRING</td><td>Short description in German.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>countAll:</tt></td><td>INT</td><td>Total count.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>node:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Count of nodes.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Is node-use encouraged?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>way:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Count of ways.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Is way-use encouraged?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>area:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Count of areas.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Is area-use encouraged?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>relation:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>count:</tt></td><td>INT</td><td>Count of relations.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>use:</tt></td><td>BOOL</td><td>Is relation-use encouraged?</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>implies:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Label of the implied tag, key=* or key=value.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink to the OpenStreetMap Wiki of this implied tag. Can be null.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>combines:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Label of the combined tag, key=* or key=value.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink to the OpenStreetMap Wiki of this combined tag. Can be null.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>links:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>label:</tt></td><td>STRING</td><td>Label of the linked tag, key=* or key=value.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink to the OpenStreetMap Wiki of this linked tag. Can be null.</td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Example:</th>
+                            <td><a rel="nofollow" href="/api/tag?key=shop&amp;value=pet" target="_blank">/api/tag?key=shop&amp;value=pet</a></td>
+                        </tr>
+                        <tr>
+                            <th title="This API is not used for the UI">UI (no example):</th>
+                            <td><a href="/search?query=shop%3Dpet" target="_blank">/search?query=shop%3Dpet</a></td>
+                        </tr>
+                    </table>
+
+                    <a class="api-anchor" name="apidoc_terms"></a>
+                    <h3 class="api-headers">/api/terms</h3>
+                    <!-- german api/terms webservice description -->
+                    <table class="api-table" lang="de">
+                        <tr>
+                            <th>Pfad:</th>
+                            <td><tt>/api/terms</tt></td>
+                        </tr>
+                        <tr>
+                            <th>Beschreibung:</th>
+                            <td>Erhalte Informationen zu verwandten Begriffen, Ober- und Unterbegriffen.</td>
+                        </tr>
+                        <tr>
+                            <th>Parameter:</th>
+                            <td>
+                                <span class="param-var"><tt>term</tt></span><span class="param-desc">- Der Begriff für den Informationen angefordert werden, vom Typ STRING. (erforderlich)</span><br/>
+                                <span class="param-var"><tt>format</tt></span><span class="param-desc">- Bei Wert json_pretty wird die JSON Rückgabe eingerückt. (optional)</span><br/>
+                                <span class="param-var"><tt>callback</tt></span><span class="param-desc">- JSONP Callback Parameter. (optional)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Bemerkung:</th>
+                            <td>Die Gross- und Kleinschreibung des erforderlichen Parameters muss beachtet werden. Falls dazu keine passenden Begriffe gefunden wurden, sind die jeweiligen Listen leer.</td>
+                        </tr>
+                        <tr>
+                            <th>Resultat:</th>
+                            <td>
+                                <table class="api-results">
+                                    <tr><td><tt>:</tt></td><td>HASH</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>termRelated:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>ARRAY OF STRING</td><td>Liste mit englischen, verwandten Begriffen.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>ARRAY OF STRING</td><td>Liste mit deutschen, verwandten Begriffen.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>termBroader:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>ARRAY OF STRING</td><td>Liste mit englischen Oberbegriffen.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>ARRAY OF STRING</td><td>Liste mit deutschen Oberbegriffen.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>termNarrower:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>ARRAY OF STRING</td><td>Liste mit englischen Unterbegriffen.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>ARRAY OF STRING</td><td>Liste mit deutschen Unterbegriffen.</td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Beispiel:</th>
+                            <td><a rel="nofollow" href="/api/terms?term=cat&amp;format=json_pretty" target="_blank">/api/terms?term=cat&amp;format=json_pretty</a></td>
+                        </tr>
+                        <tr>
+                            <th title="Dieses API wird nicht für das User Interface verwendet.">UI (kein Beispiel):</th>
+                            <td><a href="/search?query=cat" target="_blank">/search?query=cat</a></td>
+                        </tr>
+                    </table>
+
+                    <!-- english api/terms webservice description -->
+                    <table class="api-table" lang="en">
+                        <tr>
+                            <th>Path:</th>
+                            <td><tt>/api/terms</tt></td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Get information about related, narrower and broader terms.</td>
+                        </tr>
+                        <tr>
+                            <th>Parameters:</th>
+                            <td>
+                                <span class="param-var"><tt>term</tt></span><span class="param-desc">- The term to get information for, of type STRING. (required)</span><br/>
+                                <span class="param-var"><tt>format</tt></span><span class="param-desc">- With value json_pretty the JSON output gets pretty-printed. (optional)</span><br/>
+                                <span class="param-var"><tt>callback</tt></span><span class="param-desc">- JSONP callback parameter. (optional)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Notes:</th>
+                            <td>The case of the required parameter needs to be correct. If no appropriate terms are found, the according lists will be empty.</td>
+                        </tr>
+                        <tr>
+                            <th>Result:</th>
+                            <td>
+                                <table class="api-results">
+                                    <tr><td><tt>:</tt></td><td>HASH</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>termRelated:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>ARRAY OF STRING</td><td>List of English related terms.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>ARRAY OF STRING</td><td>List of German related terms.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>termBroader:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>ARRAY OF STRING</td><td>List of English broader terms.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>ARRAY OF STRING</td><td>List of German broader terms.</td></tr>
+                                    <tr><td>&emsp;&emsp;<tt>termNarrower:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>en:</tt></td><td>ARRAY OF STRING</td><td>List of English narrower terms.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>de:</tt></td><td>ARRAY OF STRING</td><td>List of German narrower terms.</td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Example:</th>
+                            <td><a rel="nofollow" href="/api/terms?term=cat&amp;format=json_pretty" target="_blank">/api/terms?term=cat&amp;format=json_pretty</a></td>
+                        </tr>
+                        <tr>
+                            <th title="This API is not used for the UI">UI (no example):</th>
+                            <td><a href="/search?query=cat" target="_blank">/search?query=cat</a></td>
+                        </tr>
+                    </table>
+
+                    <a class="api-anchor" name="apidoc_suggest"></a>
+                    <h3 class="api-headers">/api/suggest</h3>
+                    <!-- german api/suggest webservice description -->
+                    <table class="api-table" lang="de">
+                        <tr>
+                            <th>Pfad:</th>
+                            <td><tt>/api/suggest</tt></td>
+                        </tr>
+                        <tr>
+                            <th>Beschreibung:</th>
+                            <td>Gibt Vorschläge für einen Suchbegriff. Es wird eine Fehlerkorrektur verwendet.</td>
+                        </tr>
+                        <tr>
+                            <th>Parameter:</th>
+                            <td>
+                                <span class="param-var"><tt>query</tt></span><span class="param-desc">- Der Begriff für den Vorschläge gesucht werden soll, vom Typ STRING. (erforderlich)</span><br/>
+                                <span class="param-var"><tt>lang</tt></span><span class="param-desc">- Gibt die Sprache an, für welche Vorschläge gesucht werden sollen. Unterstützt: 'de' und 'en'. (optional, default: alle)</span><br/>
+                                <span class="param-var"><tt>format</tt></span><span class="param-desc">- Bei Wert json_pretty wird die JSON Rückgabe eingerückt. (optional)</span><br/>
+                                <span class="param-var"><tt>callback</tt></span><span class="param-desc">- JSONP callback parameter. (optional)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Bemerkung:</th>
+                            <td>Falls keine passenden Vorschläge gefunden wurde, wird ein leeres ARRAY zurückgegeben. (Siehe auch: <a href="/opensearch.xml" rel="nofollow">opensearch.xml</a>)</td>
+                        </tr>
+                        <tr>
+                            <th>Resultat:</th>
+                            <td>
+                                <table class="api-results">
+                                    <tr><td><tt>:</tt></td><td>ARRAY OF STRING</td><td>Liste mit Vorschlägen zum Suchbegriff.</td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Beispiel:</th>
+                            <td><a rel="nofollow" href="/api/suggest?query=tabacco&amp;lang=en" target="_blank">/api/suggest?query=tabaco&amp;lang=en</a></td>
+                        </tr>
+                    </table>
+
+                    <!-- english api/suggest webservice description -->
+                    <table class="api-table" lang="en">
+                        <tr>
+                            <th>Path:</th>
+                            <td><tt>/api/suggest</tt></td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>Get suggestions for a term. Uses a spelling correction.</td>
+                        </tr>
+                        <tr>
+                            <th>Parameters:</th>
+                            <td>
+                                <span class="param-var"><tt>query</tt></span><span class="param-desc">- The term to get suggestions for, of type STRING. (required)</span><br/>
+                                <span class="param-var"><tt>lang</tt></span><span class="param-desc">- Defines the language of the suggestions to return. Currently supported: 'en' and 'de'. (optional, default: all)</span><br/>
+                                <span class="param-var"><tt>format</tt></span><span class="param-desc">- With value json_pretty the JSON output gets pretty-printed. (optional)</span><br/>
+                                <span class="param-var"><tt>callback</tt></span><span class="param-desc">- JSONP callback parameter. (optional)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Notes:</th>
+                            <td>If no suggestions could be found an empty ARRAY is retuned. (See also: <a href="/opensearch.xml" rel="nofollow">opensearch.xml</a>)</td>
+                        </tr>
+                        <tr>
+                            <th>Result:</th>
+                            <td>
+                                <table class="api-results">
+                                    <tr><td><tt>:</tt></td><td>ARRAY OF STRING</td><td>List of suggestions for the query term.</td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Example:</th>
+                            <td><a rel="nofollow" href="/api/suggest?query=tabacco&amp;lang=en" target="_blank">/api/suggest?query=tabaco&amp;lang=en</a></td>
+                        </tr>
+                    </table>
+
+                    <p class="bottom-space"></p>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

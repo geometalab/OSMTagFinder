@@ -33,7 +33,7 @@ def runFlaskApp(rdfGraph=None, dataDate=None):
 
     tagFinderHost = cl.getWebsiteString('HOST')
     tagFinderPort = int(os.environ.get("PORT", cl.getWebsiteInt('PORT')))
-    app.run(debug=True, host=tagFinderHost, port=tagFinderPort, threaded=True) # debug=False/True, alternately app.run(..., processes=3)
+    app.run(debug=False, host=tagFinderHost, port=tagFinderPort, threaded=True) # debug=False/True, alternately app.run(..., processes=3)
 
 
 if __name__ == '__main__':

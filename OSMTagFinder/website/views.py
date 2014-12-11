@@ -13,8 +13,6 @@ import datetime
 
 
 from utilities import utils
-from utilities.configloader import ConfigLoader
-from thesaurus.rdfgraph import RDFGraph
 from website.tagresults import TagResults
 from website.graphsearch import GraphSearch
 from utilities.spellcorrect import SpellCorrect
@@ -124,9 +122,9 @@ def search():
 
     return render_template('search.html', lang=getLocale(), query=query, results=searchResults.getResults())
 
-@app.route('/api', methods = ['GET'])
+@app.route('/apidoc', methods = ['GET'])
 def api():
-    return render_template('api.html', lang=getLocale())
+    return render_template('apidoc.html', lang=getLocale())
 
 @app.route('/about', methods = ['GET'])
 def about():
