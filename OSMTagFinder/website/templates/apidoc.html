@@ -3,7 +3,7 @@
 {% set active_page = "api" %}
 {% block head %}
     {{super()}}
-    <link href="{{ url_for('static', filename='css/api.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/apidoc.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@
                 <div class="api-container">
 
                     <div class="api-info" lang="de">
-                        <h3 class="api-title" lang="de">API DOKUMENTATION</h3>
+                        <h3 class="api-title" lang="de">API Dokumentation</h3>
                         <h5>OSM TagFinder hat ein API, dass die zugrunde liegenden Daten zugänglich macht. Ein Teil des APIs wird intern auch für das Web User Interface verwendet und kann auch von
                         jedem benutzt werden, der die TagFinder Daten in seiner Webseite oder Applikation integrieren will. Der TagFinder Server hat jedoch nicht unbegrenzte Ressourcen: Bitte verwenden Sie
                         das API verantwortungsvoll!<br/>
@@ -41,12 +41,12 @@
                     </div>
 
                     <div class="api-info" lang="en">
-                        <h3 class="api-title" lang="en">API DOCUMENTATION</h3>
+                        <h3 class="api-title" lang="en">API Documentation</h3>
                         <h5>OSM TagFinder has an API, that lets you access the underlying data. A part of the API is used internally for the Web User Interface and can also be used by anybody
                         who wants to integrate TagFinder data in their webpage or application. The server running the TagFinder API does not have unlimited resources: Please use the API responsibly!<br/>
                         The OSM TagFinder isn't based on a relational database. All information is built as a Semantic Web Graph and stored as <a href="http://www.w3.org/RDF/" target="_blank">RDF</a>/<a href="http://www.w3.org/XML/" target="_blank">XML</a>.
                         Available here: <a href="/tagfinder_thesaurus.rdf" target="_blank">tagfinder_thesaurus.rdf</a><br/>
-                        All statistics data - like the count of a tag - come from the great <a href="https://taginfo.openstreetmap.org/taginfo/apidoc" target="_blank">TagInfo.org Web Service</a>. If you wish to get statistical data, please use TagInfo.org instead.</h5>
+                        All statistics data - like the count of a tag - come from the great <a href="https://taginfo.openstreetmap.org/taginfo/apidoc" target="_blank">TagInfo.org Web Service</a>. If you wish to get more recent statistical data, please use TagInfo.org instead.</h5>
 
                         <h3 class="api-headers">Basics</h3>
                         <h5>The TagFinder API is a RESTful HTTP API. All calls request information and use the HTTP GET method. All API result are in JSON format.<br/>
@@ -134,7 +134,7 @@
                                     <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink zur OpenStreetMap Wiki-Seite des verlinkten Tags. Kann null sein.</td></tr>
                                     <tr><td>&emsp;&emsp;<tt>searchMeta:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
                                     <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>score:</tt></td><td>INT</td><td>Sortierbarer Trefferscore, berechnet nach einer Okapi BM25f Variante.</td></tr>
-                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>&lt;field&gt;:</tt></td><td>ARRAY OF STRINGS</td><td>Liste mit gefundenen Begriffen.&lt;field&gt; ist entweder 'tagPrefLabel', 'termPrefLabel', 'termAltLabel', 'termBroader', 'termNarrower' oder 'tagScopeNote'.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>&lt;field&gt;:</tt></td><td>ARRAY OF STRINGS</td><td>Liste mit gefundenen Begriffen.&lt;field&gt; ist 'tagPrefLabel', 'termPrefLabel', 'termAltLabel', 'termBroader', 'termNarrower' oder 'tagScopeNote'.</td></tr>
                                 </table>
                             </td>
                         </tr>
@@ -211,7 +211,7 @@
                                     <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>link:</tt></td><td>STRING</td><td>Weblink to the OpenStreetMap Wiki of this linked tag. Can be null.</td></tr>
                                     <tr><td>&emsp;&emsp;<tt>searchMeta:</tt></td><td>ARRAY OF HASHES</td><td></td></tr>
                                     <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>score:</tt></td><td>INT</td><td>Sortable hit score, Okapi BM25f variant.</td></tr>
-                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>&lt;field&gt;:</tt></td><td>ARRAY OF STRINGS</td><td>List of hit terms.&lt;field&gt; can be one of 'tagPrefLabel', 'termPrefLabel', 'termAltLabel', 'termBroader', 'termNarrower' or 'tagScopeNote'.</td></tr>
+                                    <tr><td>&emsp;&emsp;&emsp;&emsp;<tt>&lt;field&gt;:</tt></td><td>ARRAY OF STRINGS</td><td>List of hit terms.&lt;field&gt; can be 'tagPrefLabel', 'termPrefLabel', 'termAltLabel', 'termBroader', 'termNarrower' or 'tagScopeNote'.</td></tr>
                                 </table>
                             </td>
                         </tr>

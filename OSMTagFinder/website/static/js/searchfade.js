@@ -13,5 +13,14 @@ function searchfade(found, query) {
             $('.background-footer').show();
         }
 
+        if($(window).width() > 770 && !query) {
+            $('#nav_footer').show();
+            //$('.background-footer').show();
+        }
+        else {
+            $('#nav_footer').hide();
+            //$('.background-footer').hide();
+        }
+
     });
 }

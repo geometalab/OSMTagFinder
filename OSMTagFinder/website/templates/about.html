@@ -13,6 +13,61 @@
         {{super()}}
     {% endblock %}
 
+    <div id="page-content">
+        <div class ="row">
+            <div class="col-lg-50 col-md-50">
+                <div class="about-container">
+                    <div class="about-info" lang="de">
+                        <h3 class="about-title" lang="de">Über TagFinder</h3>
+                        <h5>OpenStreetMap ist ein Projekt, das zum Ziel hat eine frei zugängliche Karte der ganzen Welt zu erstellen. Da jeder bei OpenStreetMap mitwirken kann,
+                        ist die Karte unglaublich umfangreich und detailiert. Interessante Objekte werden in OpenStreetMap mit sogenannten Tags markiert. Auch hier ist es möglich
+                        selber neue Tags zu erfinden, weshalb die Liste an verwendeten Tags beständig grösser wird. Gerade für neue Mapper kann es deshalb schwierig sein sich zurecht
+                        zu finden. Auf der <a href="http://wiki.openstreetmap.org/wiki/" target="_blank">Wiki-Seite</a> von OpenStreetMap werden immerhin die wichtigsten Tags
+                        dokumentiert, aber eine eigentliche "Tag-Suche" gibt es nicht.<br/>
+                        Hier soll TagFinder Abhilfe schaffen: Mit der Website lässt sich schnell und unkompliziert einen Begriff nachschlagen und die gefundenen Tags werden übersichtlich
+                        aufgelistet. Auf den ersten Blick werden die relevantesten Informationen über einen Tag dargestellt und wenn man weitere Details will, gelangt man direkt zur
+                        Wiki-Seite und den Statistiken von <a href="https://taginfo.openstreetmap.org/" target="_blank">TagInfo.org</a>.
+                        </h5>
+                        <h3 class="about-headers" lang="de">Das TagFinder Projekt</h3>
+                        Dieses Projekt wurde wurde im Rahmen einer Informatik Studienarbeit an der Hochschule für Technik Rapperswil <a href="http://www.hsr.ch/" target="_blank">HSR</a>
+                        durchgeführt. Diese Applikation wurde in Python 2.7 geschrieben, verwendet Flask als Web Framework und läuft auf einem Heroku Cedar Stack.
+                        <h3 class="about-headers" lang="de">API und Download</h3>
+                        <h5>Auf die TagFinder Daten kann per REST API zugegriffen werden. Auch ein Download der kompletten Daten ist möglich. Siehe die <a href="/apidoc" target="_blank">API Dokumentation</a> für mehr Details.</h5>
+                        <h3 class="about-headers" lang="de">Lizenzen</h3>
+                        <h5>TagFinder verwendet die Web Services von <a href="https://taginfo.openstreetmap.org/" target="_blank">TagInfo.org</a>. OpenStreetMap sind "Open Data", die gemäss der <a href="http://opendatacommons.org/licenses/odbl/" target="_blank">Open Data Commons Open Database Lizenz</a> (ODbL) verfügbar sind.
+                        Es steht dir frei alle Daten von TagFinder zu kopieren, zu bearbeiten, weiterzugeben und zu übermitteln, sofern du TagFinder, OpenStreetMap und die Mitwirkenden als Quelle angibst.<br/>
+                        Der vollständige Lizenztext ist unter <a href="http://opendatacommons.org/licenses/odbl/1.0/Lizenz">Lizenz</a> einsehbar und erläutert deine Rechte und Pflichten.</h5>
+                        <h3 class="about-headers" lang="de">Kontakt</h3>
+                        Diese Applikation wurde von Simon Gwerder erstellt und unterhalten. Bug Reports, konstruktive Feedbacks und Feature Requests können per Email an <a href="mailto:sgwerder@hsr.ch">sgwerder@hsr.ch</a>
+                        geschickt werden.
+                    </div>
+
+                    <div class="about-info" lang="en">
+                        <h3 class="about-title" lang="en">About TagFinder</h3>
+                        <h5>OpenStreetMap is a project which creates and distributes free geographic data for the world. Anyone can work on OpenStreetMap, so the maps are richly detailed. Users have tagged
+                        things such as "points of interest" and the number of tags in use can be overwhelming, especially for new users. The most important tags are documented on the OpenStreetMap wiki,
+                        yet no true "tag search" exists. Enter TagFinder, a web page where one can simply search for a term and get back a managable list of related tags. The most relevant information
+                        about tags is provided, as well as links to further details on the OpenStreetMap <a href="http://wiki.openstreetmap.org/wiki/" target="_blank">wiki</a> and statistics at
+                        <a href="https://taginfo.openstreetmap.org/" target="_blank">TagInfo.org</a>.</h5>
+                        <h3 class="about-headers" lang="en">The TagFinder project</h3>
+                        TagFinder was developed as part of a research project at the Technical University Rapperswil <a href="http://www.hsr.ch/" target="_blank">HSR</a>. This application was written
+                        in Python 2.7, uses Flask as web framework and is running on a Heroku Cedar stack.
+                        <h3 class="about-headers" lang="en">API und Download</h3>
+                        <h5>TagFinder data can be accessed through a REST API. It's also possible to download all the data. See the <a href="/apidoc" target="_blank">API Documentation</a> for more details.</h5>
+                        <h3 class="about-headers" lang="en">Licence</h3>
+                        <h5>TagFinder uses the web services of <a href="https://taginfo.openstreetmap.org/" target="_blank">TagInfo.org</a>. OpenStreetMap is "open data", licensed under the <a href="http://opendatacommons.org/licenses/odbl/" target="_blank">Open Data Commons Open Database Licence</a> (ODbL).
+                        You are free to copy, distribute, transmit and adapt the data, as long as you credit TagFinder, OpenStreetMap and its contributors. If you alter or build upon the data, you may distribute the result only under the same licence.<br/>
+                        The full <a href="http://opendatacommons.org/licenses/odbl/1.0/Lizenz">legal code</a> explains your rights and responsibilities.</h5>
+                        <h3 class="about-headers" lang="en">Contact</h3>
+                        This application was written and is maintained by Simon Gwerder. You can mail Bug Reports, Constructive Feedbacks and Feature Requests to <a href="mailto:sgwerder@hsr.ch">sgwerder@hsr.ch</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     {% block bgfooter %}
         {{super()}}
     {% endblock %}

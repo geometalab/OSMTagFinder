@@ -47,8 +47,27 @@
             spellcorrect('#mainsearch_de', '{{ query }}');
             spellcorrect('#mainsearch_en', '{{ query }}');
             spellcorrect('#navbarsearch', '{{ query }}');
-
+            /*getLanguage(function(data) {
+                window.lang = data;
+            });*/
         });
+
+        $(window).resize(function() {
+            searchfade({{ results|count }}, '{{ query }}');
+        });
+
+        $('#mainsearch_de').on('focus', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.scrollTo(0,-100); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
+        });
+
+        $('#mainsearch_en').on('focus', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.scrollTo(0,0-100); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
+        });
+
     </script>
 
 {% endblock %}
@@ -89,7 +108,7 @@
                                     English <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                        <li><a href="javascript:;" onclick="switchLanguageTo('de', '{{ url_for('static', filename='css/lang_de.css') }}')">
+                                        <li><a href="javascript:;" onclick="setLanguage('de', '{{ url_for('static', filename='css/lang_de.css') }}')">
                                         <img width="16" style="max-width:16px; margin-top: -2px; margin-right: 3px" src="{{ url_for('static', filename='img/de.png') }}">
                                         Deutsch
                                         </a></li>
@@ -104,7 +123,7 @@
                                     Deutsch <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                        <li><a href="javascript:;" onclick="switchLanguageTo('en', '{{ url_for('static', filename='css/lang_en.css') }}')">
+                                        <li><a href="javascript:;" onclick="setLanguage('en', '{{ url_for('static', filename='css/lang_en.css') }}')">
                                         <img width="16" style="max-width:16px; margin-top: -2px; margin-right: 3px" src="{{ url_for('static', filename='img/en.png') }}">
                                         English
                                         </a></li>
@@ -114,6 +133,7 @@
                             <form class="navbar-form navbar-left" role="search" action="/search" method="get"> <!-- navbar search -->
                                 <div id="navbarsearch-ingroup" class="input-group input-group-sm">
                                     <input id="navbarsearch" type="search" value="{{ query }}" name="query" class="form-control" autocomplete="off">
+                                    <input class="search-lang-param" type="hidden" name="lang" value="{{ lang }}"/>
                                     <span class="input-group-btn">
                                         <button id="btn_navbar" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                     </span>

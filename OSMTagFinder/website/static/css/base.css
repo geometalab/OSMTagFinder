@@ -20,6 +20,10 @@ body {
     width:100%;
 }
 
+nav.navbar.navbar-inverse.navbar-fixed-top {
+    z-index: 9001; /*its over 9000!!!*/
+}
+
 .background-footer {
     position: fixed;
     bottom: -100px;

@@ -100,10 +100,14 @@ def opensearch():
 def index():
     return render_template('search.html', lang=getLocale(), dataDate=websiteDataDate)
 
-@app.route('/lang', methods = ['POST'])
-def changeLanguage():
+@app.route('/setlang', methods = ['POST'])
+def setLanguage():
     setLocale(request.form["lang"])
     return '200'
+
+@app.route('/getlang', methods = ['GET'])
+def getLanguage():
+    return Response(json.dumps(getLocale()), mimetype='application/json')
 
 @app.errorhandler(405)
 def methodNotAllowed(e):
@@ -116,7 +120,8 @@ def pageNotFound(e):
 @app.route('/search', methods = ['GET'])
 def search():
     query = request.args.get('query', '')
-    searchResults = searchCall(query)
+    lang = request.args.get('lang', '')
+    searchResults = searchCall(query, lang)
     if searchResults is None:
         return redirect('/')
 

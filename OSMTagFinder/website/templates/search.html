@@ -21,26 +21,29 @@
     {% endblock %}
 
     <div id="page-content">
+        <div id="searchwrapper" class="navbar-fixed-top">
+            <div id="jumbotron_search" class="jumbotron">
+                <form class="main_search_form" action="/search" method="get" name="search_form"> <!-- searchbar en -->
+                    <div id="main_search_ingroup_en" class="input-group input-group-lg" lang="en">
+                        <input type="search" value="{{ query }}" name="query" class="form-control" id="mainsearch_en" autocomplete="off" data-provide="typeahead" placeholder="Search Tags...">
+                        <input class="search-lang-param" type="hidden" name="lang" value="{{ lang }}"/>
+                        <span class="input-group-btn">
+                            <button id="btn_main_search_en" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </span>
+                    </div>
+                </form>
 
-        <div id="jumbotron_search" class="jumbotron">
-            <form class="main_search_form" action="/search" method="get" name="search_form"> <!-- searchbar en -->
-                <div id="main_search_ingroup_en" class="input-group input-group-lg" lang="en">
-                    <input type="search" value="{{ query }}" name="query" class="form-control" id="mainsearch_en" autocomplete="off" data-provide="typeahead" placeholder="Search Tags...">
-                    <span class="input-group-btn">
-                        <button id="btn_main_search_en" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </span>
-                </div>
-            </form>
+                <form class="main_search_form" action="/search" method="get" name="search_form"> <!-- searchbar de -->
+                    <div id="main_search_ingroup_de" class="input-group input-group-lg" lang="de">
+                        <input type="search" value="{{ query }}" name="query" class="form-control" id="mainsearch_de" autocomplete="off" data-provide="typeahead" placeholder="Nach Tags suchen...">
+                        <input class="search-lang-param" type="hidden" name="lang" value="{{ lang }}"/>
+                        <span class="input-group-btn">
+                            <button id="btn_main_search_de" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </span>
+                    </div>
+                </form>
 
-            <form class="main_search_form" action="/search" method="get" name="search_form"> <!-- searchbar de -->
-                <div id="main_search_ingroup_de" class="input-group input-group-lg" lang="de">
-                    <input type="search" value="{{ query }}" name="query" class="form-control" id="mainsearch_de" autocomplete="off" data-provide="typeahead" placeholder="Nach Tags suchen...">
-                    <span class="input-group-btn">
-                        <button id="btn_main_search_de" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </span>
-                </div>
-            </form>
-
+            </div>
         </div>
 
         <!-- searchresults / content -->

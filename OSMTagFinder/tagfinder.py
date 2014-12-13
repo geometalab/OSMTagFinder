@@ -3,6 +3,7 @@
 Created on 13.11.2014
 
 @author: Simon Gwerder
+Thanks go to Tom (bashzestampeedo) aswell, who helped me when learning python got to me - nice Canadian guy!!
 '''
 import os
 import time
