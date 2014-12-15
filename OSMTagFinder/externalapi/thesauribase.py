@@ -28,8 +28,8 @@ class ThesauriBase(object):
     def getSupportedLang(self):
         return self.supportedLang
 
-    def getSearchTerm(self):
-        return self.searchTerm
+    def getSearchTerms(self):
+        return self.searchTerms
 
     @abc.abstractmethod
     def getRelated(self):

@@ -63,7 +63,7 @@ class BaseThesaurus:
         self.printMessage('\n Requesting valid OSM tags from "' + self.cl.getTagInfoAPIString('TAGINFO_PAGE')  + '":')
         tagMap = self.bundleToTagMap(keyList)
 
-        self.numberTags = self.numberTags(tagMap)
+        self.numberTags = self.getNumberTags(tagMap)
         self.printMessage(' Got ' + str(self.numberTags) + ' valid OSM tags.')
 
         empty = []
@@ -96,7 +96,7 @@ class BaseThesaurus:
         if self.console is not None:
             self.console.println(message)
 
-    def numberTags(self, tagMap):
+    def getNumberTags(self, tagMap):
         '''Returns number of tags in 'tagMap'.'''
         count = 0
         for key in tagMap:

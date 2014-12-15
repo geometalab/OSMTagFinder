@@ -13,8 +13,8 @@ import datetime
 
 
 from utilities import utils
-from website.tagresults import TagResults
-from website.graphsearch import GraphSearch
+from web.tagresults import TagResults
+from web.graphsearch import GraphSearch
 from utilities.spellcorrect import SpellCorrect
 
 try:

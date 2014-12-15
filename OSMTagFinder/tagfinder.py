@@ -16,8 +16,8 @@ from utilities import crython
 
 from utilities import utils
 from utilities.configloader import ConfigLoader
-from website.views import app, setRdfGraph
-from website.indexer import Indexer
+from web.views import app, setRdfGraph
+from web.indexer import Indexer
 from thesaurus.rdfgraph import RDFGraph
 from thesaurus.updater import UpdateThesaurus
 

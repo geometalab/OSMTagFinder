@@ -15,7 +15,7 @@ import json
 _invalidChars = [' ', ';']
 _dataFolderName = 'data'
 _indexerFolderName = 'indexer'
-_websiteFolderName = 'website'
+_websiteFolderName = 'web'
 _staticFolderName = 'static'
 _templatesFolderName = 'templates'
 _tempFolderName = 'temp'

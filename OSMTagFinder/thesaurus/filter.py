@@ -7,7 +7,7 @@ Created on 07.10.2014
 
 class Filter:
 
-    exactKeyFilter = ['name', 'ele', 'comment', 'image', 'symbol', 'deanery', 'jel', 'rating', 'school:FR', 'alt', 'is_in', 'url', 'website',
+    exactKeyFilter = ['name', 'ele', 'comment', 'image', 'symbol', 'deanery', 'jel', 'rating', 'school:FR', 'alt', 'is_in', 'url', 'web',
                       'wikipedia', 'email', 'converted_by', 'phone', 'opening_hours', 'date', 'time', 'collection_times',
                       'colour', 'fee', 'population', 'access', 'noexit', 'towards', 'bus_routes', 'busline', 'lines', 'type', 'denotation',
                       'CONTINUE', 'continue', 'copyright', 'stop', 'network', 'comment', 'old_name', 'destination', 'brand', 'fax', 'designation',
