@@ -1,0 +1,3749 @@
+PRESET TESTS
+
+Threshold : 2
+Data      : 06.12.2014
+
+Found test tags  : 522/530
+Found "names"    : 525/530
+Found "terms"    : 540/549
+
+Time elapsed running test: 19.21 mins
+
+
+Test 1/530 - Name: Aerialway
+============================================================
+Tags: aerialway=*
+Term: Aerialway            > found: aerialway=*
+Term: ski lift             > found: aerialway=*
+Term: funifor              > found: aerialway=*
+Term: funitel              > found: aerialway=*
+
+
+Test 2/530 - Name: Cable Car
+============================================================
+Tags: aerialway=cable_car
+Term: Cable Car            > found: aerialway=cable_car
+Term: tramway              > found: aerialway=cable_car
+Term: ropeway              > found: aerialway=cable_car
+
+
+Test 3/530 - Name: Chair Lift
+============================================================
+Tags: aerialway=chair_lift
+Term: Chair Lift           > found: aerialway=chair_lift
+
+
+Test 4/530 - Name: Gondola
+============================================================
+Tags: aerialway=gondola
+Term: Gondola              > found: aerialway=gondola
+
+
+Test 5/530 - Name: Magic Carpet Lift
+============================================================
+Tags: aerialway=magic_carpet
+Term: Magic Carpet Lift    > found: aerialway=magic_carpet
+
+
+Test 6/530 - Name: Platter Lift
+============================================================
+Tags: aerialway=platter
+Term: Platter Lift         > found: aerialway=platter
+Term: button lift          > found: aerialway=platter
+Term: poma lift            > found: aerialway=platter
+
+
+Test 7/530 - Name: Aerialway Pylon
+============================================================
+Tags: aerialway=pylon
+Term: Aerialway Pylon      > found: aerialway=pylon
+
+
+Test 8/530 - Name: Rope Tow Lift
+============================================================
+Tags: aerialway=rope_tow
+Term: Rope Tow Lift        > found: aerialway=rope_tow
+Term: handle tow           > found: aerialway=rope_tow
+Term: bugel lift           > found: aerialway=rope_tow
+
+
+Test 9/530 - Name: Aerialway Station
+============================================================
+Tags: aerialway=station
+Term: Aerialway Station    > found: aerialway=station
+
+
+Test 10/530 - Name: T-bar Lift
+============================================================
+Tags: aerialway=t-bar
+Term: T-bar Lift           > found: aerialway=t-bar
+
+
+Test 11/530 - Name: Aeroway
+============================================================
+Tags: aeroway=*
+Term: Aeroway              > found: aeroway=*
+
+
+Test 12/530 - Name: Airport
+============================================================
+Tags: aeroway=aerodrome
+Term: Airport              > found: aeroway=aerodrome
+Term: airplane             > found: aeroway=aerodrome
+Term: airport              > found: aeroway=aerodrome
+Term: aerodrome            > found: aeroway=aerodrome
+
+
+Test 13/530 - Name: Apron
+============================================================
+Tags: aeroway=apron
+Term: Apron                > found: aeroway=apron
+Term: ramp                 > found: aeroway=apron
+
+
+Test 14/530 - Name: Airport gate
+============================================================
+Tags: aeroway=gate
+Term: Airport gate         > found: aeroway=gate
+
+
+Test 15/530 - Name: Hangar
+============================================================
+Tags: aeroway=hangar
+Term: Hangar               > found: aeroway=hangar
+
+
+Test 16/530 - Name: Helipad
+============================================================
+Tags: aeroway=helipad
+Term: Helipad              > found: aeroway=helipad
+Term: helicopter           > found: aeroway=helipad
+Term: helipad              > found: aeroway=helipad
+Term: heliport             > found: aeroway=helipad
+
+
+Test 17/530 - Name: Runway
+============================================================
+Tags: aeroway=runway
+Term: Runway               > found: aeroway=runway
+Term: landing strip        > found: aeroway=runway
+
+
+Test 18/530 - Name: Taxiway
+============================================================
+Tags: aeroway=taxiway
+Term: Taxiway              > found: aeroway=taxiway
+
+
+Test 19/530 - Name: Airport terminal
+============================================================
+Tags: aeroway=terminal
+Term: Airport terminal     > found: aeroway=terminal
+Term: airport              > found: aeroway=terminal
+Term: aerodrome            > found: aeroway=terminal
+
+
+Test 20/530 - Name: Amenity
+============================================================
+Tags: amenity=*
+Term: Amenity              > found: amenity=*
+
+
+Test 21/530 - Name: Arts Center
+============================================================
+Tags: amenity=arts_centre
+Term: Arts Center          > found: amenity=arts_centre
+
+
+Test 22/530 - Name: ATM
+============================================================
+Tags: amenity=atm
+Term: ATM                  > found: amenity=atm
+Term: money                > found: amenity=atm
+Term: cash                 > found: amenity=atm
+Term: machine              > found: amenity=atm
+
+
+Test 23/530 - Name: Bank
+============================================================
+Tags: amenity=bank
+Term: Bank                 > found: amenity=bank
+Term: credit union         > found: amenity=bank
+Term: check                > found: amenity=bank
+Term: deposit              > found: amenity=bank
+Term: fund                 > found: amenity=bank
+Term: investment           > found: amenity=bank
+Term: repository           > found: amenity=bank
+Term: reserve              > found: amenity=bank
+Term: safe                 > found: amenity=bank
+Term: savings              > found: amenity=bank
+Term: stock                > found: amenity=bank
+Term: treasury             > found: amenity=bank
+Term: trust                > found: amenity=bank
+Term: vault                > found: amenity=bank
+
+
+Test 24/530 - Name: Bar
+============================================================
+Tags: amenity=bar
+Term: Bar                  > found: amenity=bar
+Term: dive                 > found: amenity=bar
+Term: beer                 > found: amenity=bar
+Term: bier                 > found: amenity=bar
+Term: booze                > found: amenity=bar
+
+
+Test 25/530 - Name: Barbecue/Grill
+============================================================
+Tags: amenity=bbq
+Term: Barbecue/Grill       > found: amenity=bbq
+Term: bbq                  > found: amenity=bbq
+
+
+Test 26/530 - Name: Bench
+============================================================
+Tags: amenity=bench
+Term: Bench                > found: amenity=bench
+
+
+Test 27/530 - Name: Bicycle Parking
+============================================================
+Tags: amenity=bicycle_parking
+Term: Bicycle Parking      > found: amenity=bicycle_parking
+Term: bike                 > found: amenity=bicycle_parking
+
+
+Test 28/530 - Name: Bicycle Rental
+============================================================
+Tags: amenity=bicycle_rental
+Term: Bicycle Rental       > found: amenity=bicycle_rental
+Term: bike                 > found: amenity=bicycle_rental
+
+
+Test 29/530 - Name: Boat Rental
+============================================================
+Tags: amenity=boat_rental
+Term: Boat Rental          > found: amenity=boat_rental
+
+
+Test 30/530 - Name: Currency Exchange
+============================================================
+Tags: amenity=bureau_de_change
+Term: Currency Exchange    > found: amenity=bureau_de_change
+Term: bureau de change     > found: amenity=bureau_de_change
+Term: money changer        > found: amenity=bureau_de_change
+
+
+Test 31/530 - Name: Bus Station
+============================================================
+Tags: amenity=bus_station
+Term: Bus Station          > found: amenity=bus_station
+
+
+Test 32/530 - Name: Cafe
+============================================================
+Tags: amenity=cafe
+Term: Cafe                 > found: amenity=cafe
+Term: coffee               > found: amenity=cafe
+Term: tea                  > found: amenity=cafe
+
+
+Test 33/530 - Name: Car Rental
+============================================================
+Tags: amenity=car_rental
+Term: Car Rental           > found: amenity=car_rental
+
+
+Test 34/530 - Name: Car Sharing
+============================================================
+Tags: amenity=car_sharing
+Term: Car Sharing          > found: amenity=car_sharing
+
+
+Test 35/530 - Name: Car Wash
+============================================================
+Tags: amenity=car_wash
+Term: Car Wash             > found: amenity=car_wash
+
+
+Test 36/530 - Name: Charging Station
+============================================================
+Tags: amenity=charging_station
+Term: Charging Station     > found: amenity=charging_station
+Term: EV                   > found: amenity=charging_station
+Term: Electric Vehicle     > found: amenity=charging_station
+Term: Supercharger         > found: amenity=charging_station
+
+
+Test 37/530 - Name: Nursery/Childcare
+============================================================
+Tags: amenity=childcare
+Term: Nursery/Childcare    > found: amenity=childcare
+Term: daycare              > found: amenity=childcare
+Term: orphanage            > found: amenity=childcare
+Term: playgroup            > found: amenity=childcare
+
+
+Test 38/530 - Name: Cinema
+============================================================
+Tags: amenity=cinema
+Term: Cinema               > found: amenity=cinema
+Term: drive-in             > found: amenity=cinema
+Term: film                 > found: amenity=cinema
+Term: flick                > found: amenity=cinema
+Term: movie                > found: amenity=cinema
+Term: theater              > found: amenity=cinema
+Term: picture              > found: amenity=cinema
+Term: show                 > found: amenity=cinema
+Term: screen               > found: amenity=cinema
+
+
+Test 39/530 - Name: Clinic
+============================================================
+Tags: amenity=clinic
+Term: Clinic               > found: amenity=clinic
+Term: medical              > found: amenity=clinic
+Term: urgentcare           > found: amenity=clinic
+
+
+Test 40/530 - Name: Clock
+============================================================
+Tags: amenity=clock
+Term: Clock                > found: amenity=clock
+
+
+Test 41/530 - Name: College Grounds
+============================================================
+Tags: amenity=college
+Term: College Grounds      > found: amenity=college
+Term: university           > found: amenity=college
+
+
+Test 42/530 - Name: Community Center
+============================================================
+Tags: amenity=community_centre
+Term: Community Center     > found: amenity=community_centre
+Term: event                > found: amenity=community_centre
+Term: hall                 > found: amenity=community_centre
+
+
+Test 43/530 - Name: Compressed Air
+============================================================
+Tags: amenity=compressed_air
+Term: Compressed Air       > found: amenity=compressed_air
+
+
+Test 44/530 - Name: Courthouse
+============================================================
+Tags: amenity=courthouse
+Term: Courthouse           > found: amenity=courthouse
+
+
+Test 45/530 - Name: Dentist
+============================================================
+Tags: amenity=dentist
+Term: Dentist              > found: amenity=dentist
+Term: tooth                > found: amenity=dentist
+Term: teeth                > found: amenity=dentist
+
+
+Test 46/530 - Name: Doctor
+============================================================
+Tags: amenity=doctors
+Term: Doctor               > found: amenity=doctors
+Term: medic*               > found: amenity=doctors
+
+
+Test 47/530 - Name: Dojo / Martial Arts Academy
+============================================================
+Tags: amenity=dojo
+Term: Dojo / Martial Arts Academy > found: amenity=dojo
+Term: martial arts         > found: amenity=dojo
+Term: dojang               > found: amenity=dojo
+
+
+Test 48/530 - Name: Drinking Water
+============================================================
+Tags: amenity=drinking_water
+Term: Drinking Water       > found: amenity=drinking_water
+Term: fountain             > found: amenity=drinking_water
+Term: potable              > found: amenity=drinking_water
+
+
+Test 49/530 - Name: Embassy
+============================================================
+Tags: amenity=embassy
+Term: Embassy              > found: amenity=embassy
+
+
+Test 50/530 - Name: Fast Food
+============================================================
+Tags: amenity=fast_food
+Term: Fast Food            > found: amenity=fast_food
+Term: restaurant           > found: amenity=fast_food
+
+
+Test 51/530 - Name: Fire Station
+============================================================
+Tags: amenity=fire_station
+Term: Fire Station         > found: amenity=fire_station
+
+
+Test 52/530 - Name: Fountain
+============================================================
+Tags: amenity=fountain
+Term: Fountain             > found: amenity=fountain
+
+
+Test 53/530 - Name: Gas Station
+============================================================
+Tags: amenity=fuel
+Term: Gas Station          > found: amenity=fuel
+Term: petrol               > found: amenity=fuel
+Term: fuel                 > found: amenity=fuel
+Term: propane              > found: amenity=fuel
+Term: diesel               > found: amenity=fuel
+Term: lng                  > found: amenity=fuel
+Term: cng                  > found: amenity=fuel
+Term: biodiesel            > found: amenity=fuel
+
+
+Test 54/530 - Name: Graveyard
+============================================================
+Tags: amenity=grave_yard
+Term: Graveyard            > found: amenity=grave_yard
+
+
+Test 55/530 - Name: Hospital Grounds
+============================================================
+Tags: amenity=hospital
+Term: Hospital Grounds     > found: amenity=hospital
+Term: clinic               > found: amenity=hospital
+Term: doctor               > found: amenity=hospital
+Term: emergency room       > found: amenity=hospital
+Term: health service       > found: amenity=hospital
+Term: hospice              > found: amenity=hospital
+Term: infirmary            > found: amenity=hospital
+Term: institution          > found: amenity=hospital
+Term: nursing home         > found: amenity=hospital
+Term: sanatorium           > found: amenity=hospital
+Term: sanitarium           > found: amenity=hospital
+Term: sick                 > found: amenity=hospital
+Term: surgery              > found: amenity=hospital
+Term: ward                 > found: amenity=hospital
+
+
+Test 56/530 - Name: Preschool/Kindergarten Grounds
+============================================================
+Tags: amenity=kindergarten
+Term: Preschool/Kindergarten Grounds > found: amenity=kindergarten
+Term: kindergarden         > found: amenity=kindergarten
+Term: pre-school           > found: amenity=kindergarten
+
+
+Test 57/530 - Name: Library
+============================================================
+Tags: amenity=library
+Term: Library              > found: amenity=library
+Term: book                 > found: amenity=library
+
+
+Test 58/530 - Name: Marketplace
+============================================================
+Tags: amenity=marketplace
+Term: Marketplace          > found: amenity=marketplace
+
+
+Test 59/530 - Name: Nightclub
+============================================================
+Tags: amenity=nightclub
+Term: Nightclub            > found: amenity=nightclub
+Term: disco*               > found: amenity=nightclub
+Term: night club           > found: amenity=nightclub
+Term: dancing              > found: amenity=nightclub
+Term: dance club           > found: amenity=nightclub
+
+
+Test 60/530 - Name: Car Parking
+============================================================
+Tags: amenity=parking
+Term: Car Parking          > found: amenity=parking
+
+
+Test 61/530 - Name: Parking Garage Entrance/Exit
+============================================================
+Tags: amenity=parking_entrance
+Term: Parking Garage Entrance/Exit > found: amenity=parking_entrance
+
+
+Test 62/530 - Name: Pharmacy
+============================================================
+Tags: amenity=pharmacy
+Term: Pharmacy             > found: amenity=pharmacy
+Term: drug                 > found: amenity=pharmacy
+Term: medicine             > found: amenity=pharmacy
+
+
+Test 63/530 - Name: Place of Worship
+============================================================
+Tags: amenity=place_of_worship
+Term: Place of Worship     > found: amenity=place_of_worship
+Term: abbey                > found: amenity=place_of_worship
+Term: basilica             > found: amenity=place_of_worship
+Term: bethel               > found: amenity=place_of_worship
+Term: cathedral            > found: amenity=place_of_worship
+Term: chancel              > found: amenity=place_of_worship
+Term: chantry              > found: amenity=place_of_worship
+Term: chapel               > found: amenity=place_of_worship
+Term: church               > found: amenity=place_of_worship
+Term: fold                 > found: amenity=place_of_worship
+Term: house of God         > found: amenity=place_of_worship
+Term: house of prayer      > found: amenity=place_of_worship
+Term: house of worship     > found: amenity=place_of_worship
+Term: minster              > found: amenity=place_of_worship
+Term: mission              > found: amenity=place_of_worship
+Term: mosque               > found: amenity=place_of_worship
+Term: oratory              > found: amenity=place_of_worship
+Term: parish               > found: amenity=place_of_worship
+Term: sacellum             > found: amenity=place_of_worship
+Term: sanctuary            > found: amenity=place_of_worship
+Term: shrine               > found: amenity=place_of_worship
+Term: synagogue            > found: amenity=place_of_worship
+Term: tabernacle           > found: amenity=place_of_worship
+Term: temple               > found: amenity=place_of_worship
+
+
+Test 64/530 - Name: Police
+============================================================
+Tags: amenity=police
+Term: Police               > found: amenity=police
+Term: badge                > found: amenity=police
+Term: constable            > found: amenity=police
+Term: constabulary         > found: amenity=police
+Term: cop                  > found: amenity=police
+Term: detective            > found: amenity=police
+Term: fed                  > found: amenity=police
+Term: law                  > found: amenity=police
+Term: enforcement          > found: amenity=police
+Term: officer              > found: amenity=police
+Term: patrol               > found: amenity=police
+
+
+Test 65/530 - Name: Mailbox
+============================================================
+Tags: amenity=post_box
+Term: Mailbox              > found: amenity=post_box
+Term: letter               > found: amenity=post_box
+Term: post                 > found: amenity=post_box
+
+
+Test 66/530 - Name: Post Office
+============================================================
+Tags: amenity=post_office
+Term: Post Office          > found: amenity=post_office
+Term: letter               > found: amenity=post_office
+Term: mail                 > found: amenity=post_office
+
+
+Test 67/530 - Name: Pub
+============================================================
+Tags: amenity=pub
+Term: Pub                  > found: amenity=pub
+Term: dive                 > found: amenity=pub
+Term: beer                 > found: amenity=pub
+Term: bier                 > found: amenity=pub
+Term: booze                > found: amenity=pub
+
+
+Test 68/530 - Name: Ranger Station
+============================================================
+Tags: amenity=ranger_station
+Term: Ranger Station       > found: amenity=ranger_station
+Term: visitor center       > found: amenity=ranger_station
+Term: visitor centre       > found: amenity=ranger_station
+Term: permit center        > found: amenity=ranger_station
+Term: permit centre        > found: amenity=ranger_station
+Term: backcountry office   > found: amenity=ranger_station
+Term: warden office        > found: amenity=ranger_station
+Term: warden center        > found: amenity=ranger_station
+
+
+Test 69/530 - Name: Recycling
+============================================================
+Tags: amenity=recycling
+Term: Recycling            > found: amenity=recycling
+Term: can                  > none found
+Term: bottle               > found: amenity=recycling
+Term: garbage              > found: amenity=recycling
+Term: scrap                > found: amenity=recycling
+Term: trash                > found: amenity=recycling
+
+
+Test 70/530 - Name: Restaurant
+============================================================
+Tags: amenity=restaurant
+Term: Restaurant           > found: amenity=restaurant
+Term: bar                  > found: amenity=restaurant
+Term: breakfast            > found: amenity=restaurant
+Term: cafe                 > found: amenity=restaurant
+Term: caf?                 > none found
+Term: canteen              > found: amenity=restaurant
+Term: coffee               > found: amenity=restaurant
+Term: dine                 > found: amenity=restaurant
+Term: dining               > found: amenity=restaurant
+Term: dinner               > found: amenity=restaurant
+Term: drive-in             > found: amenity=restaurant
+Term: eat                  > found: amenity=restaurant
+Term: grill                > found: amenity=restaurant
+Term: lunch                > found: amenity=restaurant
+Term: table                > found: amenity=restaurant
+
+
+Test 71/530 - Name: School Grounds
+============================================================
+Tags: amenity=school
+Term: School Grounds       > found: amenity=school
+Term: academy              > found: amenity=school
+Term: elementary school    > found: amenity=school
+Term: middle school        > found: amenity=school
+Term: high school          > found: amenity=school
+
+
+Test 72/530 - Name: Shelter
+============================================================
+Tags: amenity=shelter
+Term: Shelter              > found: amenity=shelter
+Term: lean-to              > found: amenity=shelter
+Term: gazebo               > found: amenity=shelter
+Term: picnic               > found: amenity=shelter
+
+
+Test 73/530 - Name: Social Facility
+============================================================
+Tags: amenity=social_facility
+Term: Social Facility      > found: amenity=social_facility
+
+
+Test 74/530 - Name: Studio
+============================================================
+Tags: amenity=studio
+Term: Studio               > found: amenity=studio
+Term: recording            > found: amenity=studio
+Term: radio                > found: amenity=studio
+Term: television           > found: amenity=studio
+
+
+Test 75/530 - Name: Swimming Pool
+============================================================
+Tags: amenity=swimming_pool
+Term: Swimming Pool        > found: amenity=swimming_pool
+
+
+Test 76/530 - Name: Taxi Stand
+============================================================
+Tags: amenity=taxi
+Term: Taxi Stand           > found: amenity=taxi
+Term: cab                  > found: amenity=taxi
+
+
+Test 77/530 - Name: Telephone
+============================================================
+Tags: amenity=telephone
+Term: Telephone            > found: amenity=telephone
+Term: phone                > found: amenity=telephone
+
+
+Test 78/530 - Name: Theater
+============================================================
+Tags: amenity=theatre
+Term: Theater              > found: amenity=theatre
+Term: theatre              > found: amenity=theatre
+Term: performance          > found: amenity=theatre
+Term: play                 > found: amenity=theatre
+Term: musical              > found: amenity=theatre
+
+
+Test 79/530 - Name: Toilets
+============================================================
+Tags: amenity=toilets
+Term: Toilets              > found: amenity=toilets
+Term: bathroom             > found: amenity=toilets
+Term: restroom             > found: amenity=toilets
+Term: outhouse             > found: amenity=toilets
+Term: privy                > found: amenity=toilets
+Term: head                 > found: amenity=toilets
+Term: lavatory             > found: amenity=toilets
+Term: latrine              > found: amenity=toilets
+Term: water closet         > found: amenity=toilets
+Term: WC                   > found: amenity=toilets
+Term: W.C.                 > found: amenity=toilets
+
+
+Test 80/530 - Name: Town Hall
+============================================================
+Tags: amenity=townhall
+Term: Town Hall            > found: amenity=townhall
+Term: village              > found: amenity=townhall
+Term: city                 > found: amenity=townhall
+Term: government           > found: amenity=townhall
+Term: courthouse           > found: amenity=townhall
+Term: municipal            > found: amenity=townhall
+
+
+Test 81/530 - Name: University Grounds
+============================================================
+Tags: amenity=university
+Term: University Grounds   > found: amenity=university
+Term: college              > found: amenity=university
+
+
+Test 82/530 - Name: Vending Machine
+============================================================
+Tags: amenity=vending_machine
+Term: Vending Machine      > found: amenity=vending_machine
+Term: snack                > found: amenity=vending_machine
+Term: soda                 > found: amenity=vending_machine
+Term: ticket               > found: amenity=vending_machine
+
+
+Test 83/530 - Name: Veterinary
+============================================================
+Tags: amenity=veterinary
+Term: Veterinary           > found: amenity=veterinary
+Term: pet clinic           > found: amenity=veterinary
+Term: veterinarian         > found: amenity=veterinary
+Term: animal hospital      > found: amenity=veterinary
+Term: pet doctor           > found: amenity=veterinary
+
+
+Test 84/530 - Name: Waste Basket
+============================================================
+Tags: amenity=waste_basket
+Term: Waste Basket         > found: amenity=waste_basket
+Term: rubbish              > found: amenity=waste_basket
+Term: litter               > found: amenity=waste_basket
+Term: trash                > found: amenity=waste_basket
+Term: garbage              > found: amenity=waste_basket
+
+
+Test 85/530 - Name: Area
+============================================================
+Tags: area=yes
+Term: Area                 > found: area=yes
+
+
+Test 86/530 - Name: Barrier
+============================================================
+Tags: barrier=*
+Term: Barrier              > found: barrier=*
+
+
+Test 87/530 - Name: Block
+============================================================
+Tags: barrier=block
+Term: Block                > found: barrier=block
+
+
+Test 88/530 - Name: Bollard
+============================================================
+Tags: barrier=bollard
+Term: Bollard              > found: barrier=bollard
+
+
+Test 89/530 - Name: Cattle Grid
+============================================================
+Tags: barrier=cattle_grid
+Term: Cattle Grid          > found: barrier=cattle_grid
+
+
+Test 90/530 - Name: City Wall
+============================================================
+Tags: barrier=city_wall
+Term: City Wall            > found: barrier=city_wall
+
+
+Test 91/530 - Name: Cycle Barrier
+============================================================
+Tags: barrier=cycle_barrier
+Term: Cycle Barrier        > found: barrier=cycle_barrier
+
+
+Test 92/530 - Name: Ditch
+============================================================
+Tags: barrier=ditch
+Term: Ditch                > found: barrier=ditch
+
+
+Test 93/530 - Name: Entrance
+============================================================
+Tags: barrier=entrance
+Term: Entrance             > found: barrier=entrance
+
+
+Test 94/530 - Name: Fence
+============================================================
+Tags: barrier=fence
+Term: Fence                > found: barrier=fence
+
+
+Test 95/530 - Name: Gate
+============================================================
+Tags: barrier=gate
+Term: Gate                 > found: barrier=gate
+
+
+Test 96/530 - Name: Hedge
+============================================================
+Tags: barrier=hedge
+Term: Hedge                > found: barrier=hedge
+
+
+Test 97/530 - Name: Kissing Gate
+============================================================
+Tags: barrier=kissing_gate
+Term: Kissing Gate         > found: barrier=kissing_gate
+
+
+Test 98/530 - Name: Lift Gate
+============================================================
+Tags: barrier=lift_gate
+Term: Lift Gate            > found: barrier=lift_gate
+
+
+Test 99/530 - Name: Retaining Wall
+============================================================
+Tags: barrier=retaining_wall
+Term: Retaining Wall       > found: barrier=retaining_wall
+
+
+Test 100/530 - Name: Stile
+============================================================
+Tags: barrier=stile
+Term: Stile                > found: barrier=stile
+
+
+Test 101/530 - Name: Toll Booth
+============================================================
+Tags: barrier=toll_booth
+Term: Toll Booth           > found: barrier=toll_booth
+
+
+Test 102/530 - Name: Wall
+============================================================
+Tags: barrier=wall
+Term: Wall                 > found: barrier=wall
+
+
+Test 103/530 - Name: Administrative Boundary
+============================================================
+Tags: boundary=administrative
+Term: Administrative Boundary > found: boundary=administrative
+
+
+Test 104/530 - Name: Building
+============================================================
+Tags: building=*
+Term: Building             > found: building=*
+
+
+Test 105/530 - Name: Apartments
+============================================================
+Tags: building=apartments
+Term: Apartments           > found: building=apartments
+
+
+Test 106/530 - Name: Barn
+============================================================
+Tags: building=barn
+Term: Barn                 > found: building=barn
+
+
+Test 107/530 - Name: Bunker
+============================================================
+Tags: building=bunker
+Term: Bunker               > found: building=bunker
+
+
+Test 108/530 - Name: Cabin
+============================================================
+Tags: building=cabin
+Term: Cabin                > found: building=cabin
+
+
+Test 109/530 - Name: Cathedral
+============================================================
+Tags: building=cathedral
+Term: Cathedral            > found: building=cathedral
+
+
+Test 110/530 - Name: Chapel
+============================================================
+Tags: building=chapel
+Term: Chapel               > found: building=chapel
+
+
+Test 111/530 - Name: Church
+============================================================
+Tags: building=church
+Term: Church               > found: building=church
+
+
+Test 112/530 - Name: College Building
+============================================================
+Tags: building=college
+Term: College Building     > none found
+Term: university           > none found
+
+
+Test 113/530 - Name: Commercial Building
+============================================================
+Tags: building=commercial
+Term: Commercial Building  > found: building=commercial
+
+
+Test 114/530 - Name: Building Under Construction
+============================================================
+Tags: building=construction
+Term: Building Under Construction > found: building=construction
+
+
+Test 115/530 - Name: Detached Home
+============================================================
+Tags: building=detached
+Term: Detached Home        > found: building=detached
+
+
+Test 116/530 - Name: Dormitory
+============================================================
+Tags: building=dormitory
+Term: Dormitory            > found: building=dormitory
+
+
+Test 117/530 - Name: Entrance/Exit
+============================================================
+Tags: building=entrance
+Term: Entrance/Exit        > found: building=entrance
+
+
+Test 118/530 - Name: Greenhouse
+============================================================
+Tags: building=greenhouse
+Term: Greenhouse           > found: building=greenhouse
+
+
+Test 119/530 - Name: Hospital Building
+============================================================
+Tags: building=hospital
+Term: Hospital Building    > found: building=hospital
+
+
+Test 120/530 - Name: Hotel Building
+============================================================
+Tags: building=hotel
+Term: Hotel Building       > found: building=hotel
+
+
+Test 121/530 - Name: House
+============================================================
+Tags: building=house
+Term: House                > found: building=house
+
+
+Test 122/530 - Name: Hut
+============================================================
+Tags: building=hut
+Term: Hut                  > found: building=hut
+
+
+Test 123/530 - Name: Industrial Building
+============================================================
+Tags: building=industrial
+Term: Industrial Building  > found: building=industrial
+
+
+Test 124/530 - Name: Preschool/Kindergarten Building
+============================================================
+Tags: building=kindergarten
+Term: Preschool/Kindergarten Building > found: building=kindergarten
+Term: kindergarden         > found: building=kindergarten
+Term: pre-school           > found: building=kindergarten
+
+
+Test 125/530 - Name: Public Building
+============================================================
+Tags: building=public
+Term: Public Building      > found: building=public
+
+
+Test 126/530 - Name: Residential Building
+============================================================
+Tags: building=residential
+Term: Residential Building > found: building=residential
+
+
+Test 127/530 - Name: Retail Building
+============================================================
+Tags: building=retail
+Term: Retail Building      > found: building=retail
+
+
+Test 128/530 - Name: Roof
+============================================================
+Tags: building=roof
+Term: Roof                 > found: building=roof
+
+
+Test 129/530 - Name: School Building
+============================================================
+Tags: building=school
+Term: School Building      > found: building=school
+Term: academy              > found: building=school
+Term: elementary school    > found: building=school
+Term: middle school        > found: building=school
+Term: high school          > found: building=school
+
+
+Test 130/530 - Name: Shed
+============================================================
+Tags: building=shed
+Term: Shed                 > found: building=shed
+
+
+Test 131/530 - Name: Stable
+============================================================
+Tags: building=stable
+Term: Stable               > found: building=stable
+
+
+Test 132/530 - Name: Static Mobile Home
+============================================================
+Tags: building=static_caravan
+Term: Static Mobile Home   > found: building=static_caravan
+
+
+Test 133/530 - Name: Row Houses
+============================================================
+Tags: building=terrace
+Term: Row Houses           > found: building=terrace
+
+
+Test 134/530 - Name: Train Station
+============================================================
+Tags: building=train_station
+Term: Train Station        > found: building=train_station
+
+
+Test 135/530 - Name: University Building
+============================================================
+Tags: building=university
+Term: University Building  > found: building=university
+Term: college              > found: building=university
+
+
+Test 136/530 - Name: Warehouse
+============================================================
+Tags: building=warehouse
+Term: Warehouse            > found: building=warehouse
+
+
+Test 137/530 - Name: Craft
+============================================================
+Tags: craft=*
+Term: Craft                > found: craft=*
+
+
+Test 138/530 - Name: Basket Maker
+============================================================
+Tags: craft=basket_maker
+Term: Basket Maker         > found: craft=basket_maker
+
+
+Test 139/530 - Name: Beekeeper
+============================================================
+Tags: craft=beekeeper
+Term: Beekeeper            > found: craft=beekeeper
+
+
+Test 140/530 - Name: Blacksmith
+============================================================
+Tags: craft=blacksmith
+Term: Blacksmith           > found: craft=blacksmith
+
+
+Test 141/530 - Name: Boat Builder
+============================================================
+Tags: craft=boatbuilder
+Term: Boat Builder         > found: craft=boatbuilder
+
+
+Test 142/530 - Name: Bookbinder
+============================================================
+Tags: craft=bookbinder
+Term: Bookbinder           > found: craft=bookbinder
+Term: book repair          > found: craft=bookbinder
+
+
+Test 143/530 - Name: Brewery
+============================================================
+Tags: craft=brewery
+Term: Brewery              > found: craft=brewery
+Term: beer                 > found: craft=brewery
+Term: bier                 > found: craft=brewery
+
+
+Test 144/530 - Name: Carpenter
+============================================================
+Tags: craft=carpenter
+Term: Carpenter            > found: craft=carpenter
+Term: woodworker           > found: craft=carpenter
+
+
+Test 145/530 - Name: Carpet Layer
+============================================================
+Tags: craft=carpet_layer
+Term: Carpet Layer         > found: craft=carpet_layer
+
+
+Test 146/530 - Name: Caterer
+============================================================
+Tags: craft=caterer
+Term: Caterer              > found: craft=caterer
+
+
+Test 147/530 - Name: Clockmaker
+============================================================
+Tags: craft=clockmaker
+Term: Clockmaker           > found: craft=clockmaker
+
+
+Test 148/530 - Name: Confectionery
+============================================================
+Tags: craft=confectionery
+Term: Confectionery        > found: craft=confectionery
+Term: sweets               > found: craft=confectionery
+Term: candy                > none found
+
+
+Test 149/530 - Name: Dressmaker
+============================================================
+Tags: craft=dressmaker
+Term: Dressmaker           > found: craft=dressmaker
+Term: seamstress           > found: craft=dressmaker
+
+
+Test 150/530 - Name: Electrician
+============================================================
+Tags: craft=electrician
+Term: Electrician          > found: craft=electrician
+Term: power                > found: craft=electrician
+Term: wire                 > found: craft=electrician
+
+
+Test 151/530 - Name: Gardener
+============================================================
+Tags: craft=gardener
+Term: Gardener             > found: craft=gardener
+Term: landscaper           > found: craft=gardener
+Term: grounds keeper       > found: craft=gardener
+
+
+Test 152/530 - Name: Glaziery
+============================================================
+Tags: craft=glaziery
+Term: Glaziery             > found: craft=glaziery
+Term: glass                > found: craft=glaziery
+Term: stained-glass        > found: craft=glaziery
+Term: window               > found: craft=glaziery
+
+
+Test 153/530 - Name: Handicraft
+============================================================
+Tags: craft=handicraft
+Term: Handicraft           > found: craft=handicraft
+
+
+Test 154/530 - Name: HVAC
+============================================================
+Tags: craft=hvac
+Term: HVAC                 > found: craft=hvac
+Term: heat*                > found: craft=hvac
+Term: vent*                > found: craft=hvac
+Term: air conditioning     > found: craft=hvac
+
+
+Test 155/530 - Name: Insulator
+============================================================
+Tags: craft=insulation
+Term: Insulator            > found: craft=insulation
+
+
+Test 156/530 - Name: Jeweler
+============================================================
+Tags: craft=jeweler
+Term: Jeweler              > none found
+
+
+Test 157/530 - Name: Key Cutter
+============================================================
+Tags: craft=key_cutter
+Term: Key Cutter           > found: craft=key_cutter
+
+
+Test 158/530 - Name: Locksmith
+============================================================
+Tags: craft=locksmith
+Term: Locksmith            > found: craft=locksmith
+
+
+Test 159/530 - Name: Metal Construction
+============================================================
+Tags: craft=metal_construction
+Term: Metal Construction   > found: craft=metal_construction
+
+
+Test 160/530 - Name: Optician
+============================================================
+Tags: craft=optician
+Term: Optician             > found: craft=optician
+
+
+Test 161/530 - Name: Painter
+============================================================
+Tags: craft=painter
+Term: Painter              > found: craft=painter
+
+
+Test 162/530 - Name: Photographer
+============================================================
+Tags: craft=photographer
+Term: Photographer         > found: craft=photographer
+
+
+Test 163/530 - Name: Photographic Laboratory
+============================================================
+Tags: craft=photographic_laboratory
+Term: Photographic Laboratory > found: craft=photographic_laboratory
+Term: film                 > found: craft=photographic_laboratory
+
+
+Test 164/530 - Name: Plasterer
+============================================================
+Tags: craft=plasterer
+Term: Plasterer            > found: craft=plasterer
+
+
+Test 165/530 - Name: Plumber
+============================================================
+Tags: craft=plumber
+Term: Plumber              > found: craft=plumber
+Term: pipe                 > found: craft=plumber
+
+
+Test 166/530 - Name: Pottery
+============================================================
+Tags: craft=pottery
+Term: Pottery              > found: craft=pottery
+Term: ceramic              > found: craft=pottery
+
+
+Test 167/530 - Name: Rigger
+============================================================
+Tags: craft=rigger
+Term: Rigger               > found: craft=rigger
+
+
+Test 168/530 - Name: Roofer
+============================================================
+Tags: craft=roofer
+Term: Roofer               > found: craft=roofer
+
+
+Test 169/530 - Name: Saddler
+============================================================
+Tags: craft=saddler
+Term: Saddler              > found: craft=saddler
+
+
+Test 170/530 - Name: Sailmaker
+============================================================
+Tags: craft=sailmaker
+Term: Sailmaker            > found: craft=sailmaker
+
+
+Test 171/530 - Name: Sawmill
+============================================================
+Tags: craft=sawmill
+Term: Sawmill              > found: craft=sawmill
+Term: lumber               > found: craft=sawmill
+
+
+Test 172/530 - Name: Scaffolder
+============================================================
+Tags: craft=scaffolder
+Term: Scaffolder           > found: craft=scaffolder
+
+
+Test 173/530 - Name: Sculpter
+============================================================
+Tags: craft=sculpter
+Term: Sculpter             > none found
+
+
+Test 174/530 - Name: Shoemaker
+============================================================
+Tags: craft=shoemaker
+Term: Shoemaker            > found: craft=shoemaker
+Term: cobbler              > found: craft=shoemaker
+
+
+Test 175/530 - Name: Stonemason
+============================================================
+Tags: craft=stonemason
+Term: Stonemason           > found: craft=stonemason
+Term: masonry              > found: craft=stonemason
+
+
+Test 176/530 - Name: Chimney Sweep
+============================================================
+Tags: craft=sweep
+Term: Chimney Sweep        > found: craft=sweep
+
+
+Test 177/530 - Name: Tailor
+============================================================
+Tags: craft=tailor
+Term: Tailor               > found: craft=tailor
+Term: clothes              > found: craft=tailor
+Term: suit                 > found: craft=tailor
+
+
+Test 178/530 - Name: Tiler
+============================================================
+Tags: craft=tiler
+Term: Tiler                > found: craft=tiler
+
+
+Test 179/530 - Name: Tinsmith
+============================================================
+Tags: craft=tinsmith
+Term: Tinsmith             > found: craft=tinsmith
+
+
+Test 180/530 - Name: Upholsterer
+============================================================
+Tags: craft=upholsterer
+Term: Upholsterer          > found: craft=upholsterer
+
+
+Test 181/530 - Name: Watchmaker
+============================================================
+Tags: craft=watchmaker
+Term: Watchmaker           > found: craft=watchmaker
+
+
+Test 182/530 - Name: Window Construction
+============================================================
+Tags: craft=window_construction
+Term: Window Construction  > found: craft=window_construction
+Term: glass                > found: craft=window_construction
+
+
+Test 183/530 - Name: Winery
+============================================================
+Tags: craft=winery
+Term: Winery               > found: craft=winery
+
+
+Test 184/530 - Name: Embankment
+============================================================
+Tags: embankment=yes
+Term: Embankment           > none found
+
+
+Test 185/530 - Name: Ambulance Station
+============================================================
+Tags: emergency=ambulance_station
+Term: Ambulance Station    > found: emergency=ambulance_station
+Term: EMS                  > found: emergency=ambulance_station
+Term: EMT                  > found: emergency=ambulance_station
+Term: rescue               > found: emergency=ambulance_station
+
+
+Test 186/530 - Name: Fire Hydrant
+============================================================
+Tags: emergency=fire_hydrant
+Term: Fire Hydrant         > found: emergency=fire_hydrant
+
+
+Test 187/530 - Name: Emergency Phone
+============================================================
+Tags: emergency=phone
+Term: Emergency Phone      > found: emergency=phone
+
+
+Test 188/530 - Name: Entrance/Exit
+============================================================
+Tags: entrance=*
+Term: Entrance/Exit        > found: entrance=*
+
+
+Test 189/530 - Name: Crossing
+============================================================
+Tags: footway=crossing, highway=footway
+Term: Crossing             > found: footway=crossing
+
+
+Test 190/530 - Name: Crosswalk
+============================================================
+Tags: crossing=zebra, footway=crossing, highway=footway
+Term: Crosswalk            > found: footway=crossing
+Term: zebra crossing       > found: footway=crossing
+
+
+Test 191/530 - Name: Sidewalk
+============================================================
+Tags: footway=sidewalk, highway=footway
+Term: Sidewalk             > found: footway=sidewalk, highway=footway
+
+
+Test 192/530 - Name: Ford
+============================================================
+Tags: ford=yes
+Term: Ford                 > none found
+
+
+Test 193/530 - Name: Sand Trap
+============================================================
+Tags: natural=sand, golf=bunker
+Term: Sand Trap            > found: natural=sand
+Term: hazard               > found: natural=sand
+Term: bunker               > found: natural=sand
+
+
+Test 194/530 - Name: Fairway
+============================================================
+Tags: landuse=grass, golf=fairway
+Term: Fairway              > none found
+
+
+Test 195/530 - Name: Putting Green
+============================================================
+Tags: sport=golf, landuse=grass, golf=green, leisure=pitch
+Term: Putting Green        > found: sport=golf, leisure=pitch
+
+
+Test 196/530 - Name: Golf Hole
+============================================================
+Tags: golf=hole
+Term: Golf Hole            > none found
+
+
+Test 197/530 - Name: Lateral Water Hazard
+============================================================
+Tags: natural=water, golf=lateral_water_hazard
+Term: Lateral Water Hazard > found: natural=water
+
+
+Test 198/530 - Name: Rough
+============================================================
+Tags: landuse=grass, golf=rough
+Term: Rough                > none found
+
+
+Test 199/530 - Name: Tee Box
+============================================================
+Tags: landuse=grass, golf=tee
+Term: Tee Box              > none found
+Term: teeing ground        > found: landuse=grass
+
+
+Test 200/530 - Name: Water Hazard
+============================================================
+Tags: natural=water, golf=water_hazard
+Term: Water Hazard         > found: natural=water
+
+
+Test 201/530 - Name: Highway
+============================================================
+Tags: highway=*
+Term: Highway              > found: highway=*
+
+
+Test 202/530 - Name: Bridle Path
+============================================================
+Tags: highway=bridleway
+Term: Bridle Path          > found: highway=bridleway
+Term: bridleway            > found: highway=bridleway
+Term: equestrian           > found: highway=bridleway
+Term: horse                > found: highway=bridleway
+
+
+Test 203/530 - Name: Bus Stop
+============================================================
+Tags: highway=bus_stop
+Term: Bus Stop             > found: highway=bus_stop
+
+
+Test 204/530 - Name: Crossing
+============================================================
+Tags: highway=crossing
+Term: Crossing             > found: highway=crossing
+
+
+Test 205/530 - Name: Crosswalk
+============================================================
+Tags: crossing=zebra, highway=crossing
+Term: Crosswalk            > found: highway=crossing
+Term: zebra crossing       > found: highway=crossing
+
+
+Test 206/530 - Name: Cycle Path
+============================================================
+Tags: highway=cycleway
+Term: Cycle Path           > found: highway=cycleway
+Term: bike                 > found: highway=cycleway
+
+
+Test 207/530 - Name: Foot Path
+============================================================
+Tags: highway=footway
+Term: Foot Path            > found: highway=footway
+Term: hike                 > found: highway=footway
+Term: hiking               > found: highway=footway
+Term: trackway             > found: highway=footway
+Term: trail                > found: highway=footway
+Term: walk                 > found: highway=footway
+
+
+Test 208/530 - Name: Living Street
+============================================================
+Tags: highway=living_street
+Term: Living Street        > found: highway=living_street
+
+
+Test 209/530 - Name: Mini-Roundabout
+============================================================
+Tags: highway=mini_roundabout
+Term: Mini-Roundabout      > found: highway=mini_roundabout
+
+
+Test 210/530 - Name: Motorway
+============================================================
+Tags: highway=motorway
+Term: Motorway             > found: highway=motorway
+
+
+Test 211/530 - Name: Motorway Junction / Exit
+============================================================
+Tags: highway=motorway_junction
+Term: Motorway Junction / Exit > found: highway=motorway_junction
+
+
+Test 212/530 - Name: Motorway Link
+============================================================
+Tags: highway=motorway_link
+Term: Motorway Link        > found: highway=motorway_link
+Term: ramp                 > found: highway=motorway_link
+Term: on ramp              > found: highway=motorway_link
+Term: off ramp             > found: highway=motorway_link
+
+
+Test 213/530 - Name: Path
+============================================================
+Tags: highway=path
+Term: Path                 > found: highway=path
+Term: hike                 > found: highway=path
+Term: hiking               > found: highway=path
+Term: trackway             > found: highway=path
+Term: trail                > found: highway=path
+Term: walk                 > found: highway=path
+
+
+Test 214/530 - Name: Pedestrian
+============================================================
+Tags: highway=pedestrian
+Term: Pedestrian           > found: highway=pedestrian
+
+
+Test 215/530 - Name: Primary Road
+============================================================
+Tags: highway=primary
+Term: Primary Road         > found: highway=primary
+
+
+Test 216/530 - Name: Primary Link
+============================================================
+Tags: highway=primary_link
+Term: Primary Link         > found: highway=primary_link
+Term: ramp                 > found: highway=primary_link
+Term: on ramp              > found: highway=primary_link
+Term: off ramp             > found: highway=primary_link
+
+
+Test 217/530 - Name: Motor Raceway
+============================================================
+Tags: highway=raceway
+Term: Motor Raceway        > found: highway=raceway
+Term: auto*                > none found
+Term: race*                > found: highway=raceway
+Term: nascar               > found: highway=raceway
+
+
+Test 218/530 - Name: Residential Road
+============================================================
+Tags: highway=residential
+Term: Residential Road     > found: highway=residential
+
+
+Test 219/530 - Name: Rest Area
+============================================================
+Tags: highway=rest_area
+Term: Rest Area            > found: highway=rest_area
+Term: rest stop            > found: highway=rest_area
+
+
+Test 220/530 - Name: Unknown Road
+============================================================
+Tags: highway=road
+Term: Unknown Road         > found: highway=road
+
+
+Test 221/530 - Name: Secondary Road
+============================================================
+Tags: highway=secondary
+Term: Secondary Road       > found: highway=secondary
+
+
+Test 222/530 - Name: Secondary Link
+============================================================
+Tags: highway=secondary_link
+Term: Secondary Link       > found: highway=secondary_link
+Term: ramp                 > found: highway=secondary_link
+Term: on ramp              > found: highway=secondary_link
+Term: off ramp             > found: highway=secondary_link
+
+
+Test 223/530 - Name: Service Road
+============================================================
+Tags: highway=service
+Term: Service Road         > found: highway=service
+
+
+Test 224/530 - Name: Service Area
+============================================================
+Tags: highway=services
+Term: Service Area         > found: highway=services
+Term: services             > found: highway=services
+Term: travel plaza         > found: highway=services
+Term: service station      > found: highway=services
+
+
+Test 225/530 - Name: Steps
+============================================================
+Tags: highway=steps
+Term: Steps                > found: highway=steps
+Term: stairs               > found: highway=steps
+Term: staircase            > found: highway=steps
+
+
+Test 226/530 - Name: Stop Sign
+============================================================
+Tags: highway=stop
+Term: Stop Sign            > found: highway=stop
+Term: stop sign            > found: highway=stop
+
+
+Test 227/530 - Name: Street Lamp
+============================================================
+Tags: highway=street_lamp
+Term: Street Lamp          > found: highway=street_lamp
+Term: streetlight          > found: highway=street_lamp
+Term: street light         > found: highway=street_lamp
+Term: lamp                 > found: highway=street_lamp
+Term: light                > found: highway=street_lamp
+Term: gaslight             > found: highway=street_lamp
+
+
+Test 228/530 - Name: Tertiary Road
+============================================================
+Tags: highway=tertiary
+Term: Tertiary Road        > found: highway=tertiary
+
+
+Test 229/530 - Name: Tertiary Link
+============================================================
+Tags: highway=tertiary_link
+Term: Tertiary Link        > found: highway=tertiary_link
+Term: ramp                 > found: highway=tertiary_link
+Term: on ramp              > found: highway=tertiary_link
+Term: off ramp             > found: highway=tertiary_link
+
+
+Test 230/530 - Name: Track
+============================================================
+Tags: highway=track
+Term: Track                > found: highway=track
+Term: woods road           > found: highway=track
+Term: fire road            > found: highway=track
+
+
+Test 231/530 - Name: Traffic Signals
+============================================================
+Tags: highway=traffic_signals
+Term: Traffic Signals      > found: highway=traffic_signals
+Term: light                > found: highway=traffic_signals
+Term: stoplight            > found: highway=traffic_signals
+Term: traffic light        > found: highway=traffic_signals
+
+
+Test 232/530 - Name: Trunk Road
+============================================================
+Tags: highway=trunk
+Term: Trunk Road           > found: highway=trunk
+
+
+Test 233/530 - Name: Trunk Link
+============================================================
+Tags: highway=trunk_link
+Term: Trunk Link           > found: highway=trunk_link
+Term: ramp                 > found: highway=trunk_link
+Term: on ramp              > found: highway=trunk_link
+Term: off ramp             > found: highway=trunk_link
+
+
+Test 234/530 - Name: Turning Circle
+============================================================
+Tags: highway=turning_circle
+Term: Turning Circle       > found: highway=turning_circle
+Term: cul-de-sac           > found: highway=turning_circle
+
+
+Test 235/530 - Name: Unclassified Road
+============================================================
+Tags: highway=unclassified
+Term: Unclassified Road    > found: highway=unclassified
+
+
+Test 236/530 - Name: Historic Site
+============================================================
+Tags: historic=*
+Term: Historic Site        > found: historic=*
+
+
+Test 237/530 - Name: Archaeological Site
+============================================================
+Tags: historic=archaeological_site
+Term: Archaeological Site  > found: historic=archaeological_site
+
+
+Test 238/530 - Name: Boundary Stone
+============================================================
+Tags: historic=boundary_stone
+Term: Boundary Stone       > found: historic=boundary_stone
+
+
+Test 239/530 - Name: Castle
+============================================================
+Tags: historic=castle
+Term: Castle               > found: historic=castle
+
+
+Test 240/530 - Name: Memorial
+============================================================
+Tags: historic=memorial
+Term: Memorial             > found: historic=memorial
+
+
+Test 241/530 - Name: Monument
+============================================================
+Tags: historic=monument
+Term: Monument             > found: historic=monument
+
+
+Test 242/530 - Name: Ruins
+============================================================
+Tags: historic=ruins
+Term: Ruins                > found: historic=ruins
+
+
+Test 243/530 - Name: Wayside Cross
+============================================================
+Tags: historic=wayside_cross
+Term: Wayside Cross        > found: historic=wayside_cross
+
+
+Test 244/530 - Name: Wayside Shrine
+============================================================
+Tags: historic=wayside_shrine
+Term: Wayside Shrine       > found: historic=wayside_shrine
+
+
+Test 245/530 - Name: Landuse
+============================================================
+Tags: landuse=*
+Term: Landuse              > found: landuse=*
+
+
+Test 246/530 - Name: Allotments
+============================================================
+Tags: landuse=allotments
+Term: Allotments           > found: landuse=allotments
+
+
+Test 247/530 - Name: Basin
+============================================================
+Tags: landuse=basin
+Term: Basin                > found: landuse=basin
+
+
+Test 248/530 - Name: Cemetery
+============================================================
+Tags: landuse=cemetery
+Term: Cemetery             > found: landuse=cemetery
+
+
+Test 249/530 - Name: Churchyard
+============================================================
+Tags: landuse=churchyard
+Term: Churchyard           > found: landuse=churchyard
+
+
+Test 250/530 - Name: Commercial
+============================================================
+Tags: landuse=commercial
+Term: Commercial           > found: landuse=commercial
+
+
+Test 251/530 - Name: Construction
+============================================================
+Tags: landuse=construction
+Term: Construction         > found: landuse=construction
+
+
+Test 252/530 - Name: Farm
+============================================================
+Tags: landuse=farm
+Term: Farm                 > found: landuse=farm
+
+
+Test 253/530 - Name: Farmland
+============================================================
+Tags: landuse=farmland
+Term: Farmland             > found: landuse=farmland
+
+
+Test 254/530 - Name: Farmyard
+============================================================
+Tags: landuse=farmyard
+Term: Farmyard             > found: landuse=farmyard
+
+
+Test 255/530 - Name: Forest
+============================================================
+Tags: landuse=forest
+Term: Forest               > found: landuse=forest
+
+
+Test 256/530 - Name: Grass
+============================================================
+Tags: landuse=grass
+Term: Grass                > found: landuse=grass
+
+
+Test 257/530 - Name: Industrial
+============================================================
+Tags: landuse=industrial
+Term: Industrial           > found: landuse=industrial
+
+
+Test 258/530 - Name: Landfill
+============================================================
+Tags: landuse=landfill
+Term: Landfill             > found: landuse=landfill
+Term: dump                 > found: landuse=landfill
+
+
+Test 259/530 - Name: Meadow
+============================================================
+Tags: landuse=meadow
+Term: Meadow               > found: landuse=meadow
+
+
+Test 260/530 - Name: Military
+============================================================
+Tags: landuse=military
+Term: Military             > found: landuse=military
+
+
+Test 261/530 - Name: Orchard
+============================================================
+Tags: landuse=orchard
+Term: Orchard              > found: landuse=orchard
+
+
+Test 262/530 - Name: Quarry
+============================================================
+Tags: landuse=quarry
+Term: Quarry               > found: landuse=quarry
+
+
+Test 263/530 - Name: Residential
+============================================================
+Tags: landuse=residential
+Term: Residential          > found: landuse=residential
+
+
+Test 264/530 - Name: Retail
+============================================================
+Tags: landuse=retail
+Term: Retail               > found: landuse=retail
+
+
+Test 265/530 - Name: Vineyard
+============================================================
+Tags: landuse=vineyard
+Term: Vineyard             > found: landuse=vineyard
+
+
+Test 266/530 - Name: Leisure
+============================================================
+Tags: leisure=*
+Term: Leisure              > found: leisure=*
+
+
+Test 267/530 - Name: Common
+============================================================
+Tags: leisure=common
+Term: Common               > found: leisure=common
+Term: open space           > found: leisure=common
+
+
+Test 268/530 - Name: Dog Park
+============================================================
+Tags: leisure=dog_park
+Term: Dog Park             > found: leisure=dog_park
+
+
+Test 269/530 - Name: Firepit
+============================================================
+Tags: leisure=firepit
+Term: Firepit              > found: leisure=firepit
+Term: fireplace            > found: leisure=firepit
+Term: campfire             > none found
+
+
+Test 270/530 - Name: Garden
+============================================================
+Tags: leisure=garden
+Term: Garden               > found: leisure=garden
+
+
+Test 271/530 - Name: Golf Course
+============================================================
+Tags: leisure=golf_course
+Term: Golf Course          > found: leisure=golf_course
+Term: links                > found: leisure=golf_course
+
+
+Test 272/530 - Name: Ice Rink
+============================================================
+Tags: leisure=ice_rink
+Term: Ice Rink             > found: leisure=ice_rink
+Term: hockey               > found: leisure=ice_rink
+Term: skating              > found: leisure=ice_rink
+Term: curling              > found: leisure=ice_rink
+
+
+Test 273/530 - Name: Marina
+============================================================
+Tags: leisure=marina
+Term: Marina               > found: leisure=marina
+Term: boat                 > found: leisure=marina
+
+
+Test 274/530 - Name: Park
+============================================================
+Tags: leisure=park
+Term: Park                 > found: leisure=park
+Term: esplanade            > found: leisure=park
+Term: estate               > found: leisure=park
+Term: forest               > found: leisure=park
+Term: garden               > found: leisure=park
+Term: grass                > found: leisure=park
+Term: green                > found: leisure=park
+Term: grounds              > found: leisure=park
+Term: lawn                 > found: leisure=park
+Term: lot                  > found: leisure=park
+Term: meadow               > found: leisure=park
+Term: parkland             > found: leisure=park
+Term: place                > found: leisure=park
+Term: playground           > found: leisure=park
+Term: plaza                > found: leisure=park
+Term: pleasure garden      > found: leisure=park
+Term: recreation area      > found: leisure=park
+Term: square               > found: leisure=park
+Term: tract                > found: leisure=park
+Term: village green        > found: leisure=park
+Term: woodland             > found: leisure=park
+
+
+Test 275/530 - Name: Picnic Table
+============================================================
+Tags: leisure=picnic_table
+Term: Picnic Table         > found: leisure=picnic_table
+Term: bench                > found: leisure=picnic_table
+
+
+Test 276/530 - Name: Sport Pitch
+============================================================
+Tags: leisure=pitch
+Term: Sport Pitch          > found: leisure=pitch
+Term: field                > found: leisure=pitch
+
+
+Test 277/530 - Name: Playground
+============================================================
+Tags: leisure=playground
+Term: Playground           > found: leisure=playground
+Term: jungle gym           > found: leisure=playground
+Term: play area            > found: leisure=playground
+
+
+Test 278/530 - Name: Running Track
+============================================================
+Tags: sport=running, leisure=track
+Term: Running Track        > found: leisure=track
+
+
+Test 279/530 - Name: Slipway
+============================================================
+Tags: leisure=slipway
+Term: Slipway              > found: leisure=slipway
+Term: boat launch          > found: leisure=slipway
+Term: boat ramp            > found: leisure=slipway
+
+
+Test 280/530 - Name: Sports Center / Gym
+============================================================
+Tags: leisure=sports_centre
+Term: Sports Center / Gym  > found: leisure=sports_centre
+Term: gym                  > found: leisure=sports_centre
+
+
+Test 281/530 - Name: Stadium
+============================================================
+Tags: leisure=stadium
+Term: Stadium              > found: leisure=stadium
+
+
+Test 282/530 - Name: Swimming Pool
+============================================================
+Tags: leisure=swimming_pool
+Term: Swimming Pool        > found: leisure=swimming_pool
+
+
+Test 283/530 - Name: Racetrack (non-Motorsport)
+============================================================
+Tags: leisure=track
+Term: Racetrack (non-Motorsport) > found: leisure=track
+
+
+Test 284/530 - Name: Line
+============================================================
+Tags: 
+Term: Line                 > none found
+
+
+Test 285/530 - Name: Man Made
+============================================================
+Tags: man_made=*
+Term: Man Made             > found: man_made=*
+
+
+Test 286/530 - Name: Breakwater
+============================================================
+Tags: man_made=breakwater
+Term: Breakwater           > found: man_made=breakwater
+
+
+Test 287/530 - Name: Cut line
+============================================================
+Tags: man_made=cutline
+Term: Cut line             > found: man_made=cutline
+
+
+Test 288/530 - Name: Embankment
+============================================================
+Tags: man_made=embankment
+Term: Embankment           > found: man_made=embankment
+
+
+Test 289/530 - Name: Flagpole
+============================================================
+Tags: man_made=flagpole
+Term: Flagpole             > found: man_made=flagpole
+
+
+Test 290/530 - Name: Lighthouse
+============================================================
+Tags: man_made=lighthouse
+Term: Lighthouse           > found: man_made=lighthouse
+
+
+Test 291/530 - Name: Observation Tower
+============================================================
+Tags: man_made=tower, tower:type=observation
+Term: Observation Tower    > found: tower:type=observation, man_made=tower
+Term: lookout tower        > found: tower:type=observation, man_made=tower
+Term: fire tower           > found: tower:type=observation, man_made=tower
+
+
+Test 292/530 - Name: Pier
+============================================================
+Tags: man_made=pier
+Term: Pier                 > found: man_made=pier
+
+
+Test 293/530 - Name: Pipeline
+============================================================
+Tags: man_made=pipeline
+Term: Pipeline             > found: man_made=pipeline
+
+
+Test 294/530 - Name: Survey Point
+============================================================
+Tags: man_made=survey_point
+Term: Survey Point         > found: man_made=survey_point
+
+
+Test 295/530 - Name: Tower
+============================================================
+Tags: man_made=tower
+Term: Tower                > found: man_made=tower
+
+
+Test 296/530 - Name: Wastewater Plant
+============================================================
+Tags: man_made=wastewater_plant
+Term: Wastewater Plant     > found: man_made=wastewater_plant
+Term: sewage*              > found: man_made=wastewater_plant
+Term: water treatment plant > found: man_made=wastewater_plant
+Term: reclamation plant    > found: man_made=wastewater_plant
+
+
+Test 297/530 - Name: Water Tower
+============================================================
+Tags: man_made=water_tower
+Term: Water Tower          > found: man_made=water_tower
+
+
+Test 298/530 - Name: Water Well
+============================================================
+Tags: man_made=water_well
+Term: Water Well           > found: man_made=water_well
+
+
+Test 299/530 - Name: Water Works
+============================================================
+Tags: man_made=water_works
+Term: Water Works          > found: man_made=water_works
+
+
+Test 300/530 - Name: Airfield
+============================================================
+Tags: military=airfield
+Term: Airfield             > found: military=airfield
+
+
+Test 301/530 - Name: Barracks
+============================================================
+Tags: military=barracks
+Term: Barracks             > found: military=barracks
+
+
+Test 302/530 - Name: Bunker
+============================================================
+Tags: military=bunker
+Term: Bunker               > found: military=bunker
+
+
+Test 303/530 - Name: Military Range
+============================================================
+Tags: military=range
+Term: Military Range       > found: military=range
+
+
+Test 304/530 - Name: Natural
+============================================================
+Tags: natural=*
+Term: Natural              > found: natural=*
+
+
+Test 305/530 - Name: Bay
+============================================================
+Tags: natural=bay
+Term: Bay                  > found: natural=bay
+
+
+Test 306/530 - Name: Beach
+============================================================
+Tags: natural=beach
+Term: Beach                > found: natural=beach
+
+
+Test 307/530 - Name: Cliff
+============================================================
+Tags: natural=cliff
+Term: Cliff                > found: natural=cliff
+
+
+Test 308/530 - Name: Coastline
+============================================================
+Tags: natural=coastline
+Term: Coastline            > found: natural=coastline
+Term: shore                > found: natural=coastline
+
+
+Test 309/530 - Name: Fell
+============================================================
+Tags: natural=fell
+Term: Fell                 > found: natural=fell
+
+
+Test 310/530 - Name: Glacier
+============================================================
+Tags: natural=glacier
+Term: Glacier              > found: natural=glacier
+
+
+Test 311/530 - Name: Grassland
+============================================================
+Tags: natural=grassland
+Term: Grassland            > found: natural=grassland
+
+
+Test 312/530 - Name: Heath
+============================================================
+Tags: natural=heath
+Term: Heath                > found: natural=heath
+
+
+Test 313/530 - Name: Peak
+============================================================
+Tags: natural=peak
+Term: Peak                 > found: natural=peak
+Term: acme                 > found: natural=peak
+Term: aiguille             > found: natural=peak
+Term: alp                  > found: natural=peak
+Term: climax               > found: natural=peak
+Term: crest                > found: natural=peak
+Term: crown                > found: natural=peak
+Term: hill                 > found: natural=peak
+Term: mount                > found: natural=peak
+Term: mountain             > found: natural=peak
+Term: pinnacle             > found: natural=peak
+Term: summit               > found: natural=peak
+Term: tip                  > found: natural=peak
+Term: top                  > found: natural=peak
+
+
+Test 314/530 - Name: Scree
+============================================================
+Tags: natural=scree
+Term: Scree                > found: natural=scree
+Term: loose rocks          > found: natural=scree
+
+
+Test 315/530 - Name: Scrub
+============================================================
+Tags: natural=scrub
+Term: Scrub                > found: natural=scrub
+
+
+Test 316/530 - Name: Spring
+============================================================
+Tags: natural=spring
+Term: Spring               > found: natural=spring
+
+
+Test 317/530 - Name: Tree
+============================================================
+Tags: natural=tree
+Term: Tree                 > found: natural=tree
+
+
+Test 318/530 - Name: Water
+============================================================
+Tags: natural=water
+Term: Water                > found: natural=water
+
+
+Test 319/530 - Name: Wetland
+============================================================
+Tags: natural=wetland
+Term: Wetland              > found: natural=wetland
+
+
+Test 320/530 - Name: Wood
+============================================================
+Tags: natural=wood
+Term: Wood                 > found: natural=wood
+
+
+Test 321/530 - Name: Office
+============================================================
+Tags: office=*
+Term: Office               > found: office=*
+
+
+Test 322/530 - Name: Accountant
+============================================================
+Tags: office=accountant
+Term: Accountant           > found: office=accountant
+
+
+Test 323/530 - Name: Administrative Office
+============================================================
+Tags: office=administrative
+Term: Administrative Office > found: office=administrative
+
+
+Test 324/530 - Name: Architect
+============================================================
+Tags: office=architect
+Term: Architect            > found: office=architect
+
+
+Test 325/530 - Name: Company Office
+============================================================
+Tags: office=company
+Term: Company Office       > found: office=company
+
+
+Test 326/530 - Name: Educational Institution
+============================================================
+Tags: office=educational_institution
+Term: Educational Institution > found: office=educational_institution
+
+
+Test 327/530 - Name: Employment Agency
+============================================================
+Tags: office=employment_agency
+Term: Employment Agency    > found: office=employment_agency
+Term: job                  > found: office=employment_agency
+
+
+Test 328/530 - Name: Real Estate Office
+============================================================
+Tags: office=estate_agent
+Term: Real Estate Office   > found: office=estate_agent
+
+
+Test 329/530 - Name: Financial Office
+============================================================
+Tags: office=financial
+Term: Financial Office     > none found
+
+
+Test 330/530 - Name: Government Office
+============================================================
+Tags: office=government
+Term: Government Office    > found: office=government
+
+
+Test 331/530 - Name: Insurance Office
+============================================================
+Tags: office=insurance
+Term: Insurance Office     > found: office=insurance
+
+
+Test 332/530 - Name: IT Office
+============================================================
+Tags: office=it
+Term: IT Office            > found: office=it
+
+
+Test 333/530 - Name: Law Office
+============================================================
+Tags: office=lawyer
+Term: Law Office           > found: office=lawyer
+
+
+Test 334/530 - Name: Newspaper
+============================================================
+Tags: office=newspaper
+Term: Newspaper            > found: office=newspaper
+
+
+Test 335/530 - Name: NGO Office
+============================================================
+Tags: office=ngo
+Term: NGO Office           > found: office=ngo
+
+
+Test 336/530 - Name: Physician
+============================================================
+Tags: office=physician
+Term: Physician            > none found
+
+
+Test 337/530 - Name: Political Party
+============================================================
+Tags: office=political_party
+Term: Political Party      > found: office=political_party
+
+
+Test 338/530 - Name: Research Office
+============================================================
+Tags: office=research
+Term: Research Office      > found: office=research
+
+
+Test 339/530 - Name: Telecom Office
+============================================================
+Tags: office=telecommunication
+Term: Telecom Office       > found: office=telecommunication
+
+
+Test 340/530 - Name: Therapist
+============================================================
+Tags: office=therapist
+Term: Therapist            > none found
+
+
+Test 341/530 - Name: Travel Agency
+============================================================
+Tags: office=travel_agent
+Term: Travel Agency        > found: office=travel_agent
+
+
+Test 342/530 - Name: Piste/Ski Trail
+============================================================
+Tags: piste:type=*
+Term: Piste/Ski Trail      > found: piste:type=*
+Term: ski                  > found: piste:type=*
+Term: sled                 > found: piste:type=*
+Term: sleigh               > found: piste:type=*
+Term: snowboard            > found: piste:type=*
+Term: nordic               > found: piste:type=*
+Term: downhill             > found: piste:type=*
+Term: snowmobile           > found: piste:type=*
+
+
+Test 343/530 - Name: Place
+============================================================
+Tags: place=*
+Term: Place                > found: place=*
+
+
+Test 344/530 - Name: City
+============================================================
+Tags: place=city
+Term: City                 > found: place=city
+
+
+Test 345/530 - Name: Hamlet
+============================================================
+Tags: place=hamlet
+Term: Hamlet               > found: place=hamlet
+
+
+Test 346/530 - Name: Island
+============================================================
+Tags: place=island
+Term: Island               > found: place=island
+Term: archipelago          > found: place=island
+Term: atoll                > found: place=island
+Term: bar                  > none found
+Term: cay                  > found: place=island
+Term: isle                 > found: place=island
+Term: islet                > found: place=island
+Term: key                  > found: place=island
+Term: reef                 > found: place=island
+
+
+Test 347/530 - Name: Isolated Dwelling
+============================================================
+Tags: place=isolated_dwelling
+Term: Isolated Dwelling    > found: place=isolated_dwelling
+
+
+Test 348/530 - Name: Locality
+============================================================
+Tags: place=locality
+Term: Locality             > found: place=locality
+
+
+Test 349/530 - Name: Neighborhood
+============================================================
+Tags: place=neighbourhood
+Term: Neighborhood         > found: place=neighbourhood
+Term: neighbourhood        > found: place=neighbourhood
+
+
+Test 350/530 - Name: Borough
+============================================================
+Tags: place=suburb
+Term: Borough              > found: place=suburb
+Term: Boro                 > found: place=suburb
+Term: Quarter              > found: place=suburb
+
+
+Test 351/530 - Name: Town
+============================================================
+Tags: place=town
+Term: Town                 > found: place=town
+
+
+Test 352/530 - Name: Village
+============================================================
+Tags: place=village
+Term: Village              > found: place=village
+
+
+Test 353/530 - Name: Point
+============================================================
+Tags: 
+Term: Point                > none found
+
+
+Test 354/530 - Name: Power
+============================================================
+Tags: power=*
+Term: Power                > found: power=*
+
+
+Test 355/530 - Name: Power Generator
+============================================================
+Tags: power=generator
+Term: Power Generator      > found: power=generator
+
+
+Test 356/530 - Name: Power Line
+============================================================
+Tags: power=line
+Term: Power Line           > found: power=line
+
+
+Test 357/530 - Name: Minor Power Line
+============================================================
+Tags: power=minor_line
+Term: Minor Power Line     > found: power=minor_line
+
+
+Test 358/530 - Name: Power Pole
+============================================================
+Tags: power=pole
+Term: Power Pole           > found: power=pole
+
+
+Test 359/530 - Name: Substation
+============================================================
+Tags: power=sub_station
+Term: Substation           > found: power=sub_station
+
+
+Test 360/530 - Name: Substation
+============================================================
+Tags: power=substation
+Term: Substation           > found: power=substation
+
+
+Test 361/530 - Name: High-Voltage Tower
+============================================================
+Tags: power=tower
+Term: High-Voltage Tower   > found: power=tower
+
+
+Test 362/530 - Name: Transformer
+============================================================
+Tags: power=transformer
+Term: Transformer          > found: power=transformer
+
+
+Test 363/530 - Name: Platform
+============================================================
+Tags: public_transport=platform
+Term: Platform             > found: public_transport=platform
+
+
+Test 364/530 - Name: Stop Position
+============================================================
+Tags: public_transport=stop_position
+Term: Stop Position        > found: public_transport=stop_position
+
+
+Test 365/530 - Name: Railway
+============================================================
+Tags: railway=*
+Term: Railway              > found: railway=*
+
+
+Test 366/530 - Name: Abandoned Railway
+============================================================
+Tags: railway=abandoned
+Term: Abandoned Railway    > found: railway=abandoned
+
+
+Test 367/530 - Name: Disused Railway
+============================================================
+Tags: railway=disused
+Term: Disused Railway      > found: railway=disused
+
+
+Test 368/530 - Name: Funicular
+============================================================
+Tags: railway=funicular
+Term: Funicular            > found: railway=funicular
+Term: venicular            > found: railway=funicular
+Term: cliff railway        > found: railway=funicular
+Term: cable car            > found: railway=funicular
+Term: cable railway        > found: railway=funicular
+Term: funicular railway    > found: railway=funicular
+
+
+Test 369/530 - Name: Railway Halt
+============================================================
+Tags: railway=halt
+Term: Railway Halt         > found: railway=halt
+Term: break                > found: railway=halt
+Term: interrupt            > found: railway=halt
+Term: rest                 > found: railway=halt
+Term: wait                 > found: railway=halt
+Term: interruption         > found: railway=halt
+
+
+Test 370/530 - Name: Level Crossing
+============================================================
+Tags: railway=level_crossing
+Term: Level Crossing       > found: railway=level_crossing
+Term: crossing             > found: railway=level_crossing
+Term: railroad crossing    > found: railway=level_crossing
+Term: railway crossing     > found: railway=level_crossing
+Term: grade crossing       > found: railway=level_crossing
+Term: road through railroad > found: railway=level_crossing
+Term: train crossing       > found: railway=level_crossing
+
+
+Test 371/530 - Name: Monorail
+============================================================
+Tags: railway=monorail
+Term: Monorail             > found: railway=monorail
+
+
+Test 372/530 - Name: Narrow Gauge Rail
+============================================================
+Tags: railway=narrow_gauge
+Term: Narrow Gauge Rail    > found: railway=narrow_gauge
+Term: narrow gauge railway > found: railway=narrow_gauge
+Term: narrow gauge railroad > found: railway=narrow_gauge
+
+
+Test 373/530 - Name: Railway Platform
+============================================================
+Tags: railway=platform
+Term: Railway Platform     > found: railway=platform
+
+
+Test 374/530 - Name: Rail
+============================================================
+Tags: railway=rail
+Term: Rail                 > found: railway=rail
+
+
+Test 375/530 - Name: Railway Station
+============================================================
+Tags: railway=station
+Term: Railway Station      > found: railway=station
+Term: train station        > found: railway=station
+Term: station              > found: railway=station
+
+
+Test 376/530 - Name: Subway
+============================================================
+Tags: railway=subway
+Term: Subway               > found: railway=subway
+
+
+Test 377/530 - Name: Subway Entrance
+============================================================
+Tags: railway=subway_entrance
+Term: Subway Entrance      > found: railway=subway_entrance
+
+
+Test 378/530 - Name: Tram
+============================================================
+Tags: railway=tram
+Term: Tram                 > found: railway=tram
+Term: streetcar            > found: railway=tram
+
+
+Test 379/530 - Name: Relation
+============================================================
+Tags: 
+Term: Relation             > none found
+
+
+Test 380/530 - Name: Ferry Route
+============================================================
+Tags: route=ferry
+Term: Ferry Route          > found: route=ferry
+
+
+Test 381/530 - Name: Shop
+============================================================
+Tags: shop=*
+Term: Shop                 > found: shop=*
+
+
+Test 382/530 - Name: Liquor Store
+============================================================
+Tags: shop=alcohol
+Term: Liquor Store         > found: shop=alcohol
+Term: alcohol              > found: shop=alcohol
+Term: beer                 > found: shop=alcohol
+Term: booze                > found: shop=alcohol
+Term: wine                 > found: shop=alcohol
+
+
+Test 383/530 - Name: Anime Shop
+============================================================
+Tags: shop=anime
+Term: Anime Shop           > found: shop=anime
+
+
+Test 384/530 - Name: Antiques Shop
+============================================================
+Tags: shop=antiques
+Term: Antiques Shop        > found: shop=antiques
+
+
+Test 385/530 - Name: Art Gallery
+============================================================
+Tags: shop=art
+Term: Art Gallery          > found: shop=art
+
+
+Test 386/530 - Name: Baby Goods Store
+============================================================
+Tags: shop=baby_goods
+Term: Baby Goods Store     > found: shop=baby_goods
+
+
+Test 387/530 - Name: Bag/Luggage Store
+============================================================
+Tags: shop=bag
+Term: Bag/Luggage Store    > found: shop=bag
+Term: handbag              > found: shop=bag
+Term: purse                > found: shop=bag
+
+
+Test 388/530 - Name: Bakery
+============================================================
+Tags: shop=bakery
+Term: Bakery               > found: shop=bakery
+
+
+Test 389/530 - Name: Bathroom Furnishing Store
+============================================================
+Tags: shop=bathroom_furnishing
+Term: Bathroom Furnishing Store > found: shop=bathroom_furnishing
+
+
+Test 390/530 - Name: Beauty Shop
+============================================================
+Tags: shop=beauty
+Term: Beauty Shop          > found: shop=beauty
+Term: nail spa             > found: shop=beauty
+Term: spa                  > found: shop=beauty
+Term: salon                > found: shop=beauty
+Term: tanning              > found: shop=beauty
+
+
+Test 391/530 - Name: Bedding/Mattress Store
+============================================================
+Tags: shop=bed
+Term: Bedding/Mattress Store > found: shop=bed
+
+
+Test 392/530 - Name: Beverage Store
+============================================================
+Tags: shop=beverages
+Term: Beverage Store       > found: shop=beverages
+
+
+Test 393/530 - Name: Bicycle Shop
+============================================================
+Tags: shop=bicycle
+Term: Bicycle Shop         > found: shop=bicycle
+
+
+Test 394/530 - Name: Bookmaker
+============================================================
+Tags: shop=bookmaker
+Term: Bookmaker            > found: shop=bookmaker
+
+
+Test 395/530 - Name: Book Store
+============================================================
+Tags: shop=books
+Term: Book Store           > found: shop=books
+
+
+Test 396/530 - Name: Boutique
+============================================================
+Tags: shop=boutique
+Term: Boutique             > found: shop=boutique
+
+
+Test 397/530 - Name: Butcher
+============================================================
+Tags: shop=butcher
+Term: Butcher              > found: shop=butcher
+Term: meat                 > found: shop=butcher
+
+
+Test 398/530 - Name: Candle Shop
+============================================================
+Tags: shop=candles
+Term: Candle Shop          > none found
+
+
+Test 399/530 - Name: Car Dealership
+============================================================
+Tags: shop=car
+Term: Car Dealership       > found: shop=car
+Term: auto                 > found: shop=car
+
+
+Test 400/530 - Name: Car Parts Store
+============================================================
+Tags: shop=car_parts
+Term: Car Parts Store      > found: shop=car_parts
+Term: auto                 > found: shop=car_parts
+
+
+Test 401/530 - Name: Car Repair Shop
+============================================================
+Tags: shop=car_repair
+Term: Car Repair Shop      > found: shop=car_repair
+Term: auto                 > found: shop=car_repair
+
+
+Test 402/530 - Name: Carpet Store
+============================================================
+Tags: shop=carpet
+Term: Carpet Store         > found: shop=carpet
+Term: rug                  > found: shop=carpet
+
+
+Test 403/530 - Name: Cheese Store
+============================================================
+Tags: shop=cheese
+Term: Cheese Store         > found: shop=cheese
+
+
+Test 404/530 - Name: Chemist
+============================================================
+Tags: shop=chemist
+Term: Chemist              > found: shop=chemist
+
+
+Test 405/530 - Name: Chocolate Store
+============================================================
+Tags: shop=chocolate
+Term: Chocolate Store      > found: shop=chocolate
+
+
+Test 406/530 - Name: Clothing Store
+============================================================
+Tags: shop=clothes
+Term: Clothing Store       > found: shop=clothes
+
+
+Test 407/530 - Name: Computer Store
+============================================================
+Tags: shop=computer
+Term: Computer Store       > found: shop=computer
+
+
+Test 408/530 - Name: Candy Store
+============================================================
+Tags: shop=confectionery
+Term: Candy Store          > found: shop=confectionery
+
+
+Test 409/530 - Name: Convenience Store
+============================================================
+Tags: shop=convenience
+Term: Convenience Store    > found: shop=convenience
+
+
+Test 410/530 - Name: Copy Store
+============================================================
+Tags: shop=copyshop
+Term: Copy Store           > found: shop=copyshop
+
+
+Test 411/530 - Name: Cosmetics Store
+============================================================
+Tags: shop=cosmetics
+Term: Cosmetics Store      > found: shop=cosmetics
+
+
+Test 412/530 - Name: Arts and Crafts Store
+============================================================
+Tags: shop=craft
+Term: Arts and Crafts Store > none found
+
+
+Test 413/530 - Name: Curtain Store
+============================================================
+Tags: shop=curtain
+Term: Curtain Store        > found: shop=curtain
+Term: drape*               > found: shop=curtain
+Term: window               > found: shop=curtain
+
+
+Test 414/530 - Name: Dairy Store
+============================================================
+Tags: shop=dairy
+Term: Dairy Store          > found: shop=dairy
+Term: milk                 > found: shop=dairy
+Term: egg                  > found: shop=dairy
+Term: cheese               > found: shop=dairy
+
+
+Test 415/530 - Name: Deli
+============================================================
+Tags: shop=deli
+Term: Deli                 > found: shop=deli
+Term: lunch                > found: shop=deli
+Term: meat                 > found: shop=deli
+Term: sandwich             > found: shop=deli
+
+
+Test 416/530 - Name: Department Store
+============================================================
+Tags: shop=department_store
+Term: Department Store     > found: shop=department_store
+
+
+Test 417/530 - Name: DIY Store
+============================================================
+Tags: shop=doityourself
+Term: DIY Store            > found: shop=doityourself
+
+
+Test 418/530 - Name: Dry Cleaner
+============================================================
+Tags: shop=dry_cleaning
+Term: Dry Cleaner          > found: shop=dry_cleaning
+
+
+Test 419/530 - Name: Electronics Store
+============================================================
+Tags: shop=electronics
+Term: Electronics Store    > found: shop=electronics
+Term: appliance            > found: shop=electronics
+Term: audio                > found: shop=electronics
+Term: computer             > found: shop=electronics
+Term: tv                   > found: shop=electronics
+
+
+Test 420/530 - Name: Erotic Store
+============================================================
+Tags: shop=erotic
+Term: Erotic Store         > found: shop=erotic
+Term: sex                  > found: shop=erotic
+Term: porn                 > found: shop=erotic
+
+
+Test 421/530 - Name: Fabric Store
+============================================================
+Tags: shop=fabric
+Term: Fabric Store         > found: shop=fabric
+Term: sew                  > found: shop=fabric
+
+
+Test 422/530 - Name: Produce Stand
+============================================================
+Tags: shop=farm
+Term: Produce Stand        > found: shop=farm
+Term: farm shop            > found: shop=farm
+Term: farm stand           > found: shop=farm
+
+
+Test 423/530 - Name: Fashion Store
+============================================================
+Tags: shop=fashion
+Term: Fashion Store        > found: shop=fashion
+
+
+Test 424/530 - Name: Fishmonger
+============================================================
+Tags: shop=fishmonger
+Term: Fishmonger           > found: shop=fishmonger
+
+
+Test 425/530 - Name: Florist
+============================================================
+Tags: shop=florist
+Term: Florist              > found: shop=florist
+Term: flower               > found: shop=florist
+
+
+Test 426/530 - Name: Framing Shop
+============================================================
+Tags: shop=frame
+Term: Framing Shop         > found: shop=frame
+
+
+Test 427/530 - Name: Funeral Home
+============================================================
+Tags: shop=funeral_directors
+Term: Funeral Home         > found: shop=funeral_directors
+Term: undertaker           > found: shop=funeral_directors
+Term: memorial home        > found: shop=funeral_directors
+
+
+Test 428/530 - Name: Furnace Store
+============================================================
+Tags: shop=furnace
+Term: Furnace Store        > found: shop=furnace
+Term: oven                 > found: shop=furnace
+Term: stove                > found: shop=furnace
+
+
+Test 429/530 - Name: Furniture Store
+============================================================
+Tags: shop=furniture
+Term: Furniture Store      > found: shop=furniture
+Term: chair                > found: shop=furniture
+Term: sofa                 > found: shop=furniture
+Term: table                > found: shop=furniture
+
+
+Test 430/530 - Name: Garden Center
+============================================================
+Tags: shop=garden_centre
+Term: Garden Center        > found: shop=garden_centre
+Term: landscape            > found: shop=garden_centre
+Term: mulch                > found: shop=garden_centre
+Term: shrub                > found: shop=garden_centre
+Term: tree                 > found: shop=garden_centre
+
+
+Test 431/530 - Name: Gift Shop
+============================================================
+Tags: shop=gift
+Term: Gift Shop            > found: shop=gift
+
+
+Test 432/530 - Name: Greengrocer
+============================================================
+Tags: shop=greengrocer
+Term: Greengrocer          > found: shop=greengrocer
+Term: fruit                > found: shop=greengrocer
+Term: vegetable            > found: shop=greengrocer
+
+
+Test 433/530 - Name: Hairdresser
+============================================================
+Tags: shop=hairdresser
+Term: Hairdresser          > found: shop=hairdresser
+
+
+Test 434/530 - Name: Hardware Store
+============================================================
+Tags: shop=hardware
+Term: Hardware Store       > found: shop=hardware
+
+
+Test 435/530 - Name: Hearing Aids Store
+============================================================
+Tags: shop=hearing_aids
+Term: Hearing Aids Store   > found: shop=hearing_aids
+
+
+Test 436/530 - Name: Herbalist
+============================================================
+Tags: shop=herbalist
+Term: Herbalist            > found: shop=herbalist
+
+
+Test 437/530 - Name: Hifi Store
+============================================================
+Tags: shop=hifi
+Term: Hifi Store           > found: shop=hifi
+Term: stereo               > found: shop=hifi
+Term: video                > found: shop=hifi
+
+
+Test 438/530 - Name: Interior Decoration Store
+============================================================
+Tags: shop=interior_decoration
+Term: Interior Decoration Store > found: shop=interior_decoration
+
+
+Test 439/530 - Name: Jeweler
+============================================================
+Tags: shop=jewelry
+Term: Jeweler              > found: shop=jewelry
+Term: diamond              > found: shop=jewelry
+Term: gem                  > found: shop=jewelry
+Term: ring                 > found: shop=jewelry
+
+
+Test 440/530 - Name: News Kiosk
+============================================================
+Tags: shop=kiosk
+Term: News Kiosk           > found: shop=kiosk
+
+
+Test 441/530 - Name: Kitchen Design Store
+============================================================
+Tags: shop=kitchen
+Term: Kitchen Design Store > found: shop=kitchen
+
+
+Test 442/530 - Name: Laundry
+============================================================
+Tags: shop=laundry
+Term: Laundry              > found: shop=laundry
+
+
+Test 443/530 - Name: Leather Store
+============================================================
+Tags: shop=leather
+Term: Leather Store        > found: shop=leather
+
+
+Test 444/530 - Name: Locksmith
+============================================================
+Tags: shop=locksmith
+Term: Locksmith            > found: shop=locksmith
+Term: key                  > found: shop=locksmith
+Term: lockpick             > found: shop=locksmith
+
+
+Test 445/530 - Name: Lottery Shop
+============================================================
+Tags: shop=lottery
+Term: Lottery Shop         > found: shop=lottery
+
+
+Test 446/530 - Name: Mall
+============================================================
+Tags: shop=mall
+Term: Mall                 > found: shop=mall
+
+
+Test 447/530 - Name: Massage Shop
+============================================================
+Tags: shop=massage
+Term: Massage Shop         > found: shop=massage
+
+
+Test 448/530 - Name: Medical Supply Store
+============================================================
+Tags: shop=medical_supply
+Term: Medical Supply Store > found: shop=medical_supply
+
+
+Test 449/530 - Name: Mobile Phone Store
+============================================================
+Tags: shop=mobile_phone
+Term: Mobile Phone Store   > found: shop=mobile_phone
+
+
+Test 450/530 - Name: Money Lender
+============================================================
+Tags: shop=money_lender
+Term: Money Lender         > found: shop=money_lender
+
+
+Test 451/530 - Name: Motorcycle Dealership
+============================================================
+Tags: shop=motorcycle
+Term: Motorcycle Dealership > found: shop=motorcycle
+
+
+Test 452/530 - Name: Music Store
+============================================================
+Tags: shop=music
+Term: Music Store          > found: shop=music
+Term: CD                   > found: shop=music
+Term: vinyl                > found: shop=music
+
+
+Test 453/530 - Name: Musical Instrument Store
+============================================================
+Tags: shop=musical_instrument
+Term: Musical Instrument Store > found: shop=musical_instrument
+
+
+Test 454/530 - Name: Newspaper/Magazine Shop
+============================================================
+Tags: shop=newsagent
+Term: Newspaper/Magazine Shop > found: shop=newsagent
+
+
+Test 455/530 - Name: Optician
+============================================================
+Tags: shop=optician
+Term: Optician             > found: shop=optician
+Term: eye                  > found: shop=optician
+Term: glasses              > found: shop=optician
+
+
+Test 456/530 - Name: Organic Goods Store
+============================================================
+Tags: shop=supermarket, organic=only
+Term: Organic Goods Store  > found: shop=supermarket
+
+
+Test 457/530 - Name: Outdoors Store
+============================================================
+Tags: shop=outdoor
+Term: Outdoors Store       > found: shop=outdoor
+Term: camping              > found: shop=outdoor
+Term: climbing             > found: shop=outdoor
+Term: hiking               > found: shop=outdoor
+
+
+Test 458/530 - Name: Paint Store
+============================================================
+Tags: shop=paint
+Term: Paint Store          > found: shop=paint
+
+
+Test 459/530 - Name: Pawn Shop
+============================================================
+Tags: shop=pawnbroker
+Term: Pawn Shop            > found: shop=pawnbroker
+
+
+Test 460/530 - Name: Pet Store
+============================================================
+Tags: shop=pet
+Term: Pet Store            > found: shop=pet
+Term: cat                  > found: shop=pet
+Term: dog                  > found: shop=pet
+Term: fish                 > found: shop=pet
+
+
+Test 461/530 - Name: Photography Store
+============================================================
+Tags: shop=photo
+Term: Photography Store    > found: shop=photo
+Term: camera               > found: shop=photo
+Term: film                 > found: shop=photo
+
+
+Test 462/530 - Name: Fireworks Store
+============================================================
+Tags: shop=pyrotechnics
+Term: Fireworks Store      > none found
+
+
+Test 463/530 - Name: Radio/Electronic Component Store
+============================================================
+Tags: shop=radiotechnics
+Term: Radio/Electronic Component Store > found: shop=radiotechnics
+
+
+Test 464/530 - Name: Religious Store
+============================================================
+Tags: shop=religion
+Term: Religious Store      > found: shop=religion
+
+
+Test 465/530 - Name: Scuba Diving Shop
+============================================================
+Tags: shop=scuba_diving
+Term: Scuba Diving Shop    > found: shop=scuba_diving
+
+
+Test 466/530 - Name: Seafood Shop
+============================================================
+Tags: shop=seafood
+Term: Seafood Shop         > found: shop=seafood
+Term: fishmonger           > found: shop=seafood
+
+
+Test 467/530 - Name: Consignment/Thrift Store
+============================================================
+Tags: shop=second_hand
+Term: Consignment/Thrift Store > found: shop=second_hand
+Term: secondhand           > found: shop=second_hand
+Term: second hand          > found: shop=second_hand
+Term: resale               > found: shop=second_hand
+Term: thrift               > found: shop=second_hand
+Term: used                 > found: shop=second_hand
+
+
+Test 468/530 - Name: Shoe Store
+============================================================
+Tags: shop=shoes
+Term: Shoe Store           > found: shop=shoes
+
+
+Test 469/530 - Name: Sporting Goods Store
+============================================================
+Tags: shop=sports
+Term: Sporting Goods Store > found: shop=sports
+
+
+Test 470/530 - Name: Stationery Store
+============================================================
+Tags: shop=stationery
+Term: Stationery Store     > found: shop=stationery
+Term: card                 > found: shop=stationery
+Term: paper                > found: shop=stationery
+
+
+Test 471/530 - Name: Supermarket
+============================================================
+Tags: shop=supermarket
+Term: Supermarket          > found: shop=supermarket
+Term: grocery              > found: shop=supermarket
+Term: store                > found: shop=supermarket
+Term: shop                 > found: shop=supermarket
+
+
+Test 472/530 - Name: Tailor
+============================================================
+Tags: shop=tailor
+Term: Tailor               > found: shop=tailor
+Term: clothes              > found: shop=tailor
+Term: suit                 > found: shop=tailor
+
+
+Test 473/530 - Name: Tattoo Parlor
+============================================================
+Tags: shop=tattoo
+Term: Tattoo Parlor        > found: shop=tattoo
+
+
+Test 474/530 - Name: Tea Store
+============================================================
+Tags: shop=tea
+Term: Tea Store            > found: shop=tea
+
+
+Test 475/530 - Name: Ticket Seller
+============================================================
+Tags: shop=ticket
+Term: Ticket Seller        > found: shop=ticket
+
+
+Test 476/530 - Name: Tobacco Shop
+============================================================
+Tags: shop=tobacco
+Term: Tobacco Shop         > found: shop=tobacco
+
+
+Test 477/530 - Name: Toy Store
+============================================================
+Tags: shop=toys
+Term: Toy Store            > found: shop=toys
+
+
+Test 478/530 - Name: Travel Agency
+============================================================
+Tags: shop=travel_agency
+Term: Travel Agency        > found: shop=travel_agency
+
+
+Test 479/530 - Name: Tire Store
+============================================================
+Tags: shop=tyres
+Term: Tire Store           > found: shop=tyres
+
+
+Test 480/530 - Name: Vacant Shop
+============================================================
+Tags: shop=vacant
+Term: Vacant Shop          > found: shop=vacant
+
+
+Test 481/530 - Name: Vacuum Cleaner Store
+============================================================
+Tags: shop=vacuum_cleaner
+Term: Vacuum Cleaner Store > found: shop=vacuum_cleaner
+
+
+Test 482/530 - Name: Variety Store
+============================================================
+Tags: shop=variety_store
+Term: Variety Store        > found: shop=variety_store
+
+
+Test 483/530 - Name: Video Store
+============================================================
+Tags: shop=video
+Term: Video Store          > found: shop=video
+Term: DVD                  > found: shop=video
+
+
+Test 484/530 - Name: Video Game Store
+============================================================
+Tags: shop=video_games
+Term: Video Game Store     > found: shop=video_games
+
+
+Test 485/530 - Name: Watersport/Swim Shop
+============================================================
+Tags: shop=water_sports
+Term: Watersport/Swim Shop > none found
+
+
+Test 486/530 - Name: Weapon Shop
+============================================================
+Tags: shop=weapons
+Term: Weapon Shop          > found: shop=weapons
+Term: ammo                 > found: shop=weapons
+Term: gun                  > found: shop=weapons
+Term: knife                > found: shop=weapons
+Term: knives               > found: shop=weapons
+
+
+Test 487/530 - Name: Window Blind Store
+============================================================
+Tags: shop=window_blind
+Term: Window Blind Store   > found: shop=window_blind
+
+
+Test 488/530 - Name: Wine Shop
+============================================================
+Tags: shop=wine
+Term: Wine Shop            > found: shop=wine
+
+
+Test 489/530 - Name: Tourism
+============================================================
+Tags: tourism=*
+Term: Tourism              > found: tourism=*
+
+
+Test 490/530 - Name: Alpine Hut
+============================================================
+Tags: tourism=alpine_hut
+Term: Alpine Hut           > found: tourism=alpine_hut
+
+
+Test 491/530 - Name: Artwork
+============================================================
+Tags: tourism=artwork
+Term: Artwork              > found: tourism=artwork
+Term: mural                > found: tourism=artwork
+Term: sculpture            > found: tourism=artwork
+Term: statue               > found: tourism=artwork
+
+
+Test 492/530 - Name: Tourist Attraction
+============================================================
+Tags: tourism=attraction
+Term: Tourist Attraction   > found: tourism=attraction
+
+
+Test 493/530 - Name: Camp Site
+============================================================
+Tags: tourism=camp_site
+Term: Camp Site            > found: tourism=camp_site
+
+
+Test 494/530 - Name: RV Park
+============================================================
+Tags: tourism=caravan_site
+Term: RV Park              > found: tourism=caravan_site
+
+
+Test 495/530 - Name: Chalet
+============================================================
+Tags: tourism=chalet
+Term: Chalet               > found: tourism=chalet
+
+
+Test 496/530 - Name: Guest House
+============================================================
+Tags: tourism=guest_house
+Term: Guest House          > found: tourism=guest_house
+Term: B&B                  > none found
+Term: Bed and Breakfast    > found: tourism=guest_house
+
+
+Test 497/530 - Name: Hostel
+============================================================
+Tags: tourism=hostel
+Term: Hostel               > found: tourism=hostel
+
+
+Test 498/530 - Name: Hotel
+============================================================
+Tags: tourism=hotel
+Term: Hotel                > found: tourism=hotel
+
+
+Test 499/530 - Name: Information
+============================================================
+Tags: tourism=information
+Term: Information          > found: tourism=information
+
+
+Test 500/530 - Name: Motel
+============================================================
+Tags: tourism=motel
+Term: Motel                > found: tourism=motel
+
+
+Test 501/530 - Name: Museum
+============================================================
+Tags: tourism=museum
+Term: Museum               > found: tourism=museum
+Term: exhibition           > found: tourism=museum
+Term: foundation           > found: tourism=museum
+Term: gallery              > found: tourism=museum
+Term: hall                 > found: tourism=museum
+Term: institution          > found: tourism=museum
+
+
+Test 502/530 - Name: Picnic Site
+============================================================
+Tags: tourism=picnic_site
+Term: Picnic Site          > found: tourism=picnic_site
+Term: camp                 > found: tourism=picnic_site
+
+
+Test 503/530 - Name: Theme Park
+============================================================
+Tags: tourism=theme_park
+Term: Theme Park           > found: tourism=theme_park
+
+
+Test 504/530 - Name: Viewpoint
+============================================================
+Tags: tourism=viewpoint
+Term: Viewpoint            > found: tourism=viewpoint
+
+
+Test 505/530 - Name: Zoo
+============================================================
+Tags: tourism=zoo
+Term: Zoo                  > found: tourism=zoo
+
+
+Test 506/530 - Name: Speed Bump
+============================================================
+Tags: traffic_calming=bump
+Term: Speed Bump           > found: traffic_calming=bump
+Term: speed hump           > found: traffic_calming=bump
+
+
+Test 507/530 - Name: Speed Hump
+============================================================
+Tags: traffic_calming=hump
+Term: Speed Hump           > found: traffic_calming=hump
+Term: speed bump           > found: traffic_calming=hump
+
+
+Test 508/530 - Name: Rumble Strip
+============================================================
+Tags: traffic_calming=rumble_strip
+Term: Rumble Strip         > found: traffic_calming=rumble_strip
+Term: sleeper lines        > found: traffic_calming=rumble_strip
+Term: audible lines        > found: traffic_calming=rumble_strip
+Term: growlers             > found: traffic_calming=rumble_strip
+
+
+Test 509/530 - Name: Raised Pedestrian Crossing
+============================================================
+Tags: traffic_calming=table, highway=crossing
+Term: Raised Pedestrian Crossing > found: highway=crossing, traffic_calming=table
+Term: speed table          > found: highway=crossing, traffic_calming=table
+Term: flat top hump        > found: highway=crossing, traffic_calming=table
+
+
+Test 510/530 - Name: Boundary
+============================================================
+Tags: type=boundary
+Term: Boundary             > none found
+
+
+Test 511/530 - Name: Multipolygon
+============================================================
+Tags: type=multipolygon
+Term: Multipolygon         > none found
+
+
+Test 512/530 - Name: Restriction
+============================================================
+Tags: type=restriction
+Term: Restriction          > none found
+
+
+Test 513/530 - Name: Route
+============================================================
+Tags: type=route
+Term: Route                > none found
+
+
+Test 514/530 - Name: Route Master
+============================================================
+Tags: type=route_master
+Term: Route Master         > none found
+
+
+Test 515/530 - Name: Other
+============================================================
+Tags: 
+Term: Other                > none found
+
+
+Test 516/530 - Name: Waterway
+============================================================
+Tags: waterway=*
+Term: Waterway             > found: waterway=*
+
+
+Test 517/530 - Name: Canal
+============================================================
+Tags: waterway=canal
+Term: Canal                > found: waterway=canal
+
+
+Test 518/530 - Name: Dam
+============================================================
+Tags: waterway=dam
+Term: Dam                  > found: waterway=dam
+
+
+Test 519/530 - Name: Ditch
+============================================================
+Tags: waterway=ditch
+Term: Ditch                > found: waterway=ditch
+
+
+Test 520/530 - Name: Drain
+============================================================
+Tags: waterway=drain
+Term: Drain                > found: waterway=drain
+
+
+Test 521/530 - Name: River
+============================================================
+Tags: waterway=river
+Term: River                > found: waterway=river
+Term: beck                 > found: waterway=river
+Term: branch               > found: waterway=river
+Term: brook                > found: waterway=river
+Term: course               > found: waterway=river
+Term: creek                > found: waterway=river
+Term: estuary              > found: waterway=river
+Term: rill                 > found: waterway=river
+Term: rivulet              > found: waterway=river
+Term: run                  > found: waterway=river
+Term: runnel               > found: waterway=river
+Term: stream               > found: waterway=river
+Term: tributary            > found: waterway=river
+Term: watercourse          > found: waterway=river
+
+
+Test 522/530 - Name: Riverbank
+============================================================
+Tags: waterway=riverbank
+Term: Riverbank            > found: waterway=riverbank
+
+
+Test 523/530 - Name: Stream
+============================================================
+Tags: waterway=stream
+Term: Stream               > found: waterway=stream
+Term: beck                 > found: waterway=stream
+Term: branch               > found: waterway=stream
+Term: brook                > found: waterway=stream
+Term: burn                 > found: waterway=stream
+Term: course               > found: waterway=stream
+Term: creek                > found: waterway=stream
+Term: current              > found: waterway=stream
+Term: drift                > found: waterway=stream
+Term: flood                > found: waterway=stream
+Term: flow                 > found: waterway=stream
+Term: freshet              > found: waterway=stream
+Term: race                 > found: waterway=stream
+Term: rill                 > found: waterway=stream
+Term: rindle               > found: waterway=stream
+Term: rivulet              > found: waterway=stream
+Term: run                  > found: waterway=stream
+Term: runnel               > found: waterway=stream
+Term: rush                 > found: waterway=stream
+Term: spate                > found: waterway=stream
+Term: spritz               > found: waterway=stream
+Term: surge                > found: waterway=stream
+Term: tide                 > found: waterway=stream
+Term: torrent              > found: waterway=stream
+Term: tributary            > found: waterway=stream
+Term: watercourse          > found: waterway=stream
+
+
+Test 524/530 - Name: Weir
+============================================================
+Tags: waterway=weir
+Term: Weir                 > found: waterway=weir
+
+
+Test 525/530 - Name: beach
+============================================================
+Tags: sport=beachvolleyball, natural=beach, surface=sand, leisure=beach
+Term: beach                > found: natural=beach, leisure=beach
+Term: Strand               > found: natural=beach
+Term: sand                 > found: surface=sand
+
+
+Test 526/530 - Name: bus stop
+============================================================
+Tags: bus=yes, amenity=bus_stop, public_transport=platform, highway=bus_stop
+Term: bus stop             > found: highway=bus_stop, amenity=bus_stop
+Term: Haltestelle          > found: public_transport=platform
+Term: bus                  > found: highway=bus_stop, public_transport=platform, amenity=bus_stop
+
+
+Test 527/530 - Name: forest
+============================================================
+Tags: forestry=*, wood=*, boundary=forestry_compartment, landuse=forest, natural=wood
+Term: forest               > found: landuse=forest
+Term: Wald                 > found: landuse=forest, natural=wood
+Term: Wälder               > none found
+Term: wood                 > found: wood=*, natural=wood
+Term: woodland             > found: landuse=forest, natural=wood
+
+
+Test 528/530 - Name: garage
+============================================================
+Tags: building=garages, amenity=parking_entrance, bicycle_parking=*
+Term: garage               > found: amenity=parking_entrance
+
+
+Test 529/530 - Name: Bahnhof
+============================================================
+Tags: building=transportation, railway=station, train=*, public_transport=platform
+Term: Bahnhof              > found: railway=station, building=transportation
+Term: train                > found: train=*, railway=station, building=transportation
+
+
+Test 530/530 - Name: zoo
+============================================================
+Tags: tourism=zoo, zoo=petting_zoo
+Term: zoo                  > found: zoo=petting_zoo, tourism=zoo
+Term: Tierpark             > found: tourism=zoo
+
+
+
+============================================================
+============================================================
+
+
+============================================================
+============================================================
+

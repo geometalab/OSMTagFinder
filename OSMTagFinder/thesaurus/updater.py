@@ -5,15 +5,16 @@ Created on 04.12.2014
 @author: Simon Gwerder
 '''
 
-from externalapi.taginfo import TagInfo
+from taginfo.taginfo import TagInfo
 from utilities import utils
 from utilities.configloader import ConfigLoader
 from utilities.translator import Translator
 from filter import Filter
-from thesaurus.maintenance import Console
+from maintenance import Maintenance
 from thesaurus.basethesaurus import BaseThesaurus
 from thesaurus.rdfgraph import RDFGraph
 from thesaurus.mapsemnet import MapOSMSemanticNet
+from thesaurus.indexer import Indexer
 
 import timeit
 import sys
@@ -21,9 +22,9 @@ import sys
 class UpdateThesaurus:
 
     rdfGraph = None
-    tagInfo = TagInfo()
     cl = ConfigLoader()
     bt = None
+    tagInfo = None
 
     osmWikiBase = cl.getThesaurusString('OSM_WIKI_PAGE')
     keySchemeName = cl.getThesaurusString('KEY_SCHEME_NAME')
@@ -38,10 +39,13 @@ class UpdateThesaurus:
     translator = Translator()
     filterUtil = Filter()
 
-    def __init__(self, rdfGraph, console=None):
+    def __init__(self, tagInfo, rdfGraph, console=None):
         if rdfGraph is None: return
+        if tagInfo is None: return
+
         self.rdfGraph = rdfGraph
-        self.bt = BaseThesaurus(self.rdfGraph, console)
+        self.tagInfo = tagInfo
+        self.bt = BaseThesaurus(tagInfo=self.tagInfo, rdfGraph=self.rdfGraph, console=console)
         self.bt.printMessage('Updating rdfGraph! Currently ' + str(rdfGraph.triplesCount()) + ' tripples')
         self.bt.printMessage('\nGetting all valid keys:')
         keyList = self.bt.getListOfValidKeys()
@@ -62,6 +66,11 @@ class UpdateThesaurus:
 
         self.bt.printMessage('\nFinished. Serializing rdfGraph: New ' + str(rdfGraph.triplesCount()) + ' tripples')
         self.rdfGraph.serialize(rdfGraph.filePath)
+
+        self.bt.printMessage('\nStarting Indexer')
+        Indexer(self.rdfGraph) # will index it anew
+        self.bt.printMessage('\nFinished updating')
+        print 'done'
 
     def handleNewKeys(self, keyList):
         current = 1
@@ -186,12 +195,13 @@ class UpdateThesaurus:
 if __name__ == '__main__':
     startTime = timeit.default_timer()
     retry = True
-    console = Console(sys.stdout)
+    console = Maintenance(sys.stdout)
     cl = ConfigLoader()
     outputName = cl.getThesaurusString('OUTPUT_NAME')
     outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')
     rdfGraph = RDFGraph(utils.outputFile(utils.dataDir(), outputName, outputEnding, useDateEnding=False))
-    UpdateThesaurus(rdfGraph, console)
+    tagInfo = TagInfo()
+    UpdateThesaurus(tagInfo, rdfGraph, console)
 
     endTime = timeit.default_timer()
     elapsed = endTime - startTime

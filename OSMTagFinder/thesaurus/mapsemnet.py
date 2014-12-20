@@ -9,7 +9,7 @@ from rdflib.namespace import SKOS
 
 from thesaurus.rdfgraph import RDFGraph
 from utilities.configloader import ConfigLoader
-from externalapi.osmsemanticnet import OSMSemanitcNet
+from semnet.osmsemanticnet import OSMSemanitcNet
 
 class MapOSMSemanticNet:
 

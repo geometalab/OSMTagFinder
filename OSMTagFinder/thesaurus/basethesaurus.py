@@ -9,15 +9,13 @@ from filter import Filter
 from utilities import utils
 from utilities.configloader import ConfigLoader
 from thesaurus.rdfgraph import RDFGraph
-from externalapi.taginfo import TagInfo
-from externalapi.taginfoupdate import TagInfoUpdate
 from utilities.translator import Translator
 from thesaurus.mapsemnet import MapOSMSemanticNet
 
 class BaseThesaurus:
 
     rdfGraph = RDFGraph()
-    tagInfo = TagInfo()
+    tagInfo = None
     numberKeys = 0
     numberTags = 0
 
@@ -44,11 +42,14 @@ class BaseThesaurus:
 
     console = None
 
-    def __init__(self, rdfGraph=None, console=None):
+    def __init__(self, tagInfo, rdfGraph=None, console=None):
+        if tagInfo is None: return
+        self.tagInfo = tagInfo
         if rdfGraph is not None:
             self.rdfGraph = rdfGraph
         if console is not None:
             self.console = console
+
 
     def createBaseThesaurus(self, console):
         if console is not None:
@@ -225,7 +226,7 @@ class BaseThesaurus:
 
     def updateTagStats(self, concept, key, value=None, wikiPageJson=None, new=True):
         '''Updates stats counts, node use, way use, area use and relation use.'''
-        tagInfoUpdate = TagInfoUpdate(key=key, value=value, wikiPageJson=wikiPageJson)
+        tagInfoStats = self.tagInfo.getTagInfoStats(key=key, value=value, wikiPageJson=wikiPageJson)
 
         nodeStr = '{ "count": "0", "use": "False" }' # dummy values
         wayStr = '{ "count": "0", "use": "False" }'
@@ -233,24 +234,24 @@ class BaseThesaurus:
         relationStr = '{ "count": "0", "use": "False" }'
 
         if value is None:
-            nodeStr = '{ "count": "' + str(tagInfoUpdate.getCountNodes()) + '", "use": "False" }'
-            wayStr = '{ "count": "' + str(tagInfoUpdate.getCountWays()) + '", "use": "False" }'
+            nodeStr = '{ "count": "' + str(tagInfoStats.getCountNodes()) + '", "use": "False" }'
+            wayStr = '{ "count": "' + str(tagInfoStats.getCountWays()) + '", "use": "False" }'
             areaStr = '{ "count": "0", "use": "False" }'
-            relationStr = '{ "count": "' + str(tagInfoUpdate.getCountRelations()) + '", "use": "False" }'
+            relationStr = '{ "count": "' + str(tagInfoStats.getCountRelations()) + '", "use": "False" }'
         else:
-            onNode =  tagInfoUpdate.getOnNode()
-            onWay = tagInfoUpdate.getOnWay()
-            onRelation = tagInfoUpdate.getOnRelation()
+            onNode =  tagInfoStats.getOnNode()
+            onWay = tagInfoStats.getOnWay()
+            onRelation = tagInfoStats.getOnRelation()
             #if not onNode and not onWay and not onRelation:
             #    onArea = True
             #else:
-            #    onArea = tagInfoUpdate.getOnArea()
-            onArea = tagInfoUpdate.getOnArea()
+            #    onArea = tagInfoStats.getOnArea()
+            onArea = tagInfoStats.getOnArea()
 
-            nodeStr = '{ "count": "' + str(tagInfoUpdate.getCountNodes()) + '", "use": "' + str(onNode) + '" }'
-            wayStr = '{ "count": "' + str(tagInfoUpdate.getCountWays()) + '", "use": "' + str(onWay) + '" }'
+            nodeStr = '{ "count": "' + str(tagInfoStats.getCountNodes()) + '", "use": "' + str(onNode) + '" }'
+            wayStr = '{ "count": "' + str(tagInfoStats.getCountWays()) + '", "use": "' + str(onWay) + '" }'
             areaStr = '{ "count": "0"' + ', "use": "' + str(onArea) + '" }'
-            relationStr = '{ "count": "' + str(tagInfoUpdate.getCountRelations()) + '", "use": "' + str(onRelation) + '" }'
+            relationStr = '{ "count": "' + str(tagInfoStats.getCountRelations()) + '", "use": "' + str(onRelation) + '" }'
 
         if new:
             self.rdfGraph.addOSMNode(concept, nodeStr)
@@ -283,7 +284,7 @@ class BaseThesaurus:
 
     def updateTagLinks(self, concept, key, value=None, wikiPageJson=None, new=True):
         '''Updates the tag links from OSM wiki: implies, combinations and linked. Just as Literals.'''
-        tagInfoUpdate = TagInfoUpdate(key=key, value=value, wikiPageJson=wikiPageJson)
+        tagInfoUpdate = self.tagInfo.getTagInfoStats(key=key, value=value, wikiPageJson=wikiPageJson)
 
         listImplies = tagInfoUpdate.getListImplies()
         listCombinations = tagInfoUpdate.getListCombinations()
@@ -401,24 +402,3 @@ class BaseThesaurus:
         self.linksToConcept()
 
 
-'''if __name__ == '__main__':
-    startTime = timeit.default_timer()
-    retry = True
-    console = Console(sys.stdout)
-    while retry:
-        try:
-            bt = BaseThesaurus(console)
-            retry = False
-        except ConnectionError as ce:
-            pass
-            console.println(ce)
-            console.println('Retrying creating TagFinder BaseThesaurus...')
-
-    endTime = timeit.default_timer()
-    elapsed = endTime - startTime
-    console.println('\nTime elapsed to generate rdfGraph: ' + str(elapsed / 60) + ' mins')
-    console.println('Number of keys: ' + str(bt.numberKeys))
-    console.println('Number tags: ' + str(bt.numberTags))
-    console.println ('Tripples: ' + str(bt.getBaseGraph().triplesCount()))
-
-    #bt.getBaseGraph()'''

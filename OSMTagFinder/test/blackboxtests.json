@@ -1,0 +1,89 @@
+{
+
+    "forest": {
+        "tags": {
+            "landuse": "forest",
+            "natural": "wood",
+            "boundary": "forestry_compartment",
+            "forestry": "*",
+            "wood": "*"
+        },
+        "terms": [
+            "Wald",
+            "Wälder",
+            "wood",
+            "woodland"
+        ],
+        "name": "forest"
+    },
+
+    "garage": {
+        "fields": [
+            "capacity"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "building": "garage",
+            "bicycle_parking": "*",
+            "amenity": "parking_entrance"
+        },
+        "name": "garage"
+    },
+
+    "beach": {
+        "tags": {
+            "natural": "beach",
+            "leisure": "beach",
+            "surface": "sand",
+            "sport": "beachvolleyball"
+        },
+        "terms": [
+            "Strand",
+            "sand"
+        ],
+        "name": "beach"
+    },
+
+    "bus stop": {
+        "tags": {
+            "public_transport": "platform",
+            "highway": "bus_stop",
+            "amenity": "bus_stop",
+            "bus": "yes"
+        },
+        "terms": [
+            "Haltestelle",
+            "bus"
+        ],
+        "name": "bus stop"
+    },
+
+    "railway/station": {
+        "tags": {
+            "railway": "station",
+            "building": "train_station",
+            "public_transport": "platform",
+            "train": "*",
+            "building": "transportation"
+        },
+        "terms": [
+            "train"
+        ],
+        "name": "Bahnhof"
+    },
+
+    "zoo": {
+        "tags": {
+            "tourism": "zoo",
+            "zoo": "petting_zoo"
+        },
+        "terms": [
+            "Tierpark"
+        ],
+        "name": "zoo"
+    }
+
+}

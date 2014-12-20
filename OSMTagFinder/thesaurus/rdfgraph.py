@@ -67,7 +67,7 @@ class RDFGraph:
         return self.graph.parse(filePath, format=guessedFormat)
 
     def serialize(self, filepath=(utils.tempDir() + 'default.rdf')):
-        plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')  # register(name, kind, module_path, class_name)
+        plugin.register('skos', Serializer, 'thesaurus.skosserializer', 'SKOSSerializer')  # register(name, kind, module_path, class_name)
         self.graph.serialize(destination=filepath, format='skos', encoding=self.encoding)
 
     def prepareLiteral(self, objStr):
@@ -132,7 +132,7 @@ class RDFGraph:
         return subject
 
     def addBroader(self, subject, obj):
-        '''subject > object. E.g. concept_mammals narrower concept_animals: '''
+        '''subject > object. E.g. concept_mammals broader concept_animals: '''
         self.graph.add((URIRef(self.prepareURIRef(subject)), SKOS.broader, URIRef(obj)))
         return subject
 

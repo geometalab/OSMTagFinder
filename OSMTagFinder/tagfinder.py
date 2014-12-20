@@ -17,9 +17,9 @@ from utilities import crython
 from utilities import utils
 from utilities.configloader import ConfigLoader
 from web.views import app, setRdfGraph
-from web.indexer import Indexer
 from thesaurus.rdfgraph import RDFGraph
 from thesaurus.updater import UpdateThesaurus
+from taginfo.taginfo import TagInfo
 
 def runFlaskApp(rdfGraph=None, dataDate=None):
     cl = ConfigLoader()
@@ -47,8 +47,8 @@ if __name__ == '__main__':
         outputName = cl.getThesaurusString('OUTPUT_NAME')
         outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')
         rdfGraph = RDFGraph(utils.outputFile(utils.dataDir(), outputName, outputEnding, useDateEnding=False))
-        UpdateThesaurus(rdfGraph) # will update the rdfGraph
-        Indexer(rdfGraph) # will index it anew
+        tagInfo = TagInfo()
+        UpdateThesaurus(tagInfo=tagInfo, rdfGraph=rdfGraph, console=None) # will update the rdfGraph
         today = str(datetime.date.today().strftime("%d.%m.%y"))
         cl.setWebsiteString('DATA_DATE', today)
         cl.write() # storing the date change in config file

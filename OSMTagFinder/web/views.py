@@ -8,13 +8,12 @@ Created on 17.10.2014
 import json
 from flask import Flask, session, send_from_directory, render_template, request, redirect, jsonify, Response
 from flask_bootstrap import Bootstrap
-from utilities.jsonpdeco import support_jsonp
+from web.jsonpdeco import support_jsonp
 import datetime
 
 
 from utilities import utils
-from web.tagresults import TagResults
-from web.graphsearch import GraphSearch
+from search.graphsearch import GraphSearch
 from utilities.spellcorrect import SpellCorrect
 
 try:
@@ -78,9 +77,8 @@ def searchCall(query, lang=None):
     if lang is None:
         lang = getLocale()
 
-    rawResults = graphSearch.fullSearch(query, lang)
+    return graphSearch.fullSearch(websiteRdfGraph, query, lang)
 
-    return TagResults(websiteRdfGraph, rawResults)
 
 @app.route('/favicon.ico', methods = ['GET'])
 def favicon():
@@ -125,7 +123,7 @@ def search():
     if searchResults is None:
         return redirect('/')
 
-    return render_template('search.html', lang=getLocale(), query=query, results=searchResults.getResults())
+    return render_template('search.html', lang=getLocale(), query=query, results=searchResults)
 
 @app.route('/apidoc', methods = ['GET'])
 def api():
@@ -153,10 +151,10 @@ def apiSearch():
     jsonDump = None
 
     if prettyPrint is not None and prettyPrint.lower() == 'json_pretty':
-        #return jsonify(results=searchResults.getResults())
-        jsonDump = json.dumps(searchResults.getResults(), indent=3, sort_keys=True)
+        #return jsonify(results=searchResults)
+        jsonDump = json.dumps(searchResults, indent=3, sort_keys=True)
     else:
-        jsonDump = json.dumps(searchResults.getResults())
+        jsonDump = json.dumps(searchResults)
     return Response(jsonDump,  mimetype='application/json')
 
 @app.route('/suggest', methods = ['GET'])
@@ -234,15 +232,16 @@ def apiTag():
         return jsonify({})
 
     rawResults = { subject : { } } # add empty dictionary for the searchMeta
-    results = TagResults(websiteRdfGraph, rawResults)
-    if len(results.getResults()) < 1:
+    graphSearch = GraphSearch()
+    results = graphSearch.getSortedTagResults(websiteRdfGraph, rawResults)
+    if len(results) < 1:
         return jsonify({})
 
     prettyPrint = request.args.get('format', '')
     if prettyPrint is not None and prettyPrint.lower() == 'json_pretty':
-        jsonDump = json.dumps(results.getResults()[0], indent=3, sort_keys=True)
+        jsonDump = json.dumps(results[0], indent=3, sort_keys=True)
     else:
-        jsonDump = json.dumps(results.getResults()[0])
+        jsonDump = json.dumps(results[0])
     return Response(jsonDump,  mimetype='application/json')
 
 @app.route('/api/terms', methods = ['GET'])
