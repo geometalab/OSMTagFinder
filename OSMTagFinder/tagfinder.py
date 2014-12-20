@@ -18,7 +18,7 @@ from utilities import utils
 from utilities.configloader import ConfigLoader
 from web.views import app, setRdfGraph
 from thesaurus.rdfgraph import RDFGraph
-from thesaurus.updater import UpdateThesaurus
+from thesaurus.updatethesaurus import UpdateThesaurus
 from taginfo.taginfo import TagInfo
 
 def runFlaskApp(rdfGraph=None, dataDate=None):
