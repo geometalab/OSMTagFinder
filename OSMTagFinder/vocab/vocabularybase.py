@@ -32,6 +32,11 @@ class VocabularyBase(object):
         return self.searchTerms
 
     @abc.abstractmethod
+    def checkConnection(self):
+        '''Returns an ordered set containing all synonyms and other related terms for 'searchTerm'.'''
+        return
+
+    @abc.abstractmethod
     def getRelated(self):
         '''Returns an ordered set containing all synonyms and other related terms for 'searchTerm'.'''
         return

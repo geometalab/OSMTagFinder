@@ -15,7 +15,6 @@ from whoosh.qparser import QueryParser
 import whoosh.index as index
 from whoosh.index import open_dir
 import re
-from thesaurus.rdfgraph import RDFGraph
 from search.tagresults import TagResults
 
 class GraphSearch:

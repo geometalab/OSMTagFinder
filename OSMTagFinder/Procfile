@@ -1,1 +1,1 @@
-web: python tagfinder.py -p $PORT
+web: python server.py -p $PORT
