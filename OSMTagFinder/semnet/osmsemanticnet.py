@@ -32,7 +32,7 @@ class OSMSemanitcNet:
             callStr = self.baseUrl + key + self.suffix + value
         try:
             response = requests.get(callStr)
-            if response.status_code < 300:
+            if response.status_code < 400:
                 return callStr
         except requests.exceptions.Timeout:
             return None

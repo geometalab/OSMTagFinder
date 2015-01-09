@@ -65,7 +65,7 @@ class TagInfo:
     @retry(Exception, tries=3)
     def checkConnection(self):
         response = requests.get(self.tagInfoWikiPageOfTag + 'building' + self.tagInfoTagPostfix + 'yes')
-        if response is not None and response.status_code < 300:
+        if response is not None and response.status_code < 400:
             return True
         return False
 

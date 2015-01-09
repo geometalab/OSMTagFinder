@@ -34,7 +34,7 @@ class OpenThesaurus(VocabularyBase):
         if language in self.supportedLang:
             for word in self.searchTerms:
                 result = self.apiCall(word, language)
-                if result.status_code < 300:
+                if result.status_code < 400:
                     xmlString = result.text
                     self.parseXML(xmlString)
                     if len(self.relatedSet) > 0:
@@ -80,7 +80,7 @@ class OpenThesaurus(VocabularyBase):
 
     def checkConnection(self):
         response = self.apiCall('test', 'de')
-        if response is not None and response.status_code < 300:
+        if response is not None and response.status_code < 400:
             return True
         return False
 

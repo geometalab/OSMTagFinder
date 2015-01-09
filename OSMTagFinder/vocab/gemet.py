@@ -55,7 +55,7 @@ class Gemet(VocabularyBase):
 
         searchResult = self.apiCall(word, apiLang)
 
-        if searchResult.status_code < 300:
+        if searchResult.status_code < 400:
             searchJson = searchResult.json()
             for category in searchJson:
                 conceptUri = category['uri']
@@ -63,7 +63,7 @@ class Gemet(VocabularyBase):
                 if thisPrefLabel is not None:
                     self.relatedSet.append(utils.eszettToSS(thisPrefLabel))
                 relativesResult = requests.get(self.getRelatives + self.conceptSuffix + conceptUri)
-                if relativesResult.status_code < 300:
+                if relativesResult.status_code < 400:
                     relativesJson = relativesResult.json()
 
                     for relation in relativesJson:
@@ -85,7 +85,7 @@ class Gemet(VocabularyBase):
     def getConceptForUri(self, gemetConceptUri, apiLang):
         try:
             conceptResult = requests.get(self.getConceptByID + self.conceptSuffix + gemetConceptUri + self.langSuffix + apiLang)
-            if conceptResult.status_code < 300:
+            if conceptResult.status_code < 400:
                 conceptJson = conceptResult.json()
                 if 'preferredLabel' in conceptJson:
                     return (conceptJson['preferredLabel'])['string']
@@ -103,7 +103,7 @@ class Gemet(VocabularyBase):
 
     def checkConnection(self):
         response = self.apiCall('test', 'en')
-        if response is not None and response.status_code < 300:
+        if response is not None and response.status_code < 400:
             return True
         return False
 

@@ -72,7 +72,7 @@ class TestRun:
     def apiCallTagfinder(self, searchTerm):
         response = requests.get(self.tagFinderAPI + searchTerm)
         #response = urllib.urlopen(self.tagFinderAPI + searchTerm)
-        if response.status_code < 300:
+        if response.status_code < 400:
             return response.json()
         return None
 

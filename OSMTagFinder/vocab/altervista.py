@@ -57,7 +57,7 @@ class Altervista(VocabularyBase):
 
     def runAPICall(self, word, apiLang):
         result = self.apiCall(word, apiLang)
-        if result.status_code < 300: # found some terms
+        if result.status_code < 400: # found some terms
             resultJson = result.json()
             response = resultJson['response']
             for responseList in response:
@@ -95,7 +95,7 @@ class Altervista(VocabularyBase):
 
     def checkConnection(self):
         response = self.apiCall('Test', 'de_DE')
-        if response is not None and response.status_code < 300:
+        if response is not None and response.status_code < 400:
             return True
         return False
 
