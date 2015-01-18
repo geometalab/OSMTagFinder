@@ -1,4 +1,4 @@
-# OSMTagFinder
+# OSM TagFinder
 
 A search engine for OpenStreetMap tags. Uses TagInfo, translation services (german to english) and an own semantic net.
 
