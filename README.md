@@ -1,6 +1,6 @@
 # OSM TagFinder
 
-A search engine for OpenStreetMap tags. Uses TagInfo, translation services  (german to english), thesaurs and an own semantic net.
+A search engine for OpenStreetMap tags. Uses TagInfo, translation services  (german to english), thesaurs and an adapted domain-specific semantic net.
 
 TagFinder was developed as part of a research project for the Geometa Lab (Prof. Keller) of the IFS 
 at the University for Applied Sciences Rapperswil (HSR) end of 2014. 
