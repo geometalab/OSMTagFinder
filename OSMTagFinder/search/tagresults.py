@@ -122,8 +122,6 @@ class TagResults:
                         relatedTerms[str(termPrefLabel.language)] = listTerms
         return relatedTerms
 
-
-
     def fillResultList(self, rdfGraph, rawResults):
         for subject in rawResults:
             tag = { }

@@ -185,10 +185,13 @@ hr {
 }
 
 #depiction, #no_depiction_key, #no_depiction_tag  {
-    min-height:160px;
-    height:160px;
-    min-width:210px;
-    width:210px;
+    position: relative;
+    min-height: 160px; /* 160x210 */
+    max-height: 160px;
+    height: 160px;
+    min-width: 210px;
+    max-width: 210px;
+    width: 210px;
     margin-top: 0px;
     margin-left: 10px;
     margin-right: 0px;
@@ -198,6 +201,15 @@ hr {
 
 .image {
     border-radius: 3px;
+    width: auto;
+    max-height: 150px;
+    max-width: 200px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 a:link {

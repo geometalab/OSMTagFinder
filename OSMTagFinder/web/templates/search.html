@@ -9,9 +9,8 @@
 {% block scripts %}
     {{super()}}
     <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
 {% endblock %}
-
-
 
 {% block content %}
     {{super()}}
@@ -70,13 +69,21 @@
                                             </a>
                                         {% else %}
                                             <a id="no_depiction_key" class="thumbnail">
-                                                <p><img  class="image" src="{{ url_for('static', filename='img/k200_150_gray.png') }}" alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
+                                                <p><img class="image" src="{{ url_for('static', filename='img/k200_150_gray.png') }}"  alt="{{ result['prefLabel'] }}" width="200" height="150"></p>
                                             </a>
                                         {% endif %}
                                     {% else %}
                                         <a id="depiction" target="_tag" href="{{ result['depiction'] }}" class="thumbnail">
-                                            <p><img class="image" src="{{ result['depiction'] }}" alt="{{ result['prefLabel'] }}" title="{{ result['depiction'] }}" align="left" width="200" height="150"></p>
+                                            <p><img class="image" id="image_{{ currentIndex }}" src="{{ result['thumbnail'] }}" alt="{{ result['prefLabel'] }}" title="{{ result['depiction'] }}" align="left"></p>
                                         </a>
+                                        <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+                                        <script type="text/javascript">
+                                            var imgLoad = imagesLoaded('#image_{{ currentIndex }}');
+                                            imgLoad.on('fail', function( instance ) {
+                                                var changedImage = document.getElementById("image_{{ currentIndex }}")
+                                                changedImage.src = '{{ result["depiction"] }}';
+                                            });
+                                        </script>
                                     {% endif %}
 
                                     <!-- tagstats -->

@@ -115,6 +115,15 @@ def methodNotAllowed(e):
 def pageNotFound(e):
     return render_template('404.html', lang=getLocale()), 404
 
+
+def getThumbnailLink(imageLink):
+    if imageLink is None: return imageLink
+    imageLink = imageLink.replace('/images/', '/images/thumb/')
+    imageLink = imageLink.replace('http://upload.wikimedia.org/wikipedia/commons/', 'http://wiki.openstreetmap.org/w/images/thumb/')
+    imageFileName = imageLink[imageLink.rfind('/') + 1:]
+    imageLink = imageLink + '/200px-' + imageFileName
+    return imageLink
+
 @app.route('/search', methods = ['GET'])
 def search():
     query = request.args.get('query', '')
@@ -122,7 +131,8 @@ def search():
     searchResults = searchCall(query, lang)
     if searchResults is None:
         return redirect('/')
-
+    for tagResult in searchResults:
+        tagResult['thumbnail'] = getThumbnailLink(tagResult['depiction']) # adding a thumbnail version of the 'depiction'
     return render_template('search.html', lang=getLocale(), query=query, results=searchResults)
 
 @app.route('/apidoc', methods = ['GET'])
