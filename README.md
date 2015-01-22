@@ -1,4 +1,4 @@
-# OSM TagFinder
+# Readme OSM TagFinder
 
 A search engine for [OpenStreetMap](www.openstreetmap.org) tags. It uses [TagInfo](http://taginfo.openstreetmap.org), translation services  (german to english), thesaurs and an adapted domain-specific semantic net.
 

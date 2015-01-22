@@ -34,12 +34,17 @@ class TagResults:
         byTermBroader = []
         byTermNarrower = []
         byTagScopeNote = []
+        byNotUsedTags = []
 
         sortedResults = []
 
         for result in unsortedResults:
 
             if not 'searchMeta' in result: return unsortedResults
+            
+            #if result['isTag'] and not self.isTagUsed(result):
+            #    byNotUsedTags.append(result)
+            #    continue
 
             searchMeta = result['searchMeta']
 
@@ -75,9 +80,15 @@ class TagResults:
         sortedResults.extend( sorted(byTermBroader, reverse=True, key=self.sortKey) )
         sortedResults.extend( sorted(byTermNarrower, reverse=True, key=self.sortKey) )
         sortedResults.extend( sorted(byTagScopeNote, reverse=True, key=self.sortKey) )
+        sortedResults.extend( sorted(byNotUsedTags, reverse=True, key=self.sortKey) )
 
         return sortedResults
 
+    def isTagUsed(self, tag):
+        if tag['node']['use'] or tag['way']['use'] or tag['area']['use'] or tag['relation']['use']:
+            return True
+        else:
+            return False
 
     def buildOSMLinksListDict(self, listOSMLinks):
         retList = []
