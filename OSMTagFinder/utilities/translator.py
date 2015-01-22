@@ -32,6 +32,20 @@ class Translator:
         if lang is None or lang == '':
             lang = 'en'
         return self.gs.translate(text, 'de', lang)
+    
+    def translate(self, text, lang=None):
+        translated = None
+        try:
+            if lang == 'de':
+                translated = self.translateDEtoEN(text)
+            elif lang == 'en':
+                translated = self.translateENtoDE(text)
+            elif lang is None or not (lang == 'en' or lang == 'de'):
+                translated = self.translateToEN(text) # guessing language, is slower
+        except:
+            pass
+        return translated
+        
 
 
 

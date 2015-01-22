@@ -16574,7 +16574,8 @@
     <skos:broader xml:lang="de">nützlich</skos:broader>
     <skos:broader xml:lang="de">Annehmlichkeit</skos:broader>
     <skos:broader xml:lang="de">amenity</skos:broader>
-    <skos:prefLabel xml:lang="de">Autoparkplatz</skos:prefLabel>
+    <skos:altLabel xml:lang="de">Autoparkplatz</skos:altLabel>
+    <skos:prefLabel xml:lang="de">Parkplatz</skos:prefLabel>
     <skos:broader xml:lang="de">öffentliche Gebäude</skos:broader>
   </skos:Concept>
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/RelatedTerms/ship">
@@ -43808,6 +43809,7 @@
     <skos:broader xml:lang="en">residents</skos:broader>
     <skos:prefLabel xml:lang="de">Fahrradabstellplatz</skos:prefLabel>
     <skos:broader xml:lang="de">amenity</skos:broader>
+    <skos:broader xml:lang="de">Parkplatz</skos:broader>
     <skos:broader xml:lang="en">amenity</skos:broader>
     <skos:broader xml:lang="en">helpful</skos:broader>
     <skos:broader xml:lang="de">angenehm</skos:broader>
@@ -43822,6 +43824,7 @@
     <skos:broader xml:lang="de">öffentliche Gebäude</skos:broader>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/RelatedTerms"/>
     <skos:broader xml:lang="en">bike</skos:broader>
+    <skos:broader xml:lang="en">parking</skos:broader>
     <skos:broader xml:lang="en">public</skos:broader>
     <skos:broader xml:lang="en">civility</skos:broader>
     <skos:broader xml:lang="de">Kunst</skos:broader>

@@ -62,7 +62,7 @@ class TagResults:
             if hasTermPrefLabel:
                 byTermPrefLabel.append(result)
                 continue
-            if  hasTermAltLabel:
+            if hasTermAltLabel:
                 byTermAltLabel.append(result)
                 continue
             if hasTagScopeNote:

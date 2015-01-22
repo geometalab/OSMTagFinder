@@ -39,16 +39,9 @@ class GraphSearch:
         return self.upgradeAndExtend(allHits, hits)
 
     def translateWord(self, word, lang=None):
-        translatedWord = word
-        try:
-            if lang is None:
-                translatedWord = Translator().translateToEN(word) # guessing language, is slower
-            elif lang=='de':
-                translatedWord = Translator().translateDEtoEN(word)
-            elif lang=='en':
-                translatedWord = Translator().translateENtoDE(word)
-        except:
-            pass
+        translatedWord = Translator().translate(word, lang)
+        if translatedWord == None:
+            return word
         return translatedWord
 
     splitChars = re.compile('[ =._,:;/\?\(\)\]\[\!\*]')
