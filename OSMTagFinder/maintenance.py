@@ -216,6 +216,7 @@ class Maintenance:
         self.println(' [1] - Create a new TagFinder graph, based on OpenStreetMap keys and tags.')
         self.println(' [2] - Load an existing TagFinder graph at its last editing position.')
         self.println('')
+        self.editTerms = None # resetting rdfGraph to make sure previous loaded ones get cleaned
         optToActionMap = { '1' : console.create, '2' : console.load }
         console.repeatedOptRead(optToActionMap)
 
@@ -265,7 +266,7 @@ class Maintenance:
         self.println('\n Time elapsed: ' + str((int) (elapsed / 60)) + ' mins')
         self.println(' Number of keys: ' + str(bt.numberKeys))
         self.println(' Number tags: ' + str(bt.numberTags))
-        self.println (' Tripples: ' + str(bt.getBaseGraph().triplesCount()))
+        self.println (' Triples: ' + str(bt.getBaseGraph().triplesCount()))
         self.rdfGraph = bt.getBaseGraph()
 
     def loadGraph(self, filePath):
@@ -307,17 +308,17 @@ class Maintenance:
             name = filePath[filePath.rfind('\\') + 1:]
             self.println(' Saving of: ' + name + ' complete!')
         else:
-            self.println('No graph found or there were no changes!')
+            self.println('No graph loaded or there were no changes!')
         self.println('')
 
     def fina(self):
         self.println('')
         if self.editTerms is not None:
             self.rdfGraph.triplesCount()
-            self.println(' Finalizing RDF graph... (' + str(self.rdfGraph.triplesCount()) + ' tripples)')
+            self.println(' Finalizing RDF graph... (' + str(self.rdfGraph.triplesCount()) + ' triples)')
             filePath = self.editTerms.finalize()
             name = filePath[filePath.rfind('\\') + 1:]
-            self.println(' Finalization of: ' + name + ' complete! (' + str(self.rdfGraph.triplesCount()) + ' tripples)')
+            self.println(' Finalization of: ' + name + ' complete! (' + str(self.rdfGraph.triplesCount()) + ' triples)')
         else:
             self.println('No graph found or there were no changes!')
         self.println('')

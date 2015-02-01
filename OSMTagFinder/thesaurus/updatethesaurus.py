@@ -42,7 +42,7 @@ class UpdateThesaurus:
         self.rdfGraph = rdfGraph
         self.tagInfo = tagInfo
         self.bt = BaseThesaurus(tagInfo=self.tagInfo, rdfGraph=self.rdfGraph, console=console)
-        self.bt.printMessage('Updating rdfGraph! Currently ' + str(rdfGraph.triplesCount()) + ' tripples')
+        self.bt.printMessage('Updating rdfGraph! Currently ' + str(rdfGraph.triplesCount()) + ' triples')
         self.bt.printMessage('\nGetting all valid keys:')
         keyList = self.bt.getListOfValidKeys()
         self.bt.printMessage('\nGetting all valid tags:')
@@ -60,7 +60,7 @@ class UpdateThesaurus:
         osnSemNetFilePath = utils.semnetDir() + 'osm_semantic_network.rdf'
         MapOSMSemanticNet(self.rdfGraph, osnSemNetFilePath)
 
-        self.bt.printMessage('\nFinished. Serializing rdfGraph: New ' + str(rdfGraph.triplesCount()) + ' tripples')
+        self.bt.printMessage('\nFinished. Serializing rdfGraph: New ' + str(rdfGraph.triplesCount()) + ' triples')
         self.rdfGraph.serialize(rdfGraph.filePath)
 
         self.bt.printMessage('\nStarting Indexer')

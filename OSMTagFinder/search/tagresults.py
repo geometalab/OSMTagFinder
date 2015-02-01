@@ -42,6 +42,11 @@ class TagResults:
 
             if not 'searchMeta' in result: return unsortedResults
             
+            # TODO: Not showing depricated tags needs to be discussed
+            if self.isTagDepricated(result):
+                continue
+            
+            # TODO: Place of unused tags needs to be discussed
             #if result['isTag'] and not self.isTagUsed(result):
             #    byNotUsedTags.append(result)
             #    continue
@@ -89,6 +94,12 @@ class TagResults:
             return True
         else:
             return False
+        
+    def isTagDepricated(self, result):
+        #hasZeroCount = (tag['node']['count'] == 0 and tag['way']['count'] == 0 and tag['area']['count'] == 0 and tag['relation']['count'] == 0)
+        if (result['isTag'] and not self.isTagUsed(result) and result['countAll'] == 0) or (result['isKey'] and result['countAll'] == 0):
+            return True
+        return False
 
     def buildOSMLinksListDict(self, listOSMLinks):
         retList = []
