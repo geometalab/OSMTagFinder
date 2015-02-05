@@ -75,7 +75,7 @@ class GraphSearch:
     
     def getTranslatedTokens(self, searcher, words, lang=None):
         tokens = set()
-        for token in self.getTokens(words, searcher, lang):
+        for token in self.getTokens(searcher, words, lang):
             if lang == 'en':
                 tokens.add(token)
             else:
