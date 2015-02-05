@@ -65,7 +65,7 @@ class GraphSearch:
             if lang == 'en':
                 translatedToken = Translator().translate(token.text, lang)
                 if not translatedToken is None and not translatedToken == token.text:
-                    tokens.add(token)
+                    tokens.add(token.text)
             else:
                 translatedToken = Translator().translate(utils.removeTrema(token.text), lang)
                 if not translatedToken is None and not translatedToken == token.text:
