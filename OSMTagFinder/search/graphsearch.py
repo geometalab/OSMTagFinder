@@ -58,17 +58,29 @@ class GraphSearch:
                 translatedWords = translatedWords + self.translateWord(word, lang)
         return utils.wsWord(translatedWords)
     
-    def getTokens(self, words, lang=None):
+    def isWordIndexed(self, searcher, word):
+        if searcher.frequency('spellingEN', word) > 0: return True
+        if searcher.frequency('spellingDE', word) > 0: return True
+        return False
+    
+    def getTokens(self, searcher, words, lang=None):
         tokenizer = StandardAnalyzer() | NgramFilter(minsize=3, maxsize=20, at='start')
         tokens = set()
         for token in tokenizer(words):
+            tokenText = token.text
+            if lang == "de": tokenText = utils.removeTrema(tokenText)
+            if self.isWordIndexed(searcher, tokenText):
+                tokens.add(tokenText)
+        return tokens
+    
+    def getTranslatedTokens(self, searcher, words, lang=None):
+        tokens = set()
+        for token in self.getTokens(words, searcher, lang):
             if lang == 'en':
-                translatedToken = Translator().translate(token.text, lang)
-                if not translatedToken is None and not translatedToken == token.text:
-                    tokens.add(token.text)
+                tokens.add(token)
             else:
-                translatedToken = Translator().translate(utils.removeTrema(token.text), lang)
-                if not translatedToken is None and not translatedToken == token.text:
+                translatedToken = Translator().translate(token, lang)
+                if not translatedToken is None and not translatedToken == token:
                     tokens.add(translatedToken)
         return tokens
 
@@ -87,8 +99,6 @@ class GraphSearch:
         words = utils.wsWord(words) # do this after translation
         # words and translatedWords are now "whitespaced", containging mostly whitespace separator
         
-        tokens = self.getTokens(words, lang)
-
         # don't leave the following statement until all results are copied into another datastructure,
         # otherwise the reader is closed.
         with self.ix.searcher() as searcher:
@@ -121,15 +131,25 @@ class GraphSearch:
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagScopeNote', results, allHits)  # english first too
                 allHits = self.extendedSearch(words, searcher, 'tagScopeNote', results, allHits)
                 
+#             for token in self.getTokens(searcher, words, lang): # tokenized search
+#                 if lang == 'de': token = utils.removeTrema(token)
+#                 if not token in words or not token in translatedWords:
+#                     allHits = self.extendedSearch(token, searcher, 'tagPrefLabel', results, allHits)
+#                     allHits = self.extendedSearch(token, searcher, 'termPrefLabel', results, allHits)
+#                     allHits = self.extendedSearch(token, searcher, 'termAltLabel', results, allHits)
+#                     allHits = self.extendedSearch(token, searcher, 'termNarrower', results, allHits)
+#                     allHits = self.extendedSearch(token, searcher, 'termBroader', results, allHits)
+#                     allHits = self.extendedSearch(token, searcher, 'tagScopeNote', results, allHits)
+                
             if not containsQuotes and (allHits is None or len(results) < self.threshold):
-                for token in tokens: # tokenized search
-                    if not token in words or not token in translatedWords:
-                        allHits = self.extendedSearch(token, searcher, 'tagPrefLabel', results, allHits)
-                        allHits = self.extendedSearch(token, searcher, 'termPrefLabel', results, allHits)
-                        allHits = self.extendedSearch(token, searcher, 'termAltLabel', results, allHits)
-                        allHits = self.extendedSearch(token, searcher, 'termNarrower', results, allHits)
-                        allHits = self.extendedSearch(token, searcher, 'termBroader', results, allHits)
-                        allHits = self.extendedSearch(token, searcher, 'tagScopeNote', results, allHits)
+                for translatedToken in self.getTranslatedTokens(searcher, words, lang): # translated tokenized search
+                    if not translatedToken in words or not translatedToken in translatedWords:
+                        allHits = self.extendedSearch(translatedToken, searcher, 'tagPrefLabel', results, allHits)
+                        allHits = self.extendedSearch(translatedToken, searcher, 'termPrefLabel', results, allHits)
+                        allHits = self.extendedSearch(translatedToken, searcher, 'termAltLabel', results, allHits)
+                        allHits = self.extendedSearch(translatedToken, searcher, 'termNarrower', results, allHits)
+                        allHits = self.extendedSearch(translatedToken, searcher, 'termBroader', results, allHits)
+                        allHits = self.extendedSearch(translatedToken, searcher, 'tagScopeNote', results, allHits)
                         
             if not containsQuotes and (allHits is None or len(results) < self.threshold):   
                 suggestions = SpellCorrect().listSuggestions(words) # is slow
