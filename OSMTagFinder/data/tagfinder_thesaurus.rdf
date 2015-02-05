@@ -2842,9 +2842,9 @@
     <skos:prefLabel>barrier=handrail</skos:prefLabel>
     <osm:node>{ "count": "0", "use": "False" }</osm:node>
     <foaf:depiction rdf:resource="http://wiki.openstreetmap.org/w/images/0/0d/Mf_tag.svg"/>
-    <skos:scopeNote xml:lang="en">[[w:en:Handrail</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Handrail</skos:scopeNote>
     <osm:way>{ "count": "292", "use": "True" }</osm:way>
-    <skos:scopeNote xml:lang="de">[[W: de: Handlauf (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">Handlauf (Übersetzung)</skos:scopeNote>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Tag"/>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Key:ramp"/>
     <skos:editorialNote>NoTerm</skos:editorialNote>
@@ -4701,7 +4701,7 @@
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/Tag:sport=australian_football">
     <foaf:depiction rdf:resource="http://upload.wikimedia.org/wikipedia/commons/c/c9/Australian_Football_2008_International_Cup.jpg"/>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Tag"/>
-    <skos:scopeNote xml:lang="en">en=Australian rules football , officially known as Australian football, [[w:Names of Australian rules football</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Australian rules football , officially known as Australian football, Names of Australian rules football</skos:scopeNote>
     <osm:relation>{ "count": "1", "use": "False" }</osm:relation>
     <skos:relatedMatch rdf:resource="http://spatial.ucd.ie/lod/osn/term/k:sport/v:australian_football"/>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:sport=australian_football"/>
@@ -4712,7 +4712,7 @@
     <osm:way>{ "count": "588", "use": "False" }</osm:way>
     <osm:area>{ "count": "0", "use": "True" }</osm:area>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=sports_centre"/>
-    <skos:scopeNote xml:lang="de">en = Australischer Football, offiziell als australischer Fussball bekannt, [[w: Namen der Australian Rules Football (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">Australischer Football, offiziell als australischer Fussball bekannt, Namen der Australian Rules Football (Übersetzung)</skos:scopeNote>
     <skos:prefLabel>sport=australian_football</skos:prefLabel>
     <skos:broader rdf:resource="http://wiki.openstreetmap.org/wiki/Key:sport"/>
   </skos:Concept>
@@ -4987,7 +4987,7 @@
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Key:name"/>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=sports_centre"/>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:building=yes"/>
-    <skos:scopeNote xml:lang="en">en=Futsal  is a [[w:team sport</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Futsal  is a team sport</skos:scopeNote>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:surface=concrete"/>
     <foaf:depiction rdf:resource="http://upload.wikimedia.org/wikipedia/commons/0/06/Futebol_Salao_Pan2007.jpg"/>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:sport=soccer"/>
@@ -5002,7 +5002,7 @@
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Key:leisure"/>
     <osm:relation>{ "count": "0", "use": "True" }</osm:relation>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:surface=asphalt"/>
-    <skos:scopeNote xml:lang="de">en = Futsal ist eine [[w: Mannschaftssport (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">Futsal ist eine Mannschaftssport (Übersetzung)</skos:scopeNote>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:amenity=fountain"/>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Key:surface"/>
     <skos:prefLabel>sport=futsal</skos:prefLabel>
@@ -8510,9 +8510,9 @@
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=stadium"/>
     <foaf:depiction rdf:resource="http://wiki.openstreetmap.org/w/images/c/cb/800px-Bandy_players.jpg"/>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Key:name"/>
-    <skos:scopeNote xml:lang="de">en = Bandy ist ein [[w: Mannschaftssport (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">Bandy ist ein Mannschaftssport (Übersetzung)</skos:scopeNote>
     <skos:broader rdf:resource="http://wiki.openstreetmap.org/wiki/Key:sport"/>
-    <skos:scopeNote xml:lang="en">en=Bandy  is a [[w:team sport</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Bandy  is a team sport</skos:scopeNote>
     <skos:editorialNote>NoTerm</skos:editorialNote>
     <osm:way>{ "count": "46", "use": "False" }</osm:way>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:sport=bandy"/>
@@ -8581,7 +8581,7 @@
     <osm:links>lines:basketball=red</osm:links>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:amenity=drinking_water"/>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:building=yes"/>
-    <skos:scopeNote xml:lang="de">en = Basketball ist ein [[w: Mannschaftssport (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">en = Basketball ist ein Mannschaftssport (Übersetzung)</skos:scopeNote>
     <osm:links>hoops:height</osm:links>
     <osm:links>lines=yes</osm:links>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:sport=basketball"/>
@@ -8618,7 +8618,7 @@
     <osm:links>backboards:size</osm:links>
     <osm:links>surface:condition</osm:links>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Key:name"/>
-    <skos:scopeNote xml:lang="en">en=Basketball  is a [[w:team sport</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Basketball  is a team sport</skos:scopeNote>
     <osm:combines>surface=synthetic</osm:combines>
     <osm:links>lines:soccer=black</osm:links>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:surface=concrete"/>
@@ -11914,11 +11914,11 @@
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/Key:post_box:type">
     <skos:editorialNote>NoTerm</skos:editorialNote>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Key"/>
-    <skos:scopeNote xml:lang="de">Die physische Stil (Grösse / Form) des [[Briefkasten]], und wie er montiert ist. (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">Die physische Stil (Grösse / Form) des Briefkasten, und wie er montiert ist. (Übersetzung)</skos:scopeNote>
     <skos:prefLabel>post_box:type</skos:prefLabel>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:amenity=post_box"/>
     <osm:way>{ "count": "0", "use": "False" }</osm:way>
-    <skos:scopeNote xml:lang="en">The physical style (size/shape) of the [[post box]], and how it is mounted.</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">The physical style (size/shape) of the post box, and how it is mounted.</skos:scopeNote>
     <osm:relation>{ "count": "0", "use": "False" }</osm:relation>
     <osm:node>{ "count": "6561", "use": "False" }</osm:node>
     <foaf:depiction rdf:resource="http://wiki.openstreetmap.org/w/images/c/c3/Post_box_types.jpg"/>
@@ -13065,12 +13065,12 @@
     <osm:relation>{ "count": "1549", "use": "False" }</osm:relation>
     <osm:way>{ "count": "4294", "use": "False" }</osm:way>
     <skos:editorialNote>NoTerm</skos:editorialNote>
-    <skos:scopeNote xml:lang="en">Describes the role of a member in a [[Relation]]</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Describes the role of a member in a Relation]]</skos:scopeNote>
     <osm:area>{ "count": "0", "use": "False" }</osm:area>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Key"/>
     <skos:prefLabel>role</skos:prefLabel>
     <osm:node>{ "count": "79", "use": "False" }</osm:node>
-    <skos:scopeNote xml:lang="de">Beschreibt die Rolle eines Mitglieds in einem [[Beziehungen]] (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">Beschreibt die Rolle eines Mitglieds in einem Beziehungen (Übersetzung)</skos:scopeNote>
   </skos:Concept>
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/Tag:highway=lane">
     <skos:prefLabel>highway=lane</skos:prefLabel>
@@ -14378,7 +14378,7 @@
     <skos:relatedMatch rdf:resource="http://spatial.ucd.ie/lod/osn/term/k:beds"/>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:amenity=hospital"/>
     <osm:node>{ "count": "943", "use": "False" }</osm:node>
-    <skos:scopeNote xml:lang="en">Beds is used for [[hotel]]s.</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Beds is used for hotel]]s.</skos:scopeNote>
     <osm:area>{ "count": "0", "use": "False" }</osm:area>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Key:rooms"/>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Key"/>
@@ -19459,10 +19459,10 @@
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Key:bridge"/>
     <foaf:depiction rdf:resource="http://upload.wikimedia.org/wikipedia/commons/d/d2/BASE_Jumping_from_Sapphire_Tower_in_Istanbul.jpg"/>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Key:man_made"/>
-    <skos:scopeNote xml:lang="de">en = BASE_jumping, ist eine Tätigkeit, eine zunächst gepackt [[w beschäftigt: Fallschirm (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">en = BASE_jumping, ist eine Tätigkeit, eine zunächst gepackt beschäftigt: Fallschirm (Übersetzung)</skos:scopeNote>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:natural=cliff"/>
     <osm:node>{ "count": "0", "use": "True" }</osm:node>
-    <skos:scopeNote xml:lang="en">en=BASE_jumping , is an activity that employs an initially packed [[w:parachute</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">BASE_jumping , is an activity that employs an initially packed parachute</skos:scopeNote>
     <skos:editorialNote>NoTerm</skos:editorialNote>
     <osm:way>{ "count": "5", "use": "True" }</osm:way>
     <skos:relatedMatch rdf:resource="http://spatial.ucd.ie/lod/osn/term/k:sport/v:BASE"/>
@@ -25995,11 +25995,11 @@
     <skos:relatedMatch rdf:resource="http://spatial.ucd.ie/lod/osn/term/k:sports/v:athletics"/>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=sports_centre"/>
     <foaf:depiction rdf:resource="http://upload.wikimedia.org/wikipedia/commons/a/a2/Daichi_Sawano_retouche.jpg"/>
-    <skos:scopeNote xml:lang="en">en=Track_and_field  athletics is a collection of [[w:sport</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Track_and_field  athletics is a collection of sport</skos:scopeNote>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Tag"/>
     <skos:editorialNote>NoTerm</skos:editorialNote>
     <osm:area>{ "count": "0", "use": "True" }</osm:area>
-    <skos:scopeNote xml:lang="de">en = Track_and_field Leichtathletik ist eine Sammlung von [[w: Sport (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">en = Track_and_field Leichtathletik ist eine Sammlung von Sport (Übersetzung)</skos:scopeNote>
     <osm:node>{ "count": "775", "use": "True" }</osm:node>
     <osm:relation>{ "count": "1879", "use": "True" }</osm:relation>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=track"/>
@@ -28544,7 +28544,7 @@
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Key:network"/>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Key:name"/>
     <skos:broader rdf:resource="http://wiki.openstreetmap.org/wiki/Key:route"/>
-    <skos:scopeNote xml:lang="en">Inline skate routes are named or numbered or otherwise signed routes. May go along [[Roads</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Inline skate routes are named or numbered or otherwise signed routes. May go along Roads</skos:scopeNote>
     <osm:relation>{ "count": "99", "use": "True" }</osm:relation>
     <osm:combines>type=route</osm:combines>
     <skos:prefLabel>route=inline_skates</skos:prefLabel>
@@ -30538,14 +30538,14 @@
     <osm:way>{ "count": "2472", "use": "False" }</osm:way>
   </skos:Concept>
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/Tag:man_made=jetty">
-    <skos:scopeNote xml:lang="de">Die Bedeutung ist in Openstreetmap unklar. [[Wiktionary: Anlegestelle]]; [[Wikipedia: Anlegestelle]] (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">Die Bedeutung ist in Openstreetmap unklar. Anlegestelle (Übersetzung)</skos:scopeNote>
     <osm:node>{ "count": "13", "use": "False" }</osm:node>
     <osm:area>{ "count": "0", "use": "True" }</osm:area>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Tag"/>
     <skos:prefLabel>man_made=jetty</skos:prefLabel>
     <foaf:depiction rdf:resource="http://upload.wikimedia.org/wikipedia/commons/6/64/Jetty_break2_new%28USGS%29.jpg"/>
     <osm:way>{ "count": "988", "use": "True" }</osm:way>
-    <skos:scopeNote xml:lang="en">The meaning is unclear in Openstreetmap. [[wiktionary:jetty]]; [[wikipedia:Jetty]]</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">The meaning is unclear in Openstreetmap. jetty</skos:scopeNote>
     <skos:broader rdf:resource="http://wiki.openstreetmap.org/wiki/Key:man_made"/>
     <skos:relatedMatch rdf:resource="http://spatial.ucd.ie/lod/osn/term/k:man_made/v:jetty"/>
     <skos:editorialNote>NoTerm</skos:editorialNote>
@@ -34935,11 +34935,11 @@
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/Tag:sport=beachvolleyball">
     <osm:way>{ "count": "4912", "use": "False" }</osm:way>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:natural=sand"/>
-    <skos:scopeNote xml:lang="en">en=Beach_volleyball  is a team [[sport]] played by two teams of two players on a [[w:sand</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Beach_volleyball  is a team sport played by two teams of two players on a sand</skos:scopeNote>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=beach_resort"/>
     <skos:prefLabel>sport=beachvolleyball</skos:prefLabel>
     <skos:relatedMatch rdf:resource="http://spatial.ucd.ie/lod/osn/term/k:sport/v:beachvolleyball"/>
-    <skos:scopeNote xml:lang="de">en = Beach_volleyball ist ein Team [[sport]] von zwei Teams von zwei Spielern auf einem [[w gespielt: Sand (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">en = Beach_volleyball ist ein Team sport von zwei Teams von zwei Spielern auf einem gespielt: Sand (Übersetzung)</skos:scopeNote>
     <foaf:depiction rdf:resource="http://upload.wikimedia.org/wikipedia/commons/d/de/Beach_Volleyball_Classic_2007_%281444261388%29.jpg"/>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=sports_centre"/>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Tag"/>
@@ -38671,9 +38671,9 @@
     <osm:relation>{ "count": "2", "use": "True" }</osm:relation>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Tag"/>
     <osm:node>{ "count": "68", "use": "True" }</osm:node>
-    <skos:scopeNote xml:lang="en">en=Badminton  is a [[w:List of racquet sports</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Badminton  is a List of racquet sports</skos:scopeNote>
     <foaf:depiction rdf:resource="http://upload.wikimedia.org/wikipedia/commons/b/b5/Badminton_competition.jpg"/>
-    <skos:scopeNote xml:lang="de">en = Badminton ist ein [[w: Liste der Schlägersportarten (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">en = Badminton ist ein Liste der Schlägersportarten (Übersetzung)</skos:scopeNote>
     <osm:way>{ "count": "279", "use": "True" }</osm:way>
     <skos:broader rdf:resource="http://wiki.openstreetmap.org/wiki/Key:sport"/>
   </skos:Concept>
@@ -43774,14 +43774,14 @@
     <osm:relation>{ "count": "189", "use": "True" }</osm:relation>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=stadium"/>
     <skos:broader rdf:resource="http://wiki.openstreetmap.org/wiki/Key:sport"/>
-    <skos:scopeNote xml:lang="en">en=Baseball  is a [[w:Bat-and-ball games</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Baseball  is a Bat-and-ball games</skos:scopeNote>
     <foaf:depiction rdf:resource="http://upload.wikimedia.org/wikipedia/commons/6/6d/Baseball_swing.jpg"/>
     <skos:editorialNote>NoTerm</skos:editorialNote>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:surface=grass"/>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=sports_centre"/>
     <osm:node>{ "count": "1283", "use": "True" }</osm:node>
     <osm:way>{ "count": "67260", "use": "False" }</osm:way>
-    <skos:scopeNote xml:lang="de">en = Baseball ist ein [[w: Schlagballspiel (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">en = Baseball ist ein Schlagballspiel (Übersetzung)</skos:scopeNote>
     <skos:prefLabel>sport=baseball</skos:prefLabel>
   </skos:Concept>
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/RelatedTerms/sport_golf">
@@ -45922,13 +45922,13 @@
     <osm:links>man_made=shoal</osm:links>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Tag"/>
     <osm:area>{ "count": "0", "use": "True" }</osm:area>
-    <skos:scopeNote xml:lang="en">An area of the sea floor which nears the sea surface (literally, becomes shallow) and can lie completely below it or be exposed at low tide.; [[wiktionary:shoal]]; [[wikipedia:Shoal]]</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">An area of the sea floor which nears the sea surface (literally, becomes shallow) and can lie completely below it or be exposed at low tide. shoal</skos:scopeNote>
     <skos:broader rdf:resource="http://wiki.openstreetmap.org/wiki/Key:natural"/>
     <skos:editorialNote>NoTerm</skos:editorialNote>
     <osm:relation>{ "count": "7", "use": "False" }</osm:relation>
     <osm:way>{ "count": "121", "use": "True" }</osm:way>
     <osm:node>{ "count": "162", "use": "True" }</osm:node>
-    <skos:scopeNote xml:lang="de">Ein Bereich des Meeresbodens, die die Wasseroberfläche nähert (wörtlich: flach wird) und kann vollständig darunter liegen oder bei Ebbe ausgesetzt werden .; [[Wiktionary: Schwarm]]; [[Wikipedia: Shoal]] (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">Ein Bereich des Meeresbodens, die die Wasseroberfläche nähert (wörtlich: flach wird) und kann vollständig darunter liegen oder bei Ebbe ausgesetzt werden. Schwarm Übersetzung)</skos:scopeNote>
     <osm:links>seamark:type=sea_area</osm:links>
     <skos:prefLabel>natural=shoal</skos:prefLabel>
     <foaf:depiction rdf:resource="http://upload.wikimedia.org/wikipedia/commons/4/43/SandbarLongIsland1.jpg"/>
@@ -52595,11 +52595,11 @@
   </skos:Concept>
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/Key:osmarender:renderName">
     <osm:relation>{ "count": "1", "use": "False" }</osm:relation>
-    <skos:scopeNote xml:lang="en">Used to provide rendering hints to [[Osmarender]]</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">Used to provide rendering hints to Osmarender</skos:scopeNote>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Key:name"/>
     <skos:editorialNote>NoTerm</skos:editorialNote>
     <skos:prefLabel>osmarender:renderName</skos:prefLabel>
-    <skos:scopeNote xml:lang="de">Verwendet Rendering Hinweise zu [[Osmarender]] zur Verfügung zu stellen (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">Verwendet Rendering Hinweise zu Osmarender zur Verfügung zu stellen (Übersetzung)</skos:scopeNote>
     <osm:way>{ "count": "481", "use": "False" }</osm:way>
     <osm:links rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:osmarender:renderName=no"/>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Key:name"/>
@@ -53695,7 +53695,7 @@
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Key:length"/>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=pitch"/>
     <osm:relation>{ "count": "2", "use": "True" }</osm:relation>
-    <skos:scopeNote xml:lang="de">en = BMX oder Fahrrad Motocross ist eine [[w: Radsport (Übersetzung)</skos:scopeNote>
+    <skos:scopeNote xml:lang="de">en = BMX oder Fahrrad Motocross ist eine Radsport (Übersetzung)</skos:scopeNote>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=sports_centre"/>
     <skos:prefLabel>sport=bmx</skos:prefLabel>
     <foaf:depiction rdf:resource="http://upload.wikimedia.org/wikipedia/commons/f/fe/BMX_racing_action_photo.jpg"/>
@@ -53703,7 +53703,7 @@
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=track"/>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Tag"/>
     <skos:editorialNote>NoTerm</skos:editorialNote>
-    <skos:scopeNote xml:lang="en">en=BMX  or Bicycle motocross is a [[w:cycle sport</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">BMX  or Bicycle motocross is a cycle sport</skos:scopeNote>
     <osm:way>{ "count": "407", "use": "True" }</osm:way>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Tag:leisure=stadium"/>
     <osm:area>{ "count": "0", "use": "True" }</osm:area>
@@ -54220,7 +54220,7 @@
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/Tag:landuse=village_green">
     <osm:way>{ "count": "64463", "use": "False" }</osm:way>
     <osm:node>{ "count": "1317", "use": "False" }</osm:node>
-    <skos:scopeNote xml:lang="en">A village green is a distinctive part of a village centre; [[wiktionary:village green]], [[wikipedia:Village green]]</skos:scopeNote>
+    <skos:scopeNote xml:lang="en">A village green is a distinctive part of a village centre</skos:scopeNote>
     <osm:combines rdf:resource="http://wiki.openstreetmap.org/wiki/Key:name"/>
     <skos:editorialNote>NoTerm</skos:editorialNote>
     <skos:relatedMatch rdf:resource="http://spatial.ucd.ie/lod/osn/term/k:landuse/v:village_green"/>
@@ -55518,14 +55518,14 @@
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/Key:product">
     <skos:prefLabel>product</skos:prefLabel>
     <skos:editorialNote>NoTerm</skos:editorialNote>
-    <skos:scopeNote xml:lang="de"><![CDATA[Die Ausgabe oder Produkt, das ein Feature produziert <p> <strong>. Hinweis: </ strong> Wenn das Produkt natürliche wie Austern oder Pflaumen der Anwender wird empfohlen, den Tag produzieren verwenden </ p> (Übersetzung)]]></skos:scopeNote>
+    <skos:scopeNote xml:lang="de">Die Ausgabe oder Produkt, das ein Feature produziert. Hinweis: Wenn das Produkt natürliche wie Austern oder Pflaumen der Anwender wird empfohlen, den Tag produzieren verwenden (Übersetzung)</skos:scopeNote>
     <foaf:depiction rdf:resource="http://wiki.openstreetmap.org/w/images/7/7b/Mf_key.svg"/>
     <osm:relation>{ "count": "11", "use": "False" }</osm:relation>
     <skos:relatedMatch rdf:resource="http://spatial.ucd.ie/lod/osn/term/k:product"/>
     <osm:node>{ "count": "209", "use": "False" }</osm:node>
     <skos:inScheme rdf:resource="http://wiki.openstreetmap.org/wiki/Key"/>
     <osm:area>{ "count": "0", "use": "False" }</osm:area>
-    <skos:scopeNote xml:lang="en"><![CDATA[The output or product that a feature produces.<p><strong>Note:</strong> If the product is natural such as oysters or plums the user is advised to use the tag produce </p>]]></skos:scopeNote>
+    <skos:scopeNote xml:lang="en">The output or product that a feature produces. Note: If the product is natural such as oysters or plums the user is advised to use the tag produce</skos:scopeNote>
     <osm:way>{ "count": "659", "use": "False" }</osm:way>
   </skos:Concept>
   <skos:Concept rdf:about="http://wiki.openstreetmap.org/wiki/Tag:denomination=protestant">

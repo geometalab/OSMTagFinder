@@ -35,6 +35,15 @@ def specCharEnc(text):
     text = text.replace('ß', '\xc3\x9f')
     return encode(text)
 
+def removeTrema(text):
+    text = text.replace('Ä', 'A')
+    text = text.replace('ä', 'a')
+    text = text.replace('Ö', 'O')
+    text = text.replace('ö', 'ö')
+    text = text.replace('Ü', 'u')
+    text = text.replace('ü', 'u')
+    return encode(text)
+
 def encode(text):
     if text is not None and not isinstance(text, unicode) and len(text) > 0:
         #encoding = chardet.detect(text)

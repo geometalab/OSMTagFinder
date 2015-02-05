@@ -12,6 +12,7 @@ from utilities.configloader import ConfigLoader
 from collections import OrderedDict
 from whoosh.qparser import QueryParser
 #from whoosh.qparser import MultifieldParser
+from whoosh.analysis import NgramFilter, StandardAnalyzer
 import whoosh.index as index
 from whoosh.index import open_dir
 import re
@@ -56,6 +57,20 @@ class GraphSearch:
             else:
                 translatedWords = translatedWords + self.translateWord(word, lang)
         return utils.wsWord(translatedWords)
+    
+    def getTokens(self, words, lang=None):
+        tokenizer = StandardAnalyzer() | NgramFilter(minsize=3, maxsize=20, at='start')
+        tokens = set()
+        for token in tokenizer(words):
+            if lang == 'en':
+                translatedToken = Translator().translate(token.text, lang)
+                if not translatedToken is None and not translatedToken == token.text:
+                    tokens.add(token)
+            else:
+                translatedToken = Translator().translate(utils.removeTrema(token.text), lang)
+                if not translatedToken is None and not translatedToken == token.text:
+                    tokens.add(translatedToken)
+        return tokens
 
     def getSortedTagResults(self, rdfGraph, rawResults):
         tagResults = TagResults(rdfGraph, rawResults)
@@ -67,10 +82,12 @@ class GraphSearch:
         results = OrderedDict()
 
         containsQuotes = words.count('"') >= 2
-
+        
         translatedWords = self.translateText(words, lang)
         words = utils.wsWord(words) # do this after translation
         # words and translatedWords are now "whitespaced", containging mostly whitespace separator
+        
+        tokens = self.getTokens(words, lang)
 
         # don't leave the following statement until all results are copied into another datastructure,
         # otherwise the reader is closed.
@@ -91,30 +108,40 @@ class GraphSearch:
             else:
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagPrefLabel', results, allHits)  # english first too
                 allHits = self.extendedSearch(words, searcher, 'tagPrefLabel', results, allHits)
-
+            
             allHits = self.extendedSearch(words, searcher, 'termNarrower', results, allHits) # Note: Searching in termNarrower gives me all broader for this term
             allHits = self.extendedSearch(words, searcher, 'termBroader', results, allHits)
             allHits = self.extendedSearch(translatedWords, searcher, 'termNarrower', results, allHits)
             allHits = self.extendedSearch(translatedWords, searcher, 'termBroader', results, allHits)
 
-            if lang == 'en' and (allHits is None or len(results) < self.threshold):
+            if lang == 'en':
                 allHits = self.extendedSearch(words, searcher, 'tagScopeNote', results, allHits)  # english first
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagScopeNote', results, allHits)
-            elif allHits is None or len(results) < self.threshold:
+            else:
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagScopeNote', results, allHits)  # english first too
                 allHits = self.extendedSearch(words, searcher, 'tagScopeNote', results, allHits)
-
+                
             if not containsQuotes and (allHits is None or len(results) < self.threshold):
-                suggestions = SpellCorrect().listSuggestions(words) # is slow
-                suggestions.extend(SpellCorrect().listSuggestions(translatedWords))
-                for s in suggestions:
-                    allHits = self.extendedSearch(s, searcher, 'termPrefLabel', results, allHits)
-                    allHits = self.extendedSearch(s, searcher, 'termAltLabel', results, allHits)
-                    allHits = self.extendedSearch(s, searcher, 'tagPrefLabel', results, allHits)
-
-                if len(results) < self.threshold:
-                    for s in suggestions:
-                        allHits = self.extendedSearch(s, searcher, 'tagScopeNote', results, allHits)
+                for token in tokens: # tokenized search
+                    if not token in words or not token in translatedWords:
+                        allHits = self.extendedSearch(token, searcher, 'tagPrefLabel', results, allHits)
+                        allHits = self.extendedSearch(token, searcher, 'termPrefLabel', results, allHits)
+                        allHits = self.extendedSearch(token, searcher, 'termAltLabel', results, allHits)
+                        allHits = self.extendedSearch(token, searcher, 'termNarrower', results, allHits)
+                        allHits = self.extendedSearch(token, searcher, 'termBroader', results, allHits)
+                        allHits = self.extendedSearch(token, searcher, 'tagScopeNote', results, allHits)
+                        
+#             if not containsQuotes and (allHits is None or len(results) < self.threshold):   
+#                 suggestions = SpellCorrect().listSuggestions(words) # is slow
+#                 suggestions.extend(SpellCorrect().listSuggestions(translatedWords))
+#                 for s in suggestions:
+#                     allHits = self.extendedSearch(s, searcher, 'termPrefLabel', results, allHits)
+#                     allHits = self.extendedSearch(s, searcher, 'termAltLabel', results, allHits)
+#                     allHits = self.extendedSearch(s, searcher, 'tagPrefLabel', results, allHits)
+# 
+#                 if len(results) < self.threshold:
+#                     for s in suggestions:
+#                         allHits = self.extendedSearch(s, searcher, 'tagScopeNote', results, allHits)
 
             results = self.updateScore(results, allHits)
 

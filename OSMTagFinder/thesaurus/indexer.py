@@ -11,7 +11,7 @@ from rdflib import Literal
 from thesaurus.rdfgraph import RDFGraph
 
 import re
-from whoosh.fields import TEXT, ID, Schema
+from whoosh.fields import TEXT, ID, Schema, NGRAMWORDS
 import whoosh.index as index
 from whoosh.index import create_in
 from utilities.configloader import ConfigLoader
@@ -19,7 +19,8 @@ from utilities.configloader import ConfigLoader
 class Indexer:
 
     schema = Schema(tagSubject=ID(stored=True),
-                    tagPrefLabel=TEXT(stored=True),
+                    #tagPrefLabel=TEXT(stored=True),
+                    tagPrefLabel=NGRAMWORDS(minsize=2, maxsize=10, stored=True, field_boost=1.0, tokenizer=None, at='start', queryor=False, sortable=False),
                     termPrefLabel=TEXT(stored=True),
                     termAltLabel=TEXT(stored=True),
                     termBroader=TEXT(stored=True),
