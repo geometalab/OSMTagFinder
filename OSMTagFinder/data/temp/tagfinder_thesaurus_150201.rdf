@@ -23807,7 +23807,7 @@
     <skos:narrower xml:lang="de">Fährschiff</skos:narrower>
     <skos:altLabel xml:lang="de">Bootsfahrt</skos:altLabel>
     <skos:narrower xml:lang="de">Jacht</skos:narrower>
-    <skos:narrower xml:lang="de">Wohnbot</skos:narrower>
+    <skos:narrower xml:lang="de">Wohnboot</skos:narrower>
     <skos:altLabel xml:lang="en">watercraft</skos:altLabel>
     <skos:relatedMatch rdf:resource="http://wiki.openstreetmap.org/wiki/Key:boat"/>
     <skos:narrower xml:lang="en">Sailor</skos:narrower>
