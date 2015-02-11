@@ -1,6 +1,6 @@
 // depends on bootstrap3-typeahead.min.js
 
-function spellcorrect(idElement, query) {
+function typeaheadCorrect(idElement, query) {
     var timeout;
     $(idElement).typeahead({
             minLength: 3,

@@ -10,6 +10,7 @@
     {{super()}}
     <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
     <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ajaxSuggest.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -313,20 +314,29 @@
             {% endfor %}
 
         {% elif query %} <!-- None found or no search (if query is None) -->
+            {% set linkedQuery = query.replace(' ','+') %}
             <div class="none_found">
                 <h5 lang="en" class="none_found_header">Your search - <b>{{ query }}</b> - did not match any OpenStreetMap tags. </h5>
                 <h5 lang="de" class="none_found_header">Es wurden keine mit Ihrer Suchanfrage - <b>{{ query }}</b> - übereinstimmende OpenStreetMap Tags gefunden.</h5>
                 <h5 lang="en" class="suggestion_header">Suggestions:</h5>
                 <h5 lang="de" class="suggestion_header">Vorschläge:</h5>
                 <ul id="suggestion_list">
+                    <li lang="en" id="li_suggestions_en">Did you mean: </li>
                     <li lang="en">Make sure that all words are spelled correctly.</li>
                     <li lang="en">Try different keywords.</li>
                     <li lang="en">Try more general keywords.</li>
+                    <li lang="en">Try searching in <a href="https://taginfo.openstreetmap.org/search?q={{ linkedQuery }}" target="_blank">TagInfo</a> or in the <a href="http://wiki.openstreetmap.org/w/index.php?search={{ linkedQuery }}" target="_blank">OSM Wiki</a>.</li>
+                    <li lang="de" id="li_suggestions_de">Meinten Sie: </li>
                     <li lang="de">Achten Sie darauf, dass alle Wörter richtig geschrieben sind.</li>
-                    <li lang="de">Probieren Sie es mit anderen Suchbegriffen.</li>
-                    <li lang="de">Probieren Sie es mit allgemeineren Suchbegriffen.</li>
+                    <li lang="de">Versuchen Sie es mit anderen Suchbegriffen.</li>
+                    <li lang="de">Versuchen Sie es mit allgemeineren Suchbegriffen.</li>
+                    <li lang="de">Versuchen Sie es ggf. mit <a href="https://taginfo.openstreetmap.org/search?q={{ linkedQuery }}" target="_blank">TagInfo</a> oder im  <a href="http://wiki.openstreetmap.org/w/index.php?search={{ linkedQuery }}" target="_blank">OSM Wiki</a>.</li>
                 </ul>
             </div>
+            <script src="{{ url_for('static', filename='js/ajaxSuggest.js') }}"></script>
+            <script type="text/javascript">
+                ajaxSuggest(document.getElementById('li_suggestions_en'), document.getElementById('li_suggestions_de'), '{{ query }}')
+            </script>
         {% endif %}
 
         <div id="push"></div>

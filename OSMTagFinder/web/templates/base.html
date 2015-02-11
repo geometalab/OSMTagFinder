@@ -36,16 +36,16 @@
     <script src="{{ url_for('static', filename='js/typeahead-noselect.js') }}"></script>
     <script src="{{ url_for('static', filename='js/language.js') }}"></script>
     <script src="{{ url_for('static', filename='js/searchfade.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/spellcorrect.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/typeaheadCorrect.js') }}"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function() {
             searchfade({{ results|count }}, '{{ query }}');
             $.getScript( "{{ url_for('static', filename='js/typeahead-noselect.js') }}"); /* loads and executes selection fix */
-            spellcorrect('#mainsearch_de', '{{ query }}');
-            spellcorrect('#mainsearch_en', '{{ query }}');
-            spellcorrect('#navbarsearch', '{{ query }}');
+            typeaheadCorrect('#mainsearch_de', '{{ query }}');
+            typeaheadCorrect('#mainsearch_en', '{{ query }}');
+            typeaheadCorrect('#navbarsearch', '{{ query }}');
             /*getLanguage(function(data) {
                 window.lang = data;
             });*/
@@ -157,7 +157,7 @@
 
     <div id="nav_footer" class="navbar navbar-default navbar-fixed-bottom" role="footer">
         <p class="navbar-text">&copy; Copyright: <a href="http://opendatacommons.org/licenses/odbl" target="_tag">OBdL</a> / <a href="https://www.openstreetmap.org/copyright" target="_tag">OSM contributors</a></p>
-        <p class="navbar-text">TagFinder v.1.5</p>
+        <p class="navbar-text">TagFinder v.1.8</p>
         <p class="navbar-text" lang="en">Data from {{ dataDate }}</p>
         <p class="navbar-text" lang="de">Daten vom {{ dataDate }}</p>
         <p class="navbar-text navbar-right" id="logo_hsr"><a href="https://www.hsr.ch/geometalab" target="_tag"><img class="image_footer" src="{{ url_for('static', filename='img/logo_hsr.png') }}" alt="hsr.ch" height="30"></a></p>

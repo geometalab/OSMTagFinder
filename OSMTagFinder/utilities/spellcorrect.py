@@ -19,7 +19,7 @@ class SpellCorrect():
 
     ix = None
 
-    limit = 8 # same as boostrap default
+    limit = 5 # 8 is boostrap default
 
     def __init__(self):
         if not index.exists_in(utils.indexerDir(), utils.indexName):
@@ -39,9 +39,9 @@ class SpellCorrect():
         if self.ix is None or word is None or word == '': return []
         retList = []
         corrector = self.ix.searcher().corrector("spellingEN")
-        wordList = self.splitWords(word)
+        wordList = self.splitWords(word.lower())
         for singleWord in wordList:
-            retList = self.mergeLists(retList, corrector.suggest(singleWord, limit=self.limit))
+            retList = self.mergeLists(retList, corrector.suggest(singleWord, limit=self.limit, maxdist=2))
         return retList
 
 
@@ -50,9 +50,9 @@ class SpellCorrect():
         if self.ix is None or word is None or word == '': return []
         retList = []
         corrector = self.ix.searcher().corrector("spellingDE")
-        wordList = self.splitWords(word)
+        wordList = self.splitWords(word.lower())
         for singleWord in wordList:
-            retList = self.mergeLists(retList, corrector.suggest(singleWord, limit=self.limit))
+            retList = self.mergeLists(retList, corrector.suggest(singleWord, limit=self.limit, maxdist=2))
         return retList
 
 

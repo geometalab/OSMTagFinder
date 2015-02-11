@@ -203,7 +203,7 @@ class Maintenance:
         self.printlnWhiteOnBlue(' separated with a comma. They can not be mixed with commands.')
         self.printlnGreyOnBlue(' (e.g. 3-5, 7, Zoo, Tierpark, 1)')
         self.printlnWhiteOnBlue('')
-        self.printlnWhiteOnBlue(' Pressing "Enter" confirms the inputs. Dont forget to -save from time to time!')
+        self.printlnWhiteOnBlue(' Pressing "Enter" confirms the inputs. Dont forget to \\save from time to time!')
         self.printlnWhiteOnBlue('')
         self.println('')
 

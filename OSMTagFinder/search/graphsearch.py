@@ -5,7 +5,7 @@ Created on 12.10.2014
 @author: Simon Gwerder
 '''
 from utilities import utils
-from utilities.spellcorrect import SpellCorrect
+#from utilities.spellcorrect import SpellCorrect
 from utilities.translator import Translator
 from utilities.configloader import ConfigLoader
 
@@ -151,18 +151,14 @@ class GraphSearch:
                         allHits = self.extendedSearch(translatedToken, searcher, 'termBroader', results, allHits)
                         allHits = self.extendedSearch(translatedToken, searcher, 'tagScopeNote', results, allHits)
                         
-            if not containsQuotes and (allHits is None or len(results) < self.threshold):   
-                suggestions = SpellCorrect().listSuggestions(words) # is slow
-                suggestions.extend(SpellCorrect().listSuggestions(translatedWords))
-                for s in suggestions:
-                    allHits = self.extendedSearch(s, searcher, 'termPrefLabel', results, allHits)
-                    allHits = self.extendedSearch(s, searcher, 'termAltLabel', results, allHits)
-                    allHits = self.extendedSearch(s, searcher, 'tagPrefLabel', results, allHits)
+#             if not containsQuotes and (allHits is None or len(results) < self.threshold):   
+#                 suggestions = SpellCorrect().listSuggestions(words) # is slow
+#                 suggestions.extend(SpellCorrect().listSuggestions(translatedWords))
+#                 for s in suggestions:
+#                     allHits = self.extendedSearch(s, searcher, 'termPrefLabel', results, allHits)
+#                     allHits = self.extendedSearch(s, searcher, 'termAltLabel', results, allHits)
+#                     allHits = self.extendedSearch(s, searcher, 'tagPrefLabel', results, allHits)
  
-                if len(results) < self.threshold:
-                    for s in suggestions:
-                        allHits = self.extendedSearch(s, searcher, 'tagScopeNote', results, allHits)
-
             results = self.updateScore(results, allHits)
 
         return self.getSortedTagResults(rdfGraph, results)
