@@ -20,7 +20,7 @@ function ajaxSuggest(liElementEN, liElementDE, query) {
             }
             var i = 0;
             for(var key in data) {
-                if (data.hasOwnProperty(key)) {
+                if(data.hasOwnProperty(key)) {
                     var dataElement = data[key];
                     var aElementEN = document.createElement('a');
                     var aElementDE = document.createElement('a');
