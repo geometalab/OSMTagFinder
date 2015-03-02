@@ -12,7 +12,7 @@ from rdflib.namespace import SKOS
 from utilities.configloader import ConfigLoader
 from utilities import utils
 
-class OSMSemanitcNet:
+class OSMSemanticNet:
 
     cl = ConfigLoader()
     baseUrl = cl.getThesaurusString('OSM_SEM_NET')

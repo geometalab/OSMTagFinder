@@ -26,6 +26,7 @@ class TagInfo:
     tagInfoWikiPageOfTag = cl.getTagInfoAPIString('WIKI_PAGE_OF_TAG')
     tagInfoTagPostfix = cl.getTagInfoAPIString('TAG_SUFFIX')
 
+    @retry(Exception, tries=3)
     def getAllKeyData(self):
         '''Calls TagInfo for a list of all keys. The list is descending sorted by count of
            values attached to the key.'''
@@ -33,6 +34,7 @@ class TagInfo:
         keyJson = keyResult.json()
         return keyJson['data']
 
+    @retry(Exception, tries=3)
     def getAllTagData(self, key):
         '''Calls TagInfo for a list of all tags for 'key'. The list is descending sorted by count of
         occurrence in OSM.'''
@@ -40,23 +42,27 @@ class TagInfo:
         tagJson = tagResult.json()
         return tagJson['data']
 
+    @retry(Exception, tries=3)
     def getKeyStats(self, key):
         '''Calls TagInfo for statistics of 'key'.'''
         keyResult = requests.get(self.tagInfoKeyStats + key)
         keyJson = keyResult.json();
         return keyJson['data']
 
+    @retry(Exception, tries=3)
     def getTagStats(self, key, value):
         '''Calls TagInfo for statistics of 'key'='value'.'''
         tagResult = requests.get(self.tagInfoTagStats + key + self.tagInfoTagPostfix + value)
         tagJson = tagResult.json();
         return tagJson['data']
 
+    @retry(Exception, tries=3)
     def getWikiPageOfKey(self, key):
         '''Calls TagInfo for the corresponding OSM wiki page for 'key'.'''
         keyWikiPage = requests.get(self.tagInfoWikiPageOfKey + key)
         return keyWikiPage.json()
 
+    @retry(Exception, tries=3)
     def getWikiPageOfTag(self, key, value):
         '''Calls TagInfo for the corresponding OSM wiki page for 'key'='value'.'''
         tagWikiPage = requests.get(self.tagInfoWikiPageOfTag + key + self.tagInfoTagPostfix + value)

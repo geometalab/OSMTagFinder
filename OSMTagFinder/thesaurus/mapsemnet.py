@@ -9,7 +9,7 @@ from rdflib.namespace import SKOS
 
 from thesaurus.rdfgraph import RDFGraph
 from utilities.configloader import ConfigLoader
-from semnet.osmsemanticnet import OSMSemanitcNet
+from semnet.osmsemanticnet import OSMSemanticNet
 
 class MapOSMSemanticNet:
 
@@ -20,7 +20,7 @@ class MapOSMSemanticNet:
         if osnSemNetFilePath is not None:
             #print('Loading OSN graph')
             osnSemNetRDF = RDFGraph(osnSemNetFilePath)
-        osn = OSMSemanitcNet(osnSemNetRDF) # if osnSemNetRDF is None it will check the web graph
+        osn = OSMSemanticNet(osnSemNetRDF) # if osnSemNetRDF is None it will check the web graph
 
         termSchemeName = ConfigLoader().getThesaurusString('TERM_SCHEME_NAME')
 
