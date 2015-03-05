@@ -8,10 +8,10 @@ Thanks go to Tom (bashzestampeedo) aswell, who helped me when learning python go
 import os
 import time
 import datetime
-#import sys
-
+import logging
+import sys
 #import codecs
-#import logging
+
 from utilities import crython
 
 from utilities import utils
@@ -22,6 +22,7 @@ from thesaurus.updatethesaurus import UpdateThesaurus
 from taginfo.taginfo import TagInfo
 
 def runFlaskApp(rdfGraph=None, dataDate=None):
+    logging.info('Application started')
     cl = ConfigLoader()
 
     if rdfGraph is None or dataDate is None:
@@ -37,12 +38,38 @@ def runFlaskApp(rdfGraph=None, dataDate=None):
     app.run(debug=False, host=tagFinderHost, port=tagFinderPort, threaded=True) # debug=False/True, alternately app.run(..., processes=3)
 
 
+def initLogger():
+    logFile = utils.outputFile(utils.logDir(), 'serverlog', '.log', False)
+    logging.basicConfig(format='%(asctime)s: %(levelname)s - %(message)s', filemode='w', filename=logFile, level=logging.DEBUG)
+    ch = logging.StreamHandler(sys.stdout)
+    
+    logger = logging.getLogger('VISITOR_LOGGER')
+    logger.setLevel(logging.INFO)
+    
+    visitorFile = utils.outputFile(utils.logDir(), 'visitorlog', '.log', False)
+    # create a file handler
+    handler = logging.FileHandler(visitorFile)
+    handler.setLevel(logging.INFO)
+    
+    # create a logging format
+    formatter = logging.Formatter('%(asctime)s: %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    
+    # add the handlers to the logger
+    logger.addHandler(handler)
+    logger.addHandler(ch)
+    
+    
+
 if __name__ == '__main__':
 
+    initLogger()
     cl = ConfigLoader()
     @crython.job(expr=cl.getWebsiteString('UPDATE_CRONTAB'))
     def updateJob():
-        print 'updating job started'
+        print 'Updating job started'
+        initLogger()
+        logging.info('Updating job started')
         cl = ConfigLoader()
         outputName = cl.getThesaurusString('OUTPUT_NAME')
         outputEnding = cl.getThesaurusString('DEFAULT_FORMAT')
@@ -54,8 +81,6 @@ if __name__ == '__main__':
         cl.write() # storing the date change in config file
         runFlaskApp(rdfGraph, today)
 
-    #sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
-    #logging.basicConfig()
 
     cl = ConfigLoader()
     startSched = cl.getWebsiteBoolean('START_SCHEDULER')

@@ -1,0 +1,18 @@
+2015-03-05 16:05:16,404: INFO - Application started
+2015-03-05 16:05:25,249: INFO -  * Running on http://0.0.0.0:5000/
+2015-03-05 16:05:35,704: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:35] "GET / HTTP/1.1" 200 -
+2015-03-05 16:05:35,913: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:35] "GET /static/js/typeahead-noselect.js?_=1425567935761 HTTP/1.1" 200 -
+2015-03-05 16:05:39,072: INFO - IP: 127.0.0.1, search query: Zoo, lang: de
+2015-03-05 16:05:39,197: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /search?query=Zoo&lang=de HTTP/1.1" 200 -
+2015-03-05 16:05:39,243: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/img/osm_count_all_v2.png HTTP/1.1" 200 -
+2015-03-05 16:05:39,243: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/img/osm_node_true.png HTTP/1.1" 200 -
+2015-03-05 16:05:39,243: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/img/osm_relation_false.png HTTP/1.1" 200 -
+2015-03-05 16:05:39,243: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/img/osm_way_false.png HTTP/1.1" 200 -
+2015-03-05 16:05:39,259: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/img/osm_area_true.png HTTP/1.1" 200 -
+2015-03-05 16:05:39,259: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/img/osm_node_unspec.png HTTP/1.1" 200 -
+2015-03-05 16:05:39,259: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/img/osm_relation_unspec.png HTTP/1.1" 200 -
+2015-03-05 16:05:39,259: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/img/osm_way_unspec.png HTTP/1.1" 200 -
+2015-03-05 16:05:39,259: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/img/osm_area_unspec.png HTTP/1.1" 200 -
+2015-03-05 16:05:39,259: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/img/k200_150_gray.png HTTP/1.1" 200 -
+2015-03-05 16:05:39,259: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/img/kv200_150_gray.png HTTP/1.1" 200 -
+2015-03-05 16:05:39,400: INFO - 127.0.0.1 - - [05/Mar/2015 16:05:39] "GET /static/js/typeahead-noselect.js?_=1425567939379 HTTP/1.1" 200 -

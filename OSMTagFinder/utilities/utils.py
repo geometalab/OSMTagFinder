@@ -21,6 +21,7 @@ _templatesFolderName = 'templates'
 _tempFolderName = 'temp'
 _semnetFolderName = 'semnet'
 _testFolderName = 'test'
+_logFolderName = 'log'
 
 indexName = 'index'  # for indexer.py and graphsearch.py
 
@@ -79,6 +80,10 @@ def dataDir():
 
 def tempDir():
     path = rootDir() + '/' + _dataFolderName + '/' + _tempFolderName + '/'
+    return _checkCreatePath(path)
+
+def logDir():
+    path = rootDir() + '/' + _logFolderName + '/'
     return _checkCreatePath(path)
 
 def websiteDir():

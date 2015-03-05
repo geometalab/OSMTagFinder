@@ -10,6 +10,7 @@ from flask import Flask, session, send_from_directory, render_template, request,
 from flask_bootstrap import Bootstrap
 from web.jsonpdeco import support_jsonp
 import datetime
+import logging
 
 
 from utilities import utils
@@ -28,6 +29,7 @@ except ImportError:
 
 websiteRdfGraph = None # global var is assigned in setRdfGraph()! Because there's no way to restart a running 'app' in FLASK!!!
 websiteDataDate = datetime.date.today().strftime("%d.%m.%y") # will be assigned aswell
+logger = logging.getLogger('VISITOR_LOGGER')
 
 def setRdfGraph(rdfGraph, dataDate):
     global websiteRdfGraph # blowing your mind, thanks FLASK for beeing so global :(
@@ -76,7 +78,7 @@ def searchCall(query, lang=None):
 
     if lang is None:
         lang = getLocale()
-
+    logger.info('IP: ' + request.remote_addr + ", search query: " + query + ", lang: " + lang)
     return graphSearch.fullSearch(websiteRdfGraph, query, lang)
 
 
@@ -165,6 +167,7 @@ def apiSearch():
         jsonDump = json.dumps(searchResults, indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(searchResults)
+    logger.info('IP: ' + request.remote_addr + ", API search: " + query + ", lang: " + lang)
     return Response(jsonDump,  mimetype='application/json')
 
 @app.route('/suggest', methods = ['GET'])
@@ -182,7 +185,6 @@ def suggest():
 
     #if len(suggestList) == 0:
     #    suggestList = spellCorrect.listSuggestions(word)
-
     return Response(json.dumps(suggestList), mimetype='application/json')
 
 @app.route('/api/suggest', methods = ['GET'])
@@ -204,6 +206,7 @@ def apiSuggest():
         jsonDump = json.dumps(suggestList, indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(suggestList)
+    logger.info('IP: ' + request.remote_addr + ", API suggest: " + query + ", lang: " + lang)
     return Response(jsonDump,  mimetype='application/json')
 
 @app.route('/ossuggest', methods = ['GET'])
@@ -252,6 +255,7 @@ def apiTag():
         jsonDump = json.dumps(results[0], indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(results[0])
+    logger.info('IP: ' + request.remote_addr + ", API tag: " + prefLabel)
     return Response(jsonDump,  mimetype='application/json')
 
 @app.route('/api/terms', methods = ['GET'])
@@ -295,7 +299,7 @@ def apiTerms():
         jsonDump = json.dumps(retDict, indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(retDict)
-
+    logger.info('IP: ' + request.remote_addr + ", API terms: " + term)
     return Response(jsonDump,  mimetype='application/json')
 
 
