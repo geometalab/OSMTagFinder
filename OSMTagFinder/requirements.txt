@@ -35,3 +35,4 @@ xmltodict==0.9.0
 zope.component==4.2.1
 zope.event==4.0.3
 zope.interface==4.1.1
+tornado==4.1

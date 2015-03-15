@@ -21,6 +21,10 @@ from thesaurus.rdfgraph import RDFGraph
 from thesaurus.updatethesaurus import UpdateThesaurus
 from taginfo.taginfo import TagInfo
 
+from tornado.wsgi import WSGIContainer
+from tornado.httpserver import HTTPServer
+from tornado.ioloop import IOLoop
+
 def runFlaskApp(rdfGraph=None, dataDate=None):
     logging.info('Application started')
     cl = ConfigLoader()
@@ -35,10 +39,19 @@ def runFlaskApp(rdfGraph=None, dataDate=None):
 
     tagFinderHost = cl.getWebsiteString('HOST')
     tagFinderPort = int(os.environ.get("PORT", cl.getWebsiteInt('PORT')))
-    app.run(debug=False, host=tagFinderHost, port=tagFinderPort, threaded=True) # debug=False/True, alternately app.run(..., processes=3)
+    
+    http_server = HTTPServer(WSGIContainer(app))
+    http_server.listen(port=tagFinderPort)
+    IOLoop.instance().start()
+    
+    #app.run(debug=False, host=tagFinderHost, port=tagFinderPort, threaded=True) # debug=False/True, alternately app.run(..., processes=3)
 
 
 def initLogger():
+    tornadoAccessLog = logging.getLogger("tornado.access")
+    tornadeAppLog = logging.getLogger("tornado.application")
+    tornadoGeneralLog = logging.getLogger("tornado.general")
+    
     logFile = utils.outputFile(utils.logDir(), 'serverlog', '.log', False)
     logging.basicConfig(format='%(asctime)s: %(levelname)s - %(message)s', filemode='w', filename=logFile, level=logging.DEBUG)
     ch = logging.StreamHandler(sys.stdout)
@@ -56,6 +69,9 @@ def initLogger():
     handler.setFormatter(formatter)
     
     # add the handlers to the logger
+    logger.addHandler(tornadeAppLog)
+    logger.addHandler(tornadoAccessLog)
+    logger.addHandler(tornadoGeneralLog)
     logger.addHandler(handler)
     logger.addHandler(ch)
     
