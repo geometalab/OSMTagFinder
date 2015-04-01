@@ -78,7 +78,7 @@ def searchCall(query, lang=None):
 
     if lang is None:
         lang = getLocale()
-    logger.info('IP: ' + request.remote_addr + ", search query: " + query + ", lang: " + lang)
+    logger.info('IP: ' + request.remote_addr + ", search: " + query + ", lang: " + lang)
     return graphSearch.fullSearch(websiteRdfGraph, query, lang)
 
 
