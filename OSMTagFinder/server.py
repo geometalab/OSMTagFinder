@@ -37,7 +37,7 @@ def runFlaskApp(rdfGraph=None, dataDate=None):
 
     setRdfGraph(rdfGraph, dataDate)
 
-    tagFinderHost = cl.getWebsiteString('HOST')
+    #tagFinderHost = cl.getWebsiteString('HOST')
     tagFinderPort = int(os.environ.get("PORT", cl.getWebsiteInt('PORT')))
     
     http_server = HTTPServer(WSGIContainer(app))

@@ -1,50 +1,56 @@
-2015-03-18 08:09:01,671: INFO - Application started
-2015-03-18 08:09:29,888: INFO - 200 GET / (::1) 156.00ms
-2015-03-18 08:09:30,061: INFO - 200 GET /static/css/base.css (::1) 109.00ms
-2015-03-18 08:09:30,061: INFO - 200 GET /static/css/lang_de.css (::1) 0.00ms
-2015-03-18 08:09:30,076: INFO - 200 GET /static/css/search.css (::1) 16.00ms
-2015-03-18 08:09:30,076: INFO - 200 GET /static/js/bootstrap3-typeahead.min.js (::1) 0.00ms
-2015-03-18 08:09:30,076: INFO - 200 GET /static/js/typeahead-noselect.js (::1) 0.00ms
-2015-03-18 08:09:30,076: INFO - 200 GET /static/js/language.js (::1) 0.00ms
-2015-03-18 08:09:30,092: INFO - 200 GET /static/js/searchfade.js (::1) 15.00ms
-2015-03-18 08:09:30,092: INFO - 200 GET /static/js/typeaheadCorrect.js (::1) 0.00ms
-2015-03-18 08:09:30,092: INFO - 200 GET /static/js/highlight.js (::1) 0.00ms
-2015-03-18 08:09:30,092: INFO - 200 GET /static/js/imagesloaded.pkgd.min.js (::1) 0.00ms
-2015-03-18 08:09:30,108: INFO - 200 GET /static/js/ajaxSuggest.js (::1) 16.00ms
-2015-03-18 08:09:30,108: INFO - 200 GET /static/ico/favicon.ico (::1) 0.00ms
-2015-03-18 08:09:30,108: INFO - 200 GET /static/img/logo_hsr.png (::1) 0.00ms
-2015-03-18 08:09:30,108: INFO - 200 GET /static/img/logo_taginfo.png (::1) 0.00ms
-2015-03-18 08:09:30,108: INFO - 200 GET /static/img/logo_osm.png (::1) 0.00ms
-2015-03-18 08:09:30,122: INFO - 200 GET /static/img/en.png (::1) 15.00ms
-2015-03-18 08:09:30,122: INFO - 200 GET /static/img/de.png (::1) 0.00ms
-2015-03-18 08:09:30,138: INFO - 200 GET /static/img/footer-bg.png (::1) 16.00ms
-2015-03-18 08:09:30,154: INFO - 200 GET /static/img/header-bg.png (::1) 16.00ms
-2015-03-18 08:09:30,154: INFO - 200 GET /static/img/logo_tf_128.png (::1) 0.00ms
-2015-03-18 08:09:30,170: INFO - 200 GET /static/js/typeahead-noselect.js?_=1426662570120 (::1) 0.00ms
-2015-03-18 08:09:33,835: INFO - IP: ::1, search: water river, lang: de
-2015-03-18 08:09:33,835: INFO - IP: ::1, search: water river, lang: de
-2015-03-18 08:09:33,835: INFO - IP: ::1, search: water river, lang: de
-2015-03-18 08:09:33,835: INFO - IP: ::1, search: water river, lang: de
-2015-03-18 08:09:34,039: INFO - 200 GET /search?query=water+river&lang=de (::1) 251.00ms
-2015-03-18 08:09:34,086: INFO - 200 GET /static/img/osm_count_all_v2.png (::1) 0.00ms
-2015-03-18 08:09:34,086: INFO - 200 GET /static/img/osm_way_false.png (::1) 0.00ms
-2015-03-18 08:09:34,086: INFO - 200 GET /static/img/osm_way_true.png (::1) 0.00ms
-2015-03-18 08:09:34,086: INFO - 200 GET /static/img/osm_area_false.png (::1) 0.00ms
-2015-03-18 08:09:34,101: INFO - 200 GET /static/img/osm_node_false.png (::1) 15.00ms
-2015-03-18 08:09:34,101: INFO - 200 GET /static/img/osm_relation_true.png (::1) 0.00ms
-2015-03-18 08:09:34,101: INFO - 200 GET /static/img/osm_area_true.png (::1) 0.00ms
-2015-03-18 08:09:34,101: INFO - 200 GET /static/img/osm_node_true.png (::1) 0.00ms
-2015-03-18 08:09:34,101: INFO - 200 GET /static/img/osm_relation_false.png (::1) 0.00ms
-2015-03-18 08:09:34,101: INFO - 200 GET /static/img/osm_area_unspec.png (::1) 0.00ms
-2015-03-18 08:09:34,118: INFO - 200 GET /static/img/k200_150_gray.png (::1) 0.00ms
-2015-03-18 08:09:34,118: INFO - 200 GET /static/img/kv200_150_gray.png (::1) 0.00ms
-2015-03-18 08:09:34,118: INFO - 200 GET /static/img/osm_node_unspec.png (::1) 0.00ms
-2015-03-18 08:09:34,118: INFO - 200 GET /static/img/osm_way_unspec.png (::1) 0.00ms
-2015-03-18 08:09:34,118: INFO - 200 GET /static/img/osm_relation_unspec.png (::1) 0.00ms
-2015-03-18 08:09:34,321: INFO - 200 GET /static/js/typeahead-noselect.js?_=1426662574287 (::1) 16.00ms
-2015-03-18 08:09:44,007: INFO - IP: ::1, search: highway, lang: de
-2015-03-18 08:09:44,007: INFO - IP: ::1, search: highway, lang: de
-2015-03-18 08:09:44,007: INFO - IP: ::1, search: highway, lang: de
-2015-03-18 08:09:44,007: INFO - IP: ::1, search: highway, lang: de
-2015-03-18 08:09:44,398: INFO - 200 GET /search?query=highway&lang=de (::1) 391.00ms
-2015-03-18 08:09:46,053: INFO - 200 GET /static/js/typeahead-noselect.js?_=1426662585990 (::1) 2.00ms
+2015-04-08 22:17:50,286: INFO - Application started
+2015-04-08 22:18:12,828: INFO - 200 GET / (::1) 156.00ms
+2015-04-08 22:18:13,000: INFO - 200 GET /static/css/base.css (::1) 109.00ms
+2015-04-08 22:18:13,000: INFO - 200 GET /static/css/lang_de.css (::1) 0.00ms
+2015-04-08 22:18:13,016: INFO - 200 GET /static/css/search.css (::1) 16.00ms
+2015-04-08 22:18:13,016: INFO - 200 GET /static/js/bootstrap3-typeahead.min.js (::1) 0.00ms
+2015-04-08 22:18:13,016: INFO - 200 GET /static/js/typeahead-noselect.js (::1) 0.00ms
+2015-04-08 22:18:13,016: INFO - 200 GET /static/js/language.js (::1) 0.00ms
+2015-04-08 22:18:13,030: INFO - 200 GET /static/js/searchfade.js (::1) 15.00ms
+2015-04-08 22:18:13,030: INFO - 200 GET /static/js/typeaheadCorrect.js (::1) 0.00ms
+2015-04-08 22:18:13,030: INFO - 200 GET /static/js/highlight.js (::1) 0.00ms
+2015-04-08 22:18:13,030: INFO - 200 GET /static/js/imagesloaded.pkgd.min.js (::1) 0.00ms
+2015-04-08 22:18:13,046: INFO - 200 GET /static/js/ajaxSuggest.js (::1) 16.00ms
+2015-04-08 22:18:13,046: INFO - 200 GET /static/ico/favicon.ico (::1) 0.00ms
+2015-04-08 22:18:13,046: INFO - 200 GET /static/img/logo_hsr.png (::1) 0.00ms
+2015-04-08 22:18:13,046: INFO - 200 GET /static/img/logo_taginfo.png (::1) 0.00ms
+2015-04-08 22:18:13,062: INFO - 200 GET /static/img/logo_osm.png (::1) 15.00ms
+2015-04-08 22:18:13,062: INFO - 200 GET /static/img/en.png (::1) 0.00ms
+2015-04-08 22:18:13,062: INFO - 200 GET /static/img/de.png (::1) 0.00ms
+2015-04-08 22:18:13,094: INFO - 200 GET /static/img/header-bg.png (::1) 32.00ms
+2015-04-08 22:18:13,108: INFO - 200 GET /static/img/footer-bg.png (::1) 15.00ms
+2015-04-08 22:18:13,125: INFO - 200 GET /static/img/logo_tf_128.png (::1) 0.00ms
+2015-04-08 22:18:13,125: INFO - 200 GET /static/js/typeahead-noselect.js?_=1428524293047 (::1) 0.00ms
+2015-04-08 22:18:16,026: INFO - IP: ::1, search: zoo, lang: de
+2015-04-08 22:18:16,026: INFO - IP: ::1, search: zoo, lang: de
+2015-04-08 22:18:16,026: INFO - IP: ::1, search: zoo, lang: de
+2015-04-08 22:18:16,026: INFO - IP: ::1, search: zoo, lang: de
+2015-04-08 22:18:26,901: INFO - 200 GET /search?query=zoo&lang=de (::1) 10907.00ms
+2015-04-08 22:18:26,963: INFO - 200 GET /suggest?query=zoo (::1) 62.00ms
+2015-04-08 22:18:26,963: INFO - 200 GET /static/img/osm_count_all_v2.png (::1) 0.00ms
+2015-04-08 22:18:26,980: INFO - 200 GET /static/img/osm_area_unspec.png (::1) 16.00ms
+2015-04-08 22:18:26,980: INFO - 200 GET /static/img/osm_way_false.png (::1) 0.00ms
+2015-04-08 22:18:26,980: INFO - 200 GET /static/img/osm_area_true.png (::1) 0.00ms
+2015-04-08 22:18:26,980: INFO - 200 GET /static/img/k200_150_gray.png (::1) 0.00ms
+2015-04-08 22:18:26,980: INFO - 200 GET /static/img/osm_way_unspec.png (::1) 0.00ms
+2015-04-08 22:18:26,980: INFO - 200 GET /static/img/osm_relation_false.png (::1) 0.00ms
+2015-04-08 22:18:26,994: INFO - 200 GET /static/img/kv200_150_gray.png (::1) 15.00ms
+2015-04-08 22:18:26,994: INFO - 200 GET /static/img/osm_relation_unspec.png (::1) 0.00ms
+2015-04-08 22:18:26,994: INFO - 200 GET /static/img/osm_node_true.png (::1) 0.00ms
+2015-04-08 22:18:26,994: INFO - 200 GET /static/img/osm_node_unspec.png (::1) 0.00ms
+2015-04-08 22:18:27,151: INFO - 200 GET /static/js/typeahead-noselect.js?_=1428524307123 (::1) 0.00ms
+2015-04-08 22:18:47,305: INFO - IP: ::1, search: zoo, lang: de
+2015-04-08 22:18:47,305: INFO - IP: ::1, search: zoo, lang: de
+2015-04-08 22:18:47,305: INFO - IP: ::1, search: zoo, lang: de
+2015-04-08 22:18:47,305: INFO - IP: ::1, search: zoo, lang: de
+2015-04-08 22:18:57,369: INFO - 200 GET /search?query=zoo&lang=de (::1) 10064.00ms
+2015-04-08 22:18:57,433: INFO - 200 GET /suggest?query=pet (::1) 63.00ms
+2015-04-08 22:18:57,588: INFO - 200 GET /static/js/typeahead-noselect.js?_=1428524337546 (::1) 0.00ms
+2015-04-08 22:19:23,328: INFO - IP: ::1, search: pet, lang: de
+2015-04-08 22:19:23,328: INFO - IP: ::1, search: pet, lang: de
+2015-04-08 22:19:23,328: INFO - IP: ::1, search: pet, lang: de
+2015-04-08 22:19:23,328: INFO - IP: ::1, search: pet, lang: de
+2015-04-08 22:19:33,657: INFO - 200 GET /search?query=pet&lang=de (::1) 10329.00ms
+2015-04-08 22:19:33,704: INFO - 200 GET /suggest?query=pet (::1) 47.00ms
+2015-04-08 22:19:33,704: INFO - 200 GET /static/img/osm_relation_true.png (::1) 0.00ms
+2015-04-08 22:19:33,907: INFO - 200 GET /static/js/typeahead-noselect.js?_=1428524373871 (::1) 16.00ms
