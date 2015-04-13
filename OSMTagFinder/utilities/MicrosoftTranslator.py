@@ -5,7 +5,7 @@ Created on 13.04.2015
 Functions to access the Microsoft Translator API HTTP Interface, using python's urllib/urllib2 libraries
 http://denis.papathanasiou.org/2012/05/07/using-microsofts-translator-api-with-python/
 Microsoft Konto: osmtagfinder@hotmail.com - #T0P#SECRET# (see access token there)
-2 Billion requests per month.
+2 Billion letters per month.
  
 @author:  Denis Papathanasiou
 '''
