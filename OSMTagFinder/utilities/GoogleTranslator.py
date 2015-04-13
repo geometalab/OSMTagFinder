@@ -4,28 +4,34 @@ Created on 10.10.2014
 
 @author: Simon Gwerder
 '''
+import goslate
 from utilities.retry import retry
-from utilities.MicrosoftTranslator import MicrosoftTranslator
 
-class Translator:
-    
-    translator = MicrosoftTranslator()
+class GoogleTranslator:
+
+    gs = goslate.Goslate()
 
     @retry(Exception, tries=3)
     def translateENtoDE(self, text):
-        return self.translator.translate(text, 'de', 'en')
+        return self.gs.translate(text, 'de', 'en')
 
     @retry(Exception, tries=3)
     def translateDEtoEN(self, text):
-        return self.translator.translate(text, 'en', 'de')
+        return self.gs.translate(text, 'en', 'de')
 
     @retry(Exception, tries=3)
     def translateToEN(self, text):
-        return self.translator.translate(text, 'en')
+        lang = self.gs.detect(text)
+        if lang is None or lang == '':
+            lang = 'de'
+        return self.gs.translate(text, 'en', lang)
 
     @retry(Exception, tries=3)
     def translateToDE(self, text):
-        return self.translator.translate(text, 'de')
+        lang = self.gs.detect(text)
+        if lang is None or lang == '':
+            lang = 'en'
+        return self.gs.translate(text, 'de', lang)
     
     def translate(self, text, lang=None):
         translated = None

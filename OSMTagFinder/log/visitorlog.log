@@ -43,3 +43,12 @@
 2015-04-08 22:18:16,026: INFO - IP: ::1, search: zoo, lang: de
 2015-04-08 22:18:47,305: INFO - IP: ::1, search: zoo, lang: de
 2015-04-08 22:19:23,328: INFO - IP: ::1, search: pet, lang: de
+2015-04-11 15:26:46,184: INFO - IP: ::1, search: zoo, lang: de
+2015-04-11 15:31:04,388: INFO - IP: ::1, search: zoo, lang: de
+2015-04-11 15:35:25,197: INFO - IP: ::1, search: zoo, lang: de
+2015-04-11 15:36:38,703: INFO - IP: ::1, search: zoo, lang: de
+2015-04-13 13:07:47,756: INFO - IP: ::1, search: Uhr, lang: de
+2015-04-13 13:59:55,447: INFO - IP: ::1, search: Bahn, lang: de
+2015-04-13 14:00:08,368: INFO - IP: ::1, search: Brot, lang: de
+2015-04-13 14:00:56,470: INFO - IP: ::1, search: Brot, lang: de
+2015-04-13 14:01:11,571: INFO - IP: ::1, search: Brot Haus Wohnung Suche, lang: de

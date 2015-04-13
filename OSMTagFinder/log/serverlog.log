@@ -1,56 +1,17 @@
-2015-04-08 22:17:50,286: INFO - Application started
-2015-04-08 22:18:12,828: INFO - 200 GET / (::1) 156.00ms
-2015-04-08 22:18:13,000: INFO - 200 GET /static/css/base.css (::1) 109.00ms
-2015-04-08 22:18:13,000: INFO - 200 GET /static/css/lang_de.css (::1) 0.00ms
-2015-04-08 22:18:13,016: INFO - 200 GET /static/css/search.css (::1) 16.00ms
-2015-04-08 22:18:13,016: INFO - 200 GET /static/js/bootstrap3-typeahead.min.js (::1) 0.00ms
-2015-04-08 22:18:13,016: INFO - 200 GET /static/js/typeahead-noselect.js (::1) 0.00ms
-2015-04-08 22:18:13,016: INFO - 200 GET /static/js/language.js (::1) 0.00ms
-2015-04-08 22:18:13,030: INFO - 200 GET /static/js/searchfade.js (::1) 15.00ms
-2015-04-08 22:18:13,030: INFO - 200 GET /static/js/typeaheadCorrect.js (::1) 0.00ms
-2015-04-08 22:18:13,030: INFO - 200 GET /static/js/highlight.js (::1) 0.00ms
-2015-04-08 22:18:13,030: INFO - 200 GET /static/js/imagesloaded.pkgd.min.js (::1) 0.00ms
-2015-04-08 22:18:13,046: INFO - 200 GET /static/js/ajaxSuggest.js (::1) 16.00ms
-2015-04-08 22:18:13,046: INFO - 200 GET /static/ico/favicon.ico (::1) 0.00ms
-2015-04-08 22:18:13,046: INFO - 200 GET /static/img/logo_hsr.png (::1) 0.00ms
-2015-04-08 22:18:13,046: INFO - 200 GET /static/img/logo_taginfo.png (::1) 0.00ms
-2015-04-08 22:18:13,062: INFO - 200 GET /static/img/logo_osm.png (::1) 15.00ms
-2015-04-08 22:18:13,062: INFO - 200 GET /static/img/en.png (::1) 0.00ms
-2015-04-08 22:18:13,062: INFO - 200 GET /static/img/de.png (::1) 0.00ms
-2015-04-08 22:18:13,094: INFO - 200 GET /static/img/header-bg.png (::1) 32.00ms
-2015-04-08 22:18:13,108: INFO - 200 GET /static/img/footer-bg.png (::1) 15.00ms
-2015-04-08 22:18:13,125: INFO - 200 GET /static/img/logo_tf_128.png (::1) 0.00ms
-2015-04-08 22:18:13,125: INFO - 200 GET /static/js/typeahead-noselect.js?_=1428524293047 (::1) 0.00ms
-2015-04-08 22:18:16,026: INFO - IP: ::1, search: zoo, lang: de
-2015-04-08 22:18:16,026: INFO - IP: ::1, search: zoo, lang: de
-2015-04-08 22:18:16,026: INFO - IP: ::1, search: zoo, lang: de
-2015-04-08 22:18:16,026: INFO - IP: ::1, search: zoo, lang: de
-2015-04-08 22:18:26,901: INFO - 200 GET /search?query=zoo&lang=de (::1) 10907.00ms
-2015-04-08 22:18:26,963: INFO - 200 GET /suggest?query=zoo (::1) 62.00ms
-2015-04-08 22:18:26,963: INFO - 200 GET /static/img/osm_count_all_v2.png (::1) 0.00ms
-2015-04-08 22:18:26,980: INFO - 200 GET /static/img/osm_area_unspec.png (::1) 16.00ms
-2015-04-08 22:18:26,980: INFO - 200 GET /static/img/osm_way_false.png (::1) 0.00ms
-2015-04-08 22:18:26,980: INFO - 200 GET /static/img/osm_area_true.png (::1) 0.00ms
-2015-04-08 22:18:26,980: INFO - 200 GET /static/img/k200_150_gray.png (::1) 0.00ms
-2015-04-08 22:18:26,980: INFO - 200 GET /static/img/osm_way_unspec.png (::1) 0.00ms
-2015-04-08 22:18:26,980: INFO - 200 GET /static/img/osm_relation_false.png (::1) 0.00ms
-2015-04-08 22:18:26,994: INFO - 200 GET /static/img/kv200_150_gray.png (::1) 15.00ms
-2015-04-08 22:18:26,994: INFO - 200 GET /static/img/osm_relation_unspec.png (::1) 0.00ms
-2015-04-08 22:18:26,994: INFO - 200 GET /static/img/osm_node_true.png (::1) 0.00ms
-2015-04-08 22:18:26,994: INFO - 200 GET /static/img/osm_node_unspec.png (::1) 0.00ms
-2015-04-08 22:18:27,151: INFO - 200 GET /static/js/typeahead-noselect.js?_=1428524307123 (::1) 0.00ms
-2015-04-08 22:18:47,305: INFO - IP: ::1, search: zoo, lang: de
-2015-04-08 22:18:47,305: INFO - IP: ::1, search: zoo, lang: de
-2015-04-08 22:18:47,305: INFO - IP: ::1, search: zoo, lang: de
-2015-04-08 22:18:47,305: INFO - IP: ::1, search: zoo, lang: de
-2015-04-08 22:18:57,369: INFO - 200 GET /search?query=zoo&lang=de (::1) 10064.00ms
-2015-04-08 22:18:57,433: INFO - 200 GET /suggest?query=pet (::1) 63.00ms
-2015-04-08 22:18:57,588: INFO - 200 GET /static/js/typeahead-noselect.js?_=1428524337546 (::1) 0.00ms
-2015-04-08 22:19:23,328: INFO - IP: ::1, search: pet, lang: de
-2015-04-08 22:19:23,328: INFO - IP: ::1, search: pet, lang: de
-2015-04-08 22:19:23,328: INFO - IP: ::1, search: pet, lang: de
-2015-04-08 22:19:23,328: INFO - IP: ::1, search: pet, lang: de
-2015-04-08 22:19:33,657: INFO - 200 GET /search?query=pet&lang=de (::1) 10329.00ms
-2015-04-08 22:19:33,704: INFO - 200 GET /suggest?query=pet (::1) 47.00ms
-2015-04-08 22:19:33,704: INFO - 200 GET /static/img/osm_relation_true.png (::1) 0.00ms
-2015-04-08 22:19:33,907: INFO - 200 GET /static/js/typeahead-noselect.js?_=1428524373871 (::1) 16.00ms
+2015-04-13 14:00:44,095: INFO - Application started
+2015-04-13 14:00:56,470: INFO - IP: ::1, search: Brot, lang: de
+2015-04-13 14:00:56,470: INFO - IP: ::1, search: Brot, lang: de
+2015-04-13 14:00:56,470: INFO - IP: ::1, search: Brot, lang: de
+2015-04-13 14:00:56,470: INFO - IP: ::1, search: Brot, lang: de
+2015-04-13 14:00:58,220: INFO - 200 GET /search?query=Brot&lang=de (::1) 1757.00ms
+2015-04-13 14:00:58,487: INFO - 200 GET /static/js/typeahead-noselect.js?_=1428926458323 (::1) 118.00ms
+2015-04-13 14:01:07,615: INFO - 200 GET /suggest?query=Brot+Haus+Wohnung+ (::1) 144.00ms
+2015-04-13 14:01:11,367: INFO - 200 GET /suggest?query=Brot+Haus+Wohnung+Suche (::1) 182.00ms
+2015-04-13 14:01:11,571: INFO - IP: ::1, search: Brot Haus Wohnung Suche, lang: de
+2015-04-13 14:01:11,571: INFO - IP: ::1, search: Brot Haus Wohnung Suche, lang: de
+2015-04-13 14:01:11,571: INFO - IP: ::1, search: Brot Haus Wohnung Suche, lang: de
+2015-04-13 14:01:11,571: INFO - IP: ::1, search: Brot Haus Wohnung Suche, lang: de
+2015-04-13 14:01:17,894: INFO - 200 GET /search?query=Brot+Haus+Wohnung+Suche&lang=de (::1) 6325.00ms
+2015-04-13 14:01:18,246: INFO - 200 GET /static/js/typeahead-noselect.js?_=1428926478193 (::1) 2.00ms
+2015-04-13 14:01:25,250: INFO - 200 GET / (::1) 5.00ms
+2015-04-13 14:01:25,479: INFO - 200 GET /static/js/typeahead-noselect.js?_=1428926485379 (::1) 4.00ms
