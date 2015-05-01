@@ -27,6 +27,7 @@ from tornado.ioloop import IOLoop
 
 def runFlaskApp(rdfGraph=None, dataDate=None):
     logging.info('Application started')
+    print 'Server Running'
     cl = ConfigLoader()
 
     if rdfGraph is None or dataDate is None:
@@ -45,7 +46,6 @@ def runFlaskApp(rdfGraph=None, dataDate=None):
     IOLoop.instance().start()
     
     #app.run(debug=False, host=tagFinderHost, port=tagFinderPort, threaded=True) # debug=False/True, alternately app.run(..., processes=3)
-
 
 def initLogger():
     tornadoAccessLog = logging.getLogger("tornado.access")

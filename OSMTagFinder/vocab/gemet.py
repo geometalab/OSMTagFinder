@@ -32,7 +32,6 @@ class Gemet(VocabularyBase):
     broaderSet = OrderedSet()
     narrowerSet = OrderedSet()
 
-
     def __init__(self, searchTerm, language):
         VocabularyBase.__init__(self, searchTerm, language)
         self.relatedSet = OrderedSet()

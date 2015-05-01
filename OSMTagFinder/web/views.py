@@ -30,6 +30,7 @@ except ImportError:
 websiteRdfGraph = None # global var is assigned in setRdfGraph()! Because there's no way to restart a running 'app' in FLASK!!!
 websiteDataDate = datetime.date.today().strftime("%d.%m.%y") # will be assigned aswell
 logger = logging.getLogger('VISITOR_LOGGER')
+uniqueIP = {} # gathering all IP's that requested during this app's runtime
 
 def setRdfGraph(rdfGraph, dataDate):
     global websiteRdfGraph # blowing your mind, thanks FLASK for beeing so global :(
@@ -70,6 +71,13 @@ def addLiteralToLangDict(retDict, literalList):
             retDict[str(literal.language)] = utils.uniquifyList(listTerms)
     return retDict
 
+def putToUniqueIP(ipAddress):
+    if ipAddress in uniqueIP:
+        countRequests = uniqueIP[ipAddress]
+        countRequests += 1
+        uniqueIP[ipAddress] = countRequests
+    else:
+        uniqueIP[ipAddress] = 1
 
 def searchCall(query, lang=None):
     graphSearch = GraphSearch()
@@ -78,7 +86,6 @@ def searchCall(query, lang=None):
 
     if lang is None:
         lang = getLocale()
-    logger.info('IP: ' + request.remote_addr + ", search: " + query + ", lang: " + lang)
     return graphSearch.fullSearch(websiteRdfGraph, query, lang)
 
 
@@ -88,10 +95,12 @@ def favicon():
 
 @app.route('/tagfinder_thesaurus.rdf', methods = ['GET'])
 def tagfindergraph():
+    putToUniqueIP(request.remote_addr)
     return send_from_directory(utils.dataDir(), 'tagfinder_thesaurus.rdf', mimetype='application/rdf+xml')
 
 @app.route('/opensearch.xml', methods = ['GET'])
 def opensearch():
+    putToUniqueIP(request.remote_addr)
     return send_from_directory(utils.templatesDir(), 'opensearch.xml', mimetype='application/opensearchdescription+xml')
 
 
@@ -135,6 +144,8 @@ def search():
         return redirect('/')
     for tagResult in searchResults:
         tagResult['thumbnail'] = getThumbnailLink(tagResult['depiction']) # adding a thumbnail version of the 'depiction'
+    putToUniqueIP(request.remote_addr)
+    logger.info('IP: ' + request.remote_addr + ", search: " + query + ", lang: " + lang)
     return render_template('search.html', lang=getLocale(), query=query, results=searchResults)
 
 @app.route('/apidoc', methods = ['GET'])
@@ -167,6 +178,7 @@ def apiSearch():
         jsonDump = json.dumps(searchResults, indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(searchResults)
+    putToUniqueIP(request.remote_addr)
     logger.info('IP: ' + request.remote_addr + ", API search: " + query + ", lang: " + lang)
     return Response(jsonDump,  mimetype='application/json')
 
@@ -206,6 +218,7 @@ def apiSuggest():
         jsonDump = json.dumps(suggestList, indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(suggestList)
+    putToUniqueIP(request.remote_addr)
     logger.info('IP: ' + request.remote_addr + ", API suggest: " + query + ", lang: " + lang)
     return Response(jsonDump,  mimetype='application/json')
 
@@ -255,6 +268,7 @@ def apiTag():
         jsonDump = json.dumps(results[0], indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(results[0])
+    putToUniqueIP(request.remote_addr)
     logger.info('IP: ' + request.remote_addr + ", API tag: " + prefLabel)
     return Response(jsonDump,  mimetype='application/json')
 
@@ -299,9 +313,20 @@ def apiTerms():
         jsonDump = json.dumps(retDict, indent=3, sort_keys=True)
     else:
         jsonDump = json.dumps(retDict)
+    putToUniqueIP(request.remote_addr)
     logger.info('IP: ' + request.remote_addr + ", API terms: " + term)
     return Response(jsonDump,  mimetype='application/json')
 
+@app.route('/api/uniqueips', methods = ['GET'])
+@cross_origin()
+@support_jsonp
+def uniqueIPs():
+    prettyPrint = request.args.get('format', '')
+    if prettyPrint is not None and prettyPrint.lower() == 'json_pretty':
+        jsonDump = json.dumps(uniqueIP, indent=3, sort_keys=True)
+    else:
+        jsonDump = json.dumps(uniqueIP)
+    return Response(jsonDump,  mimetype='application/json')
 
 
 
