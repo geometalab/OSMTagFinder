@@ -27,7 +27,7 @@ from tornado.ioloop import IOLoop
 
 def runFlaskApp(rdfGraph=None, dataDate=None):
     logging.info('Application started')
-    print 'Server Running'
+    # print 'Server Running'
     cl = ConfigLoader()
 
     if rdfGraph is None or dataDate is None:
