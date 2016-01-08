@@ -32,28 +32,28 @@ class TagInfoStats:
 
     def getOnNode(self):
         '''Returns boolean whether this osm key or tag is used on nodes.'''
-        for wikiData in self.wikiPageJson:
+        for wikiData in self.wikiPageJson['data']:
             if wikiData['lang'] == 'en':
                 return wikiData['on_node']
         return False
 
     def getOnWay(self):
         '''Returns boolean whether this osm key or tag is used on ways.'''
-        for wikiData in self.wikiPageJson:
+        for wikiData in self.wikiPageJson['data']:
             if wikiData['lang'] == 'en':
                 return wikiData['on_way']
         return False
 
     def getOnArea(self):
         '''Returns boolean whether this osm key or tag is used on areas.'''
-        for wikiData in self.wikiPageJson:
+        for wikiData in self.wikiPageJson['data']:
             if wikiData['lang'] == 'en':
                 return wikiData['on_area']
         return False
 
     def getOnRelation(self):
         '''Returns boolean whether this osm key or tag is used on relations.'''
-        for wikiData in self.wikiPageJson:
+        for wikiData in self.wikiPageJson['data']:
             if wikiData['lang'] == 'en':
                 return wikiData['on_relation']
         return False
@@ -89,32 +89,37 @@ class TagInfoStats:
 
     def getListImplies(self):
         '''Returns a array of strings of tags that this tag 'implies'. '''
-        for wikiData in self.wikiPageJson:
+        for wikiData in self.wikiPageJson['data']:
             if wikiData['lang'] == 'en':
                 return wikiData['tags_implies']
         return []
 
     def getListCombinations(self):
         '''Returns a array of strings of tags that are often 'combined' with this tag.'''
-        for wikiData in self.wikiPageJson:
+        for wikiData in self.wikiPageJson['data']:
             if wikiData['lang'] == 'en':
                 return wikiData['tags_combination']
         return []
 
     def getListLinked(self):
         '''Returns a array of strings of tags that are 'linked' to this tag.'''
-        for wikiData in self.wikiPageJson:
+        for wikiData in self.wikiPageJson['data']:
             if wikiData['lang'] == 'en':
                 return wikiData['tags_linked']
         return []
 
 
 if __name__ == '__main__':
-    tagInfoUpdate = TagInfoStats('tourism','hotel')
+    from taginfo import TagInfo
+    tagInfoUpdate = TagInfoStats(TagInfo(), 'tourism', 'zoo')
     print tagInfoUpdate.getCountAll()
     print tagInfoUpdate.getCountNodes()
     print tagInfoUpdate.getCountWays()
     print tagInfoUpdate.getCountRelations()
+
+    print tagInfoUpdate.getListImplies()
+    print tagInfoUpdate.getListCombinations()
+    print tagInfoUpdate.getListLinked()
 
     print tagInfoUpdate.getOnNode()
     print tagInfoUpdate.getOnWay()

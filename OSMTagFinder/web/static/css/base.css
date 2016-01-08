@@ -52,6 +52,8 @@ nav.navbar.navbar-inverse.navbar-fixed-top {
 }
 
 #navbarsearch-ingroup {
+    min-width: 253px;
+    max-width: 253px;
     display: none;
     margin-top: 3px;
     margin-right: 64px;
@@ -60,8 +62,8 @@ nav.navbar.navbar-inverse.navbar-fixed-top {
 
 #navbarsearch  {
     float: left;
-    width: 250px;
-    max-width: 250px;
+    width: 220px;
+    max-width: 220px;
 }
 
 

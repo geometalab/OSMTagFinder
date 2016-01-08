@@ -163,7 +163,7 @@ class BaseThesaurus:
         scopeNoteEN = ''
         depiction = ''
 
-        for wikiData in wikiPageJson:
+        for wikiData in wikiPageJson['data']:
 
             if wikiData['lang'] == 'de':
                 temp = wikiData['description']
