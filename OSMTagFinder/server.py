@@ -74,13 +74,15 @@ def initLogger():
     logger.addHandler(tornadoGeneralLog)
     logger.addHandler(handler)
     logger.addHandler(ch)
-    
-    
+
 
 if __name__ == '__main__':
-
+    import sys
+    reload(sys)
+    sys.setdefaultencoding('utf8')
     initLogger()
     cl = ConfigLoader()
+
     @crython.job(expr=cl.getWebsiteString('UPDATE_CRONTAB'))
     def updateJob():
         print 'Updating job started'

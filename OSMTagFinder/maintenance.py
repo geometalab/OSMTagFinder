@@ -541,7 +541,9 @@ class Maintenance:
 
 
 if __name__ == '__main__':
-
+    import sys
+    reload(sys)
+    sys.setdefaultencoding('utf8')
     init() #essential for colorama to work on windows
 
     console = Maintenance(sys.stdout, percentNewLine=False)

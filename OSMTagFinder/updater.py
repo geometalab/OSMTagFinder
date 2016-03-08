@@ -16,6 +16,9 @@ from thesaurus.updatethesaurus import UpdateThesaurus
 
 if __name__ == '__main__':
     '''Start script to update manually'''
+    import sys
+    reload(sys)
+    sys.setdefaultencoding('utf8')
     startTime = timeit.default_timer()
     retry = True
     console = Maintenance(sys.stdout)
