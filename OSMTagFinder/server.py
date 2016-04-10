@@ -40,7 +40,7 @@ def runFlaskApp(rdfGraph=None, dataDate=None):
 
     #tagFinderHost = cl.getWebsiteString('HOST')
     tagFinderPort = int(os.environ.get("PORT", cl.getWebsiteInt('PORT')))
-    
+
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(port=tagFinderPort)
     IOLoop.instance().start()
