@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07fcdf05-3fe0-411e-8d37-5a9b4322a7c8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/OSMTagFinder/runtime.txt" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/OSMTagFinder/data/indexer/index_w8p4c22orwd53z0y.seg" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/OSMTagFinder/data/temp/tagfinder_thesaurus_160410.rdf" afterPath="$PROJECT_DIR$/OSMTagFinder/data/temp/tagfinder_thesaurus_160506.rdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/data/indexer/_index_1.toc" afterPath="$PROJECT_DIR$/OSMTagFinder/data/indexer/_index_1.toc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/data/config.ini" afterPath="$PROJECT_DIR$/OSMTagFinder/data/config.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/data/tagfinder_thesaurus.rdf" afterPath="$PROJECT_DIR$/OSMTagFinder/data/tagfinder_thesaurus.rdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/log/serverlog.log" afterPath="$PROJECT_DIR$/OSMTagFinder/log/serverlog.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/log/visitorlog.log" afterPath="$PROJECT_DIR$/OSMTagFinder/log/visitorlog.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/requirements.txt" afterPath="$PROJECT_DIR$/OSMTagFinder/requirements.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py" afterPath="$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/sitecustomize.py" afterPath="$PROJECT_DIR$/OSMTagFinder/sitecustomize.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/taginfo/taginfo.py" afterPath="$PROJECT_DIR$/OSMTagFinder/taginfo/taginfo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/thesaurus/basethesaurus.py" afterPath="$PROJECT_DIR$/OSMTagFinder/thesaurus/basethesaurus.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/thesaurus/indexer.py" afterPath="$PROJECT_DIR$/OSMTagFinder/thesaurus/indexer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/thesaurus/mapsemnet.py" afterPath="$PROJECT_DIR$/OSMTagFinder/thesaurus/mapsemnet.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/utilities/utils.py" afterPath="$PROJECT_DIR$/OSMTagFinder/utilities/utils.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/OSMTagFinder/data/indexer/index_v6ubqhvuc57wc0xj.seg" />
     </list>
     <ignored path="OSMTagFinder.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -552,6 +536,13 @@
       <option name="number" value="Default" />
       <updated>1454453719546</updated>
     </task>
+    <task id="LOCAL-00001" summary="May 16 Update">
+      <created>1462558888669</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1462558888669</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -560,6 +551,7 @@
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23655257" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3391116" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -589,6 +581,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="May 16 Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="May 16 Update" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <option name="time" value="1" />
@@ -616,6 +612,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="34" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -849,6 +846,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.004635">
           <caret line="55" column="34" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
