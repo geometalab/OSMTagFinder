@@ -24,7 +24,7 @@ class MapOSMSemanticNet:
 
         termSchemeName = ConfigLoader().getThesaurusString('TERM_SCHEME_NAME')
 
-        count = 0;
+        count = 0
         for subject, predicate, obj in tagFinderRDF.graph:
             if not osn.baseUrl in subject and not termSchemeName in subject: # check if some osn matches have been added already
                 osnConcept = None

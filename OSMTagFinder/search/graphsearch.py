@@ -51,7 +51,7 @@ class GraphSearch:
         translatedWords = ''
         for word in wordList:
             if len(word) <= 1:
-                continue;
+                continue
             if word[0] == '"' and word[len(word) - 1] == '"': # don't translate this one
                 translatedWords = translatedWords + word
             else:

@@ -78,3 +78,10 @@
 2016-01-08 16:09:31,517: INFO - IP: 127.0.0.1, search: shop, lang: de
 2016-01-08 16:23:53,519: INFO - IP: 127.0.0.1, search: zu, lang: de
 2016-02-03 14:45:46,365: INFO - IP: ::1, search: zug, lang: de
+2016-04-16 15:14:32,552: INFO - IP: ::1, search: stras, lang: de
+2016-04-16 15:14:40,480: INFO - IP: ::1, search: belag, lang: de
+2016-04-16 15:14:49,431: INFO - IP: ::1, search: hot, lang: de
+2016-04-16 15:14:56,687: INFO - IP: ::1, search: hotel, lang: de
+2016-04-16 15:15:14,160: INFO - IP: ::1, search: Gast, lang: de
+2016-04-16 15:15:26,417: INFO - IP: ::1, search: bet, lang: de
+2016-05-06 15:50:52,690: INFO - IP: ::1, search: test, lang: de

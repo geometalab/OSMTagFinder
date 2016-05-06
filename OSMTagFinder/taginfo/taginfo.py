@@ -46,14 +46,14 @@ class TagInfo:
     def getKeyStats(self, key):
         '''Calls TagInfo for statistics of 'key'.'''
         keyResult = requests.get(self.tagInfoKeyStats + key)
-        keyJson = keyResult.json();
+        keyJson = keyResult.json()
         return keyJson['data']
 
     @retry(Exception, tries=3)
     def getTagStats(self, key, value):
         '''Calls TagInfo for statistics of 'key'='value'.'''
         tagResult = requests.get(self.tagInfoTagStats + key + self.tagInfoTagPostfix + value)
-        tagJson = tagResult.json();
+        tagJson = tagResult.json()
         return tagJson['data']
 
     @retry(Exception, tries=3)

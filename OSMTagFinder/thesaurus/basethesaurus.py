@@ -123,7 +123,7 @@ class BaseThesaurus:
         atPart = 1
         for keyItem in keyData:
             #if keyItem['count_all'] < self.valueMinCount:
-                #break;  # speedup because of sorted list
+                #break  # speedup because of sorted list
             if not self.filterUtil.hasKey(keyItem['key']) and utils.validCharsCheck(keyItem['key']) and keyItem['values_all'] >= self.valueMinCount:
                 keyList.append(keyItem['key'])
                 self.printPercent(partInt=atPart, totalInt=len(keyData), workingOn='Getting key: ' + keyItem['key'])

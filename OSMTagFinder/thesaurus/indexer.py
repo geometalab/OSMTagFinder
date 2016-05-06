@@ -90,10 +90,10 @@ class Indexer:
         wordList = self.splitChars.split(words)
         for word in wordList:
             if len(word) <= 1:
-                continue;
+                continue
 
             if filterShort and len(word) <= filterShort: # skips short lowercased words if 'filterShort'
-                continue;
+                continue
 
             if lang == 'en':
                 word = utils.eszettToSS(word)

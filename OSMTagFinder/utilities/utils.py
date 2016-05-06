@@ -199,7 +199,7 @@ def genToLangDict(generator):
     retDict = {}
     for item in generator:
         retDict[item.language] = item
-    return retDict;
+    return retDict
 
 def genGetFirstItem(generator):
     try:
