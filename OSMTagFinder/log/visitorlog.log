@@ -87,3 +87,9 @@
 2016-05-06 15:50:52,690: INFO - IP: ::1, search: test, lang: de
 2016-05-06 20:33:06,250: INFO - IP: ::1, search: asdf, lang: de
 2016-05-06 20:33:09,193: INFO - IP: ::1, search: aids, lang: 
+2016-05-12 15:26:50,293: INFO - IP: 127.0.0.1, search: office, lang: en
+2016-05-12 15:27:51,865: INFO - IP: 127.0.0.1, search: snow, lang: en
+2016-05-12 15:32:05,836: INFO - IP: ::1, search: attraction, lang: en
+2016-06-07 15:00:23,328: INFO - IP: ::1, search: security, lang: de
+2016-06-07 15:00:28,936: INFO - IP: ::1, search: Konsulat, lang: de
+2016-06-07 15:00:57,821: INFO - IP: ::1, search: Botschaft, lang: de

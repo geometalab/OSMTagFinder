@@ -1,35 +1,61 @@
-2016-05-06 20:32:46,384: INFO - Application started
-2016-05-06 20:32:59,391: INFO - 200 GET / (::1) 137.00ms
-2016-05-06 20:32:59,595: INFO - 304 GET /static/css/base.css (::1) 140.00ms
-2016-05-06 20:32:59,596: INFO - 304 GET /static/css/search.css (::1) 2.00ms
-2016-05-06 20:32:59,598: INFO - 304 GET /static/img/logo_tf_128.png (::1) 1.00ms
-2016-05-06 20:32:59,601: INFO - 304 GET /static/js/bootstrap3-typeahead.min.js (::1) 2.00ms
-2016-05-06 20:32:59,604: INFO - 304 GET /static/js/typeahead-noselect.js (::1) 1.00ms
-2016-05-06 20:32:59,605: INFO - 304 GET /static/css/lang_de.css (127.0.0.1) 2.00ms
-2016-05-06 20:32:59,608: INFO - 304 GET /static/js/searchfade.js (::1) 2.00ms
-2016-05-06 20:32:59,609: INFO - 304 GET /static/js/typeaheadCorrect.js (::1) 2.00ms
-2016-05-06 20:32:59,611: INFO - 304 GET /static/js/highlight.js (::1) 2.00ms
-2016-05-06 20:32:59,615: INFO - 304 GET /static/js/imagesloaded.pkgd.min.js (::1) 3.00ms
-2016-05-06 20:32:59,618: INFO - 304 GET /static/js/language.js (::1) 3.00ms
-2016-05-06 20:32:59,621: INFO - 304 GET /static/img/logo_hsr.png (::1) 3.00ms
-2016-05-06 20:32:59,624: INFO - 304 GET /static/img/en.png (::1) 1.00ms
-2016-05-06 20:32:59,625: INFO - 304 GET /static/img/de.png (::1) 1.00ms
-2016-05-06 20:32:59,628: INFO - 304 GET /static/img/logo_taginfo.png (::1) 1.00ms
-2016-05-06 20:32:59,631: INFO - 304 GET /static/img/logo_osm.png (::1) 2.00ms
-2016-05-06 20:32:59,632: INFO - 304 GET /static/js/ajaxSuggest.js (127.0.0.1) 2.00ms
-2016-05-06 20:32:59,661: INFO - 304 GET /static/img/header-bg.png (127.0.0.1) 2.00ms
-2016-05-06 20:32:59,664: INFO - 304 GET /static/img/footer-bg.png (::1) 2.00ms
-2016-05-06 20:32:59,683: INFO - 200 GET /static/js/typeahead-noselect.js?_=1462559579633 (::1) 3.00ms
-2016-05-06 20:33:06,250: INFO - IP: ::1, search: asdf, lang: de
-2016-05-06 20:33:06,250: INFO - IP: ::1, search: asdf, lang: de
-2016-05-06 20:33:06,250: INFO - IP: ::1, search: asdf, lang: de
-2016-05-06 20:33:06,250: INFO - IP: ::1, search: asdf, lang: de
-2016-05-06 20:33:06,256: INFO - 200 GET /search?query=asdf&lang=de (::1) 1099.00ms
-2016-05-06 20:33:06,418: INFO - 200 GET /static/js/typeahead-noselect.js?_=1462559586374 (::1) 2.00ms
-2016-05-06 20:33:07,410: INFO - 200 GET /suggest?query=asdf (::1) 53.00ms
-2016-05-06 20:33:09,193: INFO - IP: ::1, search: aids, lang: 
-2016-05-06 20:33:09,193: INFO - IP: ::1, search: aids, lang: 
-2016-05-06 20:33:09,193: INFO - IP: ::1, search: aids, lang: 
-2016-05-06 20:33:09,193: INFO - IP: ::1, search: aids, lang: 
-2016-05-06 20:33:09,203: INFO - 200 GET /search?query=aids (::1) 927.00ms
-2016-05-06 20:33:09,361: INFO - 200 GET /static/js/typeahead-noselect.js?_=1462559589352 (::1) 2.00ms
+2016-06-07 14:59:37,234: INFO - Application started
+2016-06-07 15:00:14,707: INFO - 200 GET / (::1) 139.00ms
+2016-06-07 15:00:14,986: INFO - 200 GET /static/css/base.css (::1) 183.00ms
+2016-06-07 15:00:14,990: INFO - 200 GET /static/css/search.css (::1) 2.00ms
+2016-06-07 15:00:14,996: INFO - 200 GET /static/img/logo_tf_128.png (::1) 7.00ms
+2016-06-07 15:00:15,000: INFO - 200 GET /static/js/bootstrap3-typeahead.min.js (::1) 4.00ms
+2016-06-07 15:00:15,005: INFO - 200 GET /static/js/typeahead-noselect.js (::1) 2.00ms
+2016-06-07 15:00:15,006: INFO - 200 GET /static/css/lang_de.css (::1) 2.00ms
+2016-06-07 15:00:15,009: INFO - 200 GET /static/js/searchfade.js (::1) 2.00ms
+2016-06-07 15:00:15,013: INFO - 200 GET /static/js/typeaheadCorrect.js (::1) 3.00ms
+2016-06-07 15:00:15,017: INFO - 200 GET /static/js/highlight.js (::1) 5.00ms
+2016-06-07 15:00:15,022: INFO - 200 GET /static/js/imagesloaded.pkgd.min.js (::1) 4.00ms
+2016-06-07 15:00:15,025: INFO - 200 GET /static/js/language.js (::1) 3.00ms
+2016-06-07 15:00:15,028: INFO - 200 GET /static/img/en.png (::1) 2.00ms
+2016-06-07 15:00:15,030: INFO - 200 GET /static/img/de.png (::1) 2.00ms
+2016-06-07 15:00:15,035: INFO - 200 GET /static/img/logo_hsr.png (::1) 4.00ms
+2016-06-07 15:00:15,036: INFO - 200 GET /static/img/logo_taginfo.png (::1) 2.00ms
+2016-06-07 15:00:15,043: INFO - 200 GET /static/img/logo_osm.png (::1) 6.00ms
+2016-06-07 15:00:15,046: INFO - 200 GET /static/js/ajaxSuggest.js (::1) 3.00ms
+2016-06-07 15:00:15,072: INFO - 200 GET /static/img/header-bg.png (::1) 11.00ms
+2016-06-07 15:00:15,082: INFO - 200 GET /static/img/footer-bg.png (::1) 10.00ms
+2016-06-07 15:00:15,095: INFO - 200 GET /static/js/typeahead-noselect.js?_=1465304415033 (::1) 2.00ms
+2016-06-07 15:00:15,230: INFO - 200 GET /opensearch.xml (::1) 3.00ms
+2016-06-07 15:00:15,369: INFO - 200 GET /static/ico/favicon.ico (::1) 3.00ms
+2016-06-07 15:00:23,328: INFO - IP: ::1, search: security, lang: de
+2016-06-07 15:00:23,328: INFO - IP: ::1, search: security, lang: de
+2016-06-07 15:00:23,328: INFO - IP: ::1, search: security, lang: de
+2016-06-07 15:00:23,328: INFO - IP: ::1, search: security, lang: de
+2016-06-07 15:00:23,335: INFO - 200 GET /search?query=security&lang=de (::1) 1193.00ms
+2016-06-07 15:00:23,424: INFO - 200 GET /static/img/kv200_150_gray.png (::1) 4.00ms
+2016-06-07 15:00:23,434: INFO - 200 GET /static/img/osm_count_all_v2.png (::1) 3.00ms
+2016-06-07 15:00:23,437: INFO - 200 GET /static/img/osm_area_false.png (::1) 2.00ms
+2016-06-07 15:00:23,440: INFO - 200 GET /static/img/osm_way_false.png (::1) 2.00ms
+2016-06-07 15:00:23,443: INFO - 200 GET /static/img/osm_node_false.png (::1) 2.00ms
+2016-06-07 15:00:23,446: INFO - 200 GET /static/img/osm_relation_false.png (::1) 2.00ms
+2016-06-07 15:00:23,532: INFO - 200 GET /static/js/typeahead-noselect.js?_=1465304423473 (::1) 2.00ms
+2016-06-07 15:00:28,936: INFO - IP: ::1, search: Konsulat, lang: de
+2016-06-07 15:00:28,936: INFO - IP: ::1, search: Konsulat, lang: de
+2016-06-07 15:00:28,936: INFO - IP: ::1, search: Konsulat, lang: de
+2016-06-07 15:00:28,936: INFO - IP: ::1, search: Konsulat, lang: de
+2016-06-07 15:00:28,950: INFO - 200 GET /search?query=Konsulat&lang=de (::1) 1237.00ms
+2016-06-07 15:00:29,012: INFO - 200 GET /suggest?query=Konsulat (::1) 62.00ms
+2016-06-07 15:00:29,039: INFO - 200 GET /static/img/osm_node_true.png (::1) 2.00ms
+2016-06-07 15:00:29,042: INFO - 200 GET /static/img/osm_area_true.png (::1) 2.00ms
+2016-06-07 15:00:29,118: INFO - 200 GET /static/js/typeahead-noselect.js?_=1465304429092 (::1) 2.00ms
+2016-06-07 15:00:57,821: INFO - IP: ::1, search: Botschaft, lang: de
+2016-06-07 15:00:57,821: INFO - IP: ::1, search: Botschaft, lang: de
+2016-06-07 15:00:57,821: INFO - IP: ::1, search: Botschaft, lang: de
+2016-06-07 15:00:57,821: INFO - IP: ::1, search: Botschaft, lang: de
+2016-06-07 15:00:57,831: INFO - 200 GET /search?query=Botschaft&lang=de (::1) 1241.00ms
+2016-06-07 15:00:57,914: INFO - 200 GET /static/img/osm_node_unspec.png (::1) 3.00ms
+2016-06-07 15:00:57,917: INFO - 200 GET /static/img/osm_way_unspec.png (::1) 2.00ms
+2016-06-07 15:00:57,920: INFO - 200 GET /static/img/osm_area_unspec.png (::1) 2.00ms
+2016-06-07 15:00:57,923: INFO - 200 GET /static/img/osm_relation_unspec.png (::1) 3.00ms
+2016-06-07 15:00:58,020: INFO - 200 GET /static/js/typeahead-noselect.js?_=1465304457994 (::1) 2.00ms
+2016-06-07 15:01:16,384: INFO - 200 GET /static/css/lang_en.css (::1) 2.00ms
+2016-06-07 15:01:16,385: INFO - 200 POST /setlang (::1) 2.00ms
+2016-06-07 15:01:18,934: INFO - 200 POST /setlang (::1) 2.00ms
+2016-06-07 15:01:22,584: INFO - 302 GET /search?query=&lang=de (::1) 3.00ms
+2016-06-07 15:01:22,592: INFO - 200 GET / (::1) 5.00ms
+2016-06-07 15:01:22,750: INFO - 200 GET /static/js/typeahead-noselect.js?_=1465304482717 (::1) 2.00ms
