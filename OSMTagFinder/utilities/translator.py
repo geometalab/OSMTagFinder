@@ -4,8 +4,9 @@ Created on 10.10.2014
 
 @author: Simon Gwerder
 '''
-from utilities.retry import retry
 from utilities.MicrosoftTranslator import MicrosoftTranslator
+from utilities.retry import retry
+
 
 class Translator:
     

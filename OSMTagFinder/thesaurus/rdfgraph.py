@@ -5,16 +5,17 @@ Created on 26.09.2014
 @author: Simon Gwerder
 '''
 
-from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin, XSD
-from rdflib.namespace import SKOS
-from rdflib.namespace import FOAF
-from rdflib.namespace import DCTERMS
-from rdflib.serializer import Serializer
-from rdflib.util import guess_format
 from datetime import datetime
 
+from rdflib import Graph, Literal, Namespace, RDF, URIRef, plugin, XSD
+from rdflib.namespace import DCTERMS
+from rdflib.namespace import FOAF
+from rdflib.namespace import SKOS
+from rdflib.serializer import Serializer
+from rdflib.util import guess_format
 from utilities import utils
 from utilities.configloader import ConfigLoader
+
 
 #import logging
 

@@ -5,9 +5,11 @@ Created on 10.10.2014
 @author: Simon Gwerder
 '''
 
-from ConfigParser import SafeConfigParser
 import codecs
+from ConfigParser import SafeConfigParser
+
 from utilities import utils
+
 
 class ConfigLoader:
 

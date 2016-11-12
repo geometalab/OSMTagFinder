@@ -5,25 +5,23 @@ Created on 13.11.2014
 @author: Simon Gwerder
 Thanks go to Tom (bashzestampeedo) aswell, who helped me when learning python got to me - nice Canadian guy!!
 '''
-import os
-import time
 import datetime
 import logging
-import sys
-#import codecs
+import os
+import time
 
+from tornado.httpserver import HTTPServer
+from tornado.ioloop import IOLoop
+from tornado.wsgi import WSGIContainer
+
+from taginfo.taginfo import TagInfo
+from thesaurus.rdfgraph import RDFGraph
+from thesaurus.updatethesaurus import UpdateThesaurus
 from utilities import crython
-
 from utilities import utils
 from utilities.configloader import ConfigLoader
 from web.views import app, setRdfGraph
-from thesaurus.rdfgraph import RDFGraph
-from thesaurus.updatethesaurus import UpdateThesaurus
-from taginfo.taginfo import TagInfo
 
-from tornado.wsgi import WSGIContainer
-from tornado.httpserver import HTTPServer
-from tornado.ioloop import IOLoop
 
 def runFlaskApp(rdfGraph=None, dataDate=None):
     logging.info('Application started')
@@ -44,7 +42,7 @@ def runFlaskApp(rdfGraph=None, dataDate=None):
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(port=tagFinderPort)
     IOLoop.instance().start()
-    
+
     #app.run(debug=False, host=tagFinderHost, port=tagFinderPort, threaded=True) # debug=False/True, alternately app.run(..., processes=3)
 
 def initLogger():

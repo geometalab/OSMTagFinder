@@ -5,13 +5,14 @@ Created on 01.11.2014
 @author: Simon Gwerder
 '''
 
-from vocabularybase import VocabularyBase
-from utilities.configloader import ConfigLoader
+import requests
+from ordered_set import OrderedSet
 from utilities import utils
+from utilities.configloader import ConfigLoader
 from utilities.retry import retry
 
-from ordered_set import OrderedSet
-import requests
+from vocabularybase import VocabularyBase
+
 
 class Altervista(VocabularyBase):
 

@@ -7,7 +7,9 @@ Created on 31.10.2014
 
 import abc
 from abc import ABCMeta
+
 from utilities import utils
+
 
 class VocabularyBase(object):
     __metaclass__ = ABCMeta

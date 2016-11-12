@@ -5,8 +5,9 @@ Created on 20.10.2014
 @author: Simon Gwerder
 '''
 
-from utilities.configloader import ConfigLoader
 from utilities import utils
+from utilities.configloader import ConfigLoader
+
 
 class TagResults:
 

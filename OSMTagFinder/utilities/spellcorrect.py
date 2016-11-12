@@ -8,11 +8,11 @@ Created on 03.10.2014
 # Note: Might wanna checkout GNU Aspell for an alternative library to PyEnchant.
 # GNU Aspell also provides dictionaries in more languages.
 
-from utilities import utils
+import re
 
 import whoosh.index as index
+from utilities import utils
 from whoosh.index import open_dir
-import re
 
 class SpellCorrect():
     '''SpellCorrect provides means to get a candidate list for a 'fuzzy search'. Useable for type-ahead aswell'''

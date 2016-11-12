@@ -4,21 +4,16 @@ Created on 27.09.2014
 
 @author: Simon Gwerder
 '''
-from rdflib.plugins.serializers.xmlwriter import XMLWriter
+import xml.dom.minidom
+from xml.sax.saxutils import quoteattr, escape
 
+from rdflib.collection import Collection
 from rdflib.namespace import Namespace, RDF, RDFS  # , split_uri
-
+from rdflib.plugins.serializers.xmlwriter import XMLWriter
+from rdflib.py3compat import b
+from rdflib.serializer import Serializer
 from rdflib.term import URIRef, Literal, BNode
 from rdflib.util import first, more_than
-from rdflib.collection import Collection
-from rdflib.serializer import Serializer
-
-# from rdflib.exceptions import Error
-
-from rdflib.py3compat import b
-
-from xml.sax.saxutils import quoteattr, escape
-import xml.dom.minidom
 
 ESCAPE_ENTITIES = {
     '\r': '&#13;'

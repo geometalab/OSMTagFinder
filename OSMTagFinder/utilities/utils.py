@@ -5,10 +5,11 @@ Created on 08.10.2014
 @author: Simon Gwerder
 '''
 
-import re
-import os
 import datetime
 import json
+import os
+import re
+
 #import chardet
 
 

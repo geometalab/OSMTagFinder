@@ -1,12 +1,12 @@
 __author__ = 'Andrew Hawker <andrew.r.hawker@gmail.com>'
 
 import calendar
+import collections
+import datetime
 import functools
 import logging
 import re
-import datetime
 import threading
-import collections
 import time
 
 LOG = logging.getLogger(__name__)

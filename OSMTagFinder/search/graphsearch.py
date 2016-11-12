@@ -4,19 +4,19 @@ Created on 12.10.2014
 
 @author: Simon Gwerder
 '''
-from utilities import utils
-#from utilities.spellcorrect import SpellCorrect
-from utilities.translator import Translator
-from utilities.configloader import ConfigLoader
-
-from collections import OrderedDict
-from whoosh.qparser import QueryParser
-#from whoosh.qparser import MultifieldParser
-from whoosh.analysis import NgramFilter, StandardAnalyzer
-import whoosh.index as index
-from whoosh.index import open_dir
 import re
+from collections import OrderedDict
+
+import whoosh.index as index
 from search.tagresults import TagResults
+from utilities import utils
+from utilities.configloader import ConfigLoader
+from utilities.translator import Translator
+from whoosh.analysis import NgramFilter, StandardAnalyzer
+from whoosh.index import open_dir
+from whoosh.qparser import QueryParser
+
+import wordforms.word_forms as wordforms
 
 class GraphSearch:
 
@@ -46,17 +46,44 @@ class GraphSearch:
         return translatedWord
 
     splitChars = re.compile('[ =._,:;/\?\(\)\]\[\!\*]')
-    def translateText(self, words, lang=None):
-        wordList = self.splitChars.split(words)
-        translatedWords = ''
+    def translateText(self, text, lang=None):
+        wordList = self.splitChars.split(text)
+        translatedWordsStr = ''
         for word in wordList:
             if len(word) <= 1:
                 continue
             if word[0] == '"' and word[len(word) - 1] == '"': # don't translate this one
-                translatedWords = translatedWords + word
+                translatedWordsStr = translatedWordsStr + word
             else:
-                translatedWords = translatedWords + self.translateWord(word, lang)
-        return utils.wsWord(translatedWords)
+                translatedWordsStr = translatedWordsStr + ' ' + self.translateWord(word, lang)
+        return utils.wsWord(translatedWordsStr)
+
+    def wordForms(self, text):
+        text = text.lower()
+        wordList = self.splitChars.split(text)
+        wordFormsStr = ''
+        for word in wordList:
+            if len(word) <= 1:
+                continue
+            if word[0] == '"' and word[len(word) - 1] == '"':  # don't build word forms from this one
+                wordFormsStr = wordFormsStr + word
+            else:
+                distinctWordForms = set()
+                try:
+                    wordForms = wordforms.get_word_forms(word)
+                    for noun in wordForms['n']:
+                        distinctWordForms.add(noun)
+                    for verb in wordForms['v']:
+                        distinctWordForms.add(verb)
+                    for adverb in wordForms['r']:
+                        distinctWordForms.add(adverb)
+                    for adjective in wordForms['a']:
+                        distinctWordForms.add(adjective)
+                except:
+                    pass # do nothing
+                distinctWordForms.discard(word)
+                wordFormsStr = wordFormsStr + ' ' + ' '.join(distinctWordForms)
+        return utils.wsWord(wordFormsStr)
     
     def isWordIndexed(self, searcher, word):
         if searcher.frequency('spellingEN', word) > 0: return True
@@ -96,8 +123,14 @@ class GraphSearch:
         containsQuotes = words.count('"') >= 2
         
         translatedWords = self.translateText(words, lang)
+
+        if(lang == 'en'):
+            englishWordForms = self.wordForms(words)
+        else:
+            englishWordForms = self.wordForms(translatedWords)
+
         words = utils.wsWord(words) # do this after translation
-        # words and translatedWords are now "whitespaced", containging mostly whitespace separator
+        # words and translatedWords are now "whitespaced", containing mostly whitespace separator
         
         # don't leave the following statement until all results are copied into another datastructure,
         # otherwise the reader is closed.
@@ -112,23 +145,32 @@ class GraphSearch:
             allHits = self.extendedSearch(translatedWords, searcher, 'termPrefLabel', results, allHits)
             allHits = self.extendedSearch(translatedWords, searcher, 'termAltLabel', results, allHits)
 
+            allHits = self.extendedSearch(englishWordForms, searcher, 'termPrefLabel', results, allHits)
+            allHits = self.extendedSearch(englishWordForms, searcher, 'termAltLabel', results, allHits)
+
             if lang == 'en':
                 allHits = self.extendedSearch(words, searcher, 'tagPrefLabel', results, allHits) # english first
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagPrefLabel', results, allHits)
+                allHits = self.extendedSearch(englishWordForms, searcher, 'tagPrefLabel', results, allHits)
             else:
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagPrefLabel', results, allHits)  # english first too
+                allHits = self.extendedSearch(englishWordForms, searcher, 'tagPrefLabel', results, allHits)
                 allHits = self.extendedSearch(words, searcher, 'tagPrefLabel', results, allHits)
-            
+
             allHits = self.extendedSearch(words, searcher, 'termNarrower', results, allHits) # Note: Searching in termNarrower gives me all broader for this term
             allHits = self.extendedSearch(words, searcher, 'termBroader', results, allHits)
             allHits = self.extendedSearch(translatedWords, searcher, 'termNarrower', results, allHits)
+            allHits = self.extendedSearch(englishWordForms, searcher, 'termNarrower', results, allHits)
             allHits = self.extendedSearch(translatedWords, searcher, 'termBroader', results, allHits)
+            allHits = self.extendedSearch(englishWordForms, searcher, 'termBroader', results, allHits)
 
             if lang == 'en':
                 allHits = self.extendedSearch(words, searcher, 'tagScopeNote', results, allHits)  # english first
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagScopeNote', results, allHits)
+                allHits = self.extendedSearch(englishWordForms, searcher, 'tagScopeNote', results, allHits)
             else:
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagScopeNote', results, allHits)  # english first too
+                allHits = self.extendedSearch(englishWordForms, searcher, 'tagScopeNote', results, allHits)
                 allHits = self.extendedSearch(words, searcher, 'tagScopeNote', results, allHits)
                 
 #             for token in self.getTokens(searcher, words, lang): # tokenized search

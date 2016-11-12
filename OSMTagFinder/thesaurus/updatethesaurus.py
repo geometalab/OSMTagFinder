@@ -5,14 +5,13 @@ Created on 04.12.2014
 @author: Simon Gwerder
 '''
 
-
+from thesaurus.basethesaurus import BaseThesaurus
+from thesaurus.filter import Filter
+from thesaurus.indexer import Indexer
+from thesaurus.mapsemnet import MapOSMSemanticNet
 from utilities import utils
 from utilities.configloader import ConfigLoader
 from utilities.translator import Translator
-from thesaurus.filter import Filter
-from thesaurus.basethesaurus import BaseThesaurus
-from thesaurus.mapsemnet import MapOSMSemanticNet
-from thesaurus.indexer import Indexer
 
 
 class UpdateThesaurus:

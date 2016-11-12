@@ -6,10 +6,9 @@ Created on 08.11.2014
 '''
 
 from rdflib.namespace import SKOS
-
+from semnet.osmsemanticnet import OSMSemanticNet
 from thesaurus.rdfgraph import RDFGraph
 from utilities.configloader import ConfigLoader
-from semnet.osmsemanticnet import OSMSemanticNet
 
 class MapOSMSemanticNet:
 

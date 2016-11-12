@@ -8,9 +8,9 @@ Created on 08.11.2014
 import requests
 from rdflib import Literal
 from rdflib.namespace import SKOS
-
-from utilities.configloader import ConfigLoader
 from utilities import utils
+from utilities.configloader import ConfigLoader
+
 
 class OSMSemanticNet:
 

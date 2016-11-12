@@ -4,17 +4,18 @@ Created on 11.10.2014
 
 @author: Simon Gwerder
 '''
-from utilities import utils
-from utilities.translator import Translator
-from rdflib.namespace import SKOS
-from rdflib import Literal
-from thesaurus.rdfgraph import RDFGraph
-
 import re
-from whoosh.fields import TEXT, ID, Schema, NGRAMWORDS
+
 import whoosh.index as index
-from whoosh.index import create_in
+from rdflib import Literal
+from rdflib.namespace import SKOS
+from thesaurus.rdfgraph import RDFGraph
+from utilities import utils
 from utilities.configloader import ConfigLoader
+from utilities.translator import Translator
+from whoosh.fields import TEXT, ID, Schema, NGRAMWORDS
+from whoosh.index import create_in
+
 
 class Indexer:
 

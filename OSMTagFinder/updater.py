@@ -6,13 +6,13 @@ Created on 20.12.2014
 '''
 
 import timeit
-import sys
-from thesaurus.rdfgraph import RDFGraph
-from taginfo.taginfo import TagInfo
+
 from maintenance import Maintenance
-from utilities.configloader import ConfigLoader
-from utilities import utils
+from taginfo.taginfo import TagInfo
+from thesaurus.rdfgraph import RDFGraph
 from thesaurus.updatethesaurus import UpdateThesaurus
+from utilities import utils
+from utilities.configloader import ConfigLoader
 
 if __name__ == '__main__':
     '''Start script to update manually'''

@@ -2,11 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07fcdf05-3fe0-411e-8d37-5a9b4322a7c8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/OSMTagFinder/data/indexer/index_fc27ioqskrf1y1aj.seg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/data/indexer/_index_1.toc" afterPath="$PROJECT_DIR$/OSMTagFinder/data/indexer/_index_1.toc" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/OSMTagFinder/wordforms/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/OSMTagFinder/wordforms/constants.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/OSMTagFinder/wordforms/en-verbs.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/OSMTagFinder/wordforms/word_forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/data/config.ini" afterPath="$PROJECT_DIR$/OSMTagFinder/data/config.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/data/tagfinder_thesaurus.rdf" afterPath="$PROJECT_DIR$/OSMTagFinder/data/tagfinder_thesaurus.rdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/log/serverlog.log" afterPath="$PROJECT_DIR$/OSMTagFinder/log/serverlog.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/log/visitorlog.log" afterPath="$PROJECT_DIR$/OSMTagFinder/log/visitorlog.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/maintenance.py" afterPath="$PROJECT_DIR$/OSMTagFinder/maintenance.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/requirements.txt" afterPath="$PROJECT_DIR$/OSMTagFinder/requirements.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py" afterPath="$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/search/tagresults.py" afterPath="$PROJECT_DIR$/OSMTagFinder/search/tagresults.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/semnet/osmsemanticnet.py" afterPath="$PROJECT_DIR$/OSMTagFinder/semnet/osmsemanticnet.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/server.py" afterPath="$PROJECT_DIR$/OSMTagFinder/server.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/taginfo/taginfo.py" afterPath="$PROJECT_DIR$/OSMTagFinder/taginfo/taginfo.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/test/idpresettest.py" afterPath="$PROJECT_DIR$/OSMTagFinder/test/idpresettest.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/thesaurus/basethesaurus.py" afterPath="$PROJECT_DIR$/OSMTagFinder/thesaurus/basethesaurus.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/thesaurus/indexer.py" afterPath="$PROJECT_DIR$/OSMTagFinder/thesaurus/indexer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/thesaurus/mapsemnet.py" afterPath="$PROJECT_DIR$/OSMTagFinder/thesaurus/mapsemnet.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/thesaurus/rdfgraph.py" afterPath="$PROJECT_DIR$/OSMTagFinder/thesaurus/rdfgraph.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/thesaurus/relatedterm.py" afterPath="$PROJECT_DIR$/OSMTagFinder/thesaurus/relatedterm.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/thesaurus/skosserializer.py" afterPath="$PROJECT_DIR$/OSMTagFinder/thesaurus/skosserializer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/thesaurus/updateterm.py" afterPath="$PROJECT_DIR$/OSMTagFinder/thesaurus/updateterm.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/thesaurus/updatethesaurus.py" afterPath="$PROJECT_DIR$/OSMTagFinder/thesaurus/updatethesaurus.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/updater.py" afterPath="$PROJECT_DIR$/OSMTagFinder/updater.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/utilities/MicrosoftTranslator.py" afterPath="$PROJECT_DIR$/OSMTagFinder/utilities/MicrosoftTranslator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/utilities/configloader.py" afterPath="$PROJECT_DIR$/OSMTagFinder/utilities/configloader.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/utilities/crython.py" afterPath="$PROJECT_DIR$/OSMTagFinder/utilities/crython.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/utilities/spellcorrect.py" afterPath="$PROJECT_DIR$/OSMTagFinder/utilities/spellcorrect.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/utilities/timeout.py" afterPath="$PROJECT_DIR$/OSMTagFinder/utilities/timeout.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/utilities/translator.py" afterPath="$PROJECT_DIR$/OSMTagFinder/utilities/translator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/utilities/utils.py" afterPath="$PROJECT_DIR$/OSMTagFinder/utilities/utils.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/vocab/altervista.py" afterPath="$PROJECT_DIR$/OSMTagFinder/vocab/altervista.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/vocab/gemet.py" afterPath="$PROJECT_DIR$/OSMTagFinder/vocab/gemet.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/vocab/openthesaurus.py" afterPath="$PROJECT_DIR$/OSMTagFinder/vocab/openthesaurus.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/vocab/vocabulary.py" afterPath="$PROJECT_DIR$/OSMTagFinder/vocab/vocabulary.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/vocab/vocabularybase.py" afterPath="$PROJECT_DIR$/OSMTagFinder/vocab/vocabularybase.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/vocab/wordnikapi.py" afterPath="$PROJECT_DIR$/OSMTagFinder/vocab/wordnikapi.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/web/jsonpdeco.py" afterPath="$PROJECT_DIR$/OSMTagFinder/web/jsonpdeco.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSMTagFinder/web/views.py" afterPath="$PROJECT_DIR$/OSMTagFinder/web/views.py" />
     </list>
     <ignored path="OSMTagFinder.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -19,7 +53,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/OSMTagFinder$server.coverage" NAME="server Coverage Results" MODIFIED="1467917601429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OSMTagFinder" />
+    <SUITE FILE_PATH="coverage/OSMTagFinder$server.coverage" NAME="server Coverage Results" MODIFIED="1478975584930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OSMTagFinder" />
     <SUITE FILE_PATH="coverage/OSMTagFinder$maintenance.coverage" NAME="maintenance Coverage Results" MODIFIED="1454456640471" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OSMTagFinder" />
     <SUITE FILE_PATH="coverage/OSMTagFinder$pipupdate.coverage" NAME="pipupdate Coverage Results" MODIFIED="1462542409997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OSMTagFinder$updater.coverage" NAME="updater Coverage Results" MODIFIED="1478029838721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OSMTagFinder" />
@@ -33,11 +67,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="updater.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="updater.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OSMTagFinder/updater.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+            <state relative-caret-position="209">
+              <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graphsearch.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2242">
+              <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+              <folding>
+                <element signature="e#78#87#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mapsemnet.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OSMTagFinder/thesaurus/mapsemnet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OSMTagFinder/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="931">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -46,9 +112,35 @@
       <file leaf-file-name="server.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OSMTagFinder/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1026">
-              <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
-              <folding />
+            <state relative-caret-position="342">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <element signature="e#188#203#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OSMTagFinder/web/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="181">
+              <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+              <folding>
+                <element signature="e#79#94#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="decorator.py" pinned="false" current-in-tab="true">
+        <entry file="file://C:/Program Files (x86)/Python 2.7/Lib/site-packages/flask_cors/decorator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1575">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding>
+                <element signature="e#306#342#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,6 +157,13 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -74,16 +173,20 @@
         <option value="$PROJECT_DIR$/OSMTagFinder/updater.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/maintenance.py" />
         <option value="$PROJECT_DIR$/windowspython.py" />
-        <option value="$PROJECT_DIR$/OSMTagFinder/server.py" />
-        <option value="$PROJECT_DIR$/OSMTagFinder/log/serverlog.log" />
-        <option value="$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/taginfo/taginfo.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/thesaurus/indexer.py" />
-        <option value="$PROJECT_DIR$/OSMTagFinder/thesaurus/mapsemnet.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/utilities/utils.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/thesaurus/basethesaurus.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/sitecustomize.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/data/config.ini" />
+        <option value="$PROJECT_DIR$/OSMTagFinder/wordforms/word_forms.py" />
+        <option value="$PROJECT_DIR$/OSMTagFinder/semnet/osmsemanticnet.py" />
+        <option value="$PROJECT_DIR$/OSMTagFinder/thesaurus/mapsemnet.py" />
+        <option value="$PROJECT_DIR$/OSMTagFinder/server.py" />
+        <option value="$PROJECT_DIR$/OSMTagFinder/log/serverlog.log" />
+        <option value="$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py" />
+        <option value="$PROJECT_DIR$/OSMTagFinder/requirements.txt" />
+        <option value="$PROJECT_DIR$/OSMTagFinder/web/views.py" />
       </list>
     </option>
   </component>
@@ -169,7 +272,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -216,6 +318,42 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="wordforms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OSMTagFinder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OSMTagFinder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OSMTagFinder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OSMTagFinder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OSMTagFinder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OSMTagFinder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="thesaurus" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -234,7 +372,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="search" />
+              <option name="myItemId" value="semnet" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -252,49 +390,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OSMTagFinder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OSMTagFinder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OSMTagFinder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="temp" />
+              <option name="myItemId" value="log" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/OSMTagFinder/requirements.txt" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Simon Gwerder\git\GitHub\OSMTagFinder\OSMTagFinder\wordforms" />
       <recent name="C:\Users\Simon Gwerder\git\GitHub\OSMTagFinder\OSMTagFinder\data\temp" />
       <recent name="C:\Users\Simon Gwerder\git\GitHub\OSMTagFinder\OSMTagFinder\web\static\cert" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.updater">
+  <component name="RunManager" selected="Python.server">
     <configuration default="false" name="maintenance" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -583,8 +701,8 @@
     </list>
     <recent_temporary>
       <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.updater" />
-        <item index="1" class="java.lang.String" itemvalue="Python.server" />
+        <item index="0" class="java.lang.String" itemvalue="Python.server" />
+        <item index="1" class="java.lang.String" itemvalue="Python.updater" />
         <item index="2" class="java.lang.String" itemvalue="Python.pipupdate" />
         <item index="3" class="java.lang.String" itemvalue="Python.maintenance" />
       </list>
@@ -618,24 +736,24 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24626866" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1945629" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3391116" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17984831" sideWeight="0.5063966" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38136512" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.49573562" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30985916" sideWeight="0.4936034" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2383532" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38209608" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -656,46 +774,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/data/config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/sitecustomize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/taginfo/taginfo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="55" column="34" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/thesaurus/indexer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="95" column="24" selection-start-line="95" selection-start-column="24" selection-end-line="95" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/thesaurus/mapsemnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OSMTagFinder/utilities/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -871,21 +957,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/web/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OSMTagFinder/utilities/configloader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/log/serverlog.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -896,20 +968,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="55" column="34" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/thesaurus/mapsemnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/utilities/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="201" column="18" selection-start-line="201" selection-start-column="18" selection-end-line="201" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -935,24 +993,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/OSMTagFinder/data/temp/tagfinder_thesaurus_160506.rdf" />
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OSMTagFinder/search/tagresults.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2033">
-          <caret line="107" column="36" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -965,25 +1009,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OSMTagFinder/data/temp/tagfinder_thesaurus_160607.rdf" />
     <entry file="file://$PROJECT_DIR$/OSMTagFinder/data/temp/tagfinder_thesaurus_160707.rdf" />
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/data/temp/tagfinder_thesaurus_160807.rdf">
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/data/temp/tagfinder_thesaurus_160807.rdf" />
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/data/temp/tagfinder_thesaurus_160910.rdf" />
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/updater.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1026">
-          <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/data/temp/tagfinder_thesaurus_160910.rdf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="94" selection-start-line="9" selection-start-column="94" selection-end-line="9" selection-end-column="94" />
+        <state relative-caret-position="209">
+          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -996,11 +1027,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/updater.py">
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/wordforms/en-verbs.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/semnet/osmsemanticnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/log/visitorlog.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1244">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/utilities/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2242">
+          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+          <folding>
+            <element signature="e#78#87#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/wordforms/word_forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1596">
+          <caret line="87" column="18" selection-start-line="87" selection-start-column="4" selection-end-line="87" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/thesaurus/mapsemnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="931">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="e#188#203#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/web/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+          <folding>
+            <element signature="e#79#94#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/log/serverlog.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files (x86)/Python 2.7/Lib/site-packages/flask_cors/decorator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1575">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#306#342#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

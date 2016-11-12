@@ -10,11 +10,12 @@ Microsoft Konto: osmtagfinder@hotmail.com - #T0P#SECRET# (see access token there
 @author:  Denis Papathanasiou
 '''
 
-import urllib, urllib2
 import json
+import urllib
+import urllib2
 import xml.etree.ElementTree as ET
-
 from datetime import datetime
+
 
 class MicrosoftTranslator:
     

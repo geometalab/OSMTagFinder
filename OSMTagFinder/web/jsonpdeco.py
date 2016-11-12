@@ -6,7 +6,9 @@ Created on 29.11.2014
 '''
 
 from functools import wraps
+
 from flask import request, current_app
+
 
 def support_jsonp(f):
     """Wraps JSONified output for JSONP"""

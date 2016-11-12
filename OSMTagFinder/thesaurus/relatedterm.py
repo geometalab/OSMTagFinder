@@ -6,7 +6,9 @@ Created on 16.11.2014
 '''
 
 from utilities.configloader import ConfigLoader
+
 from rdfgraph import RDFGraph
+
 
 class RelatedTerm:
 

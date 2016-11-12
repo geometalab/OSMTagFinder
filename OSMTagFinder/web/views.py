@@ -5,27 +5,26 @@ Created on 17.10.2014
 @author: Simon Gwerder
 '''
 
-import json
-from flask import Flask, session, send_from_directory, render_template, request, redirect, jsonify, Response
-from flask_bootstrap import Bootstrap
-from web.jsonpdeco import support_jsonp
 import datetime
+import json
 import logging
 
-
-from utilities import utils
+from flask import Flask, session, send_from_directory, render_template, request, redirect, jsonify, Response
+from flask_bootstrap import Bootstrap
 from search.graphsearch import GraphSearch
+from utilities import utils
 from utilities.spellcorrect import SpellCorrect
+from web.jsonpdeco import support_jsonp
 
 try:
     # The typical way to import flask-cors. From documentation!
-    from flask.ext.cors import cross_origin
+    from flask_cors import cross_origin
 except ImportError:
     # This allows examples to be run without installation.
     import os
     parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     os.sys.path.insert(0, parentdir)
-    from flask.ext.cors import cross_origin
+    from flask_cors import cross_origin
 
 websiteRdfGraph = None # global var is assigned in setRdfGraph()! Because there's no way to restart a running 'app' in FLASK!!!
 websiteDataDate = datetime.date.today().strftime("%d.%m.%y") # will be assigned aswell

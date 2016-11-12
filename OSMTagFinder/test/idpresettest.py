@@ -6,12 +6,13 @@ Created on 01.12.2014
 '''
 
 import json
-from ordered_set import OrderedSet
-import requests
+import timeit
 
+import requests
+from ordered_set import OrderedSet
 from utilities import utils
 from utilities.retry import retry
-import timeit
+
 
 class IDPreset:
     name = None

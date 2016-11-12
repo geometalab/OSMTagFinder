@@ -4,12 +4,13 @@ Created on 01.11.2014
 
 @author: Simon Gwerder
 '''
-from gemet import Gemet
+from ordered_set import OrderedSet
+
 from altervista import Altervista
+from gemet import Gemet
 from openthesaurus import OpenThesaurus
 from wordnikapi import WordnikApi
 
-from ordered_set import OrderedSet
 
 class Vocabulary:
 

@@ -5,13 +5,13 @@ Created on 01.11.2014
 @author: Simon Gwerder
 '''
 
+import requests
 from ordered_set import OrderedSet
-from vocabularybase import VocabularyBase
-from utilities.configloader import ConfigLoader
 from utilities import utils
+from utilities.configloader import ConfigLoader
 from utilities.retry import retry
 
-import requests
+from vocabularybase import VocabularyBase
 
 
 class Gemet(VocabularyBase):

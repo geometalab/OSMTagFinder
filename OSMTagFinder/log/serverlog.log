@@ -1,1 +1,24 @@
-2016-07-07 20:53:22,214: INFO - Application started
+2016-11-12 19:33:18,489: INFO - Application started
+2016-11-12 19:33:31,921: INFO - 200 GET / (127.0.0.1) 129.00ms
+2016-11-12 19:33:32,229: INFO - 200 GET /static/js/typeahead-noselect.js?_=1478975612027 (127.0.0.1) 165.00ms
+2016-11-12 19:33:32,230: INFO - 200 GET /static/ico/favicon.ico (127.0.0.1) 2.00ms
+2016-11-12 19:33:37,157: INFO - IP: 127.0.0.1, search: street, lang: en
+2016-11-12 19:33:37,157: INFO - IP: 127.0.0.1, search: street, lang: en
+2016-11-12 19:33:37,157: INFO - IP: 127.0.0.1, search: street, lang: en
+2016-11-12 19:33:37,157: INFO - IP: 127.0.0.1, search: street, lang: en
+2016-11-12 19:33:37,328: INFO - 200 GET /search?query=street&lang=en (127.0.0.1) 1323.00ms
+2016-11-12 19:33:37,405: INFO - 200 GET /suggest?query=street (127.0.0.1) 77.00ms
+2016-11-12 19:33:38,664: INFO - 200 GET /static/js/typeahead-noselect.js?_=1478975618653 (127.0.0.1) 3.00ms
+2016-11-12 19:33:53,355: INFO - IP: 127.0.0.1, search: ubahn, lang: en
+2016-11-12 19:33:53,355: INFO - IP: 127.0.0.1, search: ubahn, lang: en
+2016-11-12 19:33:53,355: INFO - IP: 127.0.0.1, search: ubahn, lang: en
+2016-11-12 19:33:53,355: INFO - IP: 127.0.0.1, search: ubahn, lang: en
+2016-11-12 19:33:53,401: INFO - 200 GET /search?query=ubahn&lang=en (127.0.0.1) 1076.00ms
+2016-11-12 19:33:53,601: INFO - 200 GET /static/js/typeahead-noselect.js?_=1478975633552 (127.0.0.1) 1.00ms
+2016-11-12 19:33:59,342: INFO - 200 POST /setlang (127.0.0.1) 1.00ms
+2016-11-12 19:34:01,286: INFO - IP: 127.0.0.1, search: ubahn, lang: de
+2016-11-12 19:34:01,286: INFO - IP: 127.0.0.1, search: ubahn, lang: de
+2016-11-12 19:34:01,286: INFO - IP: 127.0.0.1, search: ubahn, lang: de
+2016-11-12 19:34:01,286: INFO - IP: 127.0.0.1, search: ubahn, lang: de
+2016-11-12 19:34:01,315: INFO - 200 GET /search?query=ubahn&lang=de (127.0.0.1) 1009.00ms
+2016-11-12 19:34:01,483: INFO - 200 GET /static/js/typeahead-noselect.js?_=1478975641468 (127.0.0.1) 1.00ms

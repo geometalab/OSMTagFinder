@@ -5,11 +5,12 @@ Created on 25.10.2014
 @author: Simon Gwerder
 '''
 
+import requests
 from utilities.configloader import ConfigLoader
 from utilities.retry import retry
 
-import requests
 from taginfostats import TagInfoStats
+
 
 class TagInfo:
 

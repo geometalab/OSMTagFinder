@@ -5,11 +5,13 @@ Created on 16.11.2014
 @author: Simon Gwerder
 '''
 
-from utilities.configloader import ConfigLoader
+import operator
+
 from utilities import utils
+from utilities.configloader import ConfigLoader
+
 from relatedterm import RelatedTerm
 
-import operator
 
 class UpdateTerm:
 

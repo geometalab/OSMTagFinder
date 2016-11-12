@@ -5,12 +5,14 @@ Created on 27.09.2014
 @author: Simon Gwerder
 '''
 
-from filter import Filter
+from thesaurus.mapsemnet import MapOSMSemanticNet
+from thesaurus.rdfgraph import RDFGraph
 from utilities import utils
 from utilities.configloader import ConfigLoader
-from thesaurus.rdfgraph import RDFGraph
 from utilities.translator import Translator
-from thesaurus.mapsemnet import MapOSMSemanticNet
+
+from filter import Filter
+
 
 class BaseThesaurus:
 

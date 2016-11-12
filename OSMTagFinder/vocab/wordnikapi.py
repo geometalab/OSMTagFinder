@@ -4,14 +4,14 @@ Created on 01.11.2014
 
 @author: Simon Gwerder
 '''
-from vocabularybase import VocabularyBase
+from ordered_set import OrderedSet
 from utilities import utils
 from utilities.configloader import ConfigLoader
 from utilities.timeout import timeout
-#from utilities.retry import retry
-
 from wordnik import swagger, WordApi
-from ordered_set import OrderedSet
+
+from vocabularybase import VocabularyBase
+
 
 class WordnikApi(VocabularyBase):
 

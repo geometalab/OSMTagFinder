@@ -4,22 +4,23 @@ Created on 10.11.2014
 
 @author: Simon Gwerder
 '''
+import codecs
+import os
 import time
 import timeit
-import sys
+
 from colorama import init, deinit
 from termcolor import colored
-import os
-import codecs
 
-from utilities import utils
-from utilities.translator import Translator
-from utilities.configloader import ConfigLoader
-from thesaurus.basethesaurus import BaseThesaurus
-from thesaurus.updateterm import UpdateTerm
-from thesaurus.rdfgraph import RDFGraph
-from vocab.vocabulary import Vocabulary
 from taginfo.taginfo import TagInfo
+from thesaurus.basethesaurus import BaseThesaurus
+from thesaurus.rdfgraph import RDFGraph
+from thesaurus.updateterm import UpdateTerm
+from utilities import utils
+from utilities.configloader import ConfigLoader
+from utilities.translator import Translator
+from vocab.vocabulary import Vocabulary
+
 
 class Maintenance:
 
