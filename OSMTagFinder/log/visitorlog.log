@@ -132,3 +132,12 @@
 2016-11-12 19:33:37,157: INFO - IP: 127.0.0.1, search: street, lang: en
 2016-11-12 19:33:53,355: INFO - IP: 127.0.0.1, search: ubahn, lang: en
 2016-11-12 19:34:01,286: INFO - IP: 127.0.0.1, search: ubahn, lang: de
+2017-03-06 19:39:29,226: INFO - IP: ::1, search: animal, lang: de
+2017-03-06 19:39:46,473: INFO - IP: ::1, search: cargo, lang: de
+2017-03-06 19:40:06,845: INFO - IP: ::1, search: window, lang: de
+2017-03-06 19:40:19,167: INFO - IP: ::1, search: fuel, lang: de
+2017-03-06 19:40:36,349: INFO - IP: ::1, search: wool, lang: de
+2017-03-06 19:40:47,380: INFO - IP: ::1, search: fuel, lang: en
+2017-03-06 19:41:06,089: INFO - IP: ::1, search: junk_yard, lang: en
+2017-03-06 19:41:10,453: INFO - IP: ::1, search: junk yard, lang: en
+2017-03-06 19:41:29,288: INFO - IP: ::1, search: vending water, lang: en
