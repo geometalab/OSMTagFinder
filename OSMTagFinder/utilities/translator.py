@@ -4,13 +4,13 @@ Created on 10.10.2014
 
 @author: Simon Gwerder
 '''
-from utilities.MicrosoftTranslator import MicrosoftTranslator
+from utilities.YandexTranslator import YandexTranslator
 from utilities.retry import retry
 
 
 class Translator:
     
-    translator = MicrosoftTranslator()
+    translator = YandexTranslator()
 
     @retry(Exception, tries=3)
     def translateENtoDE(self, text):
