@@ -15,7 +15,7 @@ from utilities import utils
 from utilities.configloader import ConfigLoader
 
 if __name__ == '__main__':
-    '''Start script to update manually'''
+    '''Start script to update automatically'''
     import sys
     reload(sys)
     sys.setdefaultencoding('utf8')
