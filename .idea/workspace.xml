@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07fcdf05-3fe0-411e-8d37-5a9b4322a7c8" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/OSMTagFinder/nltk.txt" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/OSMTagFinder/data/config.ini" afterPath="$PROJECT_DIR$/OSMTagFinder/data/config.ini" />
-      <change beforePath="$PROJECT_DIR$/OSMTagFinder/data/indexer/_index_1.toc" afterPath="$PROJECT_DIR$/OSMTagFinder/data/indexer/_index_1.toc" />
-      <change beforePath="$PROJECT_DIR$/OSMTagFinder/data/tagfinder_thesaurus.rdf" afterPath="$PROJECT_DIR$/OSMTagFinder/data/tagfinder_thesaurus.rdf" />
+      <change beforePath="$PROJECT_DIR$/OSMTagFinder/log/serverlog.log" afterPath="$PROJECT_DIR$/OSMTagFinder/log/serverlog.log" />
+      <change beforePath="$PROJECT_DIR$/OSMTagFinder/log/visitorlog.log" afterPath="$PROJECT_DIR$/OSMTagFinder/log/visitorlog.log" />
+      <change beforePath="$PROJECT_DIR$/OSMTagFinder/runtime.txt" afterPath="$PROJECT_DIR$/OSMTagFinder/runtime.txt" />
+      <change beforePath="$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py" afterPath="$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py" />
     </list>
     <ignored path="OSMTagFinder.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,7 +26,7 @@
     <SUITE FILE_PATH="coverage/OSMTagFinder$pipupdate.coverage" NAME="pipupdate Coverage Results" MODIFIED="1462542409997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OSMTagFinder$GoogleTranslator.coverage" NAME="GoogleTranslator Coverage Results" MODIFIED="1496953239783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OSMTagFinder/utilities" />
     <SUITE FILE_PATH="coverage/OSMTagFinder$YandexTranslator.coverage" NAME="YandexTranslator Coverage Results" MODIFIED="1520549346088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OSMTagFinder/utilities" />
-    <SUITE FILE_PATH="coverage/OSMTagFinder$server.coverage" NAME="server Coverage Results" MODIFIED="1496950533717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OSMTagFinder" />
+    <SUITE FILE_PATH="coverage/OSMTagFinder$server.coverage" NAME="server Coverage Results" MODIFIED="1520619771649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OSMTagFinder" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -59,8 +61,20 @@
       <file leaf-file-name="graphsearch.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+            <state relative-caret-position="311">
+              <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+              <folding>
+                <element signature="e#78#87#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="serverlog.log" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OSMTagFinder/log/serverlog.log">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -99,7 +113,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>(Ü</find>
       <find>(Üb</find>
       <find>(Über</find>
       <find>(Überstzung</find>
@@ -129,6 +142,7 @@
       <find>se</find>
       <find>translationHintDE</find>
       <find>translation_hint_de</find>
+      <find>translateText</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\Simon Gwerder\git\GitHub\OSMTagFinder</dir>
@@ -153,7 +167,6 @@
         <option value="$PROJECT_DIR$/OSMTagFinder/thesaurus/mapsemnet.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/server.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/web/views.py" />
-        <option value="$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/thesaurus/filter.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/utilities/PyTranslator.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/utilities/YandexTranslator.py" />
@@ -163,6 +176,7 @@
         <option value="$PROJECT_DIR$/OSMTagFinder/log/visitorlog.log" />
         <option value="$PROJECT_DIR$/OSMTagFinder/updater.py" />
         <option value="$PROJECT_DIR$/OSMTagFinder/data/config.ini" />
+        <option value="$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py" />
       </list>
     </option>
   </component>
@@ -263,13 +277,13 @@
               <item name="OSMTagFinder" type="b2602c69:ProjectViewProjectNode" />
               <item name="OSMTagFinder" type="462c0819:PsiDirectoryNode" />
               <item name="OSMTagFinder" type="462c0819:PsiDirectoryNode" />
-              <item name="search" type="462c0819:PsiDirectoryNode" />
+              <item name="log" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OSMTagFinder" type="b2602c69:ProjectViewProjectNode" />
               <item name="OSMTagFinder" type="462c0819:PsiDirectoryNode" />
               <item name="OSMTagFinder" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -304,7 +318,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.YandexTranslator">
+  <component name="RunManager" selected="Python.server">
     <configuration name="GoogleTranslator" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -607,11 +621,11 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.YandexTranslator" />
-        <item index="1" class="java.lang.String" itemvalue="Python.updater" />
-        <item index="2" class="java.lang.String" itemvalue="Python.PyTranslator" />
-        <item index="3" class="java.lang.String" itemvalue="Python.GoogleTranslator" />
-        <item index="4" class="java.lang.String" itemvalue="Python.server" />
+        <item index="0" class="java.lang.String" itemvalue="Python.server" />
+        <item index="1" class="java.lang.String" itemvalue="Python.YandexTranslator" />
+        <item index="2" class="java.lang.String" itemvalue="Python.updater" />
+        <item index="3" class="java.lang.String" itemvalue="Python.PyTranslator" />
+        <item index="4" class="java.lang.String" itemvalue="Python.GoogleTranslator" />
       </list>
     </recent_temporary>
   </component>
@@ -907,20 +921,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/OSMTagFinder/data/temp/tagfinder_thesaurus_170617.rdf" />
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/log/visitorlog.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSMTagFinder/log/serverlog.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/Python 2.7/Lib/site.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3420">
@@ -1006,11 +1006,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/log/visitorlog.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSMTagFinder/log/serverlog.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/OSMTagFinder/search/graphsearch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
-          <folding />
+        <state relative-caret-position="311">
+          <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+          <folding>
+            <element signature="e#78#87#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
