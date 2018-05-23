@@ -1,120 +1,45 @@
-2018-03-09 19:23:07,404: INFO - Application started
-2018-03-09 19:24:25,581: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:24:25,921: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=dog&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 42
-2018-03-09 19:24:26,009: INFO - IP: ::1, search: dog, lang: de
-2018-03-09 19:24:26,009: INFO - IP: ::1, search: dog, lang: de
-2018-03-09 19:24:26,009: INFO - IP: ::1, search: dog, lang: de
-2018-03-09 19:24:26,009: INFO - IP: ::1, search: dog, lang: de
-2018-03-09 19:24:26,165: INFO - 200 GET /search?query=dog&lang=de (::1) 596.00ms
-2018-03-09 19:24:26,884: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520619866681 (::1) 150.00ms
-2018-03-09 19:24:32,026: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:24:32,365: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=Haus&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 44
-2018-03-09 19:24:32,497: INFO - IP: ::1, search: Haus, lang: de
-2018-03-09 19:24:32,497: INFO - IP: ::1, search: Haus, lang: de
-2018-03-09 19:24:32,497: INFO - IP: ::1, search: Haus, lang: de
-2018-03-09 19:24:32,497: INFO - IP: ::1, search: Haus, lang: de
-2018-03-09 19:24:32,592: INFO - 200 GET /search?query=Haus&lang=de (::1) 570.00ms
-2018-03-09 19:24:34,566: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520619874471 (::1) 3.00ms
-2018-03-09 19:24:42,295: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:24:43,115: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=bank&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 43
-2018-03-09 19:24:43,210: INFO - IP: ::1, search: bank, lang: de
-2018-03-09 19:24:43,210: INFO - IP: ::1, search: bank, lang: de
-2018-03-09 19:24:43,210: INFO - IP: ::1, search: bank, lang: de
-2018-03-09 19:24:43,210: INFO - IP: ::1, search: bank, lang: de
-2018-03-09 19:24:43,243: INFO - 200 GET /search?query=bank&lang=de (::1) 952.00ms
-2018-03-09 19:24:43,680: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520619883612 (::1) 2.00ms
-2018-03-09 19:25:21,295: INFO - 200 GET /suggest?query=gra (::1) 49.00ms
-2018-03-09 19:25:23,562: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:25:23,822: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=strasse&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 43
-2018-03-09 19:25:24,009: INFO - IP: ::1, search: strasse, lang: de
-2018-03-09 19:25:24,009: INFO - IP: ::1, search: strasse, lang: de
-2018-03-09 19:25:24,009: INFO - IP: ::1, search: strasse, lang: de
-2018-03-09 19:25:24,009: INFO - IP: ::1, search: strasse, lang: de
-2018-03-09 19:25:24,292: INFO - 200 GET /search?query=strasse&lang=de (::1) 734.00ms
-2018-03-09 19:25:31,101: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520619930892 (::1) 2.00ms
-2018-03-09 19:25:41,005: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:25:41,756: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=jet&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 42
-2018-03-09 19:25:41,829: INFO - IP: ::1, search: jet, lang: de
-2018-03-09 19:25:41,829: INFO - IP: ::1, search: jet, lang: de
-2018-03-09 19:25:41,829: INFO - IP: ::1, search: jet, lang: de
-2018-03-09 19:25:41,829: INFO - IP: ::1, search: jet, lang: de
-2018-03-09 19:25:41,838: INFO - 200 GET /search?query=jet&lang=de (::1) 837.00ms
-2018-03-09 19:25:41,910: INFO - 200 GET /suggest?query=jet (::1) 70.00ms
-2018-03-09 19:25:42,101: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520619942045 (::1) 2.00ms
-2018-03-09 19:25:51,111: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:25:51,984: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=flugplatz&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 47
-2018-03-09 19:25:52,019: INFO - IP: ::1, search: flugplatz, lang: de
-2018-03-09 19:25:52,019: INFO - IP: ::1, search: flugplatz, lang: de
-2018-03-09 19:25:52,019: INFO - IP: ::1, search: flugplatz, lang: de
-2018-03-09 19:25:52,019: INFO - IP: ::1, search: flugplatz, lang: de
-2018-03-09 19:25:52,042: INFO - 200 GET /search?query=flugplatz&lang=de (::1) 934.00ms
-2018-03-09 19:25:52,345: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520619952270 (::1) 2.00ms
-2018-03-09 19:26:14,309: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:26:14,862: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=strassen&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 46
-2018-03-09 19:26:14,990: INFO - IP: ::1, search: strassen, lang: de
-2018-03-09 19:26:14,990: INFO - IP: ::1, search: strassen, lang: de
-2018-03-09 19:26:14,990: INFO - IP: ::1, search: strassen, lang: de
-2018-03-09 19:26:14,990: INFO - IP: ::1, search: strassen, lang: de
-2018-03-09 19:26:15,167: INFO - 200 GET /search?query=strassen&lang=de (::1) 861.00ms
-2018-03-09 19:26:15,240: INFO - 200 GET /suggest?query=strassen (::1) 72.00ms
-2018-03-09 19:26:18,236: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520619978078 (::1) 1.00ms
-2018-03-09 19:26:23,782: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:26:24,065: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=Personen&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 45
-2018-03-09 19:26:24,253: INFO - IP: ::1, search: Personen, lang: de
-2018-03-09 19:26:24,253: INFO - IP: ::1, search: Personen, lang: de
-2018-03-09 19:26:24,253: INFO - IP: ::1, search: Personen, lang: de
-2018-03-09 19:26:24,253: INFO - IP: ::1, search: Personen, lang: de
-2018-03-09 19:26:24,344: INFO - 200 GET /search?query=Personen&lang=de (::1) 565.00ms
-2018-03-09 19:26:26,378: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520619986273 (::1) 2.00ms
-2018-03-09 19:26:45,788: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:26:46,246: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=Menschen&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 45
-2018-03-09 19:26:46,430: INFO - IP: ::1, search: Menschen, lang: de
-2018-03-09 19:26:46,430: INFO - IP: ::1, search: Menschen, lang: de
-2018-03-09 19:26:46,430: INFO - IP: ::1, search: Menschen, lang: de
-2018-03-09 19:26:46,430: INFO - IP: ::1, search: Menschen, lang: de
-2018-03-09 19:26:46,520: INFO - 200 GET /search?query=Menschen&lang=de (::1) 737.00ms
-2018-03-09 19:26:47,398: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520620007288 (::1) 2.00ms
-2018-03-09 19:26:52,667: INFO - 200 GET /suggest?query=Alter (::1) 62.00ms
-2018-03-09 19:26:54,717: INFO - 200 GET /suggest?query=Altersheime (::1) 81.00ms
-2018-03-09 19:26:54,868: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:26:55,759: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=Altersheime&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 55
-2018-03-09 19:26:55,892: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:26:56,144: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=alters&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 42
-2018-03-09 19:26:56,173: INFO - IP: ::1, search: Altersheime, lang: de
-2018-03-09 19:26:56,173: INFO - IP: ::1, search: Altersheime, lang: de
-2018-03-09 19:26:56,173: INFO - IP: ::1, search: Altersheime, lang: de
-2018-03-09 19:26:56,173: INFO - IP: ::1, search: Altersheime, lang: de
-2018-03-09 19:26:56,207: INFO - 200 GET /search?query=Altersheime&lang=de (::1) 1342.00ms
-2018-03-09 19:26:56,572: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520620016495 (::1) 2.00ms
-2018-03-09 19:27:23,575: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:27:24,071: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=Altersheim&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 56
-2018-03-09 19:27:24,158: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:27:27,407: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=alters&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 42
-2018-03-09 19:27:27,437: INFO - IP: ::1, search: Altersheim, lang: de
-2018-03-09 19:27:27,437: INFO - IP: ::1, search: Altersheim, lang: de
-2018-03-09 19:27:27,437: INFO - IP: ::1, search: Altersheim, lang: de
-2018-03-09 19:27:27,437: INFO - IP: ::1, search: Altersheim, lang: de
-2018-03-09 19:27:27,471: INFO - 200 GET /search?query=Altersheim&lang=de (::1) 3902.00ms
-2018-03-09 19:27:27,568: INFO - 200 GET /suggest?query=Altersheim (::1) 96.00ms
-2018-03-09 19:27:27,796: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520620047713 (::1) 2.00ms
-2018-03-09 19:27:39,101: INFO - 200 GET /suggest?query=PL (::1) 42.00ms
-2018-03-09 19:27:40,809: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:27:41,289: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=Pflegeheim&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 51
-2018-03-09 19:27:41,431: INFO - IP: ::1, search: Pflegeheim, lang: de
-2018-03-09 19:27:41,431: INFO - IP: ::1, search: Pflegeheim, lang: de
-2018-03-09 19:27:41,431: INFO - IP: ::1, search: Pflegeheim, lang: de
-2018-03-09 19:27:41,431: INFO - IP: ::1, search: Pflegeheim, lang: de
-2018-03-09 19:27:41,447: INFO - 200 GET /search?query=Pflegeheim&lang=de (::1) 641.00ms
-2018-03-09 19:27:41,736: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520620061669 (::1) 2.00ms
-2018-03-09 19:27:55,888: INFO - 200 GET /suggest?query=Alter (::1) 65.00ms
-2018-03-09 19:27:57,861: INFO - 200 GET /suggest?query=Alten (::1) 64.00ms
-2018-03-09 19:27:59,240: INFO - 200 GET /suggest?query=Altenheim (::1) 75.00ms
-2018-03-09 19:27:59,624: INFO - Starting new HTTPS connection (1): translate.yandex.net
-2018-03-09 19:28:00,266: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=Altenheim&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 56
-2018-03-09 19:28:00,354: INFO - IP: ::1, search: Altenheim, lang: de
-2018-03-09 19:28:00,354: INFO - IP: ::1, search: Altenheim, lang: de
-2018-03-09 19:28:00,354: INFO - IP: ::1, search: Altenheim, lang: de
-2018-03-09 19:28:00,354: INFO - IP: ::1, search: Altenheim, lang: de
-2018-03-09 19:28:00,361: INFO - 200 GET /search?query=Altenheim&lang=de (::1) 740.00ms
-2018-03-09 19:28:00,572: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520620080515 (::1) 2.00ms
-2018-03-09 19:28:04,657: INFO - 200 GET /static/js/typeahead-noselect.js?_=1520620084598 (::1) 2.00ms
+2018-03-26 19:06:42,838: INFO - Application started
+2018-03-26 19:07:30,164: INFO - 200 GET / (::1) 159.00ms
+2018-03-26 19:07:30,355: INFO - 200 GET /static/css/base.css (::1) 165.00ms
+2018-03-26 19:07:30,358: INFO - 200 GET /static/css/search.css (::1) 2.00ms
+2018-03-26 19:07:30,361: INFO - 200 GET /static/css/lang_de.css (::1) 2.00ms
+2018-03-26 19:07:30,378: INFO - 200 GET /static/js/bootstrap3-typeahead.min.js (::1) 4.00ms
+2018-03-26 19:07:30,381: INFO - 200 GET /static/js/searchfade.js (::1) 3.00ms
+2018-03-26 19:07:30,385: INFO - 200 GET /static/js/typeaheadCorrect.js (::1) 3.00ms
+2018-03-26 19:07:30,391: INFO - 200 GET /static/js/highlight.js (::1) 4.00ms
+2018-03-26 19:07:30,394: INFO - 200 GET /static/js/ajaxSuggest.js (::1) 3.00ms
+2018-03-26 19:07:30,401: INFO - 200 GET /static/img/logo_tf_128.png (::1) 7.00ms
+2018-03-26 19:07:30,404: INFO - 200 GET /static/img/en.png (::1) 2.00ms
+2018-03-26 19:07:30,408: INFO - 200 GET /static/js/typeahead-noselect.js (::1) 3.00ms
+2018-03-26 19:07:30,413: INFO - 200 GET /static/js/language.js (::1) 3.00ms
+2018-03-26 19:07:30,417: INFO - 200 GET /static/js/imagesloaded.pkgd.min.js (::1) 4.00ms
+2018-03-26 19:07:30,421: INFO - 200 GET /static/img/de.png (::1) 3.00ms
+2018-03-26 19:07:30,426: INFO - 200 GET /static/img/logo_hsr.png (::1) 5.00ms
+2018-03-26 19:07:30,434: INFO - 200 GET /static/img/logo_osm.png (::1) 7.00ms
+2018-03-26 19:07:30,447: INFO - 200 GET /static/img/footer-bg.png (::1) 13.00ms
+2018-03-26 19:07:30,463: INFO - 200 GET /static/img/header-bg.png (::1) 16.00ms
+2018-03-26 19:07:30,467: INFO - 200 GET /static/img/logo_taginfo.png (::1) 3.00ms
+2018-03-26 19:07:30,516: INFO - 200 GET /static/js/typeahead-noselect.js?_=1522084050376 (::1) 1.00ms
+2018-03-26 19:07:30,598: INFO - 200 GET /opensearch.xml (::1) 7.00ms
+2018-03-26 19:07:30,605: INFO - 200 GET /static/ico/favicon.ico (::1) 7.00ms
+2018-03-26 19:07:32,273: INFO - Starting new HTTPS connection (1): translate.yandex.net
+2018-03-26 19:07:32,674: DEBUG - "GET /api/v1.5/tr.json/translate?lang=de-en&text=cat&key=trnsl.1.1.20170617T184728Z.e5610c45350ca667.79c5d1922fb47c91e7ae727d6169aa3d5706669b HTTP/1.1" 200 42
+2018-03-26 19:07:32,752: INFO - IP: ::1, search: cat, lang: de
+2018-03-26 19:07:32,752: INFO - IP: ::1, search: cat, lang: de
+2018-03-26 19:07:32,752: INFO - IP: ::1, search: cat, lang: de
+2018-03-26 19:07:32,752: INFO - IP: ::1, search: cat, lang: de
+2018-03-26 19:07:32,796: INFO - 200 GET /search?query=cat&lang=de (::1) 541.00ms
+2018-03-26 19:07:32,872: INFO - 200 GET /static/img/osm_count_all_v2.png (::1) 5.00ms
+2018-03-26 19:07:32,878: INFO - 200 GET /static/img/osm_way_false.png (::1) 4.00ms
+2018-03-26 19:07:32,881: INFO - 200 GET /static/img/osm_relation_false.png (::1) 3.00ms
+2018-03-26 19:07:32,884: INFO - 200 GET /static/img/osm_node_true.png (::1) 2.00ms
+2018-03-26 19:07:32,888: INFO - 200 GET /static/img/k200_150_gray.png (::1) 3.00ms
+2018-03-26 19:07:32,891: INFO - 200 GET /static/img/osm_area_false.png (::1) 3.00ms
+2018-03-26 19:07:32,895: INFO - 200 GET /static/img/osm_node_unspec.png (::1) 3.00ms
+2018-03-26 19:07:32,900: INFO - 200 GET /static/img/osm_relation_unspec.png (::1) 4.00ms
+2018-03-26 19:07:32,904: INFO - 200 GET /static/img/osm_area_unspec.png (::1) 3.00ms
+2018-03-26 19:07:32,907: INFO - 200 GET /static/img/osm_way_unspec.png (::1) 4.00ms
+2018-03-26 19:07:32,911: INFO - 200 GET /static/img/osm_area_true.png (::1) 3.00ms
+2018-03-26 19:07:32,914: INFO - 200 GET /static/img/kv200_150_gray.png (::1) 3.00ms
+2018-03-26 19:07:32,917: INFO - 200 GET /static/img/osm_node_false.png (::1) 2.00ms
+2018-03-26 19:07:33,210: INFO - 200 GET /static/js/typeahead-noselect.js?_=1522084053130 (::1) 2.00ms
