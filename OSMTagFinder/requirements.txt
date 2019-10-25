@@ -33,7 +33,7 @@ pipreqs==0.4.9
 pygeoip==0.3.2
 pyparsing==2.2.0
 rdflib==4.2.2
-requests==2.19.1
+requests==2.20.0
 schedule==0.5.0
 simplegeneric==0.8.1
 singledispatch==3.4.0.3
