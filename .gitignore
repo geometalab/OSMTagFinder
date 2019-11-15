@@ -4,6 +4,9 @@
 !*.log
 !*/
 
+/venv_27
+/venv_37
+
 __pycache__/
 *.py[cod]
 *$py.class
