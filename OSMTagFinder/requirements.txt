@@ -27,7 +27,7 @@ linecache2==1.0.0
 logilab-common==1.4.2
 lxml==4.6.5
 MarkupSafe==1.0
-nltk==3.4.5
+nltk==3.6.5
 ordered-set==3.0.1
 pipreqs==0.4.9
 pygeoip==0.3.2
