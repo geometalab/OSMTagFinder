@@ -102,11 +102,11 @@ class UpdateThesaurus:
         self.rdfGraph.setOSMArea(subject, default)
         self.rdfGraph.setOSMRelation(subject, default)
 
-    def handleDepricated(self, depricatedSubjects):
+    def handleDeprecated(self, deprecatedSubjects):
         current = 1
-        for subject in depricatedSubjects:
+        for subject in deprecatedSubjects:
             self.removeStats(subject)
-            self.bt.printMessage(str(current) + '/' + str(len(depricatedSubjects)) + ' - Resetted stats for depricated subject: ' + subject)
+            self.bt.printMessage(str(current) + '/' + str(len(deprecatedSubjects)) + ' - Resetted stats for deprecated subject: ' + subject)
             current = current + 1
 
     def handleUpdateKeys(self, keysToUpdate):
@@ -137,9 +137,9 @@ class UpdateThesaurus:
 
     def handleKeys(self, keyList):
         keysToUpdate = []
-        depricatedKeys = []
+        deprecatedKeys = []
 
-        # split the keys up into those that need updatecheck, are depricated or new. The new ones will be in 'keyList'
+        # split the keys up into those that need updatecheck, are deprecated or new. The new ones will be in 'keyList'
         rdfKeysSubjects = utils.genToList(self.rdfGraph.getSubByScheme(self.keySchemeName))
         for keySubject in rdfKeysSubjects:
             key = keySubject.split('Key:')[1]
@@ -147,20 +147,20 @@ class UpdateThesaurus:
                 keysToUpdate.append(self.osmWikiBase + 'Key:' + key)
                 keyList.remove(key)
             else:
-                depricatedKeys.append(self.osmWikiBase + 'Key:' + key)
+                deprecatedKeys.append(self.osmWikiBase + 'Key:' + key)
 
         self.bt.printMessage('\nCreating new keys:')
         self.handleNewKeys(keyList)
-        self.bt.printMessage('\nResetting depricated keys:')
-        self.handleDepricated(depricatedKeys)
+        self.bt.printMessage('\nResetting deprecated keys:')
+        self.handleDeprecated(deprecatedKeys)
         self.bt.printMessage('\nUpdate existing keys:')
         self.handleUpdateKeys(keysToUpdate)
 
     def handleTags(self, tagList):
         tagsToUpdate = []
-        depricatedTags = []
+        deprecatedTags = []
 
-        # split the tags up into those that need updatecheck, are depricated or new. The new ones will be in 'tagList'
+        # split the tags up into those that need updatecheck, are deprecated or new. The new ones will be in 'tagList'
         rdfTagsSubjects = utils.genToList(self.rdfGraph.getSubByScheme(self.tagSchemeName))
         for tagSubject in rdfTagsSubjects:
             tag = tagSubject.split('Tag:')[1]
@@ -168,12 +168,12 @@ class UpdateThesaurus:
                 tagsToUpdate.append(self.osmWikiBase + 'Tag:' + tag)
                 tagList.remove(tag)
             else:
-                depricatedTags.append(self.osmWikiBase + 'Tag:' + tag)
+                deprecatedTags.append(self.osmWikiBase + 'Tag:' + tag)
 
         self.bt.printMessage('\nCreating new tags:')
         self.handleNewTags(tagList)
-        self.bt.printMessage('\nResetting depricated tags:')
-        self.handleDepricated(depricatedTags)
+        self.bt.printMessage('\nResetting deprecated tags:')
+        self.handleDeprecated(deprecatedTags)
         self.bt.printMessage('\nUpdate existing tags:')
         self.handleUpdateTags(tagsToUpdate)
 

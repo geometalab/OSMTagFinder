@@ -1,0 +1,957 @@
+2022-08-19 13:40:01,484: INFO - Application started
+2022-08-19 13:40:44,588: INFO - 200 GET / (::1) 84.00ms
+2022-08-19 13:40:44,769: INFO - 304 GET /static/css/base.css (::1) 144.00ms
+2022-08-19 13:40:44,769: INFO - 304 GET /static/css/lang_de.css (::1) 1.00ms
+2022-08-19 13:40:44,772: INFO - 304 GET /static/css/search.css (::1) 1.00ms
+2022-08-19 13:40:44,773: INFO - 200 GET /static/js/bootstrap3-typeahead.min.js (::1) 1.00ms
+2022-08-19 13:40:44,775: INFO - 200 GET /static/js/typeahead-noselect.js (::1) 1.00ms
+2022-08-19 13:40:44,776: INFO - 200 GET /static/js/language.js (::1) 1.00ms
+2022-08-19 13:40:44,776: INFO - 200 GET /static/js/searchfade.js (::1) 1.00ms
+2022-08-19 13:40:44,779: INFO - 200 GET /static/js/typeaheadCorrect.js (::1) 1.00ms
+2022-08-19 13:40:44,785: INFO - 200 GET /static/js/highlight.js (::1) 1.00ms
+2022-08-19 13:40:44,786: INFO - 200 GET /static/js/ajaxSuggest.js (::1) 1.00ms
+2022-08-19 13:40:44,788: INFO - 200 GET /static/js/imagesloaded.pkgd.min.js (::1) 1.00ms
+2022-08-19 13:40:44,789: INFO - 200 GET /static/img/logo_hsr.png (::1) 1.00ms
+2022-08-19 13:40:44,789: INFO - 200 GET /static/img/en.png (::1) 1.00ms
+2022-08-19 13:40:44,792: INFO - 200 GET /static/img/de.png (::1) 1.00ms
+2022-08-19 13:40:44,792: INFO - 200 GET /static/img/logo_tf_128.png (::1) 1.00ms
+2022-08-19 13:40:44,793: INFO - 200 GET /static/img/logo_taginfo.png (::1) 1.00ms
+2022-08-19 13:40:44,795: INFO - 200 GET /static/img/logo_osm.png (::1) 1.00ms
+2022-08-19 13:40:44,816: WARNING - 404 GET /img/header-bg.png (::1) 5.00ms
+2022-08-19 13:40:44,819: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:40:44,839: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909244778 (::1) 1.00ms
+2022-08-19 13:41:10,923: INFO - 200 GET / (::1) 2.00ms
+2022-08-19 13:41:11,009: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:41:11,012: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:41:11,104: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909271073 (::1) 1.00ms
+2022-08-19 13:41:11,161: INFO - 200 GET /static/ico/favicon.ico (::1) 1.00ms
+2022-08-19 13:41:17,217: DEBUG - Max input size: (1980)
+2022-08-19 13:41:17,217: DEBUG - Unquoted text size: (3)
+2022-08-19 13:41:17,217: DEBUG - Quoted text size: (3)
+2022-08-19 13:41:17,217: INFO - Translating word: u'dog'
+2022-08-19 13:41:17,217: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:41:17,217: DEBUG - Searching cache for key: u'dogende'
+2022-08-19 13:41:17,217: INFO - Item not in cache
+2022-08-19 13:41:17,217: INFO - Building the request
+2022-08-19 13:41:17,217: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=20278.424826&q=dog'
+2022-08-19 13:41:17,217: DEBUG - URL size: (131)
+2022-08-19 13:41:17,217: INFO - Attempt no. 1 out of 5
+2022-08-19 13:41:17,217: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:41:17,217: DEBUG - Proxy: None
+2022-08-19 13:41:17,217: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:41:17,217: INFO - Sending request
+2022-08-19 13:41:17,539: INFO - Parsing reply
+2022-08-19 13:41:17,539: DEBUG - Raw data: [[["dog","dog",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]]],null,"de",null,null,null,0.87890625,[],[["en"],null,[0.87890625],["en"]]]
+
+2022-08-19 13:41:17,539: DEBUG - JSON data: [[['dog', 'dog', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]]], None, 'de', None, None, None, 0.87890625, [], [['en'], None, [0.87890625], ['en']]]
+
+2022-08-19 13:41:17,539: DEBUG - Extracted data: {'original_text': 'dog', 'extra': {}, 'has_typo': False, 'romanization': 'dog', 'src_lang': 'de', 'translation': 'dog', 'match': 0.87890625}
+
+2022-08-19 13:41:17,539: DEBUG - Adding new item to cache, key: u'dogende'
+2022-08-19 13:41:17,565: INFO - IP: ::1, search: dog, lang: de
+2022-08-19 13:41:17,565: INFO - IP: ::1, search: dog, lang: de
+2022-08-19 13:41:17,565: INFO - IP: ::1, search: dog, lang: de
+2022-08-19 13:41:17,565: INFO - IP: ::1, search: dog, lang: de
+2022-08-19 13:41:17,582: INFO - 200 GET /search?query=dog&lang=de (::1) 372.00ms
+2022-08-19 13:41:17,638: INFO - 200 GET /static/img/osm_count_all_v2.png (::1) 1.00ms
+2022-08-19 13:41:17,641: INFO - 200 GET /static/img/osm_node_true.png (::1) 1.00ms
+2022-08-19 13:41:17,641: INFO - 200 GET /static/img/osm_node_unspec.png (::1) 1.00ms
+2022-08-19 13:41:17,642: INFO - 200 GET /static/img/osm_way_unspec.png (::1) 1.00ms
+2022-08-19 13:41:17,644: INFO - 200 GET /static/img/osm_area_unspec.png (::1) 2.00ms
+2022-08-19 13:41:17,645: INFO - 200 GET /static/img/osm_relation_unspec.png (::1) 1.00ms
+2022-08-19 13:41:17,647: INFO - 200 GET /static/img/osm_area_true.png (::1) 1.00ms
+2022-08-19 13:41:17,648: INFO - 200 GET /static/img/osm_way_true.png (::1) 1.00ms
+2022-08-19 13:41:17,650: INFO - 200 GET /static/img/osm_relation_false.png (::1) 1.00ms
+2022-08-19 13:41:17,651: INFO - 200 GET /static/img/osm_way_false.png (::1) 1.00ms
+2022-08-19 13:41:17,653: INFO - 200 GET /static/img/osm_area_false.png (::1) 1.00ms
+2022-08-19 13:41:17,654: INFO - 200 GET /static/img/osm_relation_true.png (::1) 1.00ms
+2022-08-19 13:41:17,667: INFO - 304 GET /static/img/header-bg.png (::1) 1.00ms
+2022-08-19 13:41:17,709: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:41:17,987: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909277939 (::1) 2.00ms
+2022-08-19 13:41:28,119: DEBUG - Max input size: (1980)
+2022-08-19 13:41:28,119: DEBUG - Unquoted text size: (3)
+2022-08-19 13:41:28,119: DEBUG - Quoted text size: (3)
+2022-08-19 13:41:28,121: INFO - Translating word: u'pet'
+2022-08-19 13:41:28,121: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:41:28,121: DEBUG - Searching cache for key: u'petende'
+2022-08-19 13:41:28,121: INFO - Item not in cache
+2022-08-19 13:41:28,121: INFO - Building the request
+2022-08-19 13:41:28,121: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=80914.460894&q=pet'
+2022-08-19 13:41:28,121: DEBUG - URL size: (131)
+2022-08-19 13:41:28,121: INFO - Attempt no. 1 out of 5
+2022-08-19 13:41:28,121: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:41:28,121: DEBUG - Proxy: None
+2022-08-19 13:41:28,121: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:41:28,121: INFO - Sending request
+2022-08-19 13:41:28,280: INFO - Parsing reply
+2022-08-19 13:41:28,282: DEBUG - Raw data: [[["pet","pet",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]],[null,null,null,"pɛt"]],null,"de",null,null,null,0.87109375,[],[["en"],null,[0.87109375],["en"]]]
+
+2022-08-19 13:41:28,282: DEBUG - JSON data: [[['pet', 'pet', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]], [None, None, None, 'pɛt']], None, 'de', None, None, None, 0.87109375, [], [['en'], None, [0.87109375], ['en']]]
+
+2022-08-19 13:41:28,282: DEBUG - Extracted data: {'original_text': 'pet', 'extra': {}, 'has_typo': False, 'romanization': 'pɛt', 'src_lang': 'de', 'translation': 'pet', 'match': 0.87109375}
+
+2022-08-19 13:41:28,282: DEBUG - Adding new item to cache, key: u'petende'
+2022-08-19 13:41:28,302: INFO - IP: ::1, search: pet, lang: de
+2022-08-19 13:41:28,302: INFO - IP: ::1, search: pet, lang: de
+2022-08-19 13:41:28,302: INFO - IP: ::1, search: pet, lang: de
+2022-08-19 13:41:28,302: INFO - IP: ::1, search: pet, lang: de
+2022-08-19 13:41:28,319: INFO - 200 GET /search?query=pet&lang=de (::1) 200.00ms
+2022-08-19 13:41:28,372: INFO - 200 GET /static/img/kv200_150_gray.png (::1) 1.00ms
+2022-08-19 13:41:28,375: INFO - 200 GET /static/img/osm_node_false.png (::1) 2.00ms
+2022-08-19 13:41:28,375: INFO - 200 GET /static/img/k200_150_gray.png (::1) 1.00ms
+2022-08-19 13:41:28,441: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:41:28,693: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909288637 (::1) 1.00ms
+2022-08-19 13:41:56,690: DEBUG - Max input size: (1980)
+2022-08-19 13:41:56,690: DEBUG - Unquoted text size: (6)
+2022-08-19 13:41:56,690: DEBUG - Quoted text size: (6)
+2022-08-19 13:41:56,690: INFO - Translating word: u'lagune'
+2022-08-19 13:41:56,690: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:41:56,690: DEBUG - Searching cache for key: u'laguneende'
+2022-08-19 13:41:56,690: INFO - Item not in cache
+2022-08-19 13:41:56,690: INFO - Building the request
+2022-08-19 13:41:56,690: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=925457.535389&q=lagune'
+2022-08-19 13:41:56,690: DEBUG - URL size: (135)
+2022-08-19 13:41:56,690: INFO - Attempt no. 1 out of 5
+2022-08-19 13:41:56,690: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:41:56,690: DEBUG - Proxy: None
+2022-08-19 13:41:56,690: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:41:56,690: INFO - Sending request
+2022-08-19 13:41:57,766: INFO - Parsing reply
+2022-08-19 13:41:57,766: DEBUG - Raw data: [[["lagoon","lagune",null,null,2],[null,null,null,"laˈɡuːnə"]],[["имя существительное",["lagoon"],[["lagoon",["Lagune"],null,0.6981125]],"Lagune",1]],"de",null,null,null,0.73036647,[],[["de"],null,[0.73036647],["de"]]]
+
+2022-08-19 13:41:57,766: DEBUG - JSON data: [[['lagoon', 'lagune', None, None, 2], [None, None, None, 'laˈɡuːnə']], [['имя существительное', ['lagoon'], [['lagoon', ['Lagune'], None, 0.6981125]], 'Lagune', 1]], 'de', None, None, None, 0.73036647, [], [['de'], None, [0.73036647], ['de']]]
+
+2022-08-19 13:41:57,766: DEBUG - Extracted data: {'original_text': 'lagune', 'extra': {'nouns': {'lagoon': ['Lagune']}}, 'has_typo': False, 'romanization': 'laˈɡuːnə', 'src_lang': 'de', 'translation': 'lagoon', 'match': 0.73036647}
+
+2022-08-19 13:41:57,766: DEBUG - Adding new item to cache, key: u'laguneende'
+2022-08-19 13:41:57,776: INFO - IP: ::1, search: lagune, lang: de
+2022-08-19 13:41:57,776: INFO - IP: ::1, search: lagune, lang: de
+2022-08-19 13:41:57,776: INFO - IP: ::1, search: lagune, lang: de
+2022-08-19 13:41:57,776: INFO - IP: ::1, search: lagune, lang: de
+2022-08-19 13:41:57,780: INFO - 200 GET /search?query=lagune&lang=de (::1) 1092.00ms
+2022-08-19 13:41:57,903: WARNING - 404 GET /img/header-bg.png (::1) 1.00ms
+2022-08-19 13:41:57,961: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:41:57,973: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909317955 (::1) 1.00ms
+2022-08-19 13:42:12,673: DEBUG - Max input size: (1980)
+2022-08-19 13:42:12,673: DEBUG - Unquoted text size: (7)
+2022-08-19 13:42:12,673: DEBUG - Quoted text size: (7)
+2022-08-19 13:42:12,673: INFO - Translating word: u'Koralle'
+2022-08-19 13:42:12,673: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:42:12,673: DEBUG - Searching cache for key: u'Koralleende'
+2022-08-19 13:42:12,673: INFO - Item not in cache
+2022-08-19 13:42:12,673: INFO - Building the request
+2022-08-19 13:42:12,673: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=66725.471273&q=Koralle'
+2022-08-19 13:42:12,673: DEBUG - URL size: (135)
+2022-08-19 13:42:12,673: INFO - Attempt no. 1 out of 5
+2022-08-19 13:42:12,673: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:42:12,673: DEBUG - Proxy: None
+2022-08-19 13:42:12,673: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:42:12,674: INFO - Sending request
+2022-08-19 13:42:14,105: INFO - Parsing reply
+2022-08-19 13:42:14,105: DEBUG - Raw data: [[["coral","Koralle",null,null,2],[null,null,null,"koˈralə"]],[["имя существительное",["coral"],[["coral",["Koralle"],null,0.7910651]],"Koralle",1]],"de",null,null,null,0.953125,[],[["de"],null,[0.953125],["de"]]]
+
+2022-08-19 13:42:14,105: DEBUG - JSON data: [[['coral', 'Koralle', None, None, 2], [None, None, None, 'koˈralə']], [['имя существительное', ['coral'], [['coral', ['Koralle'], None, 0.7910651]], 'Koralle', 1]], 'de', None, None, None, 0.953125, [], [['de'], None, [0.953125], ['de']]]
+
+2022-08-19 13:42:14,105: DEBUG - Extracted data: {'original_text': 'Koralle', 'extra': {'nouns': {'coral': ['Koralle']}}, 'has_typo': False, 'romanization': 'koˈralə', 'src_lang': 'de', 'translation': 'coral', 'match': 0.953125}
+
+2022-08-19 13:42:14,105: DEBUG - Adding new item to cache, key: u'Koralleende'
+2022-08-19 13:42:14,115: INFO - IP: ::1, search: Koralle, lang: de
+2022-08-19 13:42:14,115: INFO - IP: ::1, search: Koralle, lang: de
+2022-08-19 13:42:14,115: INFO - IP: ::1, search: Koralle, lang: de
+2022-08-19 13:42:14,115: INFO - IP: ::1, search: Koralle, lang: de
+2022-08-19 13:42:14,121: INFO - 200 GET /search?query=Koralle&lang=de (::1) 1450.00ms
+2022-08-19 13:42:14,161: INFO - 200 GET /suggest?query=Koralle (::1) 40.00ms
+2022-08-19 13:42:14,210: WARNING - 404 GET /img/header-bg.png (::1) 1.00ms
+2022-08-19 13:42:14,292: WARNING - 404 GET /img/footer-bg.png (::1) 1.00ms
+2022-08-19 13:42:14,312: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909334291 (::1) 1.00ms
+2022-08-19 13:42:25,256: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909345236 (::1) 1.00ms
+2022-08-19 13:42:31,510: DEBUG - Max input size: (1980)
+2022-08-19 13:42:31,510: DEBUG - Unquoted text size: (13)
+2022-08-19 13:42:31,510: DEBUG - Quoted text size: (13)
+2022-08-19 13:42:31,512: INFO - Translating word: u'Korallenriffe'
+2022-08-19 13:42:31,512: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:42:31,512: DEBUG - Searching cache for key: u'Korallenriffeende'
+2022-08-19 13:42:31,512: INFO - Item not in cache
+2022-08-19 13:42:31,512: INFO - Building the request
+2022-08-19 13:42:31,512: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=574114.980718&q=Korallenriffe'
+2022-08-19 13:42:31,512: DEBUG - URL size: (142)
+2022-08-19 13:42:31,512: INFO - Attempt no. 1 out of 5
+2022-08-19 13:42:31,512: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:42:31,512: DEBUG - Proxy: None
+2022-08-19 13:42:31,512: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:42:31,513: INFO - Sending request
+2022-08-19 13:42:32,286: INFO - Parsing reply
+2022-08-19 13:42:32,288: DEBUG - Raw data: [[["Coral reefs","Korallenriffe",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]],[null,null,null,"koˈralənrɪf"]],[["имя существительное",["coralreef"],[["coralreef",["Korallenriff"],null,0.0011708796]],"Korallenriff",1]],"de",null,null,null,1,[],[["de"],null,[1],["de"]]]
+
+2022-08-19 13:42:32,288: DEBUG - JSON data: [[['Coral reefs', 'Korallenriffe', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]], [None, None, None, 'koˈralənrɪf']], [['имя существительное', ['coralreef'], [['coralreef', ['Korallenriff'], None, 0.0011708796]], 'Korallenriff', 1]], 'de', None, None, None, 1, [], [['de'], None, [1], ['de']]]
+
+2022-08-19 13:42:32,288: DEBUG - Extracted data: {'original_text': 'Korallenriffe', 'extra': {'nouns': {'coralreef': ['Korallenriff']}}, 'has_typo': False, 'romanization': 'koˈralənrɪf', 'src_lang': 'de', 'translation': 'Coral reefs', 'match': 1}
+
+2022-08-19 13:42:32,288: DEBUG - Adding new item to cache, key: u'Korallenriffeende'
+2022-08-19 13:42:32,298: INFO - IP: ::1, search: Korallenriffe, lang: de
+2022-08-19 13:42:32,298: INFO - IP: ::1, search: Korallenriffe, lang: de
+2022-08-19 13:42:32,298: INFO - IP: ::1, search: Korallenriffe, lang: de
+2022-08-19 13:42:32,298: INFO - IP: ::1, search: Korallenriffe, lang: de
+2022-08-19 13:42:32,301: INFO - 200 GET /search?query=Korallenriffe&lang=de (::1) 791.00ms
+2022-08-19 13:42:32,421: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:42:32,470: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:42:32,615: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909352469 (::1) 1.00ms
+2022-08-19 13:42:36,984: DEBUG - Max input size: (1980)
+2022-08-19 13:42:36,984: DEBUG - Unquoted text size: (7)
+2022-08-19 13:42:36,984: DEBUG - Quoted text size: (7)
+2022-08-19 13:42:36,984: INFO - Translating word: u'Koralle'
+2022-08-19 13:42:36,984: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:42:36,984: DEBUG - Searching cache for key: u'Koralleende'
+2022-08-19 13:42:36,984: INFO - Item found in cache
+2022-08-19 13:42:36,996: INFO - IP: ::1, search: Koralle, lang: de
+2022-08-19 13:42:36,996: INFO - IP: ::1, search: Koralle, lang: de
+2022-08-19 13:42:36,996: INFO - IP: ::1, search: Koralle, lang: de
+2022-08-19 13:42:36,996: INFO - IP: ::1, search: Koralle, lang: de
+2022-08-19 13:42:37,000: INFO - 200 GET /search?query=Koralle&lang=de (::1) 17.00ms
+2022-08-19 13:42:37,118: WARNING - 404 GET /img/header-bg.png (::1) 1.00ms
+2022-08-19 13:42:37,177: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:42:37,338: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909357172 (::1) 1.00ms
+2022-08-19 13:43:08,927: DEBUG - Max input size: (1980)
+2022-08-19 13:43:08,927: DEBUG - Unquoted text size: (3)
+2022-08-19 13:43:08,927: DEBUG - Quoted text size: (3)
+2022-08-19 13:43:08,927: INFO - Translating word: u'See'
+2022-08-19 13:43:08,927: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:43:08,927: DEBUG - Searching cache for key: u'Seeende'
+2022-08-19 13:43:08,927: INFO - Item not in cache
+2022-08-19 13:43:08,927: INFO - Building the request
+2022-08-19 13:43:08,927: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=336998.200746&q=See'
+2022-08-19 13:43:08,927: DEBUG - URL size: (132)
+2022-08-19 13:43:08,927: INFO - Attempt no. 1 out of 5
+2022-08-19 13:43:08,927: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:43:08,927: DEBUG - Proxy: None
+2022-08-19 13:43:08,927: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:43:08,927: INFO - Sending request
+2022-08-19 13:43:09,091: INFO - Parsing reply
+2022-08-19 13:43:09,091: DEBUG - Raw data: [[["lake","See",null,null,2],[null,null,null,"zeː"]],[["имя существительное",["lake","sea","pond","loch","mere"],[["lake",["See","Karminrot","Karmesinrot"],null,0.3736727],["sea",["Meer","See","Seegang"],null,0.082085],["pond",["Teich","Weiher","See","Becken","Tümpel","Bassin"],null,0.0012463948],["loch",["See","Bucht","Meeresarm"],null,4.5852305E-4],["mere",["See"],null,1.5207072E-5]],"See",1]],"de",null,null,null,0.9296875,[],[["en"],null,[0.9296875],["en"]]]
+
+2022-08-19 13:43:09,091: DEBUG - JSON data: [[['lake', 'See', None, None, 2], [None, None, None, 'zeː']], [['имя существительное', ['lake', 'sea', 'pond', 'loch', 'mere'], [['lake', ['See', 'Karminrot', 'Karmesinrot'], None, 0.3736727], ['sea', ['Meer', 'See', 'Seegang'], None, 0.082085], ['pond', ['Teich', 'Weiher', 'See', 'Becken', 'Tümpel', 'Bassin'], None, 0.0012463948], ['loch', ['See', 'Bucht', 'Meeresarm'], None, 0.00045852305], ['mere', ['See'], None, 1.5207072e-05]], 'See', 1]], 'de', None, None, None, 0.9296875, [], [['en'], None, [0.9296875], ['en']]]
+
+2022-08-19 13:43:09,092: DEBUG - Extracted data: {'original_text': 'See', 'extra': {'nouns': {'pond': ['Teich', 'Weiher', 'See', 'Becken', 'Tümpel', 'Bassin'], 'loch': ['See', 'Bucht', 'Meeresarm'], 'lake': ['See', 'Karminrot', 'Karmesinrot'], 'sea': ['Meer', 'See', 'Seegang'], 'mere': ['See']}}, 'has_typo': False, 'romanization': 'zeː', 'src_lang': 'de', 'translation': 'lake', 'match': 0.9296875}
+
+2022-08-19 13:43:09,092: DEBUG - Adding new item to cache, key: u'Seeende'
+2022-08-19 13:43:09,140: INFO - IP: ::1, search: See, lang: de
+2022-08-19 13:43:09,140: INFO - IP: ::1, search: See, lang: de
+2022-08-19 13:43:09,140: INFO - IP: ::1, search: See, lang: de
+2022-08-19 13:43:09,140: INFO - IP: ::1, search: See, lang: de
+2022-08-19 13:43:09,194: INFO - 200 GET /search?query=See&lang=de (::1) 270.00ms
+2022-08-19 13:43:09,336: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:43:10,075: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909389926 (::1) 1.00ms
+2022-08-19 13:43:25,171: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909405152 (::1) 1.00ms
+2022-08-19 13:45:50,604: DEBUG - Max input size: (1980)
+2022-08-19 13:45:50,605: DEBUG - Unquoted text size: (9)
+2022-08-19 13:45:50,605: DEBUG - Quoted text size: (9)
+2022-08-19 13:45:50,605: INFO - Translating word: u'Irrgarten'
+2022-08-19 13:45:50,605: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:45:50,605: DEBUG - Searching cache for key: u'Irrgartenende'
+2022-08-19 13:45:50,605: INFO - Item not in cache
+2022-08-19 13:45:50,605: INFO - Building the request
+2022-08-19 13:45:50,605: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=175080.303012&q=Irrgarten'
+2022-08-19 13:45:50,605: DEBUG - URL size: (138)
+2022-08-19 13:45:50,605: INFO - Attempt no. 1 out of 5
+2022-08-19 13:45:50,605: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:45:50,605: DEBUG - Proxy: None
+2022-08-19 13:45:50,605: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:45:50,605: INFO - Sending request
+2022-08-19 13:45:51,605: INFO - Parsing reply
+2022-08-19 13:45:51,605: DEBUG - Raw data: [[["maze","Irrgarten",null,null,2],[null,null,null,"ˈɪrɡartn̩"]],[["имя существительное",["maze","labyrinth"],[["maze",["Labyrinth","Irrgarten","Gewirr","Dickicht"],null,0.40403652],["labyrinth",["Labyrinth","Irrgarten"],null,0.09157243]],"Irrgarten",1]],"de",null,null,null,0.9813656,[],[["de"],null,[0.9813656],["de"]]]
+
+2022-08-19 13:45:51,605: DEBUG - JSON data: [[['maze', 'Irrgarten', None, None, 2], [None, None, None, 'ˈɪrɡartn̩']], [['имя существительное', ['maze', 'labyrinth'], [['maze', ['Labyrinth', 'Irrgarten', 'Gewirr', 'Dickicht'], None, 0.40403652], ['labyrinth', ['Labyrinth', 'Irrgarten'], None, 0.09157243]], 'Irrgarten', 1]], 'de', None, None, None, 0.9813656, [], [['de'], None, [0.9813656], ['de']]]
+
+2022-08-19 13:45:51,605: DEBUG - Extracted data: {'original_text': 'Irrgarten', 'extra': {'nouns': {'labyrinth': ['Labyrinth', 'Irrgarten'], 'maze': ['Labyrinth', 'Irrgarten', 'Gewirr', 'Dickicht']}}, 'has_typo': False, 'romanization': 'ˈɪrɡartn̩', 'src_lang': 'de', 'translation': 'maze', 'match': 0.9813656}
+
+2022-08-19 13:45:51,605: DEBUG - Adding new item to cache, key: u'Irrgartenende'
+2022-08-19 13:45:51,615: INFO - IP: ::1, search: Irrgarten, lang: de
+2022-08-19 13:45:51,615: INFO - IP: ::1, search: Irrgarten, lang: de
+2022-08-19 13:45:51,615: INFO - IP: ::1, search: Irrgarten, lang: de
+2022-08-19 13:45:51,615: INFO - IP: ::1, search: Irrgarten, lang: de
+2022-08-19 13:45:51,618: INFO - 200 GET /search?query=Irrgarten&lang=de (::1) 1015.00ms
+2022-08-19 13:45:51,664: INFO - 200 GET /suggest?query=Irrgarten (::1) 46.00ms
+2022-08-19 13:45:51,740: WARNING - 404 GET /img/header-bg.png (::1) 1.00ms
+2022-08-19 13:45:51,795: WARNING - 404 GET /img/footer-bg.png (::1) 1.00ms
+2022-08-19 13:45:51,832: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909551789 (::1) 1.00ms
+2022-08-19 13:46:01,104: DEBUG - Max input size: (1980)
+2022-08-19 13:46:01,104: DEBUG - Unquoted text size: (4)
+2022-08-19 13:46:01,104: DEBUG - Quoted text size: (4)
+2022-08-19 13:46:01,104: INFO - Translating word: u'maze'
+2022-08-19 13:46:01,104: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:46:01,104: DEBUG - Searching cache for key: u'mazeende'
+2022-08-19 13:46:01,104: INFO - Item not in cache
+2022-08-19 13:46:01,104: INFO - Building the request
+2022-08-19 13:46:01,105: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=290343.154219&q=maze'
+2022-08-19 13:46:01,105: DEBUG - URL size: (133)
+2022-08-19 13:46:01,105: INFO - Attempt no. 1 out of 5
+2022-08-19 13:46:01,105: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:46:01,105: DEBUG - Proxy: None
+2022-08-19 13:46:01,105: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:46:01,105: INFO - Sending request
+2022-08-19 13:46:01,592: INFO - Parsing reply
+2022-08-19 13:46:01,592: DEBUG - Raw data: [[["maze","maze",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]]],null,"de",null,null,null,0.75,[],[["en","rw"],null,[0.75,0.25],["en","rw"]]]
+
+2022-08-19 13:46:01,592: DEBUG - JSON data: [[['maze', 'maze', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]]], None, 'de', None, None, None, 0.75, [], [['en', 'rw'], None, [0.75, 0.25], ['en', 'rw']]]
+
+2022-08-19 13:46:01,592: DEBUG - Extracted data: {'original_text': 'maze', 'extra': {}, 'has_typo': False, 'romanization': 'maze', 'src_lang': 'de', 'translation': 'maze', 'match': 0.75}
+
+2022-08-19 13:46:01,592: DEBUG - Adding new item to cache, key: u'mazeende'
+2022-08-19 13:46:01,601: INFO - IP: ::1, search: maze, lang: de
+2022-08-19 13:46:01,601: INFO - IP: ::1, search: maze, lang: de
+2022-08-19 13:46:01,601: INFO - IP: ::1, search: maze, lang: de
+2022-08-19 13:46:01,601: INFO - IP: ::1, search: maze, lang: de
+2022-08-19 13:46:01,605: INFO - 200 GET /search?query=maze&lang=de (::1) 502.00ms
+2022-08-19 13:46:01,720: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:46:01,769: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:46:01,802: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909561773 (::1) 1.00ms
+2022-08-19 13:46:10,220: INFO - 200 GET /suggest?query=Irrgarte (::1) 38.00ms
+2022-08-19 13:46:11,494: INFO - 200 GET /suggest?query=Irrgarten (::1) 38.00ms
+2022-08-19 13:46:14,486: DEBUG - Max input size: (1980)
+2022-08-19 13:46:14,486: DEBUG - Unquoted text size: (9)
+2022-08-19 13:46:14,486: DEBUG - Quoted text size: (9)
+2022-08-19 13:46:14,486: INFO - Translating word: u'irrgarten'
+2022-08-19 13:46:14,486: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:46:14,486: DEBUG - Searching cache for key: u'irrgartenende'
+2022-08-19 13:46:14,486: INFO - Item not in cache
+2022-08-19 13:46:14,486: INFO - Building the request
+2022-08-19 13:46:14,486: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=962245.563849&q=irrgarten'
+2022-08-19 13:46:14,486: DEBUG - URL size: (138)
+2022-08-19 13:46:14,486: INFO - Attempt no. 1 out of 5
+2022-08-19 13:46:14,486: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:46:14,486: DEBUG - Proxy: None
+2022-08-19 13:46:14,486: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:46:14,486: INFO - Sending request
+2022-08-19 13:46:15,802: INFO - Parsing reply
+2022-08-19 13:46:15,802: DEBUG - Raw data: [[["maze","irrgarten",null,null,2],[null,null,null,"ˈɪrɡartn̩"]],[["имя существительное",["maze","labyrinth"],[["maze",["Labyrinth","Irrgarten","Gewirr","Dickicht"],null,0.40403652],["labyrinth",["Labyrinth","Irrgarten"],null,0.09157243]],"Irrgarten",1]],"de",null,null,null,0.9813656,[],[["de"],null,[0.9813656],["de"]]]
+
+2022-08-19 13:46:15,802: DEBUG - JSON data: [[['maze', 'irrgarten', None, None, 2], [None, None, None, 'ˈɪrɡartn̩']], [['имя существительное', ['maze', 'labyrinth'], [['maze', ['Labyrinth', 'Irrgarten', 'Gewirr', 'Dickicht'], None, 0.40403652], ['labyrinth', ['Labyrinth', 'Irrgarten'], None, 0.09157243]], 'Irrgarten', 1]], 'de', None, None, None, 0.9813656, [], [['de'], None, [0.9813656], ['de']]]
+
+2022-08-19 13:46:15,802: DEBUG - Extracted data: {'original_text': 'irrgarten', 'extra': {'nouns': {'labyrinth': ['Labyrinth', 'Irrgarten'], 'maze': ['Labyrinth', 'Irrgarten', 'Gewirr', 'Dickicht']}}, 'has_typo': False, 'romanization': 'ˈɪrɡartn̩', 'src_lang': 'de', 'translation': 'maze', 'match': 0.9813656}
+
+2022-08-19 13:46:15,802: DEBUG - Adding new item to cache, key: u'irrgartenende'
+2022-08-19 13:46:15,812: INFO - IP: ::1, search: irrgarten, lang: de
+2022-08-19 13:46:15,812: INFO - IP: ::1, search: irrgarten, lang: de
+2022-08-19 13:46:15,812: INFO - IP: ::1, search: irrgarten, lang: de
+2022-08-19 13:46:15,812: INFO - IP: ::1, search: irrgarten, lang: de
+2022-08-19 13:46:15,815: INFO - 200 GET /search?query=irrgarten&lang=de (::1) 1331.00ms
+2022-08-19 13:46:15,930: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:46:15,980: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:46:16,010: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909575978 (::1) 1.00ms
+2022-08-19 13:46:20,414: INFO - 200 GET /suggest?query=irgarten (::1) 40.00ms
+2022-08-19 13:46:20,884: DEBUG - Max input size: (1980)
+2022-08-19 13:46:20,884: DEBUG - Unquoted text size: (8)
+2022-08-19 13:46:20,884: DEBUG - Quoted text size: (8)
+2022-08-19 13:46:20,884: INFO - Translating word: u'irgarten'
+2022-08-19 13:46:20,884: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:46:20,884: DEBUG - Searching cache for key: u'irgartenende'
+2022-08-19 13:46:20,884: INFO - Item not in cache
+2022-08-19 13:46:20,884: INFO - Building the request
+2022-08-19 13:46:20,884: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=967315.587487&q=irgarten'
+2022-08-19 13:46:20,884: DEBUG - URL size: (137)
+2022-08-19 13:46:20,884: INFO - Attempt no. 1 out of 5
+2022-08-19 13:46:20,884: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:46:20,884: DEBUG - Proxy: None
+2022-08-19 13:46:20,884: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:46:20,884: INFO - Sending request
+2022-08-19 13:46:21,849: INFO - Parsing reply
+2022-08-19 13:46:21,849: DEBUG - Raw data: [[["IRgarten","irgarten",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]]],null,"de",null,null,null,0.75153184,["\u003cb\u003e\u003ci\u003eirrgarten\u003c/i\u003e\u003c/b\u003e","irrgarten",[1],null,null,false],[["de"],null,[0.75153184],["de"]]]
+
+2022-08-19 13:46:21,849: DEBUG - JSON data: [[['IRgarten', 'irgarten', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]]], None, 'de', None, None, None, 0.75153184, ['<b><i>irrgarten</i></b>', 'irrgarten', [1], None, None, False], [['de'], None, [0.75153184], ['de']]]
+
+2022-08-19 13:46:21,849: DEBUG - Extracted data: {'original_text': 'irgarten', 'extra': {}, 'has_typo': True, 'romanization': 'irgarten', 'src_lang': 'de', 'translation': 'IRgarten', 'match': 0.75153184}
+
+2022-08-19 13:46:21,849: DEBUG - Adding new item to cache, key: u'irgartenende'
+2022-08-19 13:46:21,858: INFO - IP: ::1, search: irgarten, lang: de
+2022-08-19 13:46:21,858: INFO - IP: ::1, search: irgarten, lang: de
+2022-08-19 13:46:21,858: INFO - IP: ::1, search: irgarten, lang: de
+2022-08-19 13:46:21,858: INFO - IP: ::1, search: irgarten, lang: de
+2022-08-19 13:46:21,858: INFO - 200 GET /search?query=irgarten&lang=de (::1) 977.00ms
+2022-08-19 13:46:21,977: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:46:21,980: WARNING - 404 GET /img/footer-bg.png (::1) 1.00ms
+2022-08-19 13:46:22,026: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909582014 (::1) 1.00ms
+2022-08-19 13:46:22,957: INFO - 200 GET /suggest?query=irgarten (::1) 38.00ms
+2022-08-19 13:46:25,007: DEBUG - Max input size: (1980)
+2022-08-19 13:46:25,007: DEBUG - Unquoted text size: (9)
+2022-08-19 13:46:25,007: DEBUG - Quoted text size: (9)
+2022-08-19 13:46:25,007: INFO - Translating word: u'irrgarten'
+2022-08-19 13:46:25,009: DEBUG - src_lang: 'auto' dst_lang: 'en'
+2022-08-19 13:46:25,009: DEBUG - Searching cache for key: u'irrgartenenauto'
+2022-08-19 13:46:25,009: INFO - Item not in cache
+2022-08-19 13:46:25,009: INFO - Building the request
+2022-08-19 13:46:25,009: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=auto&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=962245.563849&q=irrgarten'
+2022-08-19 13:46:25,009: DEBUG - URL size: (140)
+2022-08-19 13:46:25,009: INFO - Attempt no. 1 out of 5
+2022-08-19 13:46:25,009: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:46:25,009: DEBUG - Proxy: None
+2022-08-19 13:46:25,009: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:46:25,009: INFO - Sending request
+2022-08-19 13:46:25,171: INFO - Parsing reply
+2022-08-19 13:46:25,171: DEBUG - Raw data: [[["maze","irrgarten",null,null,2],[null,null,null,"ˈɪrɡartn̩"]],[["имя существительное",["maze","labyrinth"],[["maze",["Labyrinth","Irrgarten","Gewirr","Dickicht"],null,0.40403652],["labyrinth",["Labyrinth","Irrgarten"],null,0.09157243]],"Irrgarten",1]],"de",null,null,null,0.9813656,[],[["de"],null,[0.9813656],["de"]]]
+
+2022-08-19 13:46:25,171: DEBUG - JSON data: [[['maze', 'irrgarten', None, None, 2], [None, None, None, 'ˈɪrɡartn̩']], [['имя существительное', ['maze', 'labyrinth'], [['maze', ['Labyrinth', 'Irrgarten', 'Gewirr', 'Dickicht'], None, 0.40403652], ['labyrinth', ['Labyrinth', 'Irrgarten'], None, 0.09157243]], 'Irrgarten', 1]], 'de', None, None, None, 0.9813656, [], [['de'], None, [0.9813656], ['de']]]
+
+2022-08-19 13:46:25,171: DEBUG - Extracted data: {'original_text': 'irrgarten', 'extra': {'nouns': {'labyrinth': ['Labyrinth', 'Irrgarten'], 'maze': ['Labyrinth', 'Irrgarten', 'Gewirr', 'Dickicht']}}, 'has_typo': False, 'romanization': 'ˈɪrɡartn̩', 'src_lang': 'de', 'translation': 'maze', 'match': 0.9813656}
+
+2022-08-19 13:46:25,171: DEBUG - Adding new item to cache, key: u'irrgartenenauto'
+2022-08-19 13:46:25,180: INFO - IP: ::1, search: irrgarten, lang: 
+2022-08-19 13:46:25,180: INFO - IP: ::1, search: irrgarten, lang: 
+2022-08-19 13:46:25,180: INFO - IP: ::1, search: irrgarten, lang: 
+2022-08-19 13:46:25,180: INFO - IP: ::1, search: irrgarten, lang: 
+2022-08-19 13:46:25,184: INFO - 200 GET /search?query=irrgarten (::1) 178.00ms
+2022-08-19 13:46:25,303: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:46:25,355: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:46:25,367: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909585349 (::1) 1.00ms
+2022-08-19 13:46:28,698: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909588689 (::1) 1.00ms
+2022-08-19 13:46:29,736: INFO - 200 GET /suggest?query=irgarten (::1) 39.00ms
+2022-08-19 13:46:32,753: DEBUG - Max input size: (1980)
+2022-08-19 13:46:32,753: DEBUG - Unquoted text size: (10)
+2022-08-19 13:46:32,753: DEBUG - Quoted text size: (10)
+2022-08-19 13:46:32,753: INFO - Translating word: u'tiergarten'
+2022-08-19 13:46:32,753: DEBUG - src_lang: 'auto' dst_lang: 'en'
+2022-08-19 13:46:32,753: DEBUG - Searching cache for key: u'tiergartenenauto'
+2022-08-19 13:46:32,753: INFO - Item not in cache
+2022-08-19 13:46:32,753: INFO - Building the request
+2022-08-19 13:46:32,753: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=auto&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=168442.304566&q=tiergarten'
+2022-08-19 13:46:32,753: DEBUG - URL size: (141)
+2022-08-19 13:46:32,753: INFO - Attempt no. 1 out of 5
+2022-08-19 13:46:32,753: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:46:32,753: DEBUG - Proxy: None
+2022-08-19 13:46:32,753: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:46:32,753: INFO - Sending request
+2022-08-19 13:46:33,681: INFO - Parsing reply
+2022-08-19 13:46:33,683: DEBUG - Raw data: [[["zoo","tiergarten",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]],[null,null,null,"Tiérgarten"]],[["имя существительное",["zoo"],[["zoo",["Zoo","Tierpark","Tiergarten"]]],"Tiergarten",1]],"de",null,null,null,0.89502823,[],[["de"],null,[0.89502823],["de"]]]
+
+2022-08-19 13:46:33,683: DEBUG - JSON data: [[['zoo', 'tiergarten', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]], [None, None, None, 'Tiérgarten']], [['имя существительное', ['zoo'], [['zoo', ['Zoo', 'Tierpark', 'Tiergarten']]], 'Tiergarten', 1]], 'de', None, None, None, 0.89502823, [], [['de'], None, [0.89502823], ['de']]]
+
+2022-08-19 13:46:33,683: DEBUG - Extracted data: {'original_text': 'tiergarten', 'extra': {'nouns': {'zoo': ['Zoo', 'Tierpark', 'Tiergarten']}}, 'has_typo': False, 'romanization': 'Tiérgarten', 'src_lang': 'de', 'translation': 'zoo', 'match': 0.89502823}
+
+2022-08-19 13:46:33,683: DEBUG - Adding new item to cache, key: u'tiergartenenauto'
+2022-08-19 13:46:33,706: INFO - IP: ::1, search: tiergarten, lang: 
+2022-08-19 13:46:33,706: INFO - IP: ::1, search: tiergarten, lang: 
+2022-08-19 13:46:33,706: INFO - IP: ::1, search: tiergarten, lang: 
+2022-08-19 13:46:33,706: INFO - IP: ::1, search: tiergarten, lang: 
+2022-08-19 13:46:33,724: INFO - 200 GET /search?query=tiergarten (::1) 973.00ms
+2022-08-19 13:46:33,726: DEBUG - Max input size: (1980)
+2022-08-19 13:46:33,727: DEBUG - Unquoted text size: (10)
+2022-08-19 13:46:33,727: DEBUG - Quoted text size: (10)
+2022-08-19 13:46:33,727: INFO - Translating word: u'biergarten'
+2022-08-19 13:46:33,727: DEBUG - src_lang: 'auto' dst_lang: 'en'
+2022-08-19 13:46:33,727: DEBUG - Searching cache for key: u'biergartenenauto'
+2022-08-19 13:46:33,727: INFO - Item not in cache
+2022-08-19 13:46:33,727: INFO - Building the request
+2022-08-19 13:46:33,727: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=auto&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=599253.987289&q=biergarten'
+2022-08-19 13:46:33,727: DEBUG - URL size: (141)
+2022-08-19 13:46:33,727: INFO - Attempt no. 1 out of 5
+2022-08-19 13:46:33,727: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:46:33,727: DEBUG - Proxy: None
+2022-08-19 13:46:33,729: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:46:33,729: INFO - Sending request
+2022-08-19 13:46:34,890: INFO - Parsing reply
+2022-08-19 13:46:34,890: DEBUG - Raw data: [[["beer garden","biergarten",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]],[null,null,null,"Biérgarten"]],null,"de",null,null,null,0.9609375,[],[["de"],null,[0.9609375],["de"]]]
+
+2022-08-19 13:46:34,890: DEBUG - JSON data: [[['beer garden', 'biergarten', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]], [None, None, None, 'Biérgarten']], None, 'de', None, None, None, 0.9609375, [], [['de'], None, [0.9609375], ['de']]]
+
+2022-08-19 13:46:34,890: DEBUG - Extracted data: {'original_text': 'biergarten', 'extra': {}, 'has_typo': False, 'romanization': 'Biérgarten', 'src_lang': 'de', 'translation': 'beer garden', 'match': 0.9609375}
+
+2022-08-19 13:46:34,890: DEBUG - Adding new item to cache, key: u'biergartenenauto'
+2022-08-19 13:46:34,901: INFO - IP: ::1, search: biergarten, lang: 
+2022-08-19 13:46:34,901: INFO - IP: ::1, search: biergarten, lang: 
+2022-08-19 13:46:34,901: INFO - IP: ::1, search: biergarten, lang: 
+2022-08-19 13:46:34,901: INFO - IP: ::1, search: biergarten, lang: 
+2022-08-19 13:46:34,904: INFO - 200 GET /search?query=biergarten (::1) 1179.00ms
+2022-08-19 13:46:34,907: INFO - 304 GET /static/img/footer-bg.png (::1) 1.00ms
+2022-08-19 13:46:34,907: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909593867 (::1) 1.00ms
+2022-08-19 13:46:35,019: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:46:35,085: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:46:35,098: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909595069 (::1) 1.00ms
+2022-08-19 13:46:42,410: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:47:15,440: DEBUG - Max input size: (1980)
+2022-08-19 13:47:15,440: DEBUG - Unquoted text size: (5)
+2022-08-19 13:47:15,440: DEBUG - Quoted text size: (5)
+2022-08-19 13:47:15,440: INFO - Translating word: u'hamam'
+2022-08-19 13:47:15,440: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:47:15,440: DEBUG - Searching cache for key: u'hamamende'
+2022-08-19 13:47:15,440: INFO - Item not in cache
+2022-08-19 13:47:15,440: INFO - Building the request
+2022-08-19 13:47:15,440: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=49149.428977&q=hamam'
+2022-08-19 13:47:15,440: DEBUG - URL size: (133)
+2022-08-19 13:47:15,440: INFO - Attempt no. 1 out of 5
+2022-08-19 13:47:15,440: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:47:15,440: DEBUG - Proxy: None
+2022-08-19 13:47:15,440: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:47:15,440: INFO - Sending request
+2022-08-19 13:47:15,684: INFO - Parsing reply
+2022-08-19 13:47:15,684: DEBUG - Raw data: [[["hammam","hamam",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]],[null,null,null,"Hamám"]],null,"de",null,null,null,0.68604654,[],[["az","tr"],null,[0.68604654,0.25968993],["az","tr"]]]
+
+2022-08-19 13:47:15,684: DEBUG - JSON data: [[['hammam', 'hamam', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]], [None, None, None, 'Hamám']], None, 'de', None, None, None, 0.68604654, [], [['az', 'tr'], None, [0.68604654, 0.25968993], ['az', 'tr']]]
+
+2022-08-19 13:47:15,684: DEBUG - Extracted data: {'original_text': 'hamam', 'extra': {}, 'has_typo': False, 'romanization': 'Hamám', 'src_lang': 'de', 'translation': 'hammam', 'match': 0.68604654}
+
+2022-08-19 13:47:15,684: DEBUG - Adding new item to cache, key: u'hamamende'
+2022-08-19 13:47:15,693: INFO - IP: ::1, search: hamam, lang: de
+2022-08-19 13:47:15,693: INFO - IP: ::1, search: hamam, lang: de
+2022-08-19 13:47:15,693: INFO - IP: ::1, search: hamam, lang: de
+2022-08-19 13:47:15,693: INFO - IP: ::1, search: hamam, lang: de
+2022-08-19 13:47:15,697: INFO - 200 GET /search?query=hamam&lang=de (::1) 258.00ms
+2022-08-19 13:47:15,881: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:47:15,915: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:47:15,928: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909635910 (::1) 1.00ms
+2022-08-19 13:47:46,441: DEBUG - Max input size: (1980)
+2022-08-19 13:47:46,441: DEBUG - Unquoted text size: (9)
+2022-08-19 13:47:46,441: DEBUG - Quoted text size: (9)
+2022-08-19 13:47:46,441: INFO - Translating word: u'emergency'
+2022-08-19 13:47:46,441: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:47:46,441: DEBUG - Searching cache for key: u'emergencyende'
+2022-08-19 13:47:46,441: INFO - Item not in cache
+2022-08-19 13:47:46,441: INFO - Building the request
+2022-08-19 13:47:46,441: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=40948.437176&q=emergency'
+2022-08-19 13:47:46,441: DEBUG - URL size: (137)
+2022-08-19 13:47:46,441: INFO - Attempt no. 1 out of 5
+2022-08-19 13:47:46,441: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:47:46,441: DEBUG - Proxy: None
+2022-08-19 13:47:46,441: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:47:46,443: INFO - Sending request
+2022-08-19 13:47:46,598: INFO - Parsing reply
+2022-08-19 13:47:46,598: DEBUG - Raw data: [[["emergency","emergency",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]]],null,"de",null,null,null,1,[],[["en"],null,[1],["en"]]]
+
+2022-08-19 13:47:46,599: DEBUG - JSON data: [[['emergency', 'emergency', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]]], None, 'de', None, None, None, 1, [], [['en'], None, [1], ['en']]]
+
+2022-08-19 13:47:46,599: DEBUG - Extracted data: {'original_text': 'emergency', 'extra': {}, 'has_typo': False, 'romanization': 'emergency', 'src_lang': 'de', 'translation': 'emergency', 'match': 1}
+
+2022-08-19 13:47:46,599: DEBUG - Adding new item to cache, key: u'emergencyende'
+2022-08-19 13:47:46,599: DEBUG - Max input size: (1980)
+2022-08-19 13:47:46,599: DEBUG - Unquoted text size: (5)
+2022-08-19 13:47:46,599: DEBUG - Quoted text size: (5)
+2022-08-19 13:47:46,599: INFO - Translating word: u'coast'
+2022-08-19 13:47:46,599: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:47:46,599: DEBUG - Searching cache for key: u'coastende'
+2022-08-19 13:47:46,599: INFO - Item not in cache
+2022-08-19 13:47:46,599: INFO - Building the request
+2022-08-19 13:47:46,599: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=147962.292278&q=coast'
+2022-08-19 13:47:46,599: DEBUG - URL size: (134)
+2022-08-19 13:47:46,599: INFO - Attempt no. 1 out of 5
+2022-08-19 13:47:46,599: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:47:46,601: DEBUG - Proxy: None
+2022-08-19 13:47:46,601: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:47:46,601: INFO - Sending request
+2022-08-19 13:47:46,759: INFO - Parsing reply
+2022-08-19 13:47:46,759: DEBUG - Raw data: [[["coast","coast",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]]],null,"de",null,null,null,1,[],[["en"],null,[1],["en"]]]
+
+2022-08-19 13:47:46,759: DEBUG - JSON data: [[['coast', 'coast', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]]], None, 'de', None, None, None, 1, [], [['en'], None, [1], ['en']]]
+
+2022-08-19 13:47:46,760: DEBUG - Extracted data: {'original_text': 'coast', 'extra': {}, 'has_typo': False, 'romanization': 'coast', 'src_lang': 'de', 'translation': 'coast', 'match': 1}
+
+2022-08-19 13:47:46,760: DEBUG - Adding new item to cache, key: u'coastende'
+2022-08-19 13:47:46,760: DEBUG - Max input size: (1980)
+2022-08-19 13:47:46,760: DEBUG - Unquoted text size: (5)
+2022-08-19 13:47:46,760: DEBUG - Quoted text size: (5)
+2022-08-19 13:47:46,760: INFO - Translating word: u'guard'
+2022-08-19 13:47:46,760: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:47:46,760: DEBUG - Searching cache for key: u'guardende'
+2022-08-19 13:47:46,760: INFO - Item not in cache
+2022-08-19 13:47:46,760: INFO - Building the request
+2022-08-19 13:47:46,760: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=375112.232708&q=guard'
+2022-08-19 13:47:46,760: DEBUG - URL size: (134)
+2022-08-19 13:47:46,760: INFO - Attempt no. 1 out of 5
+2022-08-19 13:47:46,760: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:47:46,760: DEBUG - Proxy: None
+2022-08-19 13:47:46,760: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:47:46,762: INFO - Sending request
+2022-08-19 13:47:48,575: INFO - Parsing reply
+2022-08-19 13:47:48,575: DEBUG - Raw data: [[["guard","guard",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]]],null,"de",null,null,null,1,[],[["en"],null,[1],["en"]]]
+
+2022-08-19 13:47:48,575: DEBUG - JSON data: [[['guard', 'guard', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]]], None, 'de', None, None, None, 1, [], [['en'], None, [1], ['en']]]
+
+2022-08-19 13:47:48,575: DEBUG - Extracted data: {'original_text': 'guard', 'extra': {}, 'has_typo': False, 'romanization': 'guard', 'src_lang': 'de', 'translation': 'guard', 'match': 1}
+
+2022-08-19 13:47:48,575: DEBUG - Adding new item to cache, key: u'guardende'
+2022-08-19 13:47:48,589: INFO - IP: ::1, search: emergency=coast_guard, lang: de
+2022-08-19 13:47:48,589: INFO - IP: ::1, search: emergency=coast_guard, lang: de
+2022-08-19 13:47:48,589: INFO - IP: ::1, search: emergency=coast_guard, lang: de
+2022-08-19 13:47:48,589: INFO - IP: ::1, search: emergency=coast_guard, lang: de
+2022-08-19 13:47:48,594: INFO - 200 GET /search?query=emergency%3Dcoast_guard&lang=de (::1) 2154.00ms
+2022-08-19 13:47:48,680: INFO - 200 GET /suggest?query=emergency%3Dcoast_guard (::1) 87.00ms
+2022-08-19 13:47:48,686: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:47:48,760: WARNING - 404 GET /img/footer-bg.png (::1) 1.00ms
+2022-08-19 13:47:48,780: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909668762 (::1) 2.00ms
+2022-08-19 13:47:58,417: DEBUG - Max input size: (1980)
+2022-08-19 13:47:58,417: DEBUG - Unquoted text size: (11)
+2022-08-19 13:47:58,417: DEBUG - Quoted text size: (16)
+2022-08-19 13:47:58,417: INFO - Translating word: u'K\xfcstenwache'
+2022-08-19 13:47:58,417: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:47:58,417: DEBUG - Searching cache for key: u'K\xfcstenwacheende'
+2022-08-19 13:47:58,417: INFO - Item not in cache
+2022-08-19 13:47:58,417: INFO - Building the request
+2022-08-19 13:47:58,417: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=119627.517895&q=K%C3%BCstenwache'
+2022-08-19 13:47:58,417: DEBUG - URL size: (145)
+2022-08-19 13:47:58,417: INFO - Attempt no. 1 out of 5
+2022-08-19 13:47:58,417: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:47:58,417: DEBUG - Proxy: None
+2022-08-19 13:47:58,417: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:47:58,417: INFO - Sending request
+2022-08-19 13:47:59,236: INFO - Parsing reply
+2022-08-19 13:47:59,237: DEBUG - Raw data: [[["Coastal guard","Küstenwache",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]]],[["имя существительное",["coastguard"],[["coastguard",["Küstenwache"],null,0.05136748]],"Küstenwache",1]],"de",null,null,null,1,[],[["de"],null,[1],["de"]]]
+
+2022-08-19 13:47:59,237: DEBUG - JSON data: [[['Coastal guard', 'Küstenwache', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]]], [['имя существительное', ['coastguard'], [['coastguard', ['Küstenwache'], None, 0.05136748]], 'Küstenwache', 1]], 'de', None, None, None, 1, [], [['de'], None, [1], ['de']]]
+
+2022-08-19 13:47:59,237: DEBUG - Extracted data: {'original_text': 'Küstenwache', 'extra': {'nouns': {'coastguard': ['Küstenwache']}}, 'has_typo': False, 'romanization': 'Küstenwache', 'src_lang': 'de', 'translation': 'Coastal guard', 'match': 1}
+
+2022-08-19 13:47:59,237: DEBUG - Adding new item to cache, key: u'K\xfcstenwacheende'
+2022-08-19 13:47:59,247: INFO - IP: ::1, search: Küstenwache, lang: de
+2022-08-19 13:47:59,247: INFO - IP: ::1, search: Küstenwache, lang: de
+2022-08-19 13:47:59,247: INFO - IP: ::1, search: Küstenwache, lang: de
+2022-08-19 13:47:59,247: INFO - IP: ::1, search: Küstenwache, lang: de
+2022-08-19 13:47:59,250: INFO - 200 GET /search?query=K%C3%BCstenwache&lang=de (::1) 834.00ms
+2022-08-19 13:47:59,368: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:47:59,420: WARNING - 404 GET /img/footer-bg.png (::1) 1.00ms
+2022-08-19 13:47:59,430: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909679406 (::1) 1.00ms
+2022-08-19 13:48:09,614: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909689596 (::1) 1.00ms
+2022-08-19 13:48:31,345: DEBUG - Max input size: (1980)
+2022-08-19 13:48:31,345: DEBUG - Unquoted text size: (8)
+2022-08-19 13:48:31,346: DEBUG - Quoted text size: (8)
+2022-08-19 13:48:31,346: INFO - Translating word: u'historic'
+2022-08-19 13:48:31,346: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:48:31,346: DEBUG - Searching cache for key: u'historicende'
+2022-08-19 13:48:31,346: INFO - Item not in cache
+2022-08-19 13:48:31,346: INFO - Building the request
+2022-08-19 13:48:31,346: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=643121.1041533&q=historic'
+2022-08-19 13:48:31,346: DEBUG - URL size: (138)
+2022-08-19 13:48:31,346: INFO - Attempt no. 1 out of 5
+2022-08-19 13:48:31,346: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:48:31,346: DEBUG - Proxy: None
+2022-08-19 13:48:31,346: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:48:31,346: INFO - Sending request
+2022-08-19 13:48:32,581: INFO - Parsing reply
+2022-08-19 13:48:32,585: DEBUG - Raw data: [[["historic","historic",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]]],null,"de",null,null,null,1,[],[["en"],null,[1],["en"]]]
+
+2022-08-19 13:48:32,585: DEBUG - JSON data: [[['historic', 'historic', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]]], None, 'de', None, None, None, 1, [], [['en'], None, [1], ['en']]]
+
+2022-08-19 13:48:32,585: DEBUG - Extracted data: {'original_text': 'historic', 'extra': {}, 'has_typo': False, 'romanization': 'historic', 'src_lang': 'de', 'translation': 'historic', 'match': 1}
+
+2022-08-19 13:48:32,585: DEBUG - Adding new item to cache, key: u'historicende'
+2022-08-19 13:48:32,585: DEBUG - Max input size: (1980)
+2022-08-19 13:48:32,585: DEBUG - Unquoted text size: (7)
+2022-08-19 13:48:32,585: DEBUG - Quoted text size: (7)
+2022-08-19 13:48:32,585: INFO - Translating word: u'wayside'
+2022-08-19 13:48:32,585: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:48:32,585: DEBUG - Searching cache for key: u'waysideende'
+2022-08-19 13:48:32,585: INFO - Item not in cache
+2022-08-19 13:48:32,585: INFO - Building the request
+2022-08-19 13:48:32,585: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=720177.838013&q=wayside'
+2022-08-19 13:48:32,585: DEBUG - URL size: (136)
+2022-08-19 13:48:32,585: INFO - Attempt no. 1 out of 5
+2022-08-19 13:48:32,585: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:48:32,585: DEBUG - Proxy: None
+2022-08-19 13:48:32,585: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:48:32,585: INFO - Sending request
+2022-08-19 13:48:33,576: INFO - Parsing reply
+2022-08-19 13:48:33,578: DEBUG - Raw data: [[["Wayside","wayside",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]]],null,"de",null,null,null,1,[],[["en"],null,[1],["en"]]]
+
+2022-08-19 13:48:33,578: DEBUG - JSON data: [[['Wayside', 'wayside', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]]], None, 'de', None, None, None, 1, [], [['en'], None, [1], ['en']]]
+
+2022-08-19 13:48:33,578: DEBUG - Extracted data: {'original_text': 'wayside', 'extra': {}, 'has_typo': False, 'romanization': 'wayside', 'src_lang': 'de', 'translation': 'Wayside', 'match': 1}
+
+2022-08-19 13:48:33,578: DEBUG - Adding new item to cache, key: u'waysideende'
+2022-08-19 13:48:33,578: DEBUG - Max input size: (1980)
+2022-08-19 13:48:33,578: DEBUG - Unquoted text size: (5)
+2022-08-19 13:48:33,578: DEBUG - Quoted text size: (5)
+2022-08-19 13:48:33,578: INFO - Translating word: u'cross'
+2022-08-19 13:48:33,578: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:48:33,578: DEBUG - Searching cache for key: u'crossende'
+2022-08-19 13:48:33,578: INFO - Item not in cache
+2022-08-19 13:48:33,578: INFO - Building the request
+2022-08-19 13:48:33,578: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=189795.315695&q=cross'
+2022-08-19 13:48:33,578: DEBUG - URL size: (134)
+2022-08-19 13:48:33,578: INFO - Attempt no. 1 out of 5
+2022-08-19 13:48:33,578: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:48:33,578: DEBUG - Proxy: None
+2022-08-19 13:48:33,578: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:48:33,578: INFO - Sending request
+2022-08-19 13:48:33,736: INFO - Parsing reply
+2022-08-19 13:48:33,736: DEBUG - Raw data: [[["cross","cross",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]],[null,null,null,"krɔs"]],null,"de",null,null,null,1,[],[["en"],null,[1],["en"]]]
+
+2022-08-19 13:48:33,736: DEBUG - JSON data: [[['cross', 'cross', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]], [None, None, None, 'krɔs']], None, 'de', None, None, None, 1, [], [['en'], None, [1], ['en']]]
+
+2022-08-19 13:48:33,736: DEBUG - Extracted data: {'original_text': 'cross', 'extra': {}, 'has_typo': False, 'romanization': 'krɔs', 'src_lang': 'de', 'translation': 'cross', 'match': 1}
+
+2022-08-19 13:48:33,737: DEBUG - Adding new item to cache, key: u'crossende'
+2022-08-19 13:48:33,752: INFO - IP: ::1, search: historic=wayside_cross, lang: de
+2022-08-19 13:48:33,752: INFO - IP: ::1, search: historic=wayside_cross, lang: de
+2022-08-19 13:48:33,752: INFO - IP: ::1, search: historic=wayside_cross, lang: de
+2022-08-19 13:48:33,752: INFO - IP: ::1, search: historic=wayside_cross, lang: de
+2022-08-19 13:48:33,755: INFO - 200 GET /search?query=historic%3Dwayside_cross&lang=de (::1) 2409.00ms
+2022-08-19 13:48:33,835: INFO - 200 GET /suggest?query=historic%3Dwayside_cross (::1) 80.00ms
+2022-08-19 13:48:33,877: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:48:33,924: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:48:33,947: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909713925 (::1) 1.00ms
+2022-08-19 13:48:49,114: DEBUG - Max input size: (1980)
+2022-08-19 13:48:49,114: DEBUG - Unquoted text size: (8)
+2022-08-19 13:48:49,114: DEBUG - Quoted text size: (8)
+2022-08-19 13:48:49,114: INFO - Translating word: u'Wegkreuz'
+2022-08-19 13:48:49,114: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:48:49,114: DEBUG - Searching cache for key: u'Wegkreuzende'
+2022-08-19 13:48:49,114: INFO - Item not in cache
+2022-08-19 13:48:49,114: INFO - Building the request
+2022-08-19 13:48:49,114: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=114091.494055&q=Wegkreuz'
+2022-08-19 13:48:49,114: DEBUG - URL size: (137)
+2022-08-19 13:48:49,114: INFO - Attempt no. 1 out of 5
+2022-08-19 13:48:49,114: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:48:49,114: DEBUG - Proxy: None
+2022-08-19 13:48:49,114: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:48:49,115: INFO - Sending request
+2022-08-19 13:48:49,648: INFO - Parsing reply
+2022-08-19 13:48:49,650: DEBUG - Raw data: [[["crossroads","Wegkreuz",null,null,2],[null,null,null,"ˈveːkkrɔ͜yt͜s"]],[["имя существительное",["crossroads","wayside cross"],[["crossroads",["Kreuzung","Scheideweg","Wegkreuzung","Straßenkreuzung","Wegkreuz"],null,0.43686765],["wayside cross",["Wegkreuz"],null,0.12713574]],"Wegkreuz",1]],"de",null,null,null,0.32048815,[],[["en","nl","fy","de"],null,[0.32048815,0.22176337,0.13329716,0.124910615],["en","nl","fy","de"]]]
+
+2022-08-19 13:48:49,650: DEBUG - JSON data: [[['crossroads', 'Wegkreuz', None, None, 2], [None, None, None, 'ˈveːkkrɔ͜yt͜s']], [['имя существительное', ['crossroads', 'wayside cross'], [['crossroads', ['Kreuzung', 'Scheideweg', 'Wegkreuzung', 'Straßenkreuzung', 'Wegkreuz'], None, 0.43686765], ['wayside cross', ['Wegkreuz'], None, 0.12713574]], 'Wegkreuz', 1]], 'de', None, None, None, 0.32048815, [], [['en', 'nl', 'fy', 'de'], None, [0.32048815, 0.22176337, 0.13329716, 0.124910615], ['en', 'nl', 'fy', 'de']]]
+
+2022-08-19 13:48:49,650: DEBUG - Extracted data: {'original_text': 'Wegkreuz', 'extra': {'nouns': {'wayside cross': ['Wegkreuz'], 'crossroads': ['Kreuzung', 'Scheideweg', 'Wegkreuzung', 'Straßenkreuzung', 'Wegkreuz']}}, 'has_typo': False, 'romanization': 'ˈveːkkrɔ͜yt͜s', 'src_lang': 'de', 'translation': 'crossroads', 'match': 0.32048815}
+
+2022-08-19 13:48:49,650: DEBUG - Adding new item to cache, key: u'Wegkreuzende'
+2022-08-19 13:48:49,660: INFO - IP: ::1, search: Wegkreuz, lang: de
+2022-08-19 13:48:49,660: INFO - IP: ::1, search: Wegkreuz, lang: de
+2022-08-19 13:48:49,660: INFO - IP: ::1, search: Wegkreuz, lang: de
+2022-08-19 13:48:49,660: INFO - IP: ::1, search: Wegkreuz, lang: de
+2022-08-19 13:48:49,664: INFO - 200 GET /search?query=Wegkreuz&lang=de (::1) 552.00ms
+2022-08-19 13:48:49,709: INFO - 200 GET /suggest?query=Wegkreuz (::1) 45.00ms
+2022-08-19 13:48:49,782: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:48:49,881: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:48:49,897: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909729849 (::1) 2.00ms
+2022-08-19 13:48:56,706: DEBUG - Max input size: (1980)
+2022-08-19 13:48:56,706: DEBUG - Unquoted text size: (5)
+2022-08-19 13:48:56,706: DEBUG - Quoted text size: (5)
+2022-08-19 13:48:56,706: INFO - Translating word: u'Kreuz'
+2022-08-19 13:48:56,706: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:48:56,706: DEBUG - Searching cache for key: u'Kreuzende'
+2022-08-19 13:48:56,706: INFO - Item not in cache
+2022-08-19 13:48:56,706: INFO - Building the request
+2022-08-19 13:48:56,706: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=143800.263668&q=Kreuz'
+2022-08-19 13:48:56,706: DEBUG - URL size: (134)
+2022-08-19 13:48:56,706: INFO - Attempt no. 1 out of 5
+2022-08-19 13:48:56,706: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:48:56,706: DEBUG - Proxy: None
+2022-08-19 13:48:56,706: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:48:56,707: INFO - Sending request
+2022-08-19 13:48:56,865: INFO - Parsing reply
+2022-08-19 13:48:56,865: DEBUG - Raw data: [[["Cross","Kreuz",null,null,10]],[["имя существительное",["cross","back","crucifix","sharp","dagger","small of the back"],[["cross",["Kreuz","Flanke","Kreuzung","Zwitter","Mittelding"],null,0.4507353],["back",["Rückseite","Rücken","Rückenlehne","Hintergrund","Hinterseite","Kreuz"],null,0.0038391664],["crucifix",["Kruzifix","Kreuz"],null,0.0020549577],["sharp",["Kreuz"],null,4.6574374E-4],["dagger",["Dolch","Kreuz"],null,1.8526005E-4],["small of the back",["Kreuz"],null,7.369136E-5]],"Kreuz",1]],"de",null,null,null,1,[],[["de"],null,[1],["de"]]]
+
+2022-08-19 13:48:56,865: DEBUG - JSON data: [[['Cross', 'Kreuz', None, None, 10]], [['имя существительное', ['cross', 'back', 'crucifix', 'sharp', 'dagger', 'small of the back'], [['cross', ['Kreuz', 'Flanke', 'Kreuzung', 'Zwitter', 'Mittelding'], None, 0.4507353], ['back', ['Rückseite', 'Rücken', 'Rückenlehne', 'Hintergrund', 'Hinterseite', 'Kreuz'], None, 0.0038391664], ['crucifix', ['Kruzifix', 'Kreuz'], None, 0.0020549577], ['sharp', ['Kreuz'], None, 0.00046574374], ['dagger', ['Dolch', 'Kreuz'], None, 0.00018526005], ['small of the back', ['Kreuz'], None, 7.369136e-05]], 'Kreuz', 1]], 'de', None, None, None, 1, [], [['de'], None, [1], ['de']]]
+
+2022-08-19 13:48:56,865: DEBUG - Extracted data: {'original_text': 'Kreuz', 'extra': {'nouns': {'dagger': ['Dolch', 'Kreuz'], 'cross': ['Kreuz', 'Flanke', 'Kreuzung', 'Zwitter', 'Mittelding'], 'back': ['Rückseite', 'Rücken', 'Rückenlehne', 'Hintergrund', 'Hinterseite', 'Kreuz'], 'small of the back': ['Kreuz'], 'crucifix': ['Kruzifix', 'Kreuz'], 'sharp': ['Kreuz']}}, 'has_typo': False, 'romanization': 'Kreuz', 'src_lang': 'de', 'translation': 'Cross', 'match': 1}
+
+2022-08-19 13:48:56,865: DEBUG - Adding new item to cache, key: u'Kreuzende'
+2022-08-19 13:48:56,927: INFO - IP: ::1, search: Kreuz, lang: de
+2022-08-19 13:48:56,927: INFO - IP: ::1, search: Kreuz, lang: de
+2022-08-19 13:48:56,927: INFO - IP: ::1, search: Kreuz, lang: de
+2022-08-19 13:48:56,927: INFO - IP: ::1, search: Kreuz, lang: de
+2022-08-19 13:48:56,996: INFO - 200 GET /search?query=Kreuz&lang=de (::1) 293.00ms
+2022-08-19 13:48:57,137: WARNING - 404 GET /img/header-bg.png (::1) 1.00ms
+2022-08-19 13:48:58,082: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909737883 (::1) 1.00ms
+2022-08-19 13:49:45,440: INFO - 200 GET /suggest?query=Gipfelkreuz (::1) 41.00ms
+2022-08-19 13:49:47,578: INFO - 200 GET /suggest?query=Gipfelkreuz (::1) 41.00ms
+2022-08-19 13:49:48,009: DEBUG - Max input size: (1980)
+2022-08-19 13:49:48,009: DEBUG - Unquoted text size: (11)
+2022-08-19 13:49:48,009: DEBUG - Quoted text size: (11)
+2022-08-19 13:49:48,009: INFO - Translating word: u'Gipfelkreuz'
+2022-08-19 13:49:48,009: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:49:48,009: DEBUG - Searching cache for key: u'Gipfelkreuzende'
+2022-08-19 13:49:48,009: INFO - Item not in cache
+2022-08-19 13:49:48,009: INFO - Building the request
+2022-08-19 13:49:48,009: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=127920.509948&q=Gipfelkreuz'
+2022-08-19 13:49:48,009: DEBUG - URL size: (140)
+2022-08-19 13:49:48,009: INFO - Attempt no. 1 out of 5
+2022-08-19 13:49:48,009: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:49:48,009: DEBUG - Proxy: None
+2022-08-19 13:49:48,009: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:49:48,009: INFO - Sending request
+2022-08-19 13:49:48,737: INFO - Parsing reply
+2022-08-19 13:49:48,739: DEBUG - Raw data: [[["Summit cross","Gipfelkreuz",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]],[null,null,null,"ˈɡɪp͜fl̩krɔ͜yt͜s"]],null,"de",null,null,null,0.969697,[],[["de"],null,[0.969697],["de"]]]
+
+2022-08-19 13:49:48,739: DEBUG - JSON data: [[['Summit cross', 'Gipfelkreuz', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]], [None, None, None, 'ˈɡɪp͜fl̩krɔ͜yt͜s']], None, 'de', None, None, None, 0.969697, [], [['de'], None, [0.969697], ['de']]]
+
+2022-08-19 13:49:48,739: DEBUG - Extracted data: {'original_text': 'Gipfelkreuz', 'extra': {}, 'has_typo': False, 'romanization': 'ˈɡɪp͜fl̩krɔ͜yt͜s', 'src_lang': 'de', 'translation': 'Summit cross', 'match': 0.969697}
+
+2022-08-19 13:49:48,739: DEBUG - Adding new item to cache, key: u'Gipfelkreuzende'
+2022-08-19 13:49:48,750: INFO - IP: ::1, search: Gipfelkreuz, lang: de
+2022-08-19 13:49:48,750: INFO - IP: ::1, search: Gipfelkreuz, lang: de
+2022-08-19 13:49:48,750: INFO - IP: ::1, search: Gipfelkreuz, lang: de
+2022-08-19 13:49:48,750: INFO - IP: ::1, search: Gipfelkreuz, lang: de
+2022-08-19 13:49:48,756: INFO - 200 GET /search?query=Gipfelkreuz&lang=de (::1) 749.00ms
+2022-08-19 13:49:48,880: WARNING - 404 GET /img/header-bg.png (::1) 1.00ms
+2022-08-19 13:49:48,947: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:49:48,979: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909788942 (::1) 1.00ms
+2022-08-19 13:50:18,913: DEBUG - Max input size: (1980)
+2022-08-19 13:50:18,913: DEBUG - Unquoted text size: (8)
+2022-08-19 13:50:18,913: DEBUG - Quoted text size: (8)
+2022-08-19 13:50:18,913: INFO - Translating word: u'weltraum'
+2022-08-19 13:50:18,913: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:50:18,913: DEBUG - Searching cache for key: u'weltraumende'
+2022-08-19 13:50:18,913: INFO - Item not in cache
+2022-08-19 13:50:18,913: INFO - Building the request
+2022-08-19 13:50:18,913: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=293592.151188&q=weltraum'
+2022-08-19 13:50:18,913: DEBUG - URL size: (137)
+2022-08-19 13:50:18,913: INFO - Attempt no. 1 out of 5
+2022-08-19 13:50:18,913: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:50:18,913: DEBUG - Proxy: None
+2022-08-19 13:50:18,913: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:50:18,914: INFO - Sending request
+2022-08-19 13:50:19,443: INFO - Parsing reply
+2022-08-19 13:50:19,443: DEBUG - Raw data: [[["space","weltraum",null,null,2]],[["имя существительное",["space","outer space"],[["space",["Raum","Platz","Weltraum","Zwischenraum","All","Weltall"],null,0.43009463],["outer space",["Weltraum","All"],null,0.362176]],"Weltraum",1]],"de",null,null,null,0.86328125,[],[["de"],null,[0.86328125],["de"]]]
+
+2022-08-19 13:50:19,443: DEBUG - JSON data: [[['space', 'weltraum', None, None, 2]], [['имя существительное', ['space', 'outer space'], [['space', ['Raum', 'Platz', 'Weltraum', 'Zwischenraum', 'All', 'Weltall'], None, 0.43009463], ['outer space', ['Weltraum', 'All'], None, 0.362176]], 'Weltraum', 1]], 'de', None, None, None, 0.86328125, [], [['de'], None, [0.86328125], ['de']]]
+
+2022-08-19 13:50:19,443: DEBUG - Extracted data: {'original_text': 'weltraum', 'extra': {'nouns': {'outer space': ['Weltraum', 'All'], 'space': ['Raum', 'Platz', 'Weltraum', 'Zwischenraum', 'All', 'Weltall']}}, 'has_typo': False, 'romanization': 'weltraum', 'src_lang': 'de', 'translation': 'space', 'match': 0.86328125}
+
+2022-08-19 13:50:19,443: DEBUG - Adding new item to cache, key: u'weltraumende'
+2022-08-19 13:50:19,474: INFO - IP: ::1, search: weltraum, lang: de
+2022-08-19 13:50:19,474: INFO - IP: ::1, search: weltraum, lang: de
+2022-08-19 13:50:19,474: INFO - IP: ::1, search: weltraum, lang: de
+2022-08-19 13:50:19,474: INFO - IP: ::1, search: weltraum, lang: de
+2022-08-19 13:50:19,505: INFO - 200 GET /search?query=weltraum&lang=de (::1) 593.00ms
+2022-08-19 13:50:19,631: WARNING - 404 GET /img/header-bg.png (::1) 1.00ms
+2022-08-19 13:50:20,098: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909820008 (::1) 1.00ms
+2022-08-19 13:50:52,813: INFO - 200 GET /suggest?query=weltraumbahn (::1) 45.00ms
+2022-08-19 13:50:53,354: DEBUG - Max input size: (1980)
+2022-08-19 13:50:53,354: DEBUG - Unquoted text size: (15)
+2022-08-19 13:50:53,354: DEBUG - Quoted text size: (15)
+2022-08-19 13:50:53,354: INFO - Translating word: u'weltraumbahnhof'
+2022-08-19 13:50:53,355: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:50:53,355: DEBUG - Searching cache for key: u'weltraumbahnhofende'
+2022-08-19 13:50:53,355: INFO - Item not in cache
+2022-08-19 13:50:53,355: INFO - Building the request
+2022-08-19 13:50:53,355: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=64501.446393&q=weltraumbahnhof'
+2022-08-19 13:50:53,355: DEBUG - URL size: (143)
+2022-08-19 13:50:53,355: INFO - Attempt no. 1 out of 5
+2022-08-19 13:50:53,355: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:50:53,355: DEBUG - Proxy: None
+2022-08-19 13:50:53,355: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:50:53,355: INFO - Sending request
+2022-08-19 13:50:54,907: INFO - Parsing reply
+2022-08-19 13:50:54,910: DEBUG - Raw data: [[["space station","weltraumbahnhof",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]],[null,null,null,"ˈvɛltra͜umbaːnhoːf"]],null,"de",null,null,null,0.50281626,[],[["de"],null,[0.50281626],["de"]]]
+
+2022-08-19 13:50:54,910: DEBUG - JSON data: [[['space station', 'weltraumbahnhof', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]], [None, None, None, 'ˈvɛltra͜umbaːnhoːf']], None, 'de', None, None, None, 0.50281626, [], [['de'], None, [0.50281626], ['de']]]
+
+2022-08-19 13:50:54,910: DEBUG - Extracted data: {'original_text': 'weltraumbahnhof', 'extra': {}, 'has_typo': False, 'romanization': 'ˈvɛltra͜umbaːnhoːf', 'src_lang': 'de', 'translation': 'space station', 'match': 0.50281626}
+
+2022-08-19 13:50:54,910: DEBUG - Adding new item to cache, key: u'weltraumbahnhofende'
+2022-08-19 13:50:54,921: INFO - IP: ::1, search: weltraumbahnhof, lang: de
+2022-08-19 13:50:54,921: INFO - IP: ::1, search: weltraumbahnhof, lang: de
+2022-08-19 13:50:54,921: INFO - IP: ::1, search: weltraumbahnhof, lang: de
+2022-08-19 13:50:54,921: INFO - IP: ::1, search: weltraumbahnhof, lang: de
+2022-08-19 13:50:54,924: INFO - 200 GET /search?query=weltraumbahnhof&lang=de (::1) 1571.00ms
+2022-08-19 13:50:54,983: INFO - 200 GET /suggest?query=weltraumbahnhof (::1) 59.00ms
+2022-08-19 13:50:55,058: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:50:55,150: WARNING - 404 GET /img/footer-bg.png (::1) 2.00ms
+2022-08-19 13:50:55,206: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909855169 (::1) 1.00ms
+2022-08-19 13:51:02,157: DEBUG - Max input size: (1980)
+2022-08-19 13:51:02,157: DEBUG - Unquoted text size: (8)
+2022-08-19 13:51:02,157: DEBUG - Quoted text size: (8)
+2022-08-19 13:51:02,157: INFO - Translating word: u'weltraum'
+2022-08-19 13:51:02,157: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:51:02,157: DEBUG - Searching cache for key: u'weltraumende'
+2022-08-19 13:51:02,157: INFO - Item found in cache
+2022-08-19 13:51:02,157: DEBUG - Max input size: (1980)
+2022-08-19 13:51:02,157: DEBUG - Unquoted text size: (7)
+2022-08-19 13:51:02,157: DEBUG - Quoted text size: (7)
+2022-08-19 13:51:02,157: INFO - Translating word: u'bahnhof'
+2022-08-19 13:51:02,157: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:51:02,157: DEBUG - Searching cache for key: u'bahnhofende'
+2022-08-19 13:51:02,157: INFO - Item not in cache
+2022-08-19 13:51:02,157: INFO - Building the request
+2022-08-19 13:51:02,157: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=981963.577415&q=bahnhof'
+2022-08-19 13:51:02,157: DEBUG - URL size: (136)
+2022-08-19 13:51:02,157: INFO - Attempt no. 1 out of 5
+2022-08-19 13:51:02,157: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:51:02,157: DEBUG - Proxy: None
+2022-08-19 13:51:02,157: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:51:02,157: INFO - Sending request
+2022-08-19 13:51:02,301: INFO - Parsing reply
+2022-08-19 13:51:02,301: DEBUG - Raw data: [[["railway station","bahnhof",null,null,1]],[["имя существительное",["station","railroad station","train station","railway station"],[["station",["Station","Bahnhof","Sender","Tankstelle","Platz","Posten"],null,0.29101658],["railroad station",["Bahnhof"],null,0.2608656],["train station",["Bahnhof"],null,0.094479255],["railway station",["Bahnhof"],null,0.093014486]],"Bahnhof",1]],"de",null,null,null,1,[],[["de"],null,[1],["de"]]]
+
+2022-08-19 13:51:02,301: DEBUG - JSON data: [[['railway station', 'bahnhof', None, None, 1]], [['имя существительное', ['station', 'railroad station', 'train station', 'railway station'], [['station', ['Station', 'Bahnhof', 'Sender', 'Tankstelle', 'Platz', 'Posten'], None, 0.29101658], ['railroad station', ['Bahnhof'], None, 0.2608656], ['train station', ['Bahnhof'], None, 0.094479255], ['railway station', ['Bahnhof'], None, 0.093014486]], 'Bahnhof', 1]], 'de', None, None, None, 1, [], [['de'], None, [1], ['de']]]
+
+2022-08-19 13:51:02,301: DEBUG - Extracted data: {'original_text': 'bahnhof', 'extra': {'nouns': {'railroad station': ['Bahnhof'], 'station': ['Station', 'Bahnhof', 'Sender', 'Tankstelle', 'Platz', 'Posten'], 'railway station': ['Bahnhof'], 'train station': ['Bahnhof']}}, 'has_typo': False, 'romanization': 'bahnhof', 'src_lang': 'de', 'translation': 'railway station', 'match': 1}
+
+2022-08-19 13:51:02,301: DEBUG - Adding new item to cache, key: u'bahnhofende'
+2022-08-19 13:51:02,312: DEBUG - Max input size: (1980)
+2022-08-19 13:51:02,312: DEBUG - Unquoted text size: (7)
+2022-08-19 13:51:02,312: DEBUG - Quoted text size: (7)
+2022-08-19 13:51:02,312: INFO - Translating word: u'bahnhof'
+2022-08-19 13:51:02,312: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:51:02,312: DEBUG - Searching cache for key: u'bahnhofende'
+2022-08-19 13:51:02,313: INFO - Item found in cache
+2022-08-19 13:51:02,313: DEBUG - Max input size: (1980)
+2022-08-19 13:51:02,313: DEBUG - Unquoted text size: (4)
+2022-08-19 13:51:02,313: DEBUG - Quoted text size: (4)
+2022-08-19 13:51:02,313: INFO - Translating word: u'bahn'
+2022-08-19 13:51:02,313: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:51:02,313: DEBUG - Searching cache for key: u'bahnende'
+2022-08-19 13:51:02,313: INFO - Item not in cache
+2022-08-19 13:51:02,313: INFO - Building the request
+2022-08-19 13:51:02,313: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=40208.436572&q=bahn'
+2022-08-19 13:51:02,313: DEBUG - URL size: (132)
+2022-08-19 13:51:02,313: INFO - Attempt no. 1 out of 5
+2022-08-19 13:51:02,313: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:51:02,313: DEBUG - Proxy: None
+2022-08-19 13:51:02,313: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:51:02,315: INFO - Sending request
+2022-08-19 13:51:02,463: INFO - Parsing reply
+2022-08-19 13:51:02,464: DEBUG - Raw data: [[["train","bahn",null,null,1]],[["имя существительное",["track","railway","path","train","course","railroad","lane","tram","pathway","length","streetcar"],[["track",["Spur","Strecke","Piste","Weg","Bahn","Rennstrecke"],null,0.0691225],["railway",["Eisenbahn","Bahn","Gleis"],null,0.06293675],["path",["Pfad","Weg","Bahn","Steg","Schneise"],null,0.061961006],["train",["Zug","Bahn","Eisenbahn","Folge","Schleppe","Gefolge"],null,0.05299806],["course",["Kurs","Verlauf","Gang","Lauf","Platz","Ablauf"],null,0.00800151],["railroad",["Eisenbahn","Bahn"],null,0.0063297153],["lane",["Spur","Fahrspur","Bahn","Gasse","Weg","Fahrbahn"],null,0.0056739203],["tram",["Tram","Straßenbahn","Bahn"],null,0.0031334364],["pathway",["Weg","Bahn","Pfad"],null,0.0023652418],["length",["Länge","Dauer","Stück","Umfang","Abschnitt","Bahn"],null,7.559767E-4],["streetcar",["Straßenbahn","Tram","Bahn","Straßenbahnwagen"],null,1.5846132E-4]],"Bahn",1]],"de",null,null,null,0.89947784,[],[["de"],null,[0.89947784],["de"]]]
+
+2022-08-19 13:51:02,464: DEBUG - JSON data: [[['train', 'bahn', None, None, 1]], [['имя существительное', ['track', 'railway', 'path', 'train', 'course', 'railroad', 'lane', 'tram', 'pathway', 'length', 'streetcar'], [['track', ['Spur', 'Strecke', 'Piste', 'Weg', 'Bahn', 'Rennstrecke'], None, 0.0691225], ['railway', ['Eisenbahn', 'Bahn', 'Gleis'], None, 0.06293675], ['path', ['Pfad', 'Weg', 'Bahn', 'Steg', 'Schneise'], None, 0.061961006], ['train', ['Zug', 'Bahn', 'Eisenbahn', 'Folge', 'Schleppe', 'Gefolge'], None, 0.05299806], ['course', ['Kurs', 'Verlauf', 'Gang', 'Lauf', 'Platz', 'Ablauf'], None, 0.00800151], ['railroad', ['Eisenbahn', 'Bahn'], None, 0.0063297153], ['lane', ['Spur', 'Fahrspur', 'Bahn', 'Gasse', 'Weg', 'Fahrbahn'], None, 0.0056739203], ['tram', ['Tram', 'Straßenbahn', 'Bahn'], None, 0.0031334364], ['pathway', ['Weg', 'Bahn', 'Pfad'], None, 0.0023652418], ['length', ['Länge', 'Dauer', 'Stück', 'Umfang', 'Abschnitt', 'Bahn'], None, 0.0007559767], ['streetcar', ['Straßenbahn', 'Tram', 'Bahn', 'Straßenbahnwagen'], None, 0.00015846132]], 'Bahn', 1]], 'de', None, None, None, 0.89947784, [], [['de'], None, [0.89947784], ['de']]]
+
+2022-08-19 13:51:02,464: DEBUG - Extracted data: {'original_text': 'bahn', 'extra': {'nouns': {'lane': ['Spur', 'Fahrspur', 'Bahn', 'Gasse', 'Weg', 'Fahrbahn'], 'streetcar': ['Straßenbahn', 'Tram', 'Bahn', 'Straßenbahnwagen'], 'track': ['Spur', 'Strecke', 'Piste', 'Weg', 'Bahn', 'Rennstrecke'], 'tram': ['Tram', 'Straßenbahn', 'Bahn'], 'pathway': ['Weg', 'Bahn', 'Pfad'], 'course': ['Kurs', 'Verlauf', 'Gang', 'Lauf', 'Platz', 'Ablauf'], 'length': ['Länge', 'Dauer', 'Stück', 'Umfang', 'Abschnitt', 'Bahn'], 'train': ['Zug', 'Bahn', 'Eisenbahn', 'Folge', 'Schleppe', 'Gefolge'], 'path': ['Pfad', 'Weg', 'Bahn', 'Steg', 'Schneise'], 'railway': ['Eisenbahn', 'Bahn', 'Gleis'], 'railroad': ['Eisenbahn', 'Bahn']}}, 'has_typo': False, 'romanization': 'bahn', 'src_lang': 'de', 'translation': 'train', 'match': 0.89947784}
+
+2022-08-19 13:51:02,464: DEBUG - Adding new item to cache, key: u'bahnende'
+2022-08-19 13:51:02,509: INFO - IP: ::1, search: weltraum bahnhof, lang: de
+2022-08-19 13:51:02,509: INFO - IP: ::1, search: weltraum bahnhof, lang: de
+2022-08-19 13:51:02,509: INFO - IP: ::1, search: weltraum bahnhof, lang: de
+2022-08-19 13:51:02,509: INFO - IP: ::1, search: weltraum bahnhof, lang: de
+2022-08-19 13:51:02,556: INFO - 200 GET /search?query=weltraum+bahnhof&lang=de (::1) 401.00ms
+2022-08-19 13:51:02,691: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:51:03,278: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909863158 (::1) 1.00ms
+2022-08-19 13:51:24,174: INFO - 200 GET /suggest?query=ahnhof (::1) 38.00ms
+2022-08-19 13:51:24,753: DEBUG - Max input size: (1980)
+2022-08-19 13:51:24,753: DEBUG - Unquoted text size: (5)
+2022-08-19 13:51:24,753: DEBUG - Quoted text size: (5)
+2022-08-19 13:51:24,753: INFO - Translating word: u'space'
+2022-08-19 13:51:24,753: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:51:24,753: DEBUG - Searching cache for key: u'spaceende'
+2022-08-19 13:51:24,753: INFO - Item not in cache
+2022-08-19 13:51:24,753: INFO - Building the request
+2022-08-19 13:51:24,753: DEBUG - Request url: u'https://translate.google.ru/translate_a/single?client=t&sl=de&tl=en&dt=t&dt=bd&dt=rm&dt=qca&ie=UTF-8&oe=UTF-8&tk=14925.396801&q=space'
+2022-08-19 13:51:24,753: DEBUG - URL size: (133)
+2022-08-19 13:51:24,753: INFO - Attempt no. 1 out of 5
+2022-08-19 13:51:24,753: DEBUG - Headers: [(u'Host', u'translate.google.ru'), (u'Accept-Language', u'en-US,en;q=0.8'), (u'Accept-Encoding', u'gzip, deflate, sdch'), (u'Referer', u'https://translate.google.ru/'), (u'Connection', u'close'), (u'Accept', u'*/*'), (u'User-Agent', u'Mozilla/5.0')]
+2022-08-19 13:51:24,755: DEBUG - Proxy: None
+2022-08-19 13:51:24,755: DEBUG - Socket timeout: (10.0)
+2022-08-19 13:51:24,755: INFO - Sending request
+2022-08-19 13:51:24,903: INFO - Parsing reply
+2022-08-19 13:51:24,904: DEBUG - Raw data: [[["space","space",null,null,3,null,null,[[null,"offline"]],[[["a4cf495cab9eceb0f9b0fe7ace31f4c3","efficient_models_2022q2.md"]]]],[null,null,null,"speɪs"]],null,"de",null,null,null,1,[],[["en"],null,[1],["en"]]]
+
+2022-08-19 13:51:24,904: DEBUG - JSON data: [[['space', 'space', None, None, 3, None, None, [[None, 'offline']], [[['a4cf495cab9eceb0f9b0fe7ace31f4c3', 'efficient_models_2022q2.md']]]], [None, None, None, 'speɪs']], None, 'de', None, None, None, 1, [], [['en'], None, [1], ['en']]]
+
+2022-08-19 13:51:24,904: DEBUG - Extracted data: {'original_text': 'space', 'extra': {}, 'has_typo': False, 'romanization': 'speɪs', 'src_lang': 'de', 'translation': 'space', 'match': 1}
+
+2022-08-19 13:51:24,904: DEBUG - Adding new item to cache, key: u'spaceende'
+2022-08-19 13:51:24,936: INFO - IP: ::1, search: space, lang: de
+2022-08-19 13:51:24,936: INFO - IP: ::1, search: space, lang: de
+2022-08-19 13:51:24,936: INFO - IP: ::1, search: space, lang: de
+2022-08-19 13:51:24,936: INFO - IP: ::1, search: space, lang: de
+2022-08-19 13:51:24,966: INFO - 200 GET /search?query=space&lang=de (::1) 213.00ms
+2022-08-19 13:51:25,099: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:51:25,611: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909885525 (::1) 2.00ms
+2022-08-19 13:51:34,296: DEBUG - Max input size: (1980)
+2022-08-19 13:51:34,296: DEBUG - Unquoted text size: (7)
+2022-08-19 13:51:34,296: DEBUG - Quoted text size: (7)
+2022-08-19 13:51:34,296: INFO - Translating word: u'bahnhof'
+2022-08-19 13:51:34,296: DEBUG - src_lang: 'de' dst_lang: 'en'
+2022-08-19 13:51:34,296: DEBUG - Searching cache for key: u'bahnhofende'
+2022-08-19 13:51:34,296: INFO - Item found in cache
+2022-08-19 13:51:34,321: INFO - IP: ::1, search: bahnhof, lang: de
+2022-08-19 13:51:34,321: INFO - IP: ::1, search: bahnhof, lang: de
+2022-08-19 13:51:34,321: INFO - IP: ::1, search: bahnhof, lang: de
+2022-08-19 13:51:34,321: INFO - IP: ::1, search: bahnhof, lang: de
+2022-08-19 13:51:34,339: INFO - 200 GET /search?query=bahnhof&lang=de (::1) 46.00ms
+2022-08-19 13:51:34,457: WARNING - 404 GET /img/header-bg.png (::1) 2.00ms
+2022-08-19 13:51:34,993: INFO - 200 GET /static/js/typeahead-noselect.js?_=1660909894937 (::1) 1.00ms

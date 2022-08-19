@@ -1,0 +1,27 @@
+2022-08-18 19:02:08,966: INFO - IP: ::1, search: dogs, lang: de
+2022-08-19 13:41:17,565: INFO - IP: ::1, search: dog, lang: de
+2022-08-19 13:41:28,302: INFO - IP: ::1, search: pet, lang: de
+2022-08-19 13:41:57,776: INFO - IP: ::1, search: lagune, lang: de
+2022-08-19 13:42:14,115: INFO - IP: ::1, search: Koralle, lang: de
+2022-08-19 13:42:32,298: INFO - IP: ::1, search: Korallenriffe, lang: de
+2022-08-19 13:42:36,996: INFO - IP: ::1, search: Koralle, lang: de
+2022-08-19 13:43:09,140: INFO - IP: ::1, search: See, lang: de
+2022-08-19 13:45:51,615: INFO - IP: ::1, search: Irrgarten, lang: de
+2022-08-19 13:46:01,601: INFO - IP: ::1, search: maze, lang: de
+2022-08-19 13:46:15,812: INFO - IP: ::1, search: irrgarten, lang: de
+2022-08-19 13:46:21,858: INFO - IP: ::1, search: irgarten, lang: de
+2022-08-19 13:46:25,180: INFO - IP: ::1, search: irrgarten, lang: 
+2022-08-19 13:46:33,706: INFO - IP: ::1, search: tiergarten, lang: 
+2022-08-19 13:46:34,901: INFO - IP: ::1, search: biergarten, lang: 
+2022-08-19 13:47:15,693: INFO - IP: ::1, search: hamam, lang: de
+2022-08-19 13:47:48,589: INFO - IP: ::1, search: emergency=coast_guard, lang: de
+2022-08-19 13:47:59,247: INFO - IP: ::1, search: Küstenwache, lang: de
+2022-08-19 13:48:33,752: INFO - IP: ::1, search: historic=wayside_cross, lang: de
+2022-08-19 13:48:49,660: INFO - IP: ::1, search: Wegkreuz, lang: de
+2022-08-19 13:48:56,927: INFO - IP: ::1, search: Kreuz, lang: de
+2022-08-19 13:49:48,750: INFO - IP: ::1, search: Gipfelkreuz, lang: de
+2022-08-19 13:50:19,474: INFO - IP: ::1, search: weltraum, lang: de
+2022-08-19 13:50:54,921: INFO - IP: ::1, search: weltraumbahnhof, lang: de
+2022-08-19 13:51:02,509: INFO - IP: ::1, search: weltraum bahnhof, lang: de
+2022-08-19 13:51:24,936: INFO - IP: ::1, search: space, lang: de
+2022-08-19 13:51:34,321: INFO - IP: ::1, search: bahnhof, lang: de

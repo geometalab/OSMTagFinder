@@ -201,16 +201,24 @@ class BaseThesaurus:
         if scopeNoteDE == '' and not scopeNoteEN == '':
             if new:
                 self.rdfGraph.addScopeNote(concept, scopeNoteEN, 'en')
-                self.rdfGraph.addScopeNote(concept, self.translator.translateENtoDE(scopeNoteEN) + ' ' + self.translationHintDE, 'de')
+                translation = self.translator.translateENtoDE(scopeNoteEN)
+                if translation is not None:
+                    self.rdfGraph.addScopeNote(concept, translation + ' ' + self.translationHintDE, 'de')
             else:
                 self.rdfGraph.setScopeNote(concept, scopeNoteEN, 'en')
-                self.rdfGraph.addScopeNote(concept, self.translator.translateENtoDE(scopeNoteEN) + ' ' + self.translationHintDE, 'de')
+                translation = self.translator.translateENtoDE(scopeNoteEN)
+                if translation is not None:
+                    self.rdfGraph.addScopeNote(concept, translation + ' ' + self.translationHintDE, 'de')
         elif not scopeNoteDE == '' and scopeNoteEN == '':
             if new:
-                self.rdfGraph.addScopeNote(concept, self.translator.translateDEtoEN(scopeNoteDE) + ' ' + self.translationHintEN, 'en')
+                translation = self.translator.translateDEtoEN(scopeNoteDE)
+                if translation is not None:
+                    self.rdfGraph.addScopeNote(concept, translation + ' ' + self.translationHintEN, 'en')
                 self.rdfGraph.addScopeNote(concept, scopeNoteDE, 'de')
             else:
-                self.rdfGraph.setScopeNote(concept, self.translator.translateDEtoEN(scopeNoteDE) + ' ' + self.translationHintEN, 'en')
+                translation = self.translator.translateDEtoEN(scopeNoteDE)
+                if translation is not None:
+                    self.rdfGraph.setScopeNote(concept, translation + ' ' + self.translationHintEN, 'en')
                 self.rdfGraph.addScopeNote(concept, scopeNoteDE, 'de')
         elif not scopeNoteDE == '' and not scopeNoteEN == '':
             if new:

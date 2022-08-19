@@ -15,7 +15,7 @@ class Filter:
                       'short_name:ru', 'tpuk_ref', 'wikimedia_commons', 'operator', 'source', 'wikipedia', 'wikipedia:en', 'wikipedia:de', 'railway:etcs',
                       'de:regionalschluessel', 'de:amtlicher_gemeindeschluessel', 'contact:xing', 'nspn', '_picture_', 'postal_code', 'exit_to',
                       '_waypoint_', 'label', 'branch', 'note', 'phone', 'created_by', 'start_date', 'end_date', 'description', 'description:ru',
-                      'lacounty:bld_id', 'lacounty:ain', 'uir_adr:ADRESA_KOD']
+                      'lacounty:bld_id', 'lacounty:ain', 'uir_adr:ADRESA_KOD', 'nysgissam:nysaddresspointid', 'wikidata']
 
     prefixKeyFilter = ['name:', 'note:', 'alt_name', 'int_name', 'loc_name', 'not:name', 'nat_name', 'official_name', 'short_name', 'reg_name', 'sorting_name',
                        'contact:', 'addr', 'icao', 'iata', 'onkz', 'is_in', 'fixme', 'seamark:fixme',
