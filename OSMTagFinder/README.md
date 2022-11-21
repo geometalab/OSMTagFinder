@@ -53,7 +53,7 @@ Requirements:
 Steps:
 
 1.  Login to Heroku
-2.  Create a new app: Dashboard > Plus sign at the upper right > give the app a name: The name will be called <appname> from now on >  choose region > Create App
+2.  Create a new app: Dashboard > Plus sign at the upper right > give the app a name: The name will be called `<appname>` from now on >  choose region > Create App
     - Steps 1) and 2) can also be done with console commands:
 		```
 		heroku login
