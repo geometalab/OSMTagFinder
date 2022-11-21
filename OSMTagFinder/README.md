@@ -1,10 +1,10 @@
-1   Installation Manual
+# 1   Installation Manual
 
 This manual covers the installation on Microsoft Windows. However installation on other operating systems should be similar or is even easier.
 It’s assumed, that the user has basic knowledge about Python.
 
 
-1.1 Local installation
+## 1.1 Local installation
 
 Requirements:
 -   Administrator access
@@ -25,7 +25,7 @@ Steps:
 5.  TagFinder is now installed
 
 
-1.2 Run local TagFinder server
+## 1.2 Run local TagFinder server
 
 Requirements:
 -   Local installation
@@ -39,7 +39,7 @@ Steps:
 5.  Open any browser and type localhost:5000 (default port) to see the website
 
 
-1.3 Prepare Heroku and GIT
+## 1.3 Prepare Heroku and GIT
 
 Requirements:
 -  Local installation
@@ -73,7 +73,7 @@ Steps:
     You will be asked to enter your login informations and probably need to create SSH keys (on new installation). Follow the procedure.
 
 	
-1.4 Deploy TagFinder on Heroku
+## 1.4 Deploy TagFinder on Heroku
 
 Requirements:
 -   Local installation
@@ -94,7 +94,7 @@ Steps:
 9.  Check state. Enter command: heroku ps. Check logs. Enter command: heroku logs
 
 
-1.5 Run Thesaurus maintenance
+## 1.5 Run Thesaurus maintenance
 
 Requirements:
 -   Local installation
@@ -106,7 +106,7 @@ Steps:
 3.  Run maintenance with command: python maintenance.py (or start it accordingly)
 
 
-1.6 Run manual update for Thesaurus
+## 1.6 Run manual update for Thesaurus
 
 Will update and then index the main thesaurus: `<projectpath>/data/tagfinder_thesaurus.rdf`
 Should be done once in a while if you deployed on a free heroku dyno and therefor didn’t activate the scheduler. Redeploy after update is done (about 20 mins).
