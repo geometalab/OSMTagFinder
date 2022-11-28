@@ -16,7 +16,7 @@ from whoosh.analysis import NgramFilter, StandardAnalyzer
 from whoosh.index import open_dir
 from whoosh.qparser import QueryParser
 
-#import wordforms.word_forms as wordforms
+import wordforms.word_forms as wordforms
 
 class GraphSearch:
 
@@ -58,32 +58,32 @@ class GraphSearch:
                 translatedWordsStr = translatedWordsStr + ' ' + self.translateWord(word, lang)
         return utils.wsWord(translatedWordsStr)
 
-    # def wordForms(self, text):
-    #     text = text.lower()
-    #     wordList = self.splitChars.split(text)
-    #     wordFormsStr = ''
-    #     for word in wordList:
-    #         if len(word) <= 1:
-    #             continue
-    #         if word[0] == '"' and word[len(word) - 1] == '"':  # don't build word forms from this one
-    #             wordFormsStr = wordFormsStr + word
-    #         else:
-    #             distinctWordForms = set()
-    #             try:
-    #                 wordForms = wordforms.get_word_forms(word)
-    #                 for noun in wordForms['n']:
-    #                     distinctWordForms.add(noun)
-    #                 for verb in wordForms['v']:
-    #                     distinctWordForms.add(verb)
-    #                 for adverb in wordForms['r']:
-    #                     distinctWordForms.add(adverb)
-    #                 for adjective in wordForms['a']:
-    #                     distinctWordForms.add(adjective)
-    #             except:
-    #                 pass # do nothing
-    #             distinctWordForms.discard(word)
-    #             wordFormsStr = wordFormsStr + ' ' + ' '.join(distinctWordForms)
-    #     return utils.wsWord(wordFormsStr)
+    def wordForms(self, text):
+        text = text.lower()
+        wordList = self.splitChars.split(text)
+        wordFormsStr = ''
+        for word in wordList:
+            if len(word) <= 1:
+                continue
+            if word[0] == '"' and word[len(word) - 1] == '"':  # don't build word forms from this one
+                wordFormsStr = wordFormsStr + word
+            else:
+                distinctWordForms = set()
+                try:
+                    wordForms = wordforms.get_word_forms(word)
+                    for noun in wordForms['n']:
+                        distinctWordForms.add(noun)
+                    for verb in wordForms['v']:
+                        distinctWordForms.add(verb)
+                    for adverb in wordForms['r']:
+                        distinctWordForms.add(adverb)
+                    for adjective in wordForms['a']:
+                        distinctWordForms.add(adjective)
+                except:
+                    pass # do nothing
+                distinctWordForms.discard(word)
+                wordFormsStr = wordFormsStr + ' ' + ' '.join(distinctWordForms)
+        return utils.wsWord(wordFormsStr)
 
     def isWordIndexed(self, searcher, word):
         if searcher.frequency('spellingEN', word) > 0: return True
@@ -124,10 +124,10 @@ class GraphSearch:
 
         translatedWords = self.translateText(words, lang)
 
-        # if(lang == 'en'):
-        #    englishWordForms = self.wordForms(words)
-        # else:
-        #    englishWordForms = self.wordForms(translatedWords)
+        if(lang == 'en'):
+           englishWordForms = self.wordForms(words)
+        else:
+           englishWordForms = self.wordForms(translatedWords)
 
         words = utils.wsWord(words) # do this after translation
         # words and translatedWords are now "whitespaced", containing mostly whitespace separator
@@ -145,32 +145,32 @@ class GraphSearch:
             allHits = self.extendedSearch(translatedWords, searcher, 'termPrefLabel', results, allHits)
             allHits = self.extendedSearch(translatedWords, searcher, 'termAltLabel', results, allHits)
 
-            # allHits = self.extendedSearch(englishWordForms, searcher, 'termPrefLabel', results, allHits)
-            # allHits = self.extendedSearch(englishWordForms, searcher, 'termAltLabel', results, allHits)
+            allHits = self.extendedSearch(englishWordForms, searcher, 'termPrefLabel', results, allHits)
+            allHits = self.extendedSearch(englishWordForms, searcher, 'termAltLabel', results, allHits)
 
             if lang == 'en':
                 allHits = self.extendedSearch(words, searcher, 'tagPrefLabel', results, allHits) # english first
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagPrefLabel', results, allHits)
-                # allHits = self.extendedSearch(englishWordForms, searcher, 'tagPrefLabel', results, allHits)
+                allHits = self.extendedSearch(englishWordForms, searcher, 'tagPrefLabel', results, allHits)
             else:
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagPrefLabel', results, allHits)  # english first too
-                # allHits = self.extendedSearch(englishWordForms, searcher, 'tagPrefLabel', results, allHits)
+                allHits = self.extendedSearch(englishWordForms, searcher, 'tagPrefLabel', results, allHits)
                 allHits = self.extendedSearch(words, searcher, 'tagPrefLabel', results, allHits)
 
             allHits = self.extendedSearch(words, searcher, 'termNarrower', results, allHits) # Note: Searching in termNarrower gives me all broader for this term
             allHits = self.extendedSearch(words, searcher, 'termBroader', results, allHits)
             allHits = self.extendedSearch(translatedWords, searcher, 'termNarrower', results, allHits)
-            # allHits = self.extendedSearch(englishWordForms, searcher, 'termNarrower', results, allHits)
+            allHits = self.extendedSearch(englishWordForms, searcher, 'termNarrower', results, allHits)
             allHits = self.extendedSearch(translatedWords, searcher, 'termBroader', results, allHits)
-            # allHits = self.extendedSearch(englishWordForms, searcher, 'termBroader', results, allHits)
+            allHits = self.extendedSearch(englishWordForms, searcher, 'termBroader', results, allHits)
 
             if lang == 'en':
                 allHits = self.extendedSearch(words, searcher, 'tagScopeNote', results, allHits)  # english first
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagScopeNote', results, allHits)
-                # allHits = self.extendedSearch(englishWordForms, searcher, 'tagScopeNote', results, allHits)
+                allHits = self.extendedSearch(englishWordForms, searcher, 'tagScopeNote', results, allHits)
             else:
                 allHits = self.extendedSearch(translatedWords, searcher, 'tagScopeNote', results, allHits)  # english first too
-                # allHits = self.extendedSearch(englishWordForms, searcher, 'tagScopeNote', results, allHits)
+                allHits = self.extendedSearch(englishWordForms, searcher, 'tagScopeNote', results, allHits)
                 allHits = self.extendedSearch(words, searcher, 'tagScopeNote', results, allHits)
 
 #             for token in self.getTokens(searcher, words, lang): # tokenized search
