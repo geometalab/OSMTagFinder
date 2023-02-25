@@ -16,7 +16,6 @@ Flask-Cors==3.0.9
 Flask-SQLAlchemy==2.4.1
 futures==3.2.0
 html5lib==1.0.1
-idna==2.7
 inflect==1.0.0
 isodate==0.6.0
 itsdangerous==0.24
