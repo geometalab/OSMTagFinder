@@ -15,7 +15,7 @@
         margin-top: -395px;
         margin-left: -175px;
         margin-right: 60px;
-        background-color: rgb(223, 240, 216)
+        background-color: rgb(223, 240, 216);
         padding-bottom: 0px;
         margin-bottom: 0px;
     }
@@ -68,6 +68,20 @@
     height: auto !important;
     height: 100%;
     min-height: 480px;
+}
+
+.jumbotron {
+    border-radius: 5px;
+
+    min-height: 160px;
+    width: auto;
+    min-width: 550px;
+    margin: auto;
+
+    max-width: 600px;
+    padding-top: 5px;
+    padding-bottom: 55px;
+    background-color: rgb(223, 240, 216);
 }
 
 #searchwrapper {
