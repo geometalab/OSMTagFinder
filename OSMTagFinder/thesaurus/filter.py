@@ -11,23 +11,24 @@ class Filter:
                       'wikipedia', 'email', 'converted_by', 'phone', 'opening_hours', 'date', 'time', 'collection_times', 'website',
                       'colour', 'fee', 'population', 'access', 'noexit', 'towards', 'bus_routes', 'busline', 'lines', 'type', 'denotation',
                       'CONTINUE', 'continue', 'copyright', 'stop', 'network', 'comment', 'old_name', 'destination', 'brand', 'fax', 'designation',
-                      'turn:lanes', 'owner', 'fire_hydrant:city', 'fire_hydrant:street', 'country', 'contact:google_plus', 'wikipedia:ru', 'note', 'height',
-                      'short_name:ru', 'tpuk_ref', 'wikimedia_commons', 'operator', 'source', 'wikipedia', 'wikipedia:en', 'wikipedia:de', 'railway:etcs',
+                      'turn:lanes', 'owner', 'fire_hydrant:city', 'fire_hydrant:street', 'country', 'contact:google_plus', 'note', 'height',
+                      'short_name:ru', 'tpuk_ref', 'wikimedia_commons', 'operator', 'source', 'wikidata', 'wikipedia', 'railway:etcs',
                       'de:regionalschluessel', 'de:amtlicher_gemeindeschluessel', 'contact:xing', 'nspn', '_picture_', 'postal_code', 'exit_to',
                       '_waypoint_', 'label', 'branch', 'note', 'phone', 'created_by', 'start_date', 'end_date', 'description', 'description:ru',
-                      'lacounty:bld_id', 'lacounty:ain', 'uir_adr:ADRESA_KOD', 'nysgissam:nysaddresspointid', 'wikidata']
+                      'lacounty:bld_id', 'lacounty:ain', 'uir_adr:ADRESA_KOD', 'nysgissam:nysaddresspointid', 'nycdoitt:bin', 'at_bev:addr_date',
+                      'raba:id', 'AlpinRes_ID', 'pmfsefin:idedif', 'maaamet:ETAK', 'dibavod:id', 'fid', 'ssr:stedsnr', 'utahagrc:parcelid']
 
     prefixKeyFilter = ['name:', 'note:', 'alt_name', 'int_name', 'loc_name', 'not:name', 'nat_name', 'official_name', 'short_name', 'reg_name', 'sorting_name',
-                       'contact:', 'addr', 'icao', 'iata', 'onkz', 'is_in', 'fixme', 'seamark:fixme',
+                       'contact:', 'addr', 'icao', 'iata', 'onkz', 'is_in', 'fixme', 'seamark:fixme', 'wikipedia:',
                        'ois:fixme', 'todo', 'type:', 'admin_level', 'AND_', 'AND:', 'seamark:', 'attribution', 'openGeoDB', 'ref', 'source_ref', 'tiger',
-                       'yh:', 'ngbe:', 'gvr:code', 'old_ref_legislative', 'sl_stop_id', 'ele:', 'source:',
+                       'yh:', 'ngbe:', 'gvr:code', 'old_ref_legislative', 'sl_stop_id', 'ele:', 'source:', 'gtfs:',
                        'osak:', 'kms', 'gnis:', 'nhd', 'chicago:building_id', 'hgv', 'nhs', 'ncat', 'nhd-shp:', 'osmc:', 'kp',
                        'int_name', 'CLC:', 'naptan:', 'building:ruian:', 'massgis:', 'WroclawGIS:', 'ref:FR:FANTOIR', 'rednap:', 'ts_', 'type:FR:FINESS',
                        'route_ref', 'lcn_ref', 'ncn_ref', 'rcn', 'rwn_ref', 'old_ref', 'prow_ref', 'local_ref', 'loc_ref', 'reg_ref', 'url',
                        'nat_ref', 'int_ref', 'uic_ref', 'asset_ref', 'carriageway_ref', 'junction:ref', 'fhrs:', 'osmc:', 'cep', 'protection_title',
                        'bag:extract', 'ref:bagid', 'adr_les', 'bag:', 'fresno_', 'uuid', 'uic_name', 'gtfs_id', 'USGS-LULC:', 'reg_', 'IBGE:',
                        'sagns_id', 'protect_id', 'PMSA_ref', 'destination:', 'EH_ref', 'rtc_rate', 'cyclestreets_id', 'woeid', 'CEMT',
-                       'depth:dredged']
+                       'depth:dredged', 'GNS:', 'gns:', 'gns_']
 
     exactValueFilter = []
 
