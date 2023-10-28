@@ -14,6 +14,8 @@ from taginfostats import TagInfoStats
 
 class TagInfo:
 
+    MAX_RESULTS_PER_PAGE = 999
+
     cl = ConfigLoader()
     tagInfoSortDesc = cl.getTagInfoAPIString('SORT_DESC')
 
@@ -26,22 +28,20 @@ class TagInfo:
     tagInfoWikiPageOfKey = cl.getTagInfoAPIString('WIKI_PAGE_OF_KEY')
     tagInfoWikiPageOfTag = cl.getTagInfoAPIString('WIKI_PAGE_OF_TAG')
     tagInfoTagPostfix = cl.getTagInfoAPIString('TAG_SUFFIX')
+    pageNumber = cl.getTagInfoAPIString('PAGE_NUMBER')
+    resultsPerPage = cl.getTagInfoAPIString('RESULTS_PER_PAGE')
 
     @retry(Exception, tries=3)
     def getAllKeyData(self):
         '''Calls TagInfo for a list of all keys. The list is descending sorted by count of
            values attached to the key.'''
-        keyResult = requests.get(self.tagInfoAllKeys + self.tagInfoSortDesc)
-        keyJson = keyResult.json()
-        return keyJson['data']
+        return self.pagination(self.tagInfoAllKeys + self.tagInfoSortDesc, 'data')
 
     @retry(Exception, tries=3)
     def getAllTagData(self, key):
         '''Calls TagInfo for a list of all tags for 'key'. The list is descending sorted by count of
         occurrence in OSM.'''
-        tagResult = requests.get(self.tagInfoValueOfKey + key + self.tagInfoSortDesc)
-        tagJson = tagResult.json()
-        return tagJson['data']
+        return self.pagination(self.tagInfoValueOfKey + key + self.tagInfoSortDesc, 'data')
 
     @retry(Exception, tries=3)
     def getKeyStats(self, key):
@@ -80,11 +80,27 @@ class TagInfo:
         '''Get the TagInfoStats object for further call methods'''
         return TagInfoStats(tagInfo = self, key=key, value=value, wikiPageJson=wikiPageJson)
 
+    def pagination(self, baseUrl, dataKey):
+        '''Calls url with pagination and gathers results'''
+        currentPageNumber = 1
+        result = []
+        while True:
+            url = baseUrl + self.pageNumber + str(currentPageNumber) + self.resultsPerPage + str(TagInfo.MAX_RESULTS_PER_PAGE)
+            response = requests.get(url)
+            responseJson = response.json()
+            data = responseJson[dataKey]
+            result.extend(data)
+            currentPageNumber += 1
+            if len(data) < TagInfo.MAX_RESULTS_PER_PAGE:
+                break
+        return result
+
 if __name__ == '__main__':
     ti = TagInfo()
     print(str(ti.checkConnection()))
     statsJson = ti.getKeyStats('amenity')
     print(str(statsJson))
+    print(str(ti.pagination(ti.tagInfoValueOfKey + 'building' + ti.tagInfoSortDesc, 'data')))
 
 
 
