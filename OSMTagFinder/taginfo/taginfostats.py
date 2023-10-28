@@ -112,17 +112,17 @@ class TagInfoStats:
 if __name__ == '__main__':
     from taginfo import TagInfo
     tagInfoUpdate = TagInfoStats(TagInfo(), 'tourism', 'zoo')
-    print tagInfoUpdate.getCountAll()
-    print tagInfoUpdate.getCountNodes()
-    print tagInfoUpdate.getCountWays()
-    print tagInfoUpdate.getCountRelations()
+    print(tagInfoUpdate.getCountAll())
+    print(tagInfoUpdate.getCountNodes())
+    print(tagInfoUpdate.getCountWays())
+    print(tagInfoUpdate.getCountRelations())
 
-    print tagInfoUpdate.getListImplies()
-    print tagInfoUpdate.getListCombinations()
-    print tagInfoUpdate.getListLinked()
+    print(tagInfoUpdate.getListImplies())
+    print(tagInfoUpdate.getListCombinations())
+    print(tagInfoUpdate.getListLinked())
 
-    print tagInfoUpdate.getOnNode()
-    print tagInfoUpdate.getOnWay()
-    print tagInfoUpdate.getOnArea()
-    print tagInfoUpdate.getOnRelation()
+    print(tagInfoUpdate.getOnNode())
+    print(tagInfoUpdate.getOnWay())
+    print(tagInfoUpdate.getOnArea())
+    print(tagInfoUpdate.getOnRelation())
 

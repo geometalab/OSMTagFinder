@@ -78,23 +78,23 @@ class Vocabulary:
 if __name__ == '__main__':
     t = Vocabulary('rail', 'en')
 
-    print "Related: "
+    print("Related: ")
     relatedStr = ''
     for related in t.getRelated():
         relatedStr = relatedStr + related + ', '
-    print relatedStr
+    print(relatedStr)
 
-    print "\nNarrower: "
+    print("\nNarrower: ")
     narrowerStr = ''
     for narrower in t.getNarrower():
         narrowerStr = narrowerStr + narrower + ', '
-    print narrowerStr
+    print(narrowerStr)
 
-    print "\nBroader: "
+    print("\nBroader: ")
     broaderStr = ''
     for broader in t.getBroader():
         broaderStr = broaderStr + broader + ', '
-    print broaderStr
+    print(broaderStr)
 
 
 

@@ -89,17 +89,17 @@ class OpenThesaurus(VocabularyBase):
 if __name__ == '__main__':
     ot = OpenThesaurus('Coiffeur', 'de')
 
-    print "Related: "
+    print("Related: ")
     for related in ot.getRelated():
-        print related
+        print(related)
 
-    print "\nNarrower: "
+    print("\nNarrower: ")
     for narrower in ot.getNarrower():
-        print narrower
+        print(narrower)
 
-    print "\nBroader: "
+    print("\nBroader: ")
     for broader in ot.getBroader():
-        print broader
+        print(broader)
 
 
 

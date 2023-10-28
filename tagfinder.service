@@ -1,0 +1,16 @@
+[Unit]
+Description=TagFinder Service
+Wants=network.target
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+ExecStart=python /opt/OSMTagFinder/OSMTagFinder/server.py
+ExecReload=/bin/kill -HUP $MAINPID
+WorkingDirectory=/opt/OSMTagFinder/OSMTagFinder
+Restart=always
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

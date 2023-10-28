@@ -66,6 +66,6 @@ class SpellCorrect():
 
 if __name__ == '__main__':
     fw = SpellCorrect()
-    print fw.listSuggestionsEN('tabacco')
-    print fw.listSuggestionsDE('adres zoo')
+    print(fw.listSuggestionsEN('tabacco'))
+    print(fw.listSuggestionsDE('adres zoo'))
 

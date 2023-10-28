@@ -103,16 +103,16 @@ class Altervista(VocabularyBase):
 if __name__ == '__main__':
     av = Altervista('Test', 'de')
 
-    print "Related: "
+    print("Related: ")
     for related in av.getRelated():
-        print related
+        print(related)
 
-    print "\nNarrower: "
+    print("\nNarrower: ")
     for narrower in av.getNarrower():
-        print narrower
+        print(narrower)
 
-    print "\nBroader: "
+    print("\nBroader: ")
     for broader in av.getBroader():
-        print broader
+        print(broader)
 
-    print av.checkConnection()
+    print(av.checkConnection())

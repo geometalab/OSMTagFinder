@@ -88,7 +88,7 @@ class TestRun:
 
     def __init__(self, idPresetsSetup):
 
-        print 'IDEDITOR PRESET TESTS'
+        print('IDEDITOR PRESET TESTS')
         current = 1
         testTotal = len(idPresetsSetup.getIDPresets())
         nameTotal = len(idPresetsSetup.getIDPresets())
@@ -98,22 +98,22 @@ class TestRun:
         altTermFound = 0
         for idPreset in idPresetsSetup.getIDPresets():
             titleStr = '\n\nTest ' + str(current) + '/' + str(len(idPresetsSetup.getIDPresets())) + ' - Name: ' + idPreset.name
-            print titleStr
-            print '=' * 60
-            print 'Tags: ' + ", ".join(idPreset.tags)
+            print(titleStr)
+            print('=' * 60)
+            print('Tags: ' + ", ".join(idPreset.tags))
             found = False
             for term in idPreset.terms:
                 responseJson = self.apiCallTagfinder(term)
                 if responseJson is None:
-                    print 'Call failed!'
+                    print('Call failed!')
                 else:
                     foundList = self.getTagDictFromCall(responseJson)
                     interSectionSet = set(idPreset.tags).intersection(set(foundList.keys()))
                     if len(interSectionSet) == 0:
-                        print '{0}{1:<20s}{2}'.format('Term: ', term, ' > none found')
+                        print('{0}{1:<20s}{2}'.format('Term: ', term, ' > none found'))
                     else:
                         found = True
-                        print '{0}{1:<20s}{2}{3}'.format('Term: ', term, ' > found: ', ', '.join(interSectionSet))
+                        print('{0}{1:<20s}{2}{3}'.format('Term: ', term, ' > found: ', ', '.join(interSectionSet)))
                         #for searchMeta in foundList.values():
                         #    print searchMeta
                         if term is idPreset.name:
@@ -126,14 +126,12 @@ class TestRun:
                 testFound = testFound + 1
             current = current + 1
 
-        print '\n\n'
-        print '=' * 60
-        print '=' * 60
-        print 'Found test tags  : ' + str(testFound) + '/' + str(testTotal)
-        print 'Found \"names\"    : ' + str(nameFound) + '/' + str(nameTotal)
-        print 'Found \"terms\"  : ' + str(altTermFound) + '/' + str(altTermTotal)
-
-
+        print('\n\n')
+        print('=' * 60)
+        print('=' * 60)
+        print('Found test tags  : ' + str(testFound) + '/' + str(testTotal))
+        print('Found \"names\"    : ' + str(nameFound) + '/' + str(nameTotal))
+        print('Found \"terms\"  : ' + str(altTermFound) + '/' + str(altTermTotal))
 
 
 if __name__ == '__main__':
@@ -147,7 +145,7 @@ if __name__ == '__main__':
 
     endTime = timeit.default_timer()
     elapsed = endTime - startTime
-    print '\nTime elapsed running test: ' + str(elapsed / 60) + ' mins'
+    print('\nTime elapsed running test: ' + str(elapsed / 60) + ' mins')
 
 
 

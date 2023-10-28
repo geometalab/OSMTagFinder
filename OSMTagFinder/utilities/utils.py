@@ -182,7 +182,6 @@ def fileLoader(baseDir, extension):
         for f in files:
             if f.endswith('.' + extension):
                 foundFiles.append(os.path.join(root, f))
-                dirs # just to get rid of the not-used warning
     return foundFiles
 
 

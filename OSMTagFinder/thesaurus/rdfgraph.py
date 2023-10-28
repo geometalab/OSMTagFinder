@@ -456,23 +456,23 @@ if __name__ == '__main__':
     gen = r.getBroader(mammals)
     for item in gen:
         if type(item) is URIRef:
-            print 'Concept: ' + item
+            print('Concept: ' + item)
         else:
-            print 'Literal language: ' + item.language
+            print('Literal language: ' + item.language)
 
     plugin.register('skos', Serializer, 'skosserializer', 'SKOSSerializer')
-    print r.graph.serialize(format='skos', encoding=r.encoding)
+    print(r.graph.serialize(format='skos', encoding=r.encoding))
 
     for i, j in r.graph.subject_objects(r.osmImplies):
-        print i
-        print j
-    print '\n'
+        print(i)
+        print(j)
+    print('\n')
     r.removeOSMImpliesLiteral(animals, 'blubb')
-    print '\n'
+    print('\n')
     for i, j in r.graph.subject_objects(r.osmImplies):
-        print i
-        print j
-    print '\n'
+        print(i)
+        print(j)
+    print('\n')
 
     '''graph = Graph()
     g = graph.parse(utils.dataDir() + 'gemet\gemet_concept_en.rdf')

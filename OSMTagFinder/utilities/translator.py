@@ -44,9 +44,9 @@ class Translator:
         
 if __name__ == '__main__':
     t = Translator()
-    print str(t.translate('Uhr', 'de'))
-    print str(t.translate('clock', 'en'))
-    print str(t.translate('This is a pen.', 'en'))
-    print str(t.translate('Das ist ein Stift.', 'de'))
+    print(str(t.translate('Uhr', 'de')))
+    print(str(t.translate('clock', 'en')))
+    print(str(t.translate('This is a pen.', 'en')))
+    print(str(t.translate('Das ist ein Stift.', 'de')))
 
 

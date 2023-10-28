@@ -65,7 +65,7 @@ class UpdateThesaurus:
         self.bt.printMessage('\nStarting Indexer')
         Indexer(self.rdfGraph) # will index it anew
         self.bt.printMessage('\nFinished updating')
-        print 'done'
+        print('done')
 
     def handleNewKeys(self, keyList):
         current = 1

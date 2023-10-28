@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
     @crython.job(expr=cl.getWebsiteString('UPDATE_CRONTAB'))
     def updateJob():
-        print 'Updating job started'
+        print('Updating job started')
         initLogger()
         logging.info('Updating job started')
         cl = ConfigLoader()

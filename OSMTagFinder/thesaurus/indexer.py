@@ -44,13 +44,13 @@ class Indexer:
             if rdfGraph.isInKeyScheme(subject) or rdfGraph.isInTagScheme(subject):
                 if predicate == SKOS.prefLabel:
                     count += 1
-                    print str(count) + ': Indexing tagPrefLabel: ' + str(obj)
+                    print(str(count) + ': Indexing tagPrefLabel: ' + str(obj))
                     label = utils.wsWord(obj)
                     lit = Literal(label, obj.language)
                     self.addTagPrefLabel(subject, lit)
                 elif predicate == SKOS.scopeNote:
                     count += 1
-                    print str(count) + ': Indexing tagScopeNote: ' + str(obj)
+                    print(str(count) + ': Indexing tagScopeNote: ' + str(obj))
                     self.addTagScopeNote(subject, obj)
 
             elif rdfGraph.isInTermScheme(subject):
@@ -60,25 +60,25 @@ class Indexer:
                     count += 1
                     lang = obj.language
                     if lang == 'en' or lang == 'de':
-                        print str(count) + ': Indexing termPrefLabel: ' + str(obj)
+                        print(str(count) + ': Indexing termPrefLabel: ' + str(obj))
                         self.addTermPrefLabel(tagSubjectList, obj)
                 if predicate == SKOS.altLabel:
                     count += 1
                     lang = obj.language
                     if lang == 'en' or lang == 'de':
-                        print str(count) + ': Indexing termAltLabel: ' + str(obj)
+                        print(str(count) + ': Indexing termAltLabel: ' + str(obj))
                         self.addTermAltLabel(tagSubjectList, obj)
                 if predicate == SKOS.broader:
                     count += 1
                     lang = obj.language
                     if lang == 'en' or lang == 'de':
-                        print str(count) + ': Indexing termBroader: ' + str(obj)
+                        print(str(count) + ': Indexing termBroader: ' + str(obj))
                         self.addTermBroader(tagSubjectList, obj)
                 if predicate == SKOS.narrower:
                     count += 1
                     lang = obj.language
                     if lang == 'en' or lang == 'de':
-                        print str(count) + ': Indexing termNarrower: ' + str(obj)
+                        print(str(count) + ': Indexing termNarrower: ' + str(obj))
                         self.addTermNarrower(tagSubjectList, obj)
 
         self.addSpellings()
@@ -119,12 +119,12 @@ class Indexer:
         countDE = 0
         for word in self.wordSetEN:
             countEN += 1
-            print str(countEN) + ': Indexing EN spelling for word: ' + word
+            print(str(countEN) + ': Indexing EN spelling for word: ' + word)
             self.__writer.add_document(spellingEN=unicode(word))
 
         for word in self.wordSetDE:
             countDE += 1
-            print str(countDE) + ': Indexing DE spelling for word: ' + word
+            print(str(countDE) + ': Indexing DE spelling for word: ' + word)
             self.__writer.add_document(spellingDE=unicode(word))
 
     def getTagsOfRelTerm(self, rdfGraph, relTermSubject):

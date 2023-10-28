@@ -82,9 +82,9 @@ class TagInfo:
 
 if __name__ == '__main__':
     ti = TagInfo()
-    print str(ti.checkConnection())
+    print(str(ti.checkConnection()))
     statsJson = ti.getKeyStats('amenity')
-    print str(statsJson)
+    print(str(statsJson))
 
 
 

@@ -110,14 +110,14 @@ class Gemet(VocabularyBase):
 if __name__ == '__main__':
     g = Gemet('Geschäft', 'de')
 
-    print "Related: "
+    print("Related: ")
     for related in g.getRelated():
-        print related
+        print(related)
 
-    print "\nNarrower: "
+    print("\nNarrower: ")
     for narrower in g.getNarrower():
-        print narrower
+        print(narrower)
 
-    print "\nBroader: "
+    print("\nBroader: ")
     for broader in g.getBroader():
-        print broader
+        print(broader)

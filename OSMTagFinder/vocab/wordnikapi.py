@@ -82,16 +82,16 @@ class WordnikApi(VocabularyBase):
 if __name__ == '__main__':
     wa = WordnikApi('hairdresser', 'en')
 
-    print "Related: "
+    print("Related: ")
     for related in wa.getRelated():
-        print related
+        print(related)
 
-    print "\nNarrower: "
+    print("\nNarrower: ")
     for narrower in wa.getNarrower():
-        print narrower
+        print(narrower)
 
-    print "\nBroader: "
+    print("\nBroader: ")
     for broader in wa.getBroader():
-        print broader
+        print(broader)
 
-    print wa.checkConnection()
+    print(wa.checkConnection())
