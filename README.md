@@ -6,3 +6,7 @@ TagFinder was developed as part of a research project for the [Geometa Lab](http
 The application is written in Python 2.7 and uses the Flask web framework. 
 
 There's a demo prototype at [Heroku](http://tagfinder.herokuapp.com/) (in english and german) including a RESTful API.
+
+## Installation
+For installation instructions, see the [the README in the OSMTagFinder
+subdirectory](OSMTagFinder/README.md).

@@ -120,3 +120,35 @@ Steps:
 1.  Run cmd console with admin rights
 2.  Navigate to `<projectpath>`
 3.  Run maintenance with command: python updater.py
+
+## 1.7 Run inside docker
+
+As an alternative to a local or heroku installation, you can also run
+the entire service inside a docker container:
+
+Requirements:
+ - Git clone of this repository
+
+Steps:
+
+1. Build the image. From the root of this repo run:
+   ```
+   docker build -t osm-tagfinder .
+   ```
+2. Start a container from that image. Run:
+   ```
+   docker run -p 5000:5000 osm-tagfinder
+   ```
+3. After a couple of seconds, the tagfinder is available at
+   http://localhost:5000
+
+Alternatively, the following `docker-compose.yml` file achieves the
+same:
+
+```
+services:
+  osh:
+    build: .
+    ports:
+      - "5000:5000"
+```
