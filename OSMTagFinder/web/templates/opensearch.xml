@@ -3,7 +3,7 @@
     <ShortName>OSM TagFinder</ShortName>
     <Description>Find OpenStreetMap tags</Description>
     <Tags>OpenStreetMap OSM TagFinder Search Tag Key Value</Tags>
-    <Contact>sgwerder@hsr.ch</Contact>
+    <Contact>gwerdersimon@hotmail.com</Contact>
     <Url type="application/x-suggestions+json" rel="suggestions" template="https://tagfinder.osm.ch/ossuggest?query={searchTerms}"/>
     <Url type="text/html" method="get" template="https://tagfinder.osm.ch/search?query={searchTerms}"/>
 	<Url type="application/json" method="get" template="https://tagfinder.osm.ch/api/search?query={searchTerms}"/>
