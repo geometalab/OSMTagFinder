@@ -5,12 +5,12 @@ body {
 
 .background-header {
     position: fixed;
-    z-index: -1;
+    z-index: 1;
     top: -100px;
     width:100%;
     height:250px;
     background-image: url("../img/header-bg.png");
-    background-size: cover;
+    background-size: auto;
     -webkit-box-shadow: 0px 7px 12px 0px rgba(255, 255, 255, 0.95);
     -moz-box-shadow:    0px 7px 12px 0px rgba(255, 255, 255, 0.95);
     box-shadow:         0px 7px 12px 0px rgba(255, 255, 255, 0.95);
@@ -26,12 +26,12 @@ nav.navbar.navbar-inverse.navbar-fixed-top {
 
 .background-footer {
     position: fixed;
+    z-index: 1;
     bottom: -100px;
     width:100%;
     height:250px;
     background-image: url("../img/footer-bg.png");
-    background-size: cover;
-    z-index: -1;
+    background-size: auto;
 }
 
 .background-footer img {
@@ -53,8 +53,8 @@ nav.navbar.navbar-inverse.navbar-fixed-top {
 }
 
 #navbarsearch-ingroup {
-    min-width: 253px;
-    max-width: 253px;
+    min-width: 260px;
+    max-width: 260px;
     display: none;
     margin-top: 3px;
     margin-right: 64px;
@@ -100,6 +100,10 @@ h5 {
     padding-top: 5px;
     text-align: center;
     font-size: 0.9em;
+}
+
+#logo_ost {
+    margin-right: 20px;
 }
 
 #logo_taginfo {
